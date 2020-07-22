@@ -36,6 +36,10 @@ public class PlayerController : MonoBehaviour {
             transform.Rotate(0f, 180f, 0f, Space.Self);
         }
 
+        if (moveHorizontal == 0) {
+            if (Input.GetButton("Smoke")) animator.SetBool("IsSmoking", true); else animator.SetBool("IsSmoking", false);
+        }
+
         //Use the two store floats to create a new Vector2 variable movement.
         Vector2 movement = new Vector2 (moveHorizontal * speed, 0);
 
