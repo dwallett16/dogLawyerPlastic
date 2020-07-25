@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Case", menuName = "Case Data")]
 public class Case : ScriptableObject
 {
     public int Id;

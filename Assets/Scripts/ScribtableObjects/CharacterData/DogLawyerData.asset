@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0916fcbb5831f948b15ef245a2030f1, type: 3}
+  m_Name: DogLawyerData
+  m_EditorClassIdentifier: 
+  Id: 0
+  Name: Dog Lawyer
+  Image: {fileID: 0}
+  CurrentSkills:
+  - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
+  StressCapacity: 100
+  CurrentStress: 0
+  FocusPointCapacity: 40
+  CurrentFocusPoints: 40
+  Agility: 33
+  Strain: Professional
+  Price: 0
+  Biography: This is my own biography.
+  Headshot: {fileID: 21300000, guid: 57b5879353e87894ca95edd0807609f1, type: 3}
+  SmallHeadshot: {fileID: 21300000, guid: 2b7e8b8676355694da6273a06e9053e2, type: 3}

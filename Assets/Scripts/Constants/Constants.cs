@@ -9,10 +9,4 @@ public static class Constants
     public static string Scholar = "Scholar";
     public static string Warlock = "Warlock";
 
-    //Target
-    public static string Opponent = "Opponent";
-    public static string Ally = "Ally";
-    public static string Defendant = "Defendant";
-    public static string Jury = "Jury";
-
 }

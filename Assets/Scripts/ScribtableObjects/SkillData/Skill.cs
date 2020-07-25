@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Skill", menuName = "Skill Data")]
 public class Skill : ScriptableObject
 {
     public int Id;
     public string Name;
-    public string Target;
+    public SkillTarget Target;
     public PriorityTypes Type;
     public int LatentPower;
     public string StatusEffect;
