@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfcc31f3d68131c489d6e7df0732459f, type: 3}
+  m_Name: OstrichFootage
+  m_EditorClassIdentifier: 
+  Id: 6
+  Name: Ornery Ostrich Footage
+  ParentCase: {fileID: 11400000, guid: c05e1767ee958174f9e07948e6f77d93, type: 2}
+  Image: {fileID: 21300000, guid: 5722dabc411b3d346869902f066ca8bc, type: 3}
+  Description: This footage from the night of the murder shows what appears to be
+    a janitor putting something into a bottle of rum.
+  CanBeExamined: 0
+  JournalDialogue: 
