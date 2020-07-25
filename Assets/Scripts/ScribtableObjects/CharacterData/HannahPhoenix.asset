@@ -10,22 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0916fcbb5831f948b15ef245a2030f1, type: 3}
-  m_Name: DogLawyerData
+  m_Name: HannahPhoenix
   m_EditorClassIdentifier: 
-  Id: 0
-  Name: Dog Lawyer
+  Id: 5
+  Name: Hannah Phoenix
   Image: {fileID: 0}
+  Type: 1
   Personality: 1
   CurrentSkills:
   - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
-  StressCapacity: 100
+  - {fileID: 11400000, guid: 4fd3da3f140ab4f44a07c06528e5f4d7, type: 2}
+  - {fileID: 11400000, guid: 395a779ae3f4e9248b60a22917adcc42, type: 2}
+  StressCapacity: 75
   CurrentStress: 0
-  FocusPointCapacity: 40
-  CurrentFocusPoints: 40
-  Agility: 33
-  Specialty: 0
+  FocusPointCapacity: 30
+  CurrentFocusPoints: 30
+  Agility: 30
+  Specialty: 2
   Strain: Professional
   Price: 0
-  Biography: This is my own biography.
+  Biography: Biography for Hannah
   Headshot: {fileID: 21300000, guid: 57b5879353e87894ca95edd0807609f1, type: 3}
   SmallHeadshot: {fileID: 21300000, guid: 2b7e8b8676355694da6273a06e9053e2, type: 3}
+  JournalDescription: Hannah's sensitivities and charm have a calming effect on defendants.
+    With her around, the accused are much more confident. Definitely could have used
+    her on my team when I was a defense attorney. She has interpersonal skills I
+    could never figure out.
