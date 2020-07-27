@@ -2719,6 +2719,7 @@ GameObject:
   - component: {fileID: 1403666234}
   - component: {fileID: 1403666236}
   - component: {fileID: 1403666235}
+  - component: {fileID: 1403666237}
   m_Layer: 0
   m_Name: Player (Spine)
   m_TagString: Player
@@ -2986,6 +2987,24 @@ MonoBehaviour:
   onDeselectedUsable:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1403666237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403666226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bb517c0a6ea37949b39d738678b3bbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evidenceList:
+  - {fileID: 11400000, guid: 5b95b7fb15267e44bbe9c92e65e375a7, type: 2}
+  - {fileID: 11400000, guid: 4a9cef82ff5b6f14da651592eececaae, type: 2}
+  - {fileID: 11400000, guid: dccb0b01442c1fb488849f32ae1ba419, type: 2}
+  skillsList:
+  - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
 --- !u!1001 &1482328300
 PrefabInstance:
   m_ObjectHideFlags: 0
