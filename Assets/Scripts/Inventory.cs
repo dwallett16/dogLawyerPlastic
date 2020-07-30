@@ -22,6 +22,8 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private List<Skill> skillsList;
 
+    public List<Case> ActiveCases;
+
     public void AddEvidence(Evidence evidence) 
     {
         if(evidenceList.TrueForAll(e => e.Id != evidence.Id))
