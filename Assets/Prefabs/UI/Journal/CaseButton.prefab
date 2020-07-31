@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 8704465126512398298}
   - component: {fileID: 5384930023372985271}
   - component: {fileID: -1542682021596225387}
+  - component: {fileID: -5557656995586329441}
   m_Layer: 5
   m_Name: CaseButton
   m_TagString: Untagged
@@ -211,5 +212,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7e0d94989daa0647b3e4e0c862e2d5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5557656995586329441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8704465126512398299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bd1a1a5538b5c04b869a771df545a8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
