@@ -43,7 +43,7 @@ public class JournalController : MonoBehaviour
 
         if(Input.GetButtonDown("Submit") && IsActive()) {
             switch(CurrentState) {
-                case JournalState.Home:
+                case JournalState.Home: //WRONG
                     CurrentState = JournalState.CaseEvidence;
                     PreviousState = JournalState.Home;
                 break;
@@ -51,6 +51,8 @@ public class JournalController : MonoBehaviour
                     CurrentState = JournalState.Evidence;
                     PreviousState = JournalState.CaseEvidence;
                 break;
+                case JournalState.Evidence:
+                    return;
             }
             UpdateJournalPage(CurrentState);
         }
@@ -188,6 +190,7 @@ public class JournalController : MonoBehaviour
         if(tag == null) {
             while (childCount > 0) {
                 DestroyImmediate(transform.GetChild(0).gameObject);
+                childCount--;
             }
         }
         else {
