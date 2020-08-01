@@ -23,6 +23,7 @@ public class Inventory : MonoBehaviour
     private List<Skill> skillsList;
 
     public List<Case> ActiveCases;
+    public List<Character> PartyList;
 
     public void AddEvidence(Evidence evidence) 
     {

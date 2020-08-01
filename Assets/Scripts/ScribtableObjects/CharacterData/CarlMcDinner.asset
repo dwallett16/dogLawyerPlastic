@@ -27,9 +27,8 @@ MonoBehaviour:
   CurrentFocusPoints: 20
   Agility: 35
   Specialty: 3
-  Strain: Artist
+  Strain: 3
   Price: 0
-  Biography: Carl McDinner biography
   Headshot: {fileID: 21300000, guid: 57b5879353e87894ca95edd0807609f1, type: 3}
   SmallHeadshot: {fileID: 21300000, guid: 2b7e8b8676355694da6273a06e9053e2, type: 3}
   JournalDescription: Carl is good at what he does, but I've found him to be unprofessional.

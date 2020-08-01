@@ -29,9 +29,8 @@ MonoBehaviour:
   CurrentFocusPoints: 40
   Agility: 30
   Specialty: 0
-  Strain: Warlock
+  Strain: 4
   Price: 0
-  Biography: Biography
   Headshot: {fileID: 21300000, guid: 57b5879353e87894ca95edd0807609f1, type: 3}
   SmallHeadshot: {fileID: 21300000, guid: 2b7e8b8676355694da6273a06e9053e2, type: 3}
   JournalDescription: Total asshole, and I'm not just saying that because he always

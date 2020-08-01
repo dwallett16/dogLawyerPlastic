@@ -6,5 +6,9 @@ public enum JournalState
 {
     Home,
     CaseEvidence,
-    Evidence
+    Evidence,
+    CaseDefense,
+    DefenseAttorneys,
+    Party,
+    Controls
 }

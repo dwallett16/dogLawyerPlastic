@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class JournalController : MonoBehaviour
 {
-    public Canvas HomeCanvas, CaseEvidenceCanvas, EvidenceCanvas;//, PartyCanvas, CaseDaCanvas, DaCanvas, ControlsCanvas;
+    public Canvas HomeCanvas, CaseEvidenceCanvas, EvidenceCanvas, PartyCanvas;//, CaseDaCanvas, DaCanvas, ControlsCanvas;
     public GameObject Background, JournalPanel;
     public GameObject Player;
     public GameObject MenuItem;
@@ -21,6 +22,7 @@ public class JournalController : MonoBehaviour
     private JournalState CurrentState;
     private JournalState PreviousState;
     private GameObject CurrentItem;
+    private string HomeSelection;
 
     // Start is called before the first frame update
     void Start()
@@ -43,14 +45,15 @@ public class JournalController : MonoBehaviour
 
         if(Input.GetButtonDown("Submit") && IsActive()) {
             switch(CurrentState) {
-                case JournalState.Home: //WRONG
-                    CurrentState = JournalState.CaseEvidence;
+                case JournalState.Home:
                     PreviousState = JournalState.Home;
+                    CurrentState = GetStateFromHomeSelection(HomeSelection);
                 break;
                 case JournalState.CaseEvidence:
                     CurrentState = JournalState.Evidence;
                     PreviousState = JournalState.CaseEvidence;
                 break;
+                case JournalState.Party:
                 case JournalState.Evidence:
                     return;
             }
@@ -66,6 +69,10 @@ public class JournalController : MonoBehaviour
                     PreviousState = JournalState.Home;
                 break;
                 case JournalState.Evidence:
+                    CurrentState = PreviousState;
+                    PreviousState = JournalState.Home;
+                break;
+                case JournalState.Party:
                     CurrentState = PreviousState;
                     PreviousState = JournalState.Home;
                 break;
@@ -105,6 +112,19 @@ public class JournalController : MonoBehaviour
                         JournalUiConstants.LongTextYStart);
                         description.GetComponent<Text>().text = CurrentItem.GetComponent<ButtonData>().Description;
                     break;
+                    case JournalState.Party:
+                        DestroyChildren(PartyCanvas.transform, "JournalDetail");
+
+                        var headshot = Instantiate(ImagePlaceholder, Vector3.zero, Quaternion.identity, PartyCanvas.transform);
+                        headshot.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ImageXRightPage,
+                        JournalUiConstants.ImageYStart);
+                        headshot.GetComponent<Image>().sprite = CurrentItem.GetComponent<ButtonData>().Image;
+                        
+                        var biography = Instantiate(LongText, Vector3.zero, Quaternion.identity, PartyCanvas.transform);
+                        biography.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.LongTextX,
+                        JournalUiConstants.LongTextYStart);
+                        biography.GetComponent<Text>().text = CurrentItem.GetComponent<ButtonData>().Description;
+                    break;
                 }
             }
         }
@@ -118,6 +138,7 @@ public class JournalController : MonoBehaviour
             case JournalState.Home:
                 HomeCanvas.gameObject.SetActive(true);
                 CaseEvidenceCanvas.gameObject.SetActive(false);
+                PartyCanvas.gameObject.SetActive(false);
                 EventSystem.current.SetSelectedGameObject(FirstHomeButton);
             break;
             case JournalState.CaseEvidence:
@@ -161,6 +182,47 @@ public class JournalController : MonoBehaviour
                     index++;
                 }
             break;
+            case JournalState.Party:
+                DestroyChildren(PartyCanvas.transform);
+                foreach(var p in PlayerInventory.PartyList) {
+                    var pInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, PartyCanvas.transform);
+                    pInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
+                    pInst.GetComponentInChildren<Text>().text = p.Name;
+
+                    var pData = pInst.GetComponent<ButtonData>();
+                    pData.Id = p.Id;
+                    pData.Image = p.Headshot;
+                    pData.Description = p.JournalDescription;
+
+                    pInst.name = pInst.name + index;
+                    if(index == 0)
+                        EventSystem.current.SetSelectedGameObject(pInst);
+                    yPos -= JournalUiConstants.ButtonYSpacing;
+                    index++;
+                }
+            break;
+        }
+    }
+
+    //used by inspector
+    public void SetHomeSelection(string selection) 
+    {
+        HomeSelection = selection;
+    }
+
+    private JournalState GetStateFromHomeSelection(string selection)
+    {
+        switch(selection) {
+            case "Evidence" :
+                return JournalState.CaseEvidence;
+            case "Party":
+                return JournalState.Party;
+            case "DefenseAttorneys":
+                return JournalState.CaseDefense;
+            case "Controls":
+                return JournalState.Controls;
+            default:
+                return JournalState.Home;
         }
     }
 
@@ -172,6 +234,7 @@ public class JournalController : MonoBehaviour
         if(JournalPanel.activeInHierarchy) {
             CaseEvidenceCanvas.gameObject.SetActive(false);
             EvidenceCanvas.gameObject.SetActive(false);
+            PartyCanvas.gameObject.SetActive(false);
             HomeCanvas.gameObject.SetActive(true);
             EventSystem.current.SetSelectedGameObject(FirstHomeButton);
         }

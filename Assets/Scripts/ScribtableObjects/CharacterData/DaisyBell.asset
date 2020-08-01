@@ -25,8 +25,8 @@ MonoBehaviour:
   CurrentFocusPoints: 40
   Agility: 29
   Specialty: 0
-  Strain: Rebel
+  Strain: 1
   Price: 100
-  Biography: Biography for Daisy Bell
   Headshot: {fileID: 21300000, guid: 57b5879353e87894ca95edd0807609f1, type: 3}
   SmallHeadshot: {fileID: 21300000, guid: 2b7e8b8676355694da6273a06e9053e2, type: 3}
+  JournalDescription: Enter bio here

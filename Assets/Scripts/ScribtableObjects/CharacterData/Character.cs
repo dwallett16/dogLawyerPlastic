@@ -16,9 +16,8 @@ public class Character : ScriptableObject
     public int CurrentFocusPoints;
     public int Agility;
     public PriorityTypes Specialty;
-    public string Strain;
+    public StrainType Strain;
     public int Price;
-    public string Biography;
     public Sprite Headshot;
     public Sprite SmallHeadshot;
     public string JournalDescription;
