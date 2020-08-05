@@ -19,6 +19,11 @@ MonoBehaviour:
   Personality: 1
   CurrentSkills:
   - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
+  - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
+  - {fileID: 11400000, guid: 1273754765a9aa84e8cb5ae0b77eed81, type: 2}
+  - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
+  - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
+  - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
   StressCapacity: 100
   CurrentStress: 0
   FocusPointCapacity: 40

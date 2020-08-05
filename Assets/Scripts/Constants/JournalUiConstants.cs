@@ -9,4 +9,5 @@ public class JournalUiConstants
     public static int ButtonYStart = 119;
     public static int ImageYStart = 100;
     public static int LongTextYStart = -56;
+    public static int SkillScrollviewYStart = -114;
 }

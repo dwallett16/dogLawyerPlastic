@@ -14,6 +14,7 @@ public class JournalController : MonoBehaviour
     public GameObject SimpleText;
     public GameObject LongText;
     public GameObject FirstHomeButton;
+    public GameObject StrainText, StressText, FocusText;
     public Sprite ButtonSprite;
     private PlayerController PlayerController;
     private Inventory PlayerInventory;
@@ -23,6 +24,7 @@ public class JournalController : MonoBehaviour
     private JournalState PreviousState;
     private GameObject CurrentItem;
     private string HomeSelection;
+    private const string DetailTag = "JournalDetail";
 
     // Start is called before the first frame update
     void Start()
@@ -87,7 +89,7 @@ public class JournalController : MonoBehaviour
                 var yPos = JournalUiConstants.ButtonYStart;
                 switch(CurrentState) {
                     case JournalState.CaseEvidence:
-                        DestroyChildren(CaseEvidenceCanvas.transform, "JournalDetail");
+                        DestroyChildren(CaseEvidenceCanvas.transform, DetailTag);
                         foreach(var e in PlayerInventory.EvidenceList) {
                             if(e.ParentCase.Id == CurrentItem.GetComponent<ButtonData>().Id) {
                                 var inst = Instantiate(SimpleText, Vector3.zero, Quaternion.identity, CaseEvidenceCanvas.transform);
@@ -100,7 +102,7 @@ public class JournalController : MonoBehaviour
                         }
                     break;
                     case JournalState.Evidence:
-                        DestroyChildren(EvidenceCanvas.transform, "JournalDetail");
+                        DestroyChildren(EvidenceCanvas.transform, DetailTag);
 
                         var image = Instantiate(ImagePlaceholder, Vector3.zero, Quaternion.identity, EvidenceCanvas.transform);
                         image.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ImageXRightPage,
@@ -113,17 +115,16 @@ public class JournalController : MonoBehaviour
                         description.GetComponent<Text>().text = CurrentItem.GetComponent<ButtonData>().Description;
                     break;
                     case JournalState.Party:
-                        DestroyChildren(PartyCanvas.transform, "JournalDetail");
-
+                        DestroyChildren(PartyCanvas.transform, DetailTag);
+                        var cData = CurrentItem.GetComponent<ButtonData>();
                         var headshot = Instantiate(ImagePlaceholder, Vector3.zero, Quaternion.identity, PartyCanvas.transform);
                         headshot.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ImageXRightPage,
                         JournalUiConstants.ImageYStart);
-                        headshot.GetComponent<Image>().sprite = CurrentItem.GetComponent<ButtonData>().Image;
+                        headshot.GetComponent<Image>().sprite = cData.Image;
                         
-                        var biography = Instantiate(LongText, Vector3.zero, Quaternion.identity, PartyCanvas.transform);
-                        biography.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.LongTextX,
-                        JournalUiConstants.LongTextYStart);
-                        biography.GetComponent<Text>().text = CurrentItem.GetComponent<ButtonData>().Description;
+                        StrainText.GetComponent<Text>().text = cData.Strain;
+                        StressText.GetComponent<Text>().text = cData.StressCapacity;
+                        FocusText.GetComponent<Text>().text = cData.FocusPoints;
                     break;
                 }
             }
@@ -183,7 +184,7 @@ public class JournalController : MonoBehaviour
                 }
             break;
             case JournalState.Party:
-                DestroyChildren(PartyCanvas.transform);
+                DestroyChildren(PartyCanvas.transform, DetailTag);
                 foreach(var p in PlayerInventory.PartyList) {
                     var pInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, PartyCanvas.transform);
                     pInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
@@ -193,6 +194,10 @@ public class JournalController : MonoBehaviour
                     pData.Id = p.Id;
                     pData.Image = p.Headshot;
                     pData.Description = p.JournalDescription;
+                    pData.Strain = Enum.GetName(typeof(StrainType), p.Strain);
+                    pData.StressCapacity = p.StressCapacity.ToString();
+                    pData.FocusPoints = p.FocusPointCapacity.ToString();
+                    pData.Skills = p.CurrentSkills;
 
                     pInst.name = pInst.name + index;
                     if(index == 0)
