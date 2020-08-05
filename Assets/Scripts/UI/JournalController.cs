@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class JournalController : MonoBehaviour
 {
-    public Canvas HomeCanvas, CaseEvidenceCanvas, EvidenceCanvas, PartyCanvas;//, CaseDaCanvas, DaCanvas, ControlsCanvas;
+    public Canvas HomeCanvas, EvidenceCanvas, PartyCanvas;//, DaCanvas, ControlsCanvas;
     public GameObject Background, JournalPanel;
     public GameObject Player;
     public GameObject MenuItem;
@@ -23,8 +23,11 @@ public class JournalController : MonoBehaviour
     private JournalState CurrentState;
     private JournalState PreviousState;
     private GameObject CurrentItem;
+    private Case ActiveCase;
     private string HomeSelection;
     private const string DetailTag = "JournalDetail";
+    private const string CaseLabelTag = "CaseLabel";
+    private const string MenuTag = "MenuItem";
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +37,7 @@ public class JournalController : MonoBehaviour
         PlayerInventory = Player.GetComponent<Inventory>();
         CurrentState = JournalState.Home;
         CurrentItem = EventSystem.current.currentSelectedGameObject;
+        ActiveCase = PlayerInventory.ActiveCase;
     }
 
     // Update is called once per frame
@@ -51,10 +55,6 @@ public class JournalController : MonoBehaviour
                     PreviousState = JournalState.Home;
                     CurrentState = GetStateFromHomeSelection(HomeSelection);
                 break;
-                case JournalState.CaseEvidence:
-                    CurrentState = JournalState.Evidence;
-                    PreviousState = JournalState.CaseEvidence;
-                break;
                 case JournalState.Party:
                 case JournalState.Evidence:
                     return;
@@ -66,10 +66,6 @@ public class JournalController : MonoBehaviour
                 case JournalState.Home:
                     ToggleJournal();
                 break;
-                case JournalState.CaseEvidence:
-                    CurrentState = PreviousState;
-                    PreviousState = JournalState.Home;
-                break;
                 case JournalState.Evidence:
                     CurrentState = PreviousState;
                     PreviousState = JournalState.Home;
@@ -79,30 +75,18 @@ public class JournalController : MonoBehaviour
                     PreviousState = JournalState.Home;
                 break;
             }
+
             UpdateJournalPage(CurrentState);
         }
         else {
             //Selecting new menu item
             if(CurrentItem != EventSystem.current.currentSelectedGameObject) {
                 CurrentItem = EventSystem.current.currentSelectedGameObject;
-                Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+                //Debug.Log(EventSystem.current.currentSelectedGameObject.name);
                 var yPos = JournalUiConstants.ButtonYStart;
                 switch(CurrentState) {
-                    case JournalState.CaseEvidence:
-                        DestroyChildren(CaseEvidenceCanvas.transform, DetailTag);
-                        foreach(var e in PlayerInventory.EvidenceList) {
-                            if(e.ParentCase.Id == CurrentItem.GetComponent<ButtonData>().Id) {
-                                var inst = Instantiate(SimpleText, Vector3.zero, Quaternion.identity, CaseEvidenceCanvas.transform);
-
-                                inst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXRightPage, yPos);
-                                inst.GetComponentInChildren<Text>().text = e.Name;
-
-                                yPos -= JournalUiConstants.ButtonYSpacing;
-                            }
-                        }
-                    break;
                     case JournalState.Evidence:
-                        DestroyChildren(EvidenceCanvas.transform, DetailTag);
+                        DestroyChildren(EvidenceCanvas.transform, new List<string>{DetailTag});
 
                         var image = Instantiate(ImagePlaceholder, Vector3.zero, Quaternion.identity, EvidenceCanvas.transform);
                         image.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ImageXRightPage,
@@ -115,7 +99,7 @@ public class JournalController : MonoBehaviour
                         description.GetComponent<Text>().text = CurrentItem.GetComponent<ButtonData>().Description;
                     break;
                     case JournalState.Party:
-                        DestroyChildren(PartyCanvas.transform, DetailTag);
+                        DestroyChildren(PartyCanvas.transform, new List<string>{DetailTag});
                         var cData = CurrentItem.GetComponent<ButtonData>();
                         var headshot = Instantiate(ImagePlaceholder, Vector3.zero, Quaternion.identity, PartyCanvas.transform);
                         headshot.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ImageXRightPage,
@@ -138,37 +122,20 @@ public class JournalController : MonoBehaviour
         switch(state) {
             case JournalState.Home:
                 HomeCanvas.gameObject.SetActive(true);
-                CaseEvidenceCanvas.gameObject.SetActive(false);
                 PartyCanvas.gameObject.SetActive(false);
+                EvidenceCanvas.gameObject.SetActive(false);
                 EventSystem.current.SetSelectedGameObject(FirstHomeButton);
             break;
-            case JournalState.CaseEvidence:
-                EvidenceCanvas.gameObject.SetActive(false);
-                CaseEvidenceCanvas.gameObject.SetActive(true);
-                DestroyChildren(CaseEvidenceCanvas.transform);
-                foreach(var c in PlayerInventory.ActiveCases) {
-                    var caseInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, CaseEvidenceCanvas.transform);
-                    caseInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
-                    caseInst.GetComponentInChildren<Text>().text = c.Name;
-                    var caseData = caseInst.GetComponent<ButtonData>();
-                    caseData.Id = c.Id;
-
-                    caseInst.name = caseInst.name + index;
-                    if(index == 0)
-                        EventSystem.current.SetSelectedGameObject(caseInst);
-
-                    yPos -= JournalUiConstants.ButtonYSpacing;
-                    index++;
-                }
-            break;
             case JournalState.Evidence:
-                CaseEvidenceCanvas.gameObject.SetActive(false);
-                EvidenceCanvas.gameObject.SetActive(true);
-                DestroyChildren(EvidenceCanvas.transform);
+                var caseLabel = GameObject.FindWithTag(CaseLabelTag);
+                caseLabel.GetComponent<Text>().text = ActiveCase.Name.ToUpper();
+                yPos = JournalUiConstants.ButtonLowYStart;
+                DestroyChildren(EvidenceCanvas.transform, new List<string>{MenuTag, DetailTag});
                 foreach(var e in PlayerInventory.EvidenceList) {
                     var evInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, EvidenceCanvas.transform);
                     evInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     evInst.GetComponentInChildren<Text>().text = e.Name;
+                    evInst.tag = MenuTag;
 
                     var evData = evInst.GetComponent<ButtonData>();
                     evData.Id = e.Id;
@@ -184,11 +151,12 @@ public class JournalController : MonoBehaviour
                 }
             break;
             case JournalState.Party:
-                DestroyChildren(PartyCanvas.transform, DetailTag);
+                DestroyChildren(PartyCanvas.transform, new List<string>{DetailTag, MenuTag});
                 foreach(var p in PlayerInventory.PartyList) {
                     var pInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, PartyCanvas.transform);
                     pInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     pInst.GetComponentInChildren<Text>().text = p.Name;
+                    pInst.tag = MenuTag;
 
                     var pData = pInst.GetComponent<ButtonData>();
                     pData.Id = p.Id;
@@ -219,11 +187,11 @@ public class JournalController : MonoBehaviour
     {
         switch(selection) {
             case "Evidence" :
-                return JournalState.CaseEvidence;
+                return JournalState.Evidence;
             case "Party":
                 return JournalState.Party;
             case "DefenseAttorneys":
-                return JournalState.CaseDefense;
+                return JournalState.DefenseAttorneys;
             case "Controls":
                 return JournalState.Controls;
             default:
@@ -237,7 +205,6 @@ public class JournalController : MonoBehaviour
         Background.SetActive(!Background.activeInHierarchy);
         JournalPanel.SetActive(!JournalPanel.activeInHierarchy);
         if(JournalPanel.activeInHierarchy) {
-            CaseEvidenceCanvas.gameObject.SetActive(false);
             EvidenceCanvas.gameObject.SetActive(false);
             PartyCanvas.gameObject.SetActive(false);
             HomeCanvas.gameObject.SetActive(true);
@@ -252,10 +219,10 @@ public class JournalController : MonoBehaviour
         return JournalPanel.activeInHierarchy && Background.activeInHierarchy;
     }
 
-    private void DestroyChildren(Transform transform, string tag = null) 
+    private void DestroyChildren(Transform transform, List<string> tags = null) 
     {
         var childCount = transform.childCount;
-        if(tag == null) {
+        if(tags == null) {
             while (childCount > 0) {
                 DestroyImmediate(transform.GetChild(0).gameObject);
                 childCount--;
@@ -269,7 +236,7 @@ public class JournalController : MonoBehaviour
                 index++;
             }
             for(var i = 0; i < childCount; i++) {
-                if(children[i].tag == tag)
+                if(tags.Contains(children[i].tag))
                     DestroyImmediate(children[i]);
             }
         }

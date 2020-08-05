@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - JournalDetail
+  - CaseLabel
+  - MenuItem
   layers:
   - Default
   - TransparentFX

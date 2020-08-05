@@ -22,15 +22,15 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private List<Skill> skillsList;
 
-    public List<Case> ActiveCases 
+    public Case ActiveCase
     {
         get 
         {
-            return activeCases;
+            return activeCase;
         }
     }
     [SerializeField]
-    private List<Case> activeCases;
+    private Case activeCase;
 
     public List<Character> PartyList
     {
@@ -53,9 +53,9 @@ public class Inventory : MonoBehaviour
         skillsList.Add(skill);
     }
 
-    public void AddActiveCase(Case c)
+    public void SetActiveCase(Case c)
     {
-        activeCases.Add(c);
+        activeCase = c;
     }
 
     public void AddPartyMember(Character character)
