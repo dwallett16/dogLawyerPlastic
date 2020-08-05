@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class JournalController : MonoBehaviour
 {
-    public Canvas HomeCanvas, EvidenceCanvas, PartyCanvas;//, DaCanvas, ControlsCanvas;
+    public Canvas HomeCanvas, EvidenceCanvas, PartyCanvas, DaCanvas;//, ControlsCanvas;
     public GameObject Background, JournalPanel;
     public GameObject Player;
     public GameObject MenuItem;
@@ -55,6 +55,7 @@ public class JournalController : MonoBehaviour
                     PreviousState = JournalState.Home;
                     CurrentState = GetStateFromHomeSelection(HomeSelection);
                 break;
+                case JournalState.DefenseAttorneys:
                 case JournalState.Party:
                 case JournalState.Evidence:
                     return;
@@ -66,10 +67,8 @@ public class JournalController : MonoBehaviour
                 case JournalState.Home:
                     ToggleJournal();
                 break;
+                case JournalState.DefenseAttorneys:
                 case JournalState.Evidence:
-                    CurrentState = PreviousState;
-                    PreviousState = JournalState.Home;
-                break;
                 case JournalState.Party:
                     CurrentState = PreviousState;
                     PreviousState = JournalState.Home;
@@ -110,6 +109,19 @@ public class JournalController : MonoBehaviour
                         StressText.GetComponent<Text>().text = cData.StressCapacity;
                         FocusText.GetComponent<Text>().text = cData.FocusPoints;
                     break;
+                    case JournalState.DefenseAttorneys:
+                        DestroyChildren(DaCanvas.transform, new List<string>{DetailTag});
+                        var dData = CurrentItem.GetComponent<ButtonData>();
+                        var dHeadshot = Instantiate(ImagePlaceholder, Vector3.zero, Quaternion.identity, DaCanvas.transform);
+                        dHeadshot.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ImageXRightPage,
+                        JournalUiConstants.ImageYStart);
+                        dHeadshot.GetComponent<Image>().sprite = dData.Image;
+
+                        var dDescription = Instantiate(LongText, Vector3.zero, Quaternion.identity, DaCanvas.transform);
+                        dDescription.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.LongTextX,
+                        JournalUiConstants.LongTextYStart);
+                        dDescription.GetComponent<Text>().text = CurrentItem.GetComponent<ButtonData>().Description;
+                    break;
                 }
             }
         }
@@ -124,6 +136,7 @@ public class JournalController : MonoBehaviour
                 HomeCanvas.gameObject.SetActive(true);
                 PartyCanvas.gameObject.SetActive(false);
                 EvidenceCanvas.gameObject.SetActive(false);
+                DaCanvas.gameObject.SetActive(false);
                 EventSystem.current.SetSelectedGameObject(FirstHomeButton);
             break;
             case JournalState.Evidence:
@@ -174,6 +187,29 @@ public class JournalController : MonoBehaviour
                     index++;
                 }
             break;
+            case JournalState.DefenseAttorneys:
+                var cLabel = GameObject.FindWithTag(CaseLabelTag);
+                cLabel.GetComponent<Text>().text = ActiveCase.Name.ToUpper();
+                yPos = JournalUiConstants.ButtonLowYStart;
+                DestroyChildren(DaCanvas.transform, new List<string> {DetailTag, MenuTag});
+                foreach(var d in ActiveCase.DefenseAttorneys) {
+                    var dInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, DaCanvas.transform);
+                    dInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
+                    dInst.GetComponentInChildren<Text>().text = d.Name;
+                    dInst.tag = MenuTag;
+
+                    var dData = dInst.GetComponent<ButtonData>();
+                    dData.Id = d.Id;
+                    dData.Image = d.Headshot;
+                    dData.Description = d.JournalDescription;
+
+                    dInst.name = dInst.name + index;
+                    if(index == 0)
+                        EventSystem.current.SetSelectedGameObject(dInst);
+                    yPos -= JournalUiConstants.ButtonYSpacing;
+                    index++;
+                }
+            break;
         }
     }
 
@@ -208,10 +244,8 @@ public class JournalController : MonoBehaviour
             EvidenceCanvas.gameObject.SetActive(false);
             PartyCanvas.gameObject.SetActive(false);
             HomeCanvas.gameObject.SetActive(true);
+            DaCanvas.gameObject.SetActive(false);
             EventSystem.current.SetSelectedGameObject(FirstHomeButton);
-        }
-        else {
-            return;
         }
     }
 
