@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class JournalController : MonoBehaviour
 {
-    public Canvas HomeCanvas, EvidenceCanvas, PartyCanvas, DaCanvas;//, ControlsCanvas;
+    public Canvas HomeCanvas, EvidenceCanvas, PartyCanvas, DaCanvas, SkillsCanvas;//ControlsCanvas;
     public GameObject Background, JournalPanel;
     public GameObject Player;
     public GameObject MenuItem;
@@ -15,6 +15,7 @@ public class JournalController : MonoBehaviour
     public GameObject LongText;
     public GameObject FirstHomeButton;
     public GameObject StrainText, StressText, FocusText;
+    public GameObject TypeText, PowerText, FpCostText, SkillDescription;
     public Sprite ButtonSprite;
     private PlayerController PlayerController;
     private Inventory PlayerInventory;
@@ -44,8 +45,6 @@ public class JournalController : MonoBehaviour
     void Update()
     {
         if(Input.GetButtonDown("Journal")) {
-            PlayerBody.velocity = Vector2.zero;
-            PlayerController.enabled = !PlayerController.enabled;
             ToggleJournal();
         }
 
@@ -55,6 +54,7 @@ public class JournalController : MonoBehaviour
                     PreviousState = JournalState.Home;
                     CurrentState = GetStateFromHomeSelection(HomeSelection);
                 break;
+                case JournalState.Skills:
                 case JournalState.DefenseAttorneys:
                 case JournalState.Party:
                 case JournalState.Evidence:
@@ -67,6 +67,7 @@ public class JournalController : MonoBehaviour
                 case JournalState.Home:
                     ToggleJournal();
                 break;
+                case JournalState.Skills:
                 case JournalState.DefenseAttorneys:
                 case JournalState.Evidence:
                 case JournalState.Party:
@@ -122,6 +123,14 @@ public class JournalController : MonoBehaviour
                         JournalUiConstants.LongTextYStart);
                         dDescription.GetComponent<Text>().text = CurrentItem.GetComponent<ButtonData>().Description;
                     break;
+                    case JournalState.Skills:
+                        var sData = CurrentItem.GetComponent<ButtonData>();
+
+                        TypeText.GetComponent<Text>().text = Enum.GetName(typeof(PriorityTypes), sData.SkillType);
+                        PowerText.GetComponent<Text>().text = GetLatentPowerDefinition(sData.LatentPower);
+                        FpCostText.GetComponent<Text>().text = sData.FpCost.ToString();
+                        SkillDescription.GetComponent<Text>().text = sData.Description.ToString();
+                    break;
                 }
             }
         }
@@ -137,6 +146,7 @@ public class JournalController : MonoBehaviour
                 PartyCanvas.gameObject.SetActive(false);
                 EvidenceCanvas.gameObject.SetActive(false);
                 DaCanvas.gameObject.SetActive(false);
+                SkillsCanvas.gameObject.SetActive(false);
                 EventSystem.current.SetSelectedGameObject(FirstHomeButton);
             break;
             case JournalState.Evidence:
@@ -210,6 +220,28 @@ public class JournalController : MonoBehaviour
                     index++;
                 }
             break;
+            case JournalState.Skills:
+                DestroyChildren(SkillsCanvas.transform, new List<string>{DetailTag, MenuTag});
+                foreach(var s in PlayerInventory.SkillsList) {
+                    var sInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, SkillsCanvas.transform);
+                    sInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
+                    sInst.GetComponentInChildren<Text>().text = s.Name;
+                    sInst.tag = MenuTag;
+
+                    var sData = sInst.GetComponent<ButtonData>();
+                    sData.Id = s.Id;
+                    sData.Description = s.Description;
+                    sData.SkillType = s.Type;
+                    sData.LatentPower = s.LatentPower;
+                    sData.FpCost = s.FocusPointCost;
+
+                    sInst.name = sInst.name + index;
+                    if(index == 0)
+                        EventSystem.current.SetSelectedGameObject(sInst);
+                    yPos -= JournalUiConstants.ButtonYSpacing;
+                    index++;
+                }
+            break;
         }
     }
 
@@ -228,6 +260,8 @@ public class JournalController : MonoBehaviour
                 return JournalState.Party;
             case "DefenseAttorneys":
                 return JournalState.DefenseAttorneys;
+            case "Skills":
+                return JournalState.Skills;
             case "Controls":
                 return JournalState.Controls;
             default:
@@ -237,6 +271,8 @@ public class JournalController : MonoBehaviour
 
     private void ToggleJournal() 
     {
+        PlayerBody.velocity = Vector2.zero;
+        PlayerController.enabled = !PlayerController.enabled;
         CurrentState = JournalState.Home;
         Background.SetActive(!Background.activeInHierarchy);
         JournalPanel.SetActive(!JournalPanel.activeInHierarchy);
@@ -245,6 +281,7 @@ public class JournalController : MonoBehaviour
             PartyCanvas.gameObject.SetActive(false);
             HomeCanvas.gameObject.SetActive(true);
             DaCanvas.gameObject.SetActive(false);
+            SkillsCanvas.gameObject.SetActive(false);
             EventSystem.current.SetSelectedGameObject(FirstHomeButton);
         }
     }
@@ -273,6 +310,22 @@ public class JournalController : MonoBehaviour
                 if(tags.Contains(children[i].tag))
                     DestroyImmediate(children[i]);
             }
+        }
+    }
+
+    private string GetLatentPowerDefinition(int power)
+    {
+        if(power > 0 && power < 10) {
+            return Constants.Light;
+        }
+        else if(power > 9 && power < 20) {
+            return Constants.Medium;
+        }
+        else if(power > 19) {
+            return Constants.Heavy;
+        }
+        else {
+            return string.Empty;
         }
     }
 }

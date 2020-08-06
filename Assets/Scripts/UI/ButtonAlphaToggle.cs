@@ -13,6 +13,7 @@ public class ButtonAlphaToggle : MonoBehaviour
     {
         Background = gameObject.GetComponent<Image>();
         ButtonText = gameObject.GetComponentInChildren<Text>();
+        Background.enabled = false;
     }
 
     void Update ()
