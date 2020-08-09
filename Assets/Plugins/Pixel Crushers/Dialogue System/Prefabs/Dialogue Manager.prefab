@@ -155,10 +155,10 @@ MonoBehaviour:
       showNPCSubtitlesWithResponses: 1
       showPCSubtitlesDuringLine: 1
       allowPCSubtitleReminders: 1
-      skipPCSubtitleAfterResponseMenu: 1
+      skipPCSubtitleAfterResponseMenu: 0
       subtitleCharsPerSecond: 30
       minSubtitleSeconds: 2
-      continueButton: 4
+      continueButton: 1
       richTextEmphases: 1
       informSequenceStartAndEnd: 0
     cameraSettings:
@@ -181,10 +181,10 @@ MonoBehaviour:
       - Fire1
       - Fire2
       cancel:
-        key: 27
+        key: 0
         buttonName: 
       cancelConversation:
-        key: 27
+        key: 0
         buttonName: 
     barkSettings:
       allowBarksDuringConversations: 1
@@ -252,7 +252,7 @@ MonoBehaviour:
   joystickAxisThreshold: 0.5
   keyButtonsToCheck: []
   keyCodesToCheck: 1b000000
-  alwaysAutoFocus: 0
+  alwaysAutoFocus: 1
   detectMouseControl: 1
   mouseMoveThreshold: 0.1
   controlCursorState: 1
