@@ -314,11 +314,11 @@ namespace PixelCrushers
                 if (sceneName.StartsWith("index:"))
                 {
                     var index = SafeConvert.ToInt(sceneName.Substring("index:".Length));
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(index);
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(index, UnityEngine.SceneManagement.LoadSceneMode.Single);
                 }
                 else
                 {
-                    UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Single);
                 }
                 yield break;
             }

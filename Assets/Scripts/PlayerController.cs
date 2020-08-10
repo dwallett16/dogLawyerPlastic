@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -33,6 +34,8 @@ public class PlayerController : MonoBehaviour {
         currentState = PlayerState.Idle;
         previousState = currentState;
         spineAnimatorController.PlayNewAnimation("Idle", true);
+
+        //SceneManager.LoadScene("Map");
     }
 
     //FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.

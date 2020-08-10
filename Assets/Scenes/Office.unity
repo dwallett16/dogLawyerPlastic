@@ -2939,20 +2939,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb517c0a6ea37949b39d738678b3bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  evidenceList:
-  - {fileID: 11400000, guid: 5b95b7fb15267e44bbe9c92e65e375a7, type: 2}
-  - {fileID: 11400000, guid: 4a9cef82ff5b6f14da651592eececaae, type: 2}
-  - {fileID: 11400000, guid: dccb0b01442c1fb488849f32ae1ba419, type: 2}
-  skillsList:
-  - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
-  - {fileID: 11400000, guid: c2fa07ba0636f3a4aa5cc531fdf171da, type: 2}
-  - {fileID: 11400000, guid: e35c0b5f17f4e18439c7273b9e23ec49, type: 2}
-  - {fileID: 11400000, guid: ee0ad0dad5de0d64a947700920f0a02b, type: 2}
-  - {fileID: 11400000, guid: 1273754765a9aa84e8cb5ae0b77eed81, type: 2}
-  activeCase: {fileID: 11400000, guid: c05e1767ee958174f9e07948e6f77d93, type: 2}
-  partyList:
-  - {fileID: 11400000, guid: 4962f63575f359b40be20351488b1245, type: 2}
-  - {fileID: 11400000, guid: d8683cc7523069d4395b4e3d4cb9233d, type: 2}
+  evidenceList: []
+  skillsList: []
+  activeCase: {fileID: 0}
+  partyList: []
 --- !u!1001 &1482328300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3925,6 +3915,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11426072, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
       propertyPath: dontDestroyOnLoad
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426072, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
+      propertyPath: displaySettings.subtitleSettings.showPCSubtitlesDuringLine
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426072, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
+      propertyPath: displaySettings.subtitleSettings.skipPCSubtitleAfterResponseMenu
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1518246486, guid: 58ac37417e60e534f91138088a3e6f70, type: 3}
@@ -4920,6 +4918,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: JournalCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 9016826927903905157, guid: d89552e61e2cae246ae3befd6c3f9ad1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9016826927903905177, guid: d89552e61e2cae246ae3befd6c3f9ad1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5033,6 +5036,11 @@ PrefabInstance:
     - target: {fileID: 9016826928461438690, guid: d89552e61e2cae246ae3befd6c3f9ad1,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016826928461438691, guid: d89552e61e2cae246ae3befd6c3f9ad1,
+        type: 3}
+      propertyPath: m_ForceModuleActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
