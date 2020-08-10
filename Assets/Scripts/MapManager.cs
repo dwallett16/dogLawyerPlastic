@@ -19,7 +19,11 @@ public class MapManager : MonoBehaviour
         
     }
 
-    public void LoadScene(string sceneName) {
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    public void LoadTransition(string sceneName) {
+        DialogueManager.PlaySequence("LoadLevel(MapTransition)");
+    }
+
+    public void SetLocation(string sceneName) {
+        DialogueLua.SetVariable("TravelTo", sceneName);
     }
 }

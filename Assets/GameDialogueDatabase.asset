@@ -117,6 +117,20 @@ MonoBehaviour:
       value: 
       type: 0
       typeString: 
+  - id: 2
+    fields:
+    - title: Name
+      value: TravelTo
+      type: 0
+      typeString: 
+    - title: Initial Value
+      value: Map
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Description
+      value: Where to travel to when accessing the MapTransition scene
+      type: 0
+      typeString: 
   conversations:
   - id: 1
     fields:
@@ -744,7 +758,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: LoadLevel(Map);
+        value: LoadLevel(MapTransition);
         type: 0
         typeString: CustomFieldType_Text
       - title: Response Menu Sequence
@@ -760,7 +774,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: 
+      userScript: Variable["TravelTo"] = "Map"
       onExecute:
         m_PersistentCalls:
           m_Calls: []
