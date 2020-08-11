@@ -7,6 +7,7 @@ TagManager:
   - JournalDetail
   - CaseLabel
   - MenuItem
+  - GameData
   layers:
   - Default
   - TransparentFX

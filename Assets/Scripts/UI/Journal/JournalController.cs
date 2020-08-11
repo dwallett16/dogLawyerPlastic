@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class JournalController : MonoBehaviour
 {
-    public Canvas HomeCanvas, EvidenceCanvas, PartyCanvas, DaCanvas, SkillsCanvas;//ControlsCanvas;
+    public Canvas HomeCanvas, CaseEvidenceCanvas, EvidenceCanvas, PartyCanvas, CaseDaCanvas, DaCanvas, SkillsCanvas;
     public GameObject Background, JournalPanel;
     public GameObject Player;
     public GameObject MenuItem;
@@ -17,28 +17,24 @@ public class JournalController : MonoBehaviour
     public GameObject StrainText, StressText, FocusText;
     public GameObject TypeText, PowerText, FpCostText, SkillDescription;
     public Sprite ButtonSprite;
-    private PlayerController PlayerController;
-    private Inventory PlayerInventory;
-    private Rigidbody2D PlayerBody;
-    private List<Canvas> CanvasList;
-    private JournalState CurrentState;
-    private JournalState PreviousState;
-    private GameObject CurrentItem;
-    private Case ActiveCase;
-    private string HomeSelection;
-    private const string DetailTag = "JournalDetail";
-    private const string CaseLabelTag = "CaseLabel";
-    private const string MenuTag = "MenuItem";
+    private PlayerController playerController;
+    private Inventory playerInventory;
+    private Rigidbody2D playerBody;
+    private List<Canvas> canvasList;
+    private JournalState currentState;
+    private JournalState previousState;
+    private GameObject currentItem;
+    private Case activeCase;
+    private string homeSelection;
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerController = Player.GetComponent<PlayerController>();
-        PlayerBody = Player.GetComponent<Rigidbody2D>();
-        PlayerInventory = Player.GetComponent<Inventory>();
-        CurrentState = JournalState.Home;
-        CurrentItem = EventSystem.current.currentSelectedGameObject;
-        ActiveCase = PlayerInventory.ActiveCase;
+        playerController = Player.GetComponent<PlayerController>();
+        playerBody = Player.GetComponent<Rigidbody2D>();
+        playerInventory = Player.GetComponent<Inventory>();
+        currentState = JournalState.Home;
+        currentItem = EventSystem.current.currentSelectedGameObject;
     }
 
     // Update is called once per frame
@@ -49,10 +45,10 @@ public class JournalController : MonoBehaviour
         }
 
         if(Input.GetButtonDown("Submit") && IsActive()) {
-            switch(CurrentState) {
+            switch(currentState) {
                 case JournalState.Home:
-                    PreviousState = JournalState.Home;
-                    CurrentState = GetStateFromHomeSelection(HomeSelection);
+                    previousState = JournalState.Home;
+                    currentState = GetStateFromHomeSelection(homeSelection);
                 break;
                 case JournalState.Skills:
                 case JournalState.DefenseAttorneys:
@@ -60,10 +56,10 @@ public class JournalController : MonoBehaviour
                 case JournalState.Evidence:
                     return;
             }
-            UpdateJournalPage(CurrentState);
+            UpdateJournalPage(currentState);
         }
         else if(Input.GetButtonDown("Cancel") && IsActive()) {
-            switch(CurrentState) {
+            switch(currentState) {
                 case JournalState.Home:
                     ToggleJournal();
                 break;
@@ -71,36 +67,36 @@ public class JournalController : MonoBehaviour
                 case JournalState.DefenseAttorneys:
                 case JournalState.Evidence:
                 case JournalState.Party:
-                    CurrentState = PreviousState;
-                    PreviousState = JournalState.Home;
+                    currentState = previousState;
+                    previousState = JournalState.Home;
                 break;
             }
 
-            UpdateJournalPage(CurrentState);
+            UpdateJournalPage(currentState);
         }
         else {
             //Selecting new menu item
-            if(CurrentItem != EventSystem.current.currentSelectedGameObject) {
-                CurrentItem = EventSystem.current.currentSelectedGameObject;
+            if(currentItem != EventSystem.current.currentSelectedGameObject) {
+                currentItem = EventSystem.current.currentSelectedGameObject;
                 //Debug.Log(EventSystem.current.currentSelectedGameObject.name);
                 var yPos = JournalUiConstants.ButtonYStart;
-                switch(CurrentState) {
+                switch(currentState) {
                     case JournalState.Evidence:
-                        DestroyChildren(EvidenceCanvas.transform, new List<string>{DetailTag});
+                        DestroyChildren(EvidenceCanvas.transform, new List<string>{Constants.DetailTag});
 
                         var image = Instantiate(ImagePlaceholder, Vector3.zero, Quaternion.identity, EvidenceCanvas.transform);
                         image.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ImageXRightPage,
                         JournalUiConstants.ImageYStart);
-                        image.GetComponent<Image>().sprite = CurrentItem.GetComponent<ButtonData>().Image;
+                        image.GetComponent<Image>().sprite = currentItem.GetComponent<ButtonData>().Image;
                         
                         var description = Instantiate(LongText, Vector3.zero, Quaternion.identity, EvidenceCanvas.transform);
                         description.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.LongTextX,
                         JournalUiConstants.LongTextYStart);
-                        description.GetComponent<Text>().text = CurrentItem.GetComponent<ButtonData>().Description;
+                        description.GetComponent<Text>().text = currentItem.GetComponent<ButtonData>().Description;
                     break;
                     case JournalState.Party:
-                        DestroyChildren(PartyCanvas.transform, new List<string>{DetailTag});
-                        var cData = CurrentItem.GetComponent<ButtonData>();
+                        DestroyChildren(PartyCanvas.transform, new List<string>{Constants.DetailTag});
+                        var cData = currentItem.GetComponent<ButtonData>();
                         var headshot = Instantiate(ImagePlaceholder, Vector3.zero, Quaternion.identity, PartyCanvas.transform);
                         headshot.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ImageXRightPage,
                         JournalUiConstants.ImageYStart);
@@ -111,8 +107,8 @@ public class JournalController : MonoBehaviour
                         FocusText.GetComponent<Text>().text = cData.FocusPoints;
                     break;
                     case JournalState.DefenseAttorneys:
-                        DestroyChildren(DaCanvas.transform, new List<string>{DetailTag});
-                        var dData = CurrentItem.GetComponent<ButtonData>();
+                        DestroyChildren(DaCanvas.transform, new List<string>{Constants.DetailTag});
+                        var dData = currentItem.GetComponent<ButtonData>();
                         var dHeadshot = Instantiate(ImagePlaceholder, Vector3.zero, Quaternion.identity, DaCanvas.transform);
                         dHeadshot.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ImageXRightPage,
                         JournalUiConstants.ImageYStart);
@@ -121,10 +117,10 @@ public class JournalController : MonoBehaviour
                         var dDescription = Instantiate(LongText, Vector3.zero, Quaternion.identity, DaCanvas.transform);
                         dDescription.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.LongTextX,
                         JournalUiConstants.LongTextYStart);
-                        dDescription.GetComponent<Text>().text = CurrentItem.GetComponent<ButtonData>().Description;
+                        dDescription.GetComponent<Text>().text = currentItem.GetComponent<ButtonData>().Description;
                     break;
                     case JournalState.Skills:
-                        var sData = CurrentItem.GetComponent<ButtonData>();
+                        var sData = currentItem.GetComponent<ButtonData>();
 
                         TypeText.GetComponent<Text>().text = Enum.GetName(typeof(PriorityTypes), sData.SkillType);
                         PowerText.GetComponent<Text>().text = GetLatentPowerDefinition(sData.LatentPower);
@@ -150,15 +146,15 @@ public class JournalController : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(FirstHomeButton);
             break;
             case JournalState.Evidence:
-                var caseLabel = GameObject.FindWithTag(CaseLabelTag);
-                caseLabel.GetComponent<Text>().text = ActiveCase.Name.ToUpper();
+                var caseLabel = GameObject.FindWithTag(Constants.CaseLabelTag);
+                caseLabel.GetComponent<Text>().text = activeCase.Name.ToUpper();
                 yPos = JournalUiConstants.ButtonLowYStart;
-                DestroyChildren(EvidenceCanvas.transform, new List<string>{MenuTag, DetailTag});
-                foreach(var e in PlayerInventory.EvidenceList) {
+                DestroyChildren(EvidenceCanvas.transform, new List<string>{Constants.MenuTag, Constants.DetailTag});
+                foreach(var e in playerInventory.EvidenceList) {
                     var evInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, EvidenceCanvas.transform);
                     evInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     evInst.GetComponentInChildren<Text>().text = e.Name;
-                    evInst.tag = MenuTag;
+                    evInst.tag = Constants.MenuTag;
 
                     var evData = evInst.GetComponent<ButtonData>();
                     evData.Id = e.Id;
@@ -174,12 +170,12 @@ public class JournalController : MonoBehaviour
                 }
             break;
             case JournalState.Party:
-                DestroyChildren(PartyCanvas.transform, new List<string>{DetailTag, MenuTag});
-                foreach(var p in PlayerInventory.PartyList) {
+                DestroyChildren(PartyCanvas.transform, new List<string>{Constants.DetailTag, Constants.MenuTag});
+                foreach(var p in playerInventory.PartyList) {
                     var pInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, PartyCanvas.transform);
                     pInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     pInst.GetComponentInChildren<Text>().text = p.Name;
-                    pInst.tag = MenuTag;
+                    pInst.tag = Constants.MenuTag;
 
                     var pData = pInst.GetComponent<ButtonData>();
                     pData.Id = p.Id;
@@ -198,15 +194,15 @@ public class JournalController : MonoBehaviour
                 }
             break;
             case JournalState.DefenseAttorneys:
-                var cLabel = GameObject.FindWithTag(CaseLabelTag);
-                cLabel.GetComponent<Text>().text = ActiveCase.Name.ToUpper();
+                var cLabel = GameObject.FindWithTag(Constants.CaseLabelTag);
+                cLabel.GetComponent<Text>().text = activeCase.Name.ToUpper();
                 yPos = JournalUiConstants.ButtonLowYStart;
-                DestroyChildren(DaCanvas.transform, new List<string> {DetailTag, MenuTag});
-                foreach(var d in ActiveCase.DefenseAttorneys) {
+                DestroyChildren(DaCanvas.transform, new List<string> {Constants.DetailTag, Constants.MenuTag});
+                foreach(var d in activeCase.DefenseAttorneys) {
                     var dInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, DaCanvas.transform);
                     dInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     dInst.GetComponentInChildren<Text>().text = d.Name;
-                    dInst.tag = MenuTag;
+                    dInst.tag = Constants.MenuTag;
 
                     var dData = dInst.GetComponent<ButtonData>();
                     dData.Id = d.Id;
@@ -221,12 +217,12 @@ public class JournalController : MonoBehaviour
                 }
             break;
             case JournalState.Skills:
-                DestroyChildren(SkillsCanvas.transform, new List<string>{DetailTag, MenuTag});
-                foreach(var s in PlayerInventory.SkillsList) {
+                DestroyChildren(SkillsCanvas.transform, new List<string>{Constants.DetailTag, Constants.MenuTag});
+                foreach(var s in playerInventory.SkillsList) {
                     var sInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, SkillsCanvas.transform);
                     sInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     sInst.GetComponentInChildren<Text>().text = s.Name;
-                    sInst.tag = MenuTag;
+                    sInst.tag = Constants.MenuTag;
 
                     var sData = sInst.GetComponent<ButtonData>();
                     sData.Id = s.Id;
@@ -248,22 +244,20 @@ public class JournalController : MonoBehaviour
     //used by inspector
     public void SetHomeSelection(string selection) 
     {
-        HomeSelection = selection;
+        homeSelection = selection;
     }
 
     private JournalState GetStateFromHomeSelection(string selection)
     {
         switch(selection) {
             case "Evidence" :
-                return JournalState.Evidence;
+                return JournalState.CaseEvidence;
             case "Party":
                 return JournalState.Party;
             case "DefenseAttorneys":
-                return JournalState.DefenseAttorneys;
+                return JournalState.CaseDefenseAttorneys;
             case "Skills":
                 return JournalState.Skills;
-            case "Controls":
-                return JournalState.Controls;
             default:
                 return JournalState.Home;
         }
@@ -271,9 +265,9 @@ public class JournalController : MonoBehaviour
 
     private void ToggleJournal() 
     {
-        PlayerBody.velocity = Vector2.zero;
-        PlayerController.enabled = !PlayerController.enabled;
-        CurrentState = JournalState.Home;
+        playerBody.velocity = Vector2.zero;
+        playerController.enabled = !playerController.enabled;
+        currentState = JournalState.Home;
         Background.SetActive(!Background.activeInHierarchy);
         JournalPanel.SetActive(!JournalPanel.activeInHierarchy);
         if(JournalPanel.activeInHierarchy) {

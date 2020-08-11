@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8269213753056961713}
   - component: {fileID: 8269213753056961718}
   m_Layer: 5
-  m_Name: StrainLabel
+  m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d80ea17075ced504ab515d02df7ae2a9, type: 3}
-    m_FontSize: 17
+    m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

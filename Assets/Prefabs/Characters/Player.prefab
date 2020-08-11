@@ -327,7 +327,6 @@ GameObject:
   - component: {fileID: 6339554685193931734}
   - component: {fileID: 6339554685193931728}
   - component: {fileID: 6339554685193931735}
-  - component: {fileID: 6339554685193931729}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -595,22 +594,6 @@ MonoBehaviour:
     applyColorToPrependedName: 0
     prependActorNameSeparator: ': '
     subtitleColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &6339554685193931729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6339554685193931742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bb517c0a6ea37949b39d738678b3bbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  evidenceList: []
-  skillsList: []
-  activeCase: {fileID: 0}
-  partyList: []
 --- !u!1 &6339554685499945199
 GameObject:
   m_ObjectHideFlags: 0

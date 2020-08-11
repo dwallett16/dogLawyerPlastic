@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory
 {
     public List<Evidence> EvidenceList { 
         get 
@@ -22,15 +22,15 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private List<Skill> skillsList;
 
-    public Case ActiveCase
+    public List<Case> ActiveCases
     {
         get 
         {
-            return activeCase;
+            return activeCases;
         }
     }
     [SerializeField]
-    private Case activeCase;
+    private List<Case> activeCases;
 
     public List<Character> PartyList
     {
@@ -53,9 +53,9 @@ public class Inventory : MonoBehaviour
         skillsList.Add(skill);
     }
 
-    public void SetActiveCase(Case c)
+    public void AddActiveCase(Case c)
     {
-        activeCase = c;
+        activeCases.Add(c);
     }
 
     public void AddPartyMember(Character character)
