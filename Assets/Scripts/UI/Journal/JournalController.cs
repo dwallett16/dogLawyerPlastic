@@ -8,7 +8,6 @@ public class JournalController : MonoBehaviour
 {
     public Canvas HomeCanvas, CaseEvidenceCanvas, EvidenceCanvas, PartyCanvas, CaseDaCanvas, DaCanvas, SkillsCanvas;
     public GameObject Background, JournalPanel;
-    public GameObject Player;
     public GameObject MenuItem;
     public GameObject ImagePlaceholder;
     public GameObject SimpleText;
@@ -17,6 +16,7 @@ public class JournalController : MonoBehaviour
     public GameObject StrainText, StressText, FocusText;
     public GameObject TypeText, PowerText, FpCostText, SkillDescription;
     public Sprite ButtonSprite;
+    public GameObject Player;
     private PlayerController playerController;
     private Inventory playerInventory;
     private Rigidbody2D playerBody;

@@ -11,4 +11,5 @@ public static class Constants
     public static string DetailTag = "JournalDetail";
     public static string CaseLabelTag = "CaseLabel";
     public static string MenuTag = "MenuItem";
+    public static string PlayerTag = "Player";
 }

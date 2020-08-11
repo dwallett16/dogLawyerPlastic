@@ -35,6 +35,7 @@ public class GameDataSingleton : MonoBehaviour
             PlayerInventory = new Inventory();
             //Load from save system on initialization
             if(UseTestData) {
+                PlayerInventory = new Inventory();
                 startEvidenceList.ForEach(e => PlayerInventory.AddEvidence(e));
                 startPartyList.ForEach(p => PlayerInventory.AddPartyMember(p));
                 startSkillsList.ForEach(s => PlayerInventory.AddSkill(s));
