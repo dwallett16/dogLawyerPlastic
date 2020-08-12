@@ -18,15 +18,15 @@ public class GameDataSingleton : MonoBehaviour
     [SerializeField]
     private List<Case> startCaseList;
     
-    private static GameObject gameData;
+    public static GameDataSingleton gameData;
 
     void Awake() 
     {
         DontDestroyOnLoad(gameObject);
         if (gameData == null)
-            gameData = gameObject;
+            gameData = this;
         else
-            Destroy(gameObject);
+            Destroy(this);
     }
 
     void Start()

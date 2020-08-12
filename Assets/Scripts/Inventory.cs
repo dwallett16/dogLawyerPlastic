@@ -1,8 +1,16 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Inventory
 {
+    public Inventory() 
+    {
+        evidenceList = new List<Evidence>();
+        skillsList = new List<Skill>();
+        partyList = new List<Character>();
+        activeCases = new List<Case>();
+    }
     public List<Evidence> EvidenceList { 
         get 
         {
@@ -61,5 +69,10 @@ public class Inventory
     public void AddPartyMember(Character character)
     {
         partyList.Add(character);
+    }
+
+    public Case GetCaseById(int id) 
+    {
+        return ActiveCases.First(c => c.Id == id);
     }
 }
