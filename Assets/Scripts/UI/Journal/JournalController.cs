@@ -54,6 +54,10 @@ public class JournalController : MonoBehaviour
                     previousState = JournalState.CaseEvidence;
                     activeCase = GameDataSingleton.gameData.PlayerInventory.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
                 break;
+                case JournalState.CaseDefenseAttorneys:
+                    currentState = JournalState.DefenseAttorneys;
+                    previousState = JournalState.CaseDefenseAttorneys;
+                break;
                 case JournalState.Skills:
                 case JournalState.DefenseAttorneys:
                 case JournalState.Party:
@@ -114,6 +118,18 @@ public class JournalController : MonoBehaviour
                         StrainText.GetComponent<Text>().text = cData.Strain;
                         StressText.GetComponent<Text>().text = cData.StressCapacity;
                         FocusText.GetComponent<Text>().text = cData.FocusPoints;
+                    break;
+                    case JournalState.CaseDefenseAttorneys:
+                        activeCase = GameDataSingleton.gameData.PlayerInventory.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
+                        DestroyChildren(CaseDaCanvas.transform, new List<string>{Constants.DetailTag});
+                        foreach(var d in activeCase.DefenseAttorneys) {
+                            var inst = Instantiate(SimpleText, Vector3.zero, Quaternion.identity, CaseDaCanvas.transform);
+
+                            inst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXRightPage, yPos);
+                            inst.GetComponentInChildren<Text>().text = d.Name;
+
+                            yPos -= JournalUiConstants.ButtonYSpacing;
+                        }
                     break;
                     case JournalState.DefenseAttorneys:
                         DestroyChildren(DaCanvas.transform, new List<string>{Constants.DetailTag});
@@ -219,7 +235,28 @@ public class JournalController : MonoBehaviour
                     index++;
                 }
             break;
+            case JournalState.CaseDefenseAttorneys:
+                CaseDaCanvas.gameObject.SetActive(true);
+                DaCanvas.gameObject.SetActive(false);
+                DestroyChildren(CaseDaCanvas.transform);
+                foreach(var c in GameDataSingleton.gameData.PlayerInventory.ActiveCases) {
+                    var caseInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, CaseDaCanvas.transform);
+                    caseInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
+                    caseInst.GetComponentInChildren<Text>().text = c.Name;
+                    var caseData = caseInst.GetComponent<ButtonData>();
+                    caseData.Id = c.Id;
+
+                    caseInst.name = caseInst.name + index;
+                    if(index == 0)
+                        EventSystem.current.SetSelectedGameObject(caseInst);
+
+                    yPos -= JournalUiConstants.ButtonYSpacing;
+                    index++;
+                }
+            break;
             case JournalState.DefenseAttorneys:
+                CaseDaCanvas.gameObject.SetActive(false);
+                DaCanvas.gameObject.SetActive(true);
                 var cLabel = GameObject.FindWithTag(Constants.CaseLabelTag);
                 cLabel.GetComponent<Text>().text = activeCase.Name.ToUpper();
                 yPos = JournalUiConstants.ButtonLowYStart;
