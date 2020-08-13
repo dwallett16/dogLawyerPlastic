@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class GameDataSingleton : MonoBehaviour
 {
+    #pragma warning disable 0649
     [NonSerialized]
-    public Inventory PlayerInventory;
+    public PlayerInventory PlayerInventory;
+    [NonSerialized]
+    public GuildInventory GuildInventory;
 
     [SerializeField]
     private bool UseTestData;
@@ -17,6 +20,10 @@ public class GameDataSingleton : MonoBehaviour
     private List<Character> startPartyList;
     [SerializeField]
     private List<Case> startCaseList;
+    [SerializeField]
+    private List<Character> guildCharacterList;
+    [SerializeField]
+    private List<Skill> guildSkillList;
     
     public static GameDataSingleton gameData;
 
@@ -32,14 +39,22 @@ public class GameDataSingleton : MonoBehaviour
     void Start()
     {
         if(PlayerInventory == null) {
-            PlayerInventory = new Inventory();
+            PlayerInventory = new PlayerInventory();
             //Load from save system on initialization
             if(UseTestData) {
-                PlayerInventory = new Inventory();
+                PlayerInventory = new PlayerInventory();
                 startEvidenceList.ForEach(e => PlayerInventory.AddEvidence(e));
                 startPartyList.ForEach(p => PlayerInventory.AddPartyMember(p));
                 startSkillsList.ForEach(s => PlayerInventory.AddSkill(s));
                 startCaseList.ForEach(c => PlayerInventory.AddActiveCase(c));
+            }
+        }
+        if(GuildInventory == null) {
+            GuildInventory = new GuildInventory();
+            if(UseTestData) {
+                GuildInventory = new GuildInventory();
+                guildCharacterList.ForEach(g => GuildInventory.AddPartyMember(g));
+                guildSkillList.ForEach(s => GuildInventory.AddSkill(s));
             }
         }
     }

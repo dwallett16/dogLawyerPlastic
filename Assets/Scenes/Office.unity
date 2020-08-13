@@ -4101,6 +4101,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4923594385142955106, guid: 124d130aa09734682971e3d38363e1b7,
         type: 3}
+      propertyPath: guildCharacterList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923594385142955106, guid: 124d130aa09734682971e3d38363e1b7,
+        type: 3}
+      propertyPath: guildSkillList.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923594385142955106, guid: 124d130aa09734682971e3d38363e1b7,
+        type: 3}
       propertyPath: UseTestData
       value: 1
       objectReference: {fileID: 0}
@@ -4163,6 +4173,48 @@ PrefabInstance:
       propertyPath: startCaseList.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: c05e1767ee958174f9e07948e6f77d93,
+        type: 2}
+    - target: {fileID: 4923594385142955106, guid: 124d130aa09734682971e3d38363e1b7,
+        type: 3}
+      propertyPath: guildCharacterList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: d8683cc7523069d4395b4e3d4cb9233d,
+        type: 2}
+    - target: {fileID: 4923594385142955106, guid: 124d130aa09734682971e3d38363e1b7,
+        type: 3}
+      propertyPath: guildCharacterList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: e6c33f168ab20994bb8d93162d109bce,
+        type: 2}
+    - target: {fileID: 4923594385142955106, guid: 124d130aa09734682971e3d38363e1b7,
+        type: 3}
+      propertyPath: guildSkillList.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: c2fa07ba0636f3a4aa5cc531fdf171da,
+        type: 2}
+    - target: {fileID: 4923594385142955106, guid: 124d130aa09734682971e3d38363e1b7,
+        type: 3}
+      propertyPath: guildSkillList.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b7678e470ded2d4dbecfcfc8ec47045,
+        type: 2}
+    - target: {fileID: 4923594385142955106, guid: 124d130aa09734682971e3d38363e1b7,
+        type: 3}
+      propertyPath: guildSkillList.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2823c7f95926cdf4f9742b9a7a241b13,
+        type: 2}
+    - target: {fileID: 4923594385142955106, guid: 124d130aa09734682971e3d38363e1b7,
+        type: 3}
+      propertyPath: guildSkillList.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 46aa7e274317c4a4492ec6bfd55901a4,
+        type: 2}
+    - target: {fileID: 4923594385142955106, guid: 124d130aa09734682971e3d38363e1b7,
+        type: 3}
+      propertyPath: guildSkillList.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 395a779ae3f4e9248b60a22917adcc42,
         type: 2}
     - target: {fileID: 4923594385142955107, guid: 124d130aa09734682971e3d38363e1b7,
         type: 3}
