@@ -758,7 +758,9 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: LoadLevel(MapTransition);
+        value: 'BgmStop();
+
+          LoadLevel(MapTransition);'
         type: 0
         typeString: CustomFieldType_Text
       - title: Response Menu Sequence
@@ -781,7 +783,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 20
-        y: 131.02042
+        y: 132.04082
         width: 160
         height: 30
     - id: 3
