@@ -424,7 +424,7 @@ MonoBehaviour:
   singleSubmesh: 0
   fixDrawOrder: 0
   addNormals: 0
-  calculateTangents: 0
+  calculateTangents: 1
   maskInteraction: 0
   maskMaterials:
     materialsMaskDisabled: []
