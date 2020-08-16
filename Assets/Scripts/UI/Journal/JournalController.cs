@@ -39,11 +39,11 @@ public class JournalController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Journal")) {
+        if(Input.GetButtonDown(Constants.Journal)) {
             ToggleJournal();
         }
 
-        if(Input.GetButtonDown("Submit") && IsActive()) {
+        if(Input.GetButtonDown(Constants.Submit) && IsActive()) {
             switch(currentState) {
                 case JournalState.Home:
                     previousState = JournalState.Home;
@@ -66,7 +66,7 @@ public class JournalController : MonoBehaviour
             }
             UpdateJournalPage(currentState);
         }
-        else if(Input.GetButtonDown("Cancel") && IsActive()) {
+        else if(Input.GetButtonDown(Constants.Cancel) && IsActive()) {
             if(currentState == JournalState.Home)
                 ToggleJournal();
             currentState = previousState;

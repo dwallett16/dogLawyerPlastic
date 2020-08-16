@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour {
     {
         //Store the current horizontal input in the float moveHorizontal.
         if (currentState == PlayerState.Idle || currentState == PlayerState.Walk) {
-            moveHorizontal = Input.GetAxisRaw ("Horizontal");
+            moveHorizontal = Input.GetAxisRaw (Constants.Horizontal);
 
             //Movement
             Vector2 movement = new Vector2 (moveHorizontal * speed, 0);
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour {
             currentState = PlayerState.Walk;
         }
         else {
-            if (Input.GetButtonDown("Smoke")) {
+            if (Input.GetButtonDown(Constants.Smoke)) {
                 currentState = PlayerState.SmokeStart;
             }
             else  if (!IsSmoking()) {
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour {
                 }
             }
             else if (currentState == PlayerState.Smoking) {
-                if (spineAnimatorController.IsAnimationComplete() && !Input.GetButton("Smoke")) {
+                if (spineAnimatorController.IsAnimationComplete() && !Input.GetButton(Constants.Smoke)) {
                     currentState = PlayerState.SmokeEnd;
                 }
             }
