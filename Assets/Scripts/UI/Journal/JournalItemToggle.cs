@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ButtonAlphaToggle : MonoBehaviour
+public class JournalItemToggle : MonoBehaviour
 {
     private Image Background;
     private Text ButtonText;
