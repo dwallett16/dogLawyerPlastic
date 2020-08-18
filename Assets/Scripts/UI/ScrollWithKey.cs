@@ -11,7 +11,9 @@ public class ScrollWithKey : MonoBehaviour
     private float percentageToScroll;
     private int index;
     private float numItems;
+    private int totalItems;
     private GameObject currentItem;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,13 +21,20 @@ public class ScrollWithKey : MonoBehaviour
         index = 0;
         var height = Mathf.Round(ScrollView.GetComponent<RectTransform>().rect.height);
         numItems = Mathf.Round(height / ListItem.GetComponent<RectTransform>().rect.height); //how many items fit per page
-        var totalItems = Content.transform.childCount;
+        totalItems = Content.transform.childCount;
         percentageToScroll = 1/(Convert.ToSingle(totalItems)-numItems);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(totalItems != Content.transform.childCount){
+            var height = Mathf.Round(ScrollView.GetComponent<RectTransform>().rect.height);
+            numItems = Mathf.Round(height / ListItem.GetComponent<RectTransform>().rect.height); //how many items fit per page
+            totalItems = Content.transform.childCount;
+            percentageToScroll = 1/(Convert.ToSingle(totalItems)-numItems);
+        }
+
         var itemsPerPage = Convert.ToInt32(numItems);
         if(Input.GetAxis(Constants.Vertical) < 0) {
             if(currentItem != EventSystem.current.currentSelectedGameObject) {
@@ -49,5 +58,10 @@ public class ScrollWithKey : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ScrollToTop() {
+        index = 0;
+        ScrollView.GetComponent<ScrollRect>().verticalNormalizedPosition = 1;
     }
 }

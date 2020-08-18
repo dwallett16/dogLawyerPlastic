@@ -8,6 +8,7 @@ TagManager:
   - CaseLabel
   - MenuItem
   - GameData
+  - Scrollview
   layers:
   - Default
   - TransparentFX

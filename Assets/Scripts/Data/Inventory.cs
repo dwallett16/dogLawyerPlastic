@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 public abstract class Inventory
 {
@@ -34,5 +35,10 @@ public abstract class Inventory
     public void AddPartyMember(Character character)
     {
         partyList.Add(character);
+    }
+
+    public Character GetCharacterFromId(int id)
+    {
+        return partyList.First(x => x.Id == id);
     }
 }

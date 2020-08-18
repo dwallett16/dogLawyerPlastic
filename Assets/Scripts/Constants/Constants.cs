@@ -12,6 +12,7 @@ public static class Constants
     public static string CaseLabelTag = "CaseLabel";
     public static string MenuTag = "MenuItem";
     public static string PlayerTag = "Player";
+    public static string Scrollview = "Scrollview";
 
     //Inputs
     public static string Submit = "Submit";

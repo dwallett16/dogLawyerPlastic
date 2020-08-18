@@ -4,5 +4,7 @@ public enum GuildState
     Hire,
     Buy,
     Fire,
-    Sell
+    Sell,
+    Confirm,
+    Message
 }
