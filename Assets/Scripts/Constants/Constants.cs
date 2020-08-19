@@ -21,4 +21,20 @@ public static class Constants
     public static string Vertical = "Vertical";
     public static string Horizontal = "Horizontal";
     public static string Smoke = "Smoke";
+
+    public static string GetLatentPowerDefinition(int power)
+    {
+        if(power > 0 && power < 10) {
+            return Constants.Light;
+        }
+        else if(power > 9 && power < 20) {
+            return Constants.Medium;
+        }
+        else if(power > 19) {
+            return Constants.Heavy;
+        }
+        else {
+            return string.Empty;
+        }
+    }
 }

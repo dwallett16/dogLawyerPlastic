@@ -148,7 +148,7 @@ public class JournalController : MonoBehaviour
                         var sData = currentItem.GetComponent<ButtonData>();
 
                         TypeText.GetComponent<Text>().text = Enum.GetName(typeof(PriorityTypes), sData.SkillType);
-                        PowerText.GetComponent<Text>().text = GetLatentPowerDefinition(sData.LatentPower);
+                        PowerText.GetComponent<Text>().text = Constants.GetLatentPowerDefinition(sData.LatentPower);
                         FpCostText.GetComponent<Text>().text = sData.FpCost.ToString();
                         SkillDescription.GetComponent<Text>().text = sData.Description.ToString();
                     break;
@@ -374,22 +374,6 @@ public class JournalController : MonoBehaviour
                 if(tags.Contains(children[i].tag))
                     DestroyImmediate(children[i]);
             }
-        }
-    }
-
-    private string GetLatentPowerDefinition(int power)
-    {
-        if(power > 0 && power < 10) {
-            return Constants.Light;
-        }
-        else if(power > 9 && power < 20) {
-            return Constants.Medium;
-        }
-        else if(power > 19) {
-            return Constants.Heavy;
-        }
-        else {
-            return string.Empty;
         }
     }
 }

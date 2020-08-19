@@ -9,7 +9,7 @@ public class GuildMenuController : MonoBehaviour
 {
     public GameObject HireCanvas, BuyCanvas, FireCanvas, SellCanvas;
     public GameObject HireDescription, HireStrain, HireFp, HireStress, HireList;
-    public GameObject BuyDescription, BuyType, BuyPower, BuyCost;
+    public GameObject BuyDescription, BuyType, BuyPower, BuyCost, BuyList;
     public GameObject MenuItem;
     public GameObject ItemName;
     public GameObject ItemCost;
@@ -22,12 +22,17 @@ public class GuildMenuController : MonoBehaviour
     private GuildState previousState;
     private GameObject currentItem;
     private GameObject selectedItem;
-    private ScrollWithKey scrollview;
+    private ScrollWithKey hireScrollview;
+    private ScrollWithKey buyScrollview;
+    private bool isConfirmation;
+    private GuildState[] tabs = new GuildState[] {GuildState.Hire, GuildState.Buy, GuildState.Fire, GuildState.Sell};
+    private int tabIndex = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        scrollview = HireCanvas.GetComponent<ScrollWithKey>();
+        hireScrollview = HireCanvas.GetComponent<ScrollWithKey>();
+        buyScrollview = BuyCanvas.GetComponent<ScrollWithKey>();
         currentState = GuildState.Hire;
         UpdateGuildData(currentState);
     }
@@ -42,8 +47,7 @@ public class GuildMenuController : MonoBehaviour
                 currentState = GuildState.Confirm;
             }
             else if(currentState == GuildState.Confirm) {
-                currentState = GuildState.Message;
-                UpdateGuildData(currentState);
+               HandleConfirmation();
             }
             else if(currentState == GuildState.Message) {
                 currentState = previousState;
@@ -62,21 +66,44 @@ public class GuildMenuController : MonoBehaviour
                     HireFp.GetComponent<Text>().text = cData.FocusPoints;
                     HireStress.GetComponent<Text>().text = cData.StressCapacity;
                 break;
+                case GuildState.Buy:
+                    var sData = currentItem.GetComponent<ButtonData>();
+                    BuyDescription.GetComponent<Text>().text = sData.Description;
+                    BuyType.GetComponent<Text>().text = sData.SkillType.ToString();
+                    BuyPower.GetComponent<Text>().text = Constants.GetLatentPowerDefinition(sData.LatentPower);
+                    BuyCost.GetComponent<Text>().text = sData.FpCost.ToString();
+                break;
                 case GuildState.Confirm:
                 break;
             }
+        }
+
+        if(Input.GetButtonDown(Constants.Horizontal)) {
+            var dir = Input.GetAxisRaw(Constants.Horizontal) < 0 ? -1 : 1;
+            if(tabIndex + dir == tabs.Length)
+                tabIndex = tabs.Length;
+            else if(tabIndex + dir < 0)
+                tabIndex = 0;
+            else
+                tabIndex += dir;
+            currentState = tabs[tabIndex];
+
+            UpdateGuildData(currentState);
         }
     }
 
     void UpdateGuildData(GuildState state) {
         ConfirmPanel.SetActive(false);
         MessagePanel.SetActive(false);
-        scrollview.ScrollToTop(); //think of generic way instead of acessing all 4 
+        hireScrollview.ScrollToTop();
+        buyScrollview.ScrollToTop();
+        var yPos = GuildUiConstants.MenuY;
+        var index = 0;
         switch(state) {
             case GuildState.Hire:
+                HireCanvas.SetActive(true);
+                BuyCanvas.SetActive(false);
                 DestroyChildren(HireList.transform, new List<string>{Constants.MenuTag});
-                var yPos = GuildUiConstants.MenuY;
-                var index = 0;
                 foreach(var p in GameDataSingleton.gameData.GuildInventory.PartyList) {
                     var pInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, HireList.transform);
                     pInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(GuildUiConstants.MenuX, yPos);
@@ -101,6 +128,34 @@ public class GuildMenuController : MonoBehaviour
                     index++;
                 }
             break;
+            case GuildState.Buy:
+                HireCanvas.SetActive(false);
+                BuyCanvas.SetActive(true);
+                DestroyChildren(BuyList.transform, new List<string>{Constants.MenuTag});
+                foreach(var s in GameDataSingleton.gameData.GuildInventory.SkillsList) {
+                    var sInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, BuyList.transform);
+                    sInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(GuildUiConstants.MenuX, yPos);
+                    sInst.name = sInst.name + index;
+                    var sName = Instantiate(ItemName, Vector3.zero, Quaternion.identity, sInst.transform);
+                    sName.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+                    sName.GetComponent<Text>().text = s.Name;
+                    var pCost = Instantiate(ItemCost, Vector3.zero, Quaternion.identity, sInst.transform);
+                    pCost.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+                    pCost.GetComponent<Text>().text = s.Price.ToString() + "f";
+                    
+                    var data = sInst.GetComponent<ButtonData>();
+                    data.Id = s.Id;
+                    data.Description = s.Description;
+                    data.SkillType = s.Type;
+                    data.LatentPower = s.LatentPower;
+                    data.FpCost = s.FocusPointCost;
+
+                    if(index == 0)
+                        EventSystem.current.SetSelectedGameObject(sInst);
+                    yPos -= GuildUiConstants.MenuYSpacing;
+                    index++;
+                }
+            break;
             case GuildState.Confirm:
                 selectedItem = currentItem;
                 ConfirmPanel.SetActive(true);
@@ -115,12 +170,36 @@ public class GuildMenuController : MonoBehaviour
 
     public void ConfirmSelection() 
     {
-        switch(previousState) {
-            case GuildState.Hire:
-                GameDataSingleton.gameData.PlayerInventory.
-                AddPartyMember(GameDataSingleton.gameData.GuildInventory.
-                GetCharacterFromId(selectedItem.GetComponent<ButtonData>().Id));
-            break;
+        isConfirmation = true;
+    }
+
+    public void CancelSelection()
+    {
+        isConfirmation = false;
+    }
+
+    private void HandleConfirmation() 
+    {
+        if(isConfirmation) {
+            var id = selectedItem.GetComponent<ButtonData>().Id;
+            switch(previousState) {
+                case GuildState.Hire:
+                    GameDataSingleton.gameData.PlayerInventory.
+                    AddPartyMember(GameDataSingleton.gameData.GuildInventory.
+                    GetCharacterFromId(id));
+                break;
+                case GuildState.Buy:
+                Debug.Log(GameDataSingleton.gameData.PlayerInventory.SkillsList.Count);
+                    GameDataSingleton.gameData.PlayerInventory
+                    .AddSkill(GameDataSingleton.gameData.GuildInventory
+                    .GetSkillFromId(id));
+                    Debug.Log(GameDataSingleton.gameData.PlayerInventory.SkillsList.Count);
+                break;
+            }
+            currentState = GuildState.Message;
+        }
+        else {
+            currentState = previousState;
         }
     }
 

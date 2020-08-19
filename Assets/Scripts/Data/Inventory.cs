@@ -41,4 +41,9 @@ public abstract class Inventory
     {
         return partyList.First(x => x.Id == id);
     }
+
+    public Skill GetSkillFromId(int id)
+    {
+        return skillsList.First(x => x.Id == id);
+    }
 }
