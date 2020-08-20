@@ -37,12 +37,22 @@ public abstract class Inventory
         partyList.Add(character);
     }
 
-    public Character GetCharacterFromId(int id)
+    public void RemovePartyMemberById(int id)
+    {
+        partyList.RemoveAll(x =>x.Id == id);
+    }
+
+    public void RemoveSkillById(int id)
+    {
+        skillsList.RemoveAll(x => x.Id == id);
+    }
+
+    public Character GetCharacterById(int id)
     {
         return partyList.First(x => x.Id == id);
     }
 
-    public Skill GetSkillFromId(int id)
+    public Skill GetSkillById(int id)
     {
         return skillsList.First(x => x.Id == id);
     }
