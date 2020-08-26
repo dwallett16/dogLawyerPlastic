@@ -9,6 +9,8 @@ public class GameDataSingleton : MonoBehaviour
     public PlayerInventory PlayerInventory;
     [NonSerialized]
     public GuildInventory GuildInventory;
+    [NonSerialized]
+    public Budget Budget;
 
     [SerializeField]
     private bool UseTestData;
@@ -24,6 +26,10 @@ public class GameDataSingleton : MonoBehaviour
     private List<Character> guildCharacterList;
     [SerializeField]
     private List<Skill> guildSkillList;
+    [SerializeField]
+    private int currentBudget;
+    [SerializeField]
+    private int maxBudget;
     
     public static GameDataSingleton gameData;
 
@@ -51,12 +57,22 @@ public class GameDataSingleton : MonoBehaviour
         }
         if(GuildInventory == null) {
             GuildInventory = new GuildInventory();
+            //Load here
             if(UseTestData) {
                 GuildInventory = new GuildInventory();
                 guildCharacterList.ForEach(g => GuildInventory.AddPartyMember(g));
                 guildSkillList.ForEach(s => GuildInventory.AddSkill(s));
             }
         }
+        if(Budget == null) {
+            Budget = new Budget();
+            //load budget
+            if(UseTestData) {
+                Budget.SetCurrentBudget(currentBudget);
+                Budget.SetMaxBudget(maxBudget);
+            }
+        }
+        
     }
 
 }

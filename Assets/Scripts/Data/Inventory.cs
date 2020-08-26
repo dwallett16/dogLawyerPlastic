@@ -39,12 +39,14 @@ public abstract class Inventory
 
     public void RemovePartyMemberById(int id)
     {
-        partyList.RemoveAll(x =>x.Id == id);
+        var p = partyList.First(x => x.Id == id);
+        partyList.RemoveAt(partyList.IndexOf(p));
     }
 
     public void RemoveSkillById(int id)
     {
-        skillsList.RemoveAll(x => x.Id == id);
+        var s = skillsList.First(x => x.Id == id);
+        skillsList.RemoveAt(skillsList.IndexOf(s));
     }
 
     public Character GetCharacterById(int id)

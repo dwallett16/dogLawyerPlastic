@@ -18,6 +18,7 @@ public class GuildMenuController : MonoBehaviour
     public GameObject MessagePanel;
     public GameObject MessageText;
     public GameObject ConfirmText;
+    public GameObject BudgetText;
     public GameObject Background;
     public Sprite HireSprite, BuySprite, FireSprite, SellSprite;
     
@@ -28,6 +29,7 @@ public class GuildMenuController : MonoBehaviour
     private ScrollWithKey hireScrollview;
     private ScrollWithKey buyScrollview;
     private bool isConfirmation;
+    private bool isSuccessfulTransaction;
     private GuildState[] tabs = new GuildState[] {GuildState.Hire, GuildState.Buy, GuildState.Fire, GuildState.Sell};
     private Sprite[] tabSprites;
     private int tabIndex = 0;
@@ -38,6 +40,8 @@ public class GuildMenuController : MonoBehaviour
         hireScrollview = HireCanvas.GetComponent<ScrollWithKey>();
         buyScrollview = BuyCanvas.GetComponent<ScrollWithKey>();
         tabSprites = new Sprite[] {HireSprite, BuySprite, FireSprite, SellSprite};
+        var data = GameDataSingleton.gameData;
+        BudgetText.GetComponent<Text>().text = data.Budget.CurrentBudget.ToString() + "/" + data.Budget.MaxBudget.ToString();
         currentState = GuildState.Hire;
         UpdateGuildData(currentState);
     }
@@ -131,6 +135,7 @@ public class GuildMenuController : MonoBehaviour
                     data.Strain = p.Strain.ToString();
                     data.FocusPoints = p.FocusPointCapacity.ToString();
                     data.StressCapacity = p.StressCapacity.ToString();
+                    data.Price = p.Price;
 
                     if(index == 0)
                         EventSystem.current.SetSelectedGameObject(pInst);
@@ -159,6 +164,7 @@ public class GuildMenuController : MonoBehaviour
                     data.SkillType = s.Type;
                     data.LatentPower = s.LatentPower;
                     data.FpCost = s.FocusPointCost;
+                    data.Price = s.Price;
 
                     if(index == 0)
                         EventSystem.current.SetSelectedGameObject(sInst);
@@ -187,6 +193,7 @@ public class GuildMenuController : MonoBehaviour
                     data.Strain = p.Strain.ToString();
                     data.FocusPoints = p.FocusPointCapacity.ToString();
                     data.StressCapacity = p.StressCapacity.ToString();
+                    data.Price = p.Price;
 
                     if(index == 0)
                         EventSystem.current.SetSelectedGameObject(pInst);
@@ -215,6 +222,7 @@ public class GuildMenuController : MonoBehaviour
                     data.SkillType = s.Type;
                     data.LatentPower = s.LatentPower;
                     data.FpCost = s.FocusPointCost;
+                    data.Price = s.Price;
 
                     if(index == 0)
                         EventSystem.current.SetSelectedGameObject(sInst);
@@ -249,29 +257,38 @@ public class GuildMenuController : MonoBehaviour
     {
         if(isConfirmation) {
             var id = selectedItem.GetComponent<ButtonData>().Id;
+            var price = selectedItem.GetComponent<ButtonData>().Price;
+            var gameData = GameDataSingleton.gameData;
+            isSuccessfulTransaction = false;
             switch(previousState) {
                 case GuildState.Hire:
-                    GameDataSingleton.gameData.PlayerInventory.
-                    AddPartyMember(GameDataSingleton.gameData.GuildInventory.
-                    GetCharacterById(id));
+                    if(gameData.Budget.CurrentBudget >= price) {
+                        gameData.PlayerInventory.AddPartyMember(gameData.GuildInventory.GetCharacterById(id));
+                        gameData.Budget.Purchase(price);
+                        isSuccessfulTransaction = true;
+                    }
                 break;
                 case GuildState.Buy:
-                    GameDataSingleton.gameData.PlayerInventory
-                    .AddSkill(GameDataSingleton.gameData.GuildInventory
-                    .GetSkillById(id));
+                    if(gameData.Budget.CurrentBudget >= price) {
+                        gameData.PlayerInventory.AddSkill(gameData.GuildInventory.GetSkillById(id));
+                        gameData.Budget.Purchase(price);
+                        isSuccessfulTransaction = true;
+                    }
+                    
                 break;
                 case GuildState.Fire:
-                    GameDataSingleton.gameData.PlayerInventory
-                    .RemovePartyMemberById(id);
-                    GameDataSingleton.gameData.GuildInventory
-                    .RemovePartyMemberById(id);
+                    gameData.PlayerInventory.RemovePartyMemberById(id);
+                    gameData.Budget.Sell(price);
+                    isSuccessfulTransaction = true;
                 break;
                 case GuildState.Sell:
-                    GameDataSingleton.gameData.PlayerInventory
-                    .RemoveSkillById(id);
+                    gameData.PlayerInventory.RemoveSkillById(id);
+                    gameData.Budget.Sell(price);
+                    isSuccessfulTransaction = true;
                 break;
             }
             currentState = GuildState.Message;
+            BudgetText.GetComponent<Text>().text = gameData.Budget.CurrentBudget.ToString() + "/" + gameData.Budget.MaxBudget.ToString();
         }
         else {
             currentState = previousState;
@@ -281,16 +298,22 @@ public class GuildMenuController : MonoBehaviour
     private string GetMessageText(GuildState previousState) 
     {
         var name = selectedItem.GetComponentInChildren<Text>().text;
-        switch(previousState) {
-            case GuildState.Hire:
-                return "Recruited " + name + ".";
-            case GuildState.Buy:
-                return "Purchased " + name + ".";
-            case GuildState.Fire:
-                return "Fired " + name + ".";
-            case GuildState.Sell:
-                return "Sold " + name + ".";
+        if(isSuccessfulTransaction) {
+            switch(previousState) {
+                case GuildState.Hire:
+                    return "Recruited " + name + ".";
+                case GuildState.Buy:
+                    return "Purchased " + name + ".";
+                case GuildState.Fire:
+                    return "Fired " + name + ".";
+                case GuildState.Sell:
+                    return "Sold " + name + ".";
+            }
         }
+        else {
+            return "Insufficient funds.";
+        }
+        
         return string.Empty;
     }
 

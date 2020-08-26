@@ -13,4 +13,5 @@ public class ButtonData: MonoBehaviour
     public PriorityTypes SkillType {get; set;}
     public int FpCost {get; set;}
     public int LatentPower {get; set;}
+    public int Price {get;set;}
 }
