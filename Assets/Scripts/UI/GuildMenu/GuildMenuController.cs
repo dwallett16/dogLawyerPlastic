@@ -21,6 +21,7 @@ public class GuildMenuController : MonoBehaviour
     public GameObject BudgetText;
     public GameObject Background;
     public Sprite HireSprite, BuySprite, FireSprite, SellSprite;
+    public GameObject HireHelp, BuyHelp, FireHelp, SellHelp;
     
     private GuildState currentState;
     private GuildState previousState;
@@ -33,6 +34,7 @@ public class GuildMenuController : MonoBehaviour
     private GuildState[] tabs = new GuildState[] {GuildState.Hire, GuildState.Buy, GuildState.Fire, GuildState.Sell};
     private Sprite[] tabSprites;
     private int tabIndex = 0;
+    private GameObject[] helpBubbles;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,7 @@ public class GuildMenuController : MonoBehaviour
         hireScrollview = HireCanvas.GetComponent<ScrollWithKey>();
         buyScrollview = BuyCanvas.GetComponent<ScrollWithKey>();
         tabSprites = new Sprite[] {HireSprite, BuySprite, FireSprite, SellSprite};
+        helpBubbles = new GameObject[] {HireHelp, BuyHelp, FireHelp, SellHelp};
         var data = GameDataSingleton.gameData;
         BudgetText.GetComponent<Text>().text = data.Budget.CurrentBudget.ToString() + "/" + data.Budget.MaxBudget.ToString();
         currentState = GuildState.Hire;
@@ -67,7 +70,6 @@ public class GuildMenuController : MonoBehaviour
 
         if(currentItem != EventSystem.current.currentSelectedGameObject) {
             currentItem = EventSystem.current.currentSelectedGameObject;
-            Debug.Log(currentItem.name);
             switch(currentState) {
                 case GuildState.Fire:
                 case GuildState.Hire:
@@ -101,6 +103,12 @@ public class GuildMenuController : MonoBehaviour
                 tabIndex += dir;
             currentState = tabs[tabIndex];
             Background.GetComponent<Image>().sprite = tabSprites[tabIndex];
+            for(var i = 0; i < tabs.Length; i++) {
+                if(i == tabIndex)
+                    helpBubbles[i].SetActive(true);
+                else
+                    helpBubbles[i].SetActive(false);
+            }
 
             UpdateGuildData(currentState);
         }
