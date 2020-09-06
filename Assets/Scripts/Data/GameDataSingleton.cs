@@ -45,8 +45,6 @@ public class GameDataSingleton : MonoBehaviour
     void Start()
     {
         if(PlayerInventory == null) {
-            PlayerInventory = new PlayerInventory();
-            //Load from save system on initialization
             if(UseTestData) {
                 PlayerInventory = new PlayerInventory();
                 startEvidenceList.ForEach(e => PlayerInventory.AddEvidence(e));
@@ -54,22 +52,30 @@ public class GameDataSingleton : MonoBehaviour
                 startSkillsList.ForEach(s => PlayerInventory.AddSkill(s));
                 startCaseList.ForEach(c => PlayerInventory.AddActiveCase(c));
             }
+            else {
+                PlayerInventory = new PlayerInventory();
+                //Load from save system on initialization
+            }
         }
         if(GuildInventory == null) {
-            GuildInventory = new GuildInventory();
-            //Load here
             if(UseTestData) {
                 GuildInventory = new GuildInventory();
                 guildCharacterList.ForEach(g => GuildInventory.AddPartyMember(g));
                 guildSkillList.ForEach(s => GuildInventory.AddSkill(s));
             }
+            else {
+                GuildInventory = new GuildInventory();
+                //Load here
+            }
         }
         if(Budget == null) {
-            Budget = new Budget();
-            //load budget
             if(UseTestData) {
                 Budget.SetCurrentBudget(currentBudget);
                 Budget.SetMaxBudget(maxBudget);
+            }
+            else {
+                Budget = new Budget();
+                //load budget
             }
         }
         
