@@ -675,7 +675,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 2
+        value: 3
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -835,7 +835,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: No
+        value: '[nosubtitle]No'
         type: 0
         typeString: 
       - title: Parenthetical
@@ -873,7 +873,7 @@ MonoBehaviour:
         y: 130
         width: 160
         height: 30
-    canvasScrollPosition: {x: 0, y: 0}
+    canvasScrollPosition: {x: 0, y: 16.326538}
     canvasZoom: 0.97999966
   - id: 3
     fields:
@@ -1003,7 +1003,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 2
+        value: 4
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -1049,7 +1049,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 20
+        x: 21
         y: 80
         width: 160
         height: 30
