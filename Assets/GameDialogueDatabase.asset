@@ -1255,7 +1255,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: 
+        value: SpineAnimation(SmokeStart,Player)
         type: 0
         typeString: 
       conversationID: 4

@@ -3506,6 +3506,56 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 210478282}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1544255251 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6339554685193931742, guid: 69d0cd3e520784ec0be3a75a1e829213,
+    type: 3}
+  m_PrefabInstance: {fileID: 1974292973}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1544255252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544255251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e654c011848bd448ffa6958faf0600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonAnimation: {fileID: 1544255260}
+  animationReferenceAssets:
+  - {fileID: 11400000, guid: c6815773bdd6c43d280cf58baf8a0ef9, type: 2}
+  - {fileID: 11400000, guid: b010c6b62d2be4238b2335e2b090e2a5, type: 2}
+  - {fileID: 0}
+--- !u!114 &1544255253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544255251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71421582644b3684494794e00460b94a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spineGameObject: {fileID: 1544255251}
+  showTrigger: 
+  hideTrigger: 
+--- !u!114 &1544255260 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6339554685193931738, guid: 69d0cd3e520784ec0be3a75a1e829213,
+    type: 3}
+  m_PrefabInstance: {fileID: 1974292973}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544255251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1552687600
 PrefabInstance:
   m_ObjectHideFlags: 0
