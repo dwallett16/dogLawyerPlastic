@@ -11,10 +11,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Office.unity
     guid: b6f84251e4321471d9ccdeb0a6c374c0
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Map/MapTransition.unity
     guid: be6e34f89597e49ed924e8fa1b842d55
+  - enabled: 1
+    path: Assets/Scenes/OrneryOstrich/OrneryOstrichMain.unity
+    guid: 976bd944f5df94565ad4ef746a3b09a7
+  - enabled: 1
+    path: Assets/Scenes/OrneryOstrich/OrneryOstrichSecurity.unity
+    guid: 14af6d4c9a1bd194fbb9ff7203a40b40
+  - enabled: 1
+    path: Assets/Scenes/OrneryOstrich/OrneryOstrichCloset.unity
+    guid: e8d771eaec9a94d8fb2412e5b5328371
+  - enabled: 1
+    path: Assets/Scenes/Guild/Guild.unity
+    guid: 01e7711d42e4b2341a7ccf39db0e6684
   m_configObjects: {}
