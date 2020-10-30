@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &581617818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3915841001415405972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ee3d99442035942b6dd1ede25ff7cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueUI: {fileID: 0}
+  typewriterEffect: {fileID: 842756446}
+  hideContinueButtonOnContinue: 0
+  continueSubtitlePanel: 1
+  continueAlertPanel: 1
 --- !u!1 &3915841001710658046
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,6 +136,48 @@ MonoBehaviour:
   _animationName: Idle
   loop: 1
   timeScale: 1
+--- !u!114 &842756446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5245630403947634572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf59e9c601bf0354baa2d3daac7d491e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightToLeft: 0
+  charactersPerSecond: 50
+  audioClip: {fileID: 0}
+  alternateAudioClips: []
+  audioSource: {fileID: 0}
+  interruptAudioClip: 0
+  usePlayOneShot: 0
+  silentCharacters: 
+  fullPauseCharacters: 
+  quarterPauseCharacters: 
+  fullPauseDuration: 1
+  quarterPauseDuration: 0.25
+  removeDuplicateTypewriterEffects: 1
+  playOnEnable: 0
+  waitOneFrameBeforeStarting: 0
+  stopOnConversationEnd: 0
+  autoScrollSettings:
+    autoScrollEnabled: 0
+    scrollRect: {fileID: 0}
+    scrollbarEnabler: {fileID: 0}
+    sizerText: {fileID: 0}
+  onBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  onCharacter:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &3915841001902603601
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -126,6 +185,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3915841001710658042}
     m_Modifications:
+    - target: {fileID: 622202054, guid: 2b041cd7007ba4318b74fbd500bc9865, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 622202054, guid: 2b041cd7007ba4318b74fbd500bc9865, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 581617818}
+    - target: {fileID: 622202054, guid: 2b041cd7007ba4318b74fbd500bc9865, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PixelCrushers.DialogueSystem.StandardUIContinueButtonFastForward, Assembly-CSharp-firstpass
+      objectReference: {fileID: 0}
+    - target: {fileID: 622202054, guid: 2b041cd7007ba4318b74fbd500bc9865, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnFastForward
+      objectReference: {fileID: 0}
+    - target: {fileID: 622202054, guid: 2b041cd7007ba4318b74fbd500bc9865, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 622202054, guid: 2b041cd7007ba4318b74fbd500bc9865, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 622202054, guid: 2b041cd7007ba4318b74fbd500bc9865, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 622202056, guid: 2b041cd7007ba4318b74fbd500bc9865, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9123137995371416429, guid: 2b041cd7007ba4318b74fbd500bc9865,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -169,7 +260,7 @@ PrefabInstance:
     - target: {fileID: 9123137996733740160, guid: 2b041cd7007ba4318b74fbd500bc9865,
         type: 3}
       propertyPath: conversation
-      value: MarjoryTest
+      value: Marjory
       objectReference: {fileID: 0}
     - target: {fileID: 9123137996733740169, guid: 2b041cd7007ba4318b74fbd500bc9865,
         type: 3}
@@ -256,11 +347,33 @@ PrefabInstance:
       propertyPath: actor
       value: Marjory
       objectReference: {fileID: 0}
+    - target: {fileID: 9123137996933912184, guid: 2b041cd7007ba4318b74fbd500bc9865,
+        type: 3}
+      propertyPath: visibility
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9123137996933912186, guid: 2b041cd7007ba4318b74fbd500bc9865,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b041cd7007ba4318b74fbd500bc9865, type: 3}
 --- !u!4 &5245630402692811227 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9123137996733740170, guid: 2b041cd7007ba4318b74fbd500bc9865,
+    type: 3}
+  m_PrefabInstance: {fileID: 3915841001902603601}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5245630403947634572 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9123137995876721373, guid: 2b041cd7007ba4318b74fbd500bc9865,
+    type: 3}
+  m_PrefabInstance: {fileID: 3915841001902603601}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3915841001415405972 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 622202053, guid: 2b041cd7007ba4318b74fbd500bc9865,
     type: 3}
   m_PrefabInstance: {fileID: 3915841001902603601}
   m_PrefabAsset: {fileID: 0}

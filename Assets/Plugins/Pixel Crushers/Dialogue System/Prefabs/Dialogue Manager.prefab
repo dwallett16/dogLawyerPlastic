@@ -171,11 +171,11 @@ MonoBehaviour:
       entrytagFormat: 0
       disableInternalSequencerCommands: 0
     inputSettings:
-      alwaysForceResponseMenu: 1
+      alwaysForceResponseMenu: 0
       includeInvalidEntries: 0
       responseTimeout: 0
       responseTimeoutAction: 0
-      emTagForOldResponses: 0
+      emTagForOldResponses: 1
       emTagForInvalidResponses: 0
       qteButtons:
       - Fire1
@@ -208,7 +208,7 @@ MonoBehaviour:
     asyncDialogueEntryBatchSize: 100
     initializeNewVariables: 1
   allowSimultaneousConversations: 0
-  includeSimStatus: 0
+  includeSimStatus: 1
   preloadResources: 1
   instantiateDatabase: 0
   dontDestroyOnLoad: 1
