@@ -1,0 +1,51 @@
+{
+"skeleton": {
+	"hash": "CyVrcE6odzcmLcuC1dBkwQ1Y8jU",
+	"spine": "3.8.77",
+	"x": -463.35,
+	"y": 14.9,
+	"width": 921.39,
+	"height": 1655.46,
+	"images": "",
+	"audio": ""
+},
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "UpperArmLeft", "bone": "root", "attachment": "UpperArmLeft" },
+	{ "name": "LowerArmLeft", "bone": "root", "attachment": "LowerArmLeft" },
+	{ "name": "Torso", "bone": "root", "attachment": "Torso" },
+	{ "name": "Head", "bone": "root", "attachment": "Head" },
+	{ "name": "LowerArmRight", "bone": "root", "attachment": "LowerArmRight" },
+	{ "name": "UpperArmRight", "bone": "root", "attachment": "UpperArmRight" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"Head": {
+				"Head": { "x": 158.41, "y": 1377.86, "width": 563, "height": 585 }
+			},
+			"LowerArmLeft": {
+				"LowerArmLeft": { "x": 321.54, "y": 711.59, "width": 273, "height": 590 }
+			},
+			"LowerArmRight": {
+				"LowerArmRight": { "x": -62.71, "y": 612.99, "width": 238, "height": 598 }
+			},
+			"Torso": {
+				"Torso": { "x": -48.35, "y": 698.9, "width": 830, "height": 1368 }
+			},
+			"UpperArmLeft": {
+				"UpperArmLeft": { "x": 275.86, "y": 1056.69, "width": 211, "height": 431 }
+			},
+			"UpperArmRight": {
+				"UpperArmRight": { "x": -40.96, "y": 964.61, "width": 213, "height": 428 }
+			}
+		}
+	}
+],
+"animations": {
+	"animation": {}
+}
+}
