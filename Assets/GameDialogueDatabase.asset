@@ -239,20 +239,6 @@ MonoBehaviour:
       value: 
       type: 0
       typeString: 
-  - id: 5
-    fields:
-    - title: Name
-      value: testfrommatt
-      type: 0
-      typeString: 
-    - title: Initial Value
-      value: 
-      type: 5
-      typeString: CustomFieldType_Actor
-    - title: Description
-      value: 
-      type: 0
-      typeString: 
   conversations:
   - id: 1
     fields:
