@@ -180,6 +180,30 @@ MonoBehaviour:
     - title: Description
       value: Jameson
       type: 0
+      typeString: CustomFieldType_Text
+    - title: State
+      value: unassigned
+      type: 0
+      typeString: CustomFieldType_QuestState
+    - title: Success Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Failure Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Entry Count
+      value: 1
+      type: 1
+      typeString: CustomFieldType_Number
+    - title: Entry 1 State
+      value: unassigned
+      type: 0
+      typeString: 
+    - title: Entry 1
+      value: 
+      type: 0
       typeString: 
   locations: []
   variables:
@@ -5815,7 +5839,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 20
-        y: 3080
+        y: 3079
         width: 160
         height: 30
     - id: 66
@@ -6239,7 +6263,7 @@ MonoBehaviour:
         y: 2001
         width: 160
         height: 30
-    canvasScrollPosition: {x: 1, y: 3159}
+    canvasScrollPosition: {x: 0, y: 2904}
     canvasZoom: 1
   syncInfo:
     syncActors: 0

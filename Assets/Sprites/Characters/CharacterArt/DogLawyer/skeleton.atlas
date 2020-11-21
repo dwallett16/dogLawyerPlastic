@@ -1,0 +1,146 @@
+
+skeleton.png
+size: 2048,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+DogLawyer_CurvedTie
+  rotate: true
+  xy: 1550, 87
+  size: 62, 326
+  orig: 62, 326
+  offset: 0, 0
+  index: -1
+DogLawyer_Head
+  rotate: false
+  xy: 623, 40
+  size: 404, 251
+  orig: 404, 251
+  offset: 0, 0
+  index: -1
+DogLawyer_Hips
+  rotate: false
+  xy: 1550, 151
+  size: 279, 164
+  orig: 279, 164
+  offset: 0, 0
+  index: -1
+DogLawyer_LeftLowerArm
+  rotate: true
+  xy: 361, 84
+  size: 87, 258
+  orig: 87, 258
+  offset: 0, 0
+  index: -1
+DogLawyer_LeftLowerLeg
+  rotate: true
+  xy: 1285, 27
+  size: 58, 378
+  orig: 58, 378
+  offset: 0, 0
+  index: -1
+DogLawyer_LeftShoe
+  rotate: false
+  xy: 1735, 44
+  size: 55, 41
+  orig: 55, 41
+  offset: 0, 0
+  index: -1
+DogLawyer_LeftUpperArm
+  rotate: false
+  xy: 1919, 202
+  size: 111, 308
+  orig: 111, 308
+  offset: 0, 0
+  index: -1
+DogLawyer_LeftUpperLeg
+  rotate: true
+  xy: 623, 293
+  size: 217, 585
+  orig: 217, 585
+  offset: 0, 0
+  index: -1
+DogLawyer_LeftWrist
+  rotate: true
+  xy: 1665, 40
+  size: 45, 68
+  orig: 45, 68
+  offset: 0, 0
+  index: -1
+DogLawyer_LighterLid
+  rotate: false
+  xy: 1210, 305
+  size: 29, 10
+  orig: 29, 10
+  offset: 0, 0
+  index: -1
+DogLawyer_RightHand
+  rotate: false
+  xy: 1793, 400
+  size: 124, 110
+  orig: 124, 110
+  offset: 0, 0
+  index: -1
+DogLawyer_RightLowerArm
+  rotate: false
+  xy: 1029, 33
+  size: 254, 258
+  orig: 254, 258
+  offset: 0, 0
+  index: -1
+DogLawyer_RightLowerLeg
+  rotate: true
+  xy: 2, 2
+  size: 169, 357
+  orig: 169, 357
+  offset: 0, 0
+  index: -1
+DogLawyer_RightShoe
+  rotate: false
+  xy: 1857, 348
+  size: 47, 50
+  orig: 47, 50
+  offset: 0, 0
+  index: -1
+DogLawyer_RightUpperArm
+  rotate: false
+  xy: 1285, 89
+  size: 263, 226
+  orig: 263, 226
+  offset: 0, 0
+  index: -1
+DogLawyer_RightUpperLeg
+  rotate: true
+  xy: 1210, 317
+  size: 193, 581
+  orig: 193, 581
+  offset: 0, 0
+  index: -1
+DogLawyer_RightWrist
+  rotate: false
+  xy: 1793, 345
+  size: 62, 53
+  orig: 62, 53
+  offset: 0, 0
+  index: -1
+DogLawyer_Torso
+  rotate: true
+  xy: 2, 173
+  size: 337, 619
+  orig: 337, 619
+  offset: 0, 0
+  index: -1
+DogLawyer_cigarette
+  rotate: false
+  xy: 361, 67
+  size: 112, 15
+  orig: 112, 15
+  offset: 0, 0
+  index: -1
+DogLaywer_LighterBase
+  rotate: true
+  xy: 361, 2
+  size: 29, 84
+  orig: 29, 84
+  offset: 0, 0
+  index: -1

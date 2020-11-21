@@ -15,8 +15,6 @@ public class SpineAnimatorController : MonoBehaviour
 
 
     void Start() {
-        //skeletonAnimation = GetComponent<SkeletonAnimation>();
-        //animationState = skeletonAnimation.AnimationState;
         skeletonAnimation.AnimationState.Complete += delegate (TrackEntry trackEntry) {
             Debug.Log("Animation complete");
             isAnimationComplete = true;
@@ -30,6 +28,8 @@ public class SpineAnimatorController : MonoBehaviour
         skeletonAnimation.AnimationState.End += delegate (TrackEntry trackEntry) {
             Debug.Log("Animation ended");
         };
+
+        skeletonAnimation.AnimationState.Event += HandleEvent;
 
         //capitalize animation names
         for(int i = 0; i < listOfAllAnimations.Count; i++) {
@@ -52,6 +52,10 @@ public class SpineAnimatorController : MonoBehaviour
     public void OnSpineAnimationEnd(TrackEntry trackEntry) {
         isAnimationEnded = true;
     }
+
+    void HandleEvent (TrackEntry trackEntry, Spine.Event e) {
+      SendMessage("AnimationEvent", e.Data.Name);
+   }
 
     
     public bool IsAnimationComplete() {

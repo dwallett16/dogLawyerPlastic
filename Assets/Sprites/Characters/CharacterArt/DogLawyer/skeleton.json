@@ -1,6 +1,6 @@
 {
 "skeleton": {
-	"hash": "LAhrHXJjOUlnV8VAzV4NIKJ5pQE",
+	"hash": "Vw1cT/+/CMxb+0YvX8iIJXd1GUI",
 	"spine": "3.8.77",
 	"x": -313.4,
 	"y": -21.4,
@@ -122,6 +122,10 @@
 		}
 	}
 ],
+"events": {
+	"SmokeExhaleStart": {},
+	"SmokeExhaleStop": {}
+},
 "animations": {
 	"Idle": {
 		"slots": {
@@ -1384,7 +1388,11 @@
 					{ "time": 3.4667 }
 				]
 			}
-		}
+		},
+		"events": [
+			{ "time": 2.1, "name": "SmokeExhaleStart" },
+			{ "time": 3.1, "name": "SmokeExhaleStop" }
+		]
 	},
 	"Walk": {
 		"slots": {

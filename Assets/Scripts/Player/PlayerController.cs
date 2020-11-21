@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Spine.Unity;
 
 public class PlayerController : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class PlayerController : MonoBehaviour {
 
     new private Rigidbody2D rigidbody2D;
     private Animator animator;
+    public ParticleSystem smokeParticleSystem;
     private float currentDirection;
     
     public SpineAnimatorController spineAnimatorController;
@@ -129,5 +131,17 @@ public class PlayerController : MonoBehaviour {
             return true;
         }
         return false;
+    }
+
+    public void AnimationEvent(string eventName) {
+        Debug.Log("Animation event hit!");
+
+        if (eventName == "SmokeExhaleStart") {
+            smokeParticleSystem.Play();
+        }
+
+        if (eventName == "SmokeExhaleStop") {
+            smokeParticleSystem.Stop();
+        }
     }
 }
