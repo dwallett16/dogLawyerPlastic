@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace PixelCrushers.DialogueSystem.SequencerCommands
 {
 
-    public class SequencerObserver: ISequencerObserver
+    public class AddEvidenceObserver: ISequencerObserver
     {
         public List<string> evidenceIds {get; set;}
         public int DataCount {
@@ -11,16 +11,8 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
                 return evidenceIds == null ? 0 : evidenceIds.Count;
             }
         }
-        private SequencerObserver() {
+        public AddEvidenceObserver() {
             evidenceIds = new List<string>();
-        }
-        private static SequencerObserver instance;
-        public static SequencerObserver Instance {
-            get {
-                if(instance == null)
-                    instance = new SequencerObserver();
-                return instance;
-            }
         }
 
         public void UpdateData(string id) 
@@ -30,6 +22,10 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
 
         public void ClearData() {
             evidenceIds.Clear();
+        }
+
+        public bool IsUpdated() {
+            return DataCount > 0;
         }
     }
 

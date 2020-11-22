@@ -37,6 +37,8 @@ public class GameDataSingleton : MonoBehaviour
     
     public static GameDataSingleton gameData;
 
+    private SequencerObserverContainer observerContainer;
+
     void Awake() 
     {
         DontDestroyOnLoad(gameObject);
@@ -49,6 +51,7 @@ public class GameDataSingleton : MonoBehaviour
 
     void Start()
     {
+        observerContainer = SequencerObserverContainer.Instance;
         if(PlayerInventory == null) {
             if(UseTestData) {
                 PlayerInventory = new PlayerInventory();
@@ -87,13 +90,14 @@ public class GameDataSingleton : MonoBehaviour
     }
 
     void Update() 
-    {
-        if(SequencerObserver.Instance.DataCount > 0) {
-            foreach(var id in SequencerObserver.Instance.evidenceIds) {
+    {   
+        if(observerContainer.AddEvidenceObserver != null && observerContainer.AddEvidenceObserver.IsUpdated()) {
+            var evObserver = observerContainer.AddEvidenceObserver as AddEvidenceObserver;
+            foreach(var id in evObserver.evidenceIds) {
                 var outId = Int32.Parse(id);
                 PlayerInventory.AddEvidence(allEvidence.GetEvidenceById(outId));
             }
-            SequencerObserver.Instance.ClearData();
+            evObserver.ClearData();
         }
     }
 
