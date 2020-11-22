@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using PixelCrushers.DialogueSystem;
+using PixelCrushers.DialogueSystem.SequencerCommands;
 
 public class GameDataSingleton : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class GameDataSingleton : MonoBehaviour
     [NonSerialized]
     public Budget Budget;
 
+    [SerializeField]
+    private EvidenceContainer allEvidence;
     [SerializeField]
     private bool UseTestData;
     [SerializeField]
@@ -40,6 +44,7 @@ public class GameDataSingleton : MonoBehaviour
             gameData = this;
         else
             Destroy(this);
+
     }
 
     void Start()
@@ -79,6 +84,17 @@ public class GameDataSingleton : MonoBehaviour
             }
         }
         
+    }
+
+    void Update() 
+    {
+        if(SequencerObserver.Instance.DataCount > 0) {
+            foreach(var id in SequencerObserver.Instance.evidenceIds) {
+                var outId = Int32.Parse(id);
+                PlayerInventory.AddEvidence(allEvidence.GetEvidenceById(outId));
+            }
+            SequencerObserver.Instance.ClearData();
+        }
     }
 
 }

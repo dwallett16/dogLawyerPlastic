@@ -43,3 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e14ce791df91c47f39c6937c8d2a8fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allEvidence: {fileID: 11400000, guid: 41b2144a5dd91c24aba979cd0b8d8d44, type: 2}
+  UseTestData: 0
+  startEvidenceList: []
+  startSkillsList: []
+  startPartyList: []
+  startCaseList: []
+  guildCharacterList: []
+  guildSkillList: []
+  currentBudget: 0
+  maxBudget: 0
