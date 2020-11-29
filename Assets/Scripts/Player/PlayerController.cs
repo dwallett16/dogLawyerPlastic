@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using Spine.Unity;
+using PixelCrushers.DialogueSystem;
 
 public class PlayerController : MonoBehaviour {
 
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour {
     private PlayerState currentState, previousState;
     bool stateChanged;
     float moveHorizontal = 0f;
+    bool isInConversation = false;
 
     // Use this for initialization
     void Start()
@@ -44,7 +46,7 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate()
     {
         //Store the current horizontal input in the float moveHorizontal.
-        if (currentState == PlayerState.Idle || currentState == PlayerState.Walk) {
+        if ((currentState == PlayerState.Idle || currentState == PlayerState.Walk) && !isInConversation) {
             moveHorizontal = Input.GetAxisRaw (Constants.Horizontal);
 
             //Movement
@@ -143,5 +145,14 @@ public class PlayerController : MonoBehaviour {
         if (eventName == "SmokeExhaleStop") {
             smokeParticleSystem.Stop();
         }
+    }
+
+    void OnConversationStart() {
+        isInConversation = true;
+        Debug.Log(DialogueLua.GetVariable("Conversant").asString);
+    }
+
+    void OnConversationEnd() {
+        isInConversation = false;
     }
 }
