@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using PixelCrushers.DialogueSystem;
-using PixelCrushers.DialogueSystem.SequencerCommands;
 
 public class GameDataSingleton : MonoBehaviour
 {
@@ -15,7 +13,7 @@ public class GameDataSingleton : MonoBehaviour
     public Budget Budget;
 
     [SerializeField]
-    private EvidenceContainer allEvidence;
+    public EvidenceContainer allEvidence;
     [SerializeField]
     private bool UseTestData;
     [SerializeField]
@@ -37,8 +35,6 @@ public class GameDataSingleton : MonoBehaviour
     
     public static GameDataSingleton gameData;
 
-    private SequencerObserverContainer observerContainer;
-
     void Awake() 
     {
         DontDestroyOnLoad(gameObject);
@@ -51,7 +47,6 @@ public class GameDataSingleton : MonoBehaviour
 
     void Start()
     {
-        observerContainer = SequencerObserverContainer.Instance;
         if(PlayerInventory == null) {
             if(UseTestData) {
                 PlayerInventory = new PlayerInventory();
@@ -87,18 +82,6 @@ public class GameDataSingleton : MonoBehaviour
             }
         }
         
-    }
-
-    void Update() 
-    {   
-        if(observerContainer.AddEvidenceObserver != null && observerContainer.AddEvidenceObserver.IsUpdated()) {
-            var evObserver = observerContainer.AddEvidenceObserver as AddEvidenceObserver;
-            foreach(var id in evObserver.evidenceIds) {
-                var outId = Int32.Parse(id);
-                PlayerInventory.AddEvidence(allEvidence.GetEvidenceById(outId));
-            }
-            evObserver.ClearData();
-        }
     }
 
 }

@@ -11,10 +11,9 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
         public void Start()
         {
             var evidenceId = GetParameter(0);
-            if(SequencerObserverContainer.Instance.AddEvidenceObserver == null)
-                SequencerObserverContainer.Instance.AddEvidenceObserver = new AddEvidenceObserver();
-            
-            SequencerObserverContainer.Instance.AddEvidenceObserver.UpdateData(evidenceId);
+            var subject = GetSubject(1);
+            var listener = subject.GetComponent<IListener>();
+            listener.NotifyEvidence(evidenceId);
             Stop();
         }
     }

@@ -348,7 +348,7 @@ MonoBehaviour:
     - title: Name
       value: New Quest 3
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Pictures
       value: '[]'
       type: 3
@@ -356,19 +356,19 @@ MonoBehaviour:
     - title: Description
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Success Description
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Failure Description
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: State
       value: active
       type: 0
-      typeString: 
+      typeString: CustomFieldType_QuestState
     - title: Is Item
       value: False
       type: 2
@@ -15323,8 +15323,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 351.51547
-        y: 16.618553
+        x: 399.33377
+        y: 19.009468
         width: 160
         height: 30
     - id: 2
@@ -15387,6 +15387,12 @@ MonoBehaviour:
         destinationDialogueID: 7
         isConnector: 0
         priority: 2
+      - originConversationID: 7
+        originDialogueID: 2
+        destinationConversationID: 7
+        destinationDialogueID: 13
+        isConnector: 0
+        priority: 0
       conditionsString: 
       userScript: 
       onExecute:
@@ -15981,7 +15987,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 174.11964
+        x: 354.6337
         y: 367.38605
         width: 160
         height: 30
@@ -16046,12 +16052,77 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 355.8294
-        y: 367.38605
+        x: 174.1199
+        y: 368.5815
         width: 160
         height: 30
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.8364999
+    - id: 13
+      fields:
+      - title: Title
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Pictures
+        value: '[]'
+        type: 3
+        typeString: CustomFieldType_Files
+      - title: Description
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Actor
+        value: 5
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Conversant
+        value: -1
+        type: 5
+        typeString: CustomFieldType_Actor
+      - title: Menu Text
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Dialogue Text
+        value: There's no active investigation right now.
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Parenthetical
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Audio Files
+        value: '[]'
+        type: 3
+        typeString: CustomFieldType_Files
+      - title: Video File
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      - title: Sequence
+        value: 
+        type: 0
+        typeString: CustomFieldType_Text
+      conversationID: 7
+      isRoot: 0
+      isGroup: 0
+      nodeColor: 
+      delaySimStatus: 0
+      falseConditionAction: Block
+      conditionPriority: 2
+      outgoingLinks: []
+      conditionsString: 
+      userScript: 
+      onExecute:
+        m_PersistentCalls:
+          m_Calls: []
+      canvasRect:
+        serializedVersion: 2
+        x: 2.2399292
+        y: 150.9569
+        width: 160
+        height: 30
+    canvasScrollPosition: {x: 2.4797974, y: 32.238068}
+    canvasZoom: 0.80649996
   - id: 8
     fields:
     - title: Title
@@ -16297,7 +16368,7 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: Actor["PhilSmith"].IsRightfullyAccused == true
-      userScript: 
+      userScript: SetQuestState("Murder_on_the_Dancefloor", "success")
       onExecute:
         m_PersistentCalls:
           m_Calls: []
