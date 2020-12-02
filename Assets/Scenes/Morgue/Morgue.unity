@@ -1989,6 +1989,11 @@ PrefabInstance:
       propertyPath: conversation
       value: ReturnToCar
       objectReference: {fileID: 0}
+    - target: {fileID: 9123137996733740160, guid: 2b041cd7007ba4318b74fbd500bc9865,
+        type: 3}
+      propertyPath: condition.luaConditions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9123137996733740169, guid: 2b041cd7007ba4318b74fbd500bc9865,
         type: 3}
       propertyPath: m_Name

@@ -334,8 +334,12 @@ public class JournalController : MonoBehaviour
         Background.SetActive(!Background.activeInHierarchy);
         JournalPanel.SetActive(!JournalPanel.activeInHierarchy);
         if(JournalPanel.activeInHierarchy) {
+            Time.timeScale = 0;
             ActivateHomePage();
             EventSystem.current.SetSelectedGameObject(FirstHomeButton);
+        }
+        else {
+            Time.timeScale = 1;
         }
     }
 

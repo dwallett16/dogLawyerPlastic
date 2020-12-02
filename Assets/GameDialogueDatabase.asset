@@ -431,6 +431,20 @@ MonoBehaviour:
       value: 
       type: 0
       typeString: 
+  - id: 5
+    fields:
+    - title: Name
+      value: IsMorgueActive
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Initial Value
+      value: True
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
   conversations:
   - id: 1
     fields:
@@ -1129,7 +1143,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: 
+        value: None();
         type: 0
         typeString: 
       conversationID: 2

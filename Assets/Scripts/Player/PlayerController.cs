@@ -149,7 +149,6 @@ public class PlayerController : MonoBehaviour {
 
     void OnConversationStart() {
         isInConversation = true;
-        Debug.Log(DialogueLua.GetVariable("Conversant").asString);
     }
 
     void OnConversationEnd() {

@@ -73,6 +73,7 @@ public class GameDataSingleton : MonoBehaviour
         }
         if(Budget == null) {
             if(UseTestData) {
+                Budget = new Budget();
                 Budget.SetCurrentBudget(currentBudget);
                 Budget.SetMaxBudget(maxBudget);
             }

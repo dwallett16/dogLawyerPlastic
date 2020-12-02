@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Guild/Guild.unity
     guid: 01e7711d42e4b2341a7ccf39db0e6684
+  - enabled: 1
+    path: Assets/Scenes/Morgue/Morgue.unity
+    guid: 25c4247a14c5b8c47a8fd9ae9c4d3dc2
   m_configObjects: {}
