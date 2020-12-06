@@ -274,7 +274,7 @@ MonoBehaviour:
       type: 3
       typeString: CustomFieldType_Files
     - title: Description
-      value: 
+      value: Jameson was murdered on the floor of the Ornery Ostrich.
       type: 0
       typeString: CustomFieldType_Text
     - title: State
@@ -298,7 +298,9 @@ MonoBehaviour:
       type: 0
       typeString: CustomFieldType_QuestState
     - title: Entry 1
-      value: 
+      value: Somebody I used to know asked me for a favor. A young man named Jameson
+        died on the dancefloor. Marjory thinks it was murder. I should look around
+        the Ornery Ostrich.
       type: 0
       typeString: CustomFieldType_Text
     - title: Is Item

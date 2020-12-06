@@ -1,0 +1,67 @@
+{
+"skeleton": {
+	"hash": "ee5egzjHmjmPcVIDC+jzTPl2bp8",
+	"spine": "3.8.77",
+	"x": -192.5,
+	"y": 3.5,
+	"width": 369,
+	"height": 898.5,
+	"images": "",
+	"audio": "/Volumes/Samsung_T5/DogLawyerAssets/PhilSmith/Spine"
+},
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "leg6", "bone": "root", "attachment": "leg6" },
+	{ "name": "leg1", "bone": "root", "attachment": "leg1" },
+	{ "name": "leg2", "bone": "root", "attachment": "leg2" },
+	{ "name": "leg5", "bone": "root", "attachment": "leg5" },
+	{ "name": "leg4", "bone": "root", "attachment": "leg4" },
+	{ "name": "leg3", "bone": "root", "attachment": "leg3" },
+	{ "name": "rightArm", "bone": "root", "attachment": "rightArm" },
+	{ "name": "torso", "bone": "root", "attachment": "torso" },
+	{ "name": "armLeft", "bone": "root", "attachment": "armLeft" },
+	{ "name": "head", "bone": "root", "attachment": "head" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"armLeft": {
+				"armLeft": { "x": -134, "y": 441, "width": 92, "height": 295 }
+			},
+			"head": {
+				"head": { "x": -4, "y": 729, "width": 271, "height": 346 }
+			},
+			"leg1": {
+				"leg1": { "x": -124, "y": 173, "width": 124, "height": 284 }
+			},
+			"leg2": {
+				"leg2": { "x": -72, "y": 145, "width": 125, "height": 283 }
+			},
+			"leg3": {
+				"leg3": { "x": 64, "y": 153, "width": 121, "height": 283 }
+			},
+			"leg4": {
+				"leg4": { "x": 114, "y": 177, "width": 125, "height": 284 }
+			},
+			"leg5": {
+				"leg5": { "x": 106, "y": 227, "width": 107, "height": 284 }
+			},
+			"leg6": {
+				"leg6": { "x": -130, "y": 227, "width": 125, "height": 284 }
+			},
+			"rightArm": {
+				"rightArm": { "x": 100, "y": 441, "width": 92, "height": 295 }
+			},
+			"torso": {
+				"torso": { "x": -12, "y": 429, "width": 258, "height": 337 }
+			}
+		}
+	}
+],
+"animations": {
+	"Idle": {}
+}
+}
