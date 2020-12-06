@@ -11817,7 +11817,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 20
-        y: 130
+        y: 131.0989
         width: 160
         height: 30
     - id: 3
@@ -11887,7 +11887,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 20
+        x: 21.0989
         y: 180
         width: 160
         height: 30
@@ -12671,7 +12671,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 20
-        y: 730
+        y: 731.0989
         width: 160
         height: 30
     - id: 15
@@ -13168,7 +13168,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 20
+        x: 18.901093
         y: 1080
         width: 160
         height: 30
@@ -13512,7 +13512,7 @@ MonoBehaviour:
         y: 216.38464
         width: 160
         height: 30
-    canvasScrollPosition: {x: 0, y: 0}
+    canvasScrollPosition: {x: 0, y: 37.362732}
     canvasZoom: 0.9100001
   - id: 6
     fields:
@@ -13768,7 +13768,7 @@ MonoBehaviour:
           MoveTo(Spot1,Player
           (1), 0.1)@2;
 
-          MoveTo(Spot2,Agatha, 0.1)@2;'
+          MoveTo(Spot2,AgathaCharacter, 0.1)@2;'
         type: 0
         typeString: 
       - title: Response Menu Sequence
@@ -13797,7 +13797,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 518.88306
-        y: 230.91798
+        y: 229.27864
         width: 160
         height: 30
     - id: 3

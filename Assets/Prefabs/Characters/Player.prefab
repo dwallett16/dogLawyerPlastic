@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 740875942}
   - component: {fileID: 740875941}
   - component: {fileID: 740875940}
+  - component: {fileID: 2139772038}
   m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
@@ -414,7 +415,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 740875942}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2139772038}
+        m_TargetAssemblyTypeName: PixelCrushers.DialogueSystem.StandardUIContinueButtonFastForward,
+          Assembly-CSharp-firstpass
+        m_MethodName: OnFastForward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &740875940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,6 +447,23 @@ MonoBehaviour:
   skipIfBeingClickedBySubmit: 1
   simulateButtonClick: 1
   simulateButtonDownDuration: 0.1
+--- !u!114 &2139772038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 740875938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ee3d99442035942b6dd1ede25ff7cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueUI: {fileID: 0}
+  typewriterEffect: {fileID: 609051891}
+  hideContinueButtonOnContinue: 0
+  continueSubtitlePanel: 1
+  continueAlertPanel: 1
 --- !u!1 &1091136161
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,6 +647,7 @@ GameObject:
   - component: {fileID: 1916026006}
   - component: {fileID: 1916026008}
   - component: {fileID: 1916026007}
+  - component: {fileID: 609051891}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -684,6 +716,48 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Subtitle text.
+--- !u!114 &609051891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916026005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf59e9c601bf0354baa2d3daac7d491e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rightToLeft: 0
+  charactersPerSecond: 50
+  audioClip: {fileID: 0}
+  alternateAudioClips: []
+  audioSource: {fileID: 0}
+  interruptAudioClip: 0
+  usePlayOneShot: 0
+  silentCharacters: 
+  fullPauseCharacters: 
+  quarterPauseCharacters: 
+  fullPauseDuration: 1
+  quarterPauseDuration: 0.25
+  removeDuplicateTypewriterEffects: 1
+  playOnEnable: 0
+  waitOneFrameBeforeStarting: 0
+  stopOnConversationEnd: 0
+  autoScrollSettings:
+    autoScrollEnabled: 0
+    scrollRect: {fileID: 0}
+    scrollbarEnabler: {fileID: 0}
+    sizerText: {fileID: 0}
+  onBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  onCharacter:
+    m_PersistentCalls:
+      m_Calls: []
+  onEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1351552536390478430
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,13 +783,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1351552536390478430}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 4.12, y: 14.27, z: -0.15017933}
+  m_LocalRotation: {x: -0.5445335, y: 0.40952387, z: -0.3466494, w: 0.6446764}
+  m_LocalPosition: {x: 4.7135563, y: 14.27, z: -0.15017933}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6339554685193931733}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -24.719, y: 85.482, z: -79.43}
 --- !u!198 &2044370113146868166
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -799,7 +873,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 5.83
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -852,7 +926,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0.85
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -968,7 +1042,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 4.41
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1285,7 +1359,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     maxNumParticles: 1000
-    size3D: 0
+    size3D: 1
     rotation3D: 1
     gravityModifier:
       serializedVersion: 2
@@ -1343,14 +1417,14 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
-    angle: 25
+    type: 12
+    angle: 25.099117
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 0, y: 0, z: 0}
+    m_Position: {x: -0.00009047924, y: -0.0000000024319529, z: 0.00017538611}
+    m_Rotation: {x: 84.57191, y: 0.0000130545195, z: 0.000012229991}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -1430,7 +1504,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.30961066
       mode: 0
       spread: 0
       speed:
@@ -1655,7 +1729,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -1665,19 +1739,28 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 1
+          time: 0.012109326
+          value: 0.14679383
+          inSlope: 0.048551917
+          outSlope: 0.048551917
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 0.19117416
+        - serializedVersion: 3
+          time: 0.291119
+          value: 0.54898137
+          inSlope: 2.468039
+          outSlope: 2.468039
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.55742085
+          outWeight: 0.31344908
         - serializedVersion: 3
           time: 1
           value: 1
           inSlope: 1
-          outSlope: 0
+          outSlope: 1
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
@@ -1718,10 +1801,10 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
-          value: 0
+          time: 0.0072631836
+          value: 0.27522278
           inSlope: 0
-          outSlope: 1
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
@@ -1730,7 +1813,7 @@ ParticleSystem:
           time: 1
           value: 1
           inSlope: 1
-          outSlope: 0
+          outSlope: 1
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
@@ -1815,7 +1898,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    separateAxes: 0
+    separateAxes: 1
   RotationModule:
     enabled: 0
     x:
@@ -1979,7 +2062,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -2168,7 +2251,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -2701,7 +2784,7 @@ ParticleSystem:
         m_RotationOrder: 4
     speedModifier:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 1
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -2717,13 +2800,13 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
+          time: 0.99756896
+          value: -0.18348575
+          inSlope: -0.2418665
+          outSlope: -0.2418665
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.114069186
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -2866,7 +2949,7 @@ ParticleSystem:
         m_RotationOrder: 4
     m_Range: {x: 0, y: 1}
   ForceModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -2923,7 +3006,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3026,7 +3109,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    inWorldSpace: 0
+    inWorldSpace: 1
     randomizePerFrame: 0
   ExternalForcesModule:
     serializedVersion: 2
@@ -4310,8 +4393,8 @@ ParticleSystem:
     plane5: {fileID: 0}
     m_Dampen:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 3
+      scalar: 0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4364,7 +4447,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.46
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4474,9 +4557,9 @@ ParticleSystem:
       serializedVersion: 2
       m_Bits: 4294967295
     maxCollisionShapes: 256
-    quality: 0
+    quality: 1
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -5868,6 +5951,7 @@ GameObject:
   - component: {fileID: 6339554685193931735}
   - component: {fileID: 1544255252}
   - component: {fileID: 1544255253}
+  - component: {fileID: 411727036510853679}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6171,6 +6255,18 @@ MonoBehaviour:
   spineGameObject: {fileID: 6339554685193931742}
   showTrigger: 
   hideTrigger: 
+--- !u!114 &411727036510853679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6339554685193931742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 482026a18e49a6c489a3531925f8f672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6339554685499945199
 GameObject:
   m_ObjectHideFlags: 0
@@ -6357,6 +6453,7 @@ GameObject:
   - component: {fileID: 6339554685827268972}
   - component: {fileID: 6339554685827268974}
   - component: {fileID: 1658898046}
+  - component: {fileID: 853215214393964636}
   m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
@@ -6465,7 +6562,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1658898046}
+      - m_Target: {fileID: 853215214393964636}
         m_TargetAssemblyTypeName: PixelCrushers.DialogueSystem.StandardUIContinueButtonFastForward,
           Assembly-CSharp-firstpass
         m_MethodName: OnFastForward
@@ -6497,6 +6594,23 @@ MonoBehaviour:
   simulateButtonClick: 1
   simulateButtonDownDuration: 0.1
 --- !u!114 &1658898046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6339554685827269011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73ee3d99442035942b6dd1ede25ff7cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueUI: {fileID: 0}
+  typewriterEffect: {fileID: 1370362378}
+  hideContinueButtonOnContinue: 0
+  continueSubtitlePanel: 1
+  continueAlertPanel: 1
+--- !u!114 &853215214393964636
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6546,7 +6660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22412716, guid: 7ad6c6a623182da45943ac32462b53dd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 672.5
+      value: 1124.5
       objectReference: {fileID: 0}
     - target: {fileID: 22412716, guid: 7ad6c6a623182da45943ac32462b53dd, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6594,7 +6708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22438518, guid: 7ad6c6a623182da45943ac32462b53dd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 416.5
+      value: 868.5
       objectReference: {fileID: 0}
     - target: {fileID: 22438518, guid: 7ad6c6a623182da45943ac32462b53dd, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6821,6 +6935,96 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22492740, guid: 7ad6c6a623182da45943ac32462b53dd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 844904065677790240, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 844904065677790240, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 844904065677790240, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 844904065677790240, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 844904065677790240, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 844904065677790240, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406305532954192838, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406305532954192838, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406305532954192838, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406305532954192838, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406305532954192838, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1380.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406305532954192838, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635751189071590265, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635751189071590265, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635751189071590265, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635751189071590265, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635751189071590265, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2635751189071590265, guid: 7ad6c6a623182da45943ac32462b53dd,
+        type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
