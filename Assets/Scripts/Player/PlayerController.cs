@@ -1,7 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.SceneManagement;
-using Spine.Unity;
 using PixelCrushers.DialogueSystem;
 
 public class PlayerController : MonoBehaviour {
@@ -67,6 +64,9 @@ public class PlayerController : MonoBehaviour {
         else {
             if (Input.GetButtonDown(Constants.Smoke)) {
                 currentState = PlayerState.SmokeStart;
+            }
+            else if(Input.GetButtonDown(Constants.CaseStatus)) {
+                DialogueManager.StartConversation("CaseStatus", this.gameObject.transform.Find("Monologue"));
             }
             else  if (!IsSmoking()) {
                 currentState = PlayerState.Idle;

@@ -21,6 +21,7 @@ public static class Constants
     public static string Vertical = "Vertical";
     public static string Horizontal = "Horizontal";
     public static string Smoke = "Smoke";
+    public static string CaseStatus = "CaseStatus";
 
     public static string GetLatentPowerDefinition(int power)
     {
