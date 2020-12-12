@@ -17,7 +17,7 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
     /// -# (Optional) Duration in seconds.
     /// </summary>
     [AddComponentMenu("")] // Hide from menu.
-    public class SequencerCommandMoveTo : SequencerCommand
+    public class SequencerCommandMoveToCharacter : SequencerCommand
     {
 
         private const float SmoothMoveCutoff = 0.05f;
@@ -49,8 +49,12 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
             if ((subject != null) && (target != null) && (subject != target))
             {
                 subjectRigidbody = subject.GetComponent<Rigidbody>();
-
-                // If duration is above the cutoff, smoothly move toward target:
+                var leftPoint = GameObject.Find(DialogueLua.GetVariable("Conversant").AsString + "LeftPoint");
+                var rightPoint = GameObject.Find(DialogueLua.GetVariable("Conversant").AsString + "RightPoint");
+                var leftDistance = Vector2.Distance(subject.position, leftPoint.transform.position);
+                var rightDistance = Vector2.Distance(subject.position, rightPoint.transform.position);
+                target = leftDistance <= rightDistance ? leftPoint.transform : rightPoint.transform;
+                
                 if (duration > SmoothMoveCutoff)
                 {
                     startTime = DialogueTime.time;

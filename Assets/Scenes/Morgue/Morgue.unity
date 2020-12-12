@@ -1863,6 +1863,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b041cd7007ba4318b74fbd500bc9865, type: 3}
+--- !u!1 &888956729 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3853546566761319196, guid: 8727cbba2b7a441cbaac1934433eef96,
+    type: 3}
+  m_PrefabInstance: {fileID: 3853546565951669372}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &888956730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888956729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 428d3fb630e61ba42ae17a6ca1fa2156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DialogueRange: 4.5
 --- !u!1001 &956055858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4011,6 +4030,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1544255252, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
+      propertyPath: animationReferenceAssets.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: ef2b88cc075b545ca8305272685bdc16,
+        type: 2}
     - target: {fileID: 1916026006, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4229,6 +4253,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6339554685193931743, guid: 69d0cd3e520784ec0be3a75a1e829213,
+        type: 3}
+      propertyPath: speed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
@@ -4457,7 +4486,7 @@ PrefabInstance:
     - target: {fileID: 3853546566761319192, guid: 8727cbba2b7a441cbaac1934433eef96,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.9
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3853546566761319192, guid: 8727cbba2b7a441cbaac1934433eef96,
         type: 3}

@@ -35,8 +35,6 @@ public class PlayerController : MonoBehaviour {
         currentState = PlayerState.Idle;
         previousState = currentState;
         spineAnimatorController.PlayNewAnimation("Idle", true);
-
-        //SceneManager.LoadScene("Map");
     }
 
     //FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
@@ -53,7 +51,13 @@ public class PlayerController : MonoBehaviour {
             //Flip image
             if (currentDirection != moveHorizontal && moveHorizontal != 0) {
                 currentDirection = moveHorizontal;
-                transform.Rotate(0f, 180f, 0f, Space.Self);
+                var scale = transform.localScale;
+                if(movement.x < 0)
+                    scale.x = scale.x >=0 ? scale.x * -1 : scale.x;
+                else
+                    scale.x = scale.x < 0 ? scale.x * -1 : scale.x;
+                transform.localScale = scale;
+                
             }
         }
 
@@ -70,6 +74,7 @@ public class PlayerController : MonoBehaviour {
             }
             else  if (!IsSmoking()) {
                 currentState = PlayerState.Idle;
+                currentDirection = 0;
             }
         }
 
