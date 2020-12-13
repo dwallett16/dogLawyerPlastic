@@ -51,10 +51,24 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
                 subjectRigidbody = subject.GetComponent<Rigidbody>();
                 var leftPoint = GameObject.Find(DialogueLua.GetVariable("Conversant").AsString + "LeftPoint");
                 var rightPoint = GameObject.Find(DialogueLua.GetVariable("Conversant").AsString + "RightPoint");
+                if(leftPoint == null || rightPoint == null) {
+                    Debug.LogError("Could not find Left Point or Right Point on conversant. Attach the DialogueSpacer component to the conversant.");
+                    Stop();
+                }
                 var leftDistance = Vector2.Distance(subject.position, leftPoint.transform.position);
                 var rightDistance = Vector2.Distance(subject.position, rightPoint.transform.position);
                 target = leftDistance <= rightDistance ? leftPoint.transform : rightPoint.transform;
-                
+                //Look at target first before walking
+                var difference = subject.position - target.position;
+                var scale = subject.transform.localScale;
+                if(difference.x < 0) {
+                    scale.x = scale.x < 0 ? scale.x * -1 : scale.x;
+                }
+                else {
+                    scale.x = scale.x >=0 ? scale.x * -1 : scale.x;
+                }
+                    
+                subject.transform.localScale = scale;
                 if (duration > SmoothMoveCutoff)
                 {
                     startTime = DialogueTime.time;

@@ -37,7 +37,6 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
             if ((target == null) && DialogueDebug.logWarnings) Debug.LogWarning(string.Format("{0}: Sequencer: LookAt Target '{1}' wasn't found.", new System.Object[] { DialogueDebug.Prefix, GetParameter(0) }));
             if ((subject == null) && DialogueDebug.logWarnings) Debug.LogWarning(string.Format("{0}: Sequencer: LookAt Subject '{1}' wasn't found.", new System.Object[] { DialogueDebug.Prefix, GetParameter(1) }));
 
-            // Set up the rotation:
             if ((subject != null) && (target != null) && (subject != target))
             {
                 var difference = subject.position - target.position;

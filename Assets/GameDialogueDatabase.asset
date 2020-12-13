@@ -19059,17 +19059,17 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 'LookAt2D([lua( Variable["Conversant"] )]);
-
-          MoveToCharacter([lua(
-          Variable["Conversant"] )], Player, 0.6, true);
+        value: 'MoveToCharacter([lua( Variable["Conversant"] )], Player, 0.6, true);
 
           SpineAnimation(Walk);
 
           SpineAnimation(Idle)@0.5;
 
-          LookAt2D(Player,
-          [lua( Variable["Conversant"] )]Character)@0.7;'
+          LookAt2D([lua(
+          Variable["Conversant"] )]Character)@0.5;
+
+          LookAt2D(Player, [lua(
+          Variable["Conversant"] )]Character)@0.7;'
         type: 0
         typeString: CustomFieldType_Text
       conversationID: 7
@@ -19217,7 +19217,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: 
+        value: None();
         type: 0
         typeString: 
       conversationID: 7
