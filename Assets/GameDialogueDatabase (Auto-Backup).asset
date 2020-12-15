@@ -19021,7 +19021,7 @@ MonoBehaviour:
       - title: Title
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Pictures
         value: '[]'
         type: 3
@@ -19029,7 +19029,7 @@ MonoBehaviour:
       - title: Description
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Actor
         value: 1
         type: 5
@@ -19041,15 +19041,15 @@ MonoBehaviour:
       - title: Menu Text
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Dialogue Text
         value: '[nosubtitle]Talk'
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Parenthetical
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Audio Files
         value: '[]'
         type: 3
@@ -19057,14 +19057,21 @@ MonoBehaviour:
       - title: Video File
         value: 
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       - title: Sequence
-        value: 'MoveTo([lua( Variable["Conversant"] )]LeftPoint,Player, 0.5, true);
+        value: 'MoveToCharacter([lua( Variable["Conversant"] )], Player, 0.6, true);
 
-          LookAt([lua(
-          Variable["Conversant"] )], ,0);'
+          SpineAnimation(Walk);
+
+          SpineAnimation(Idle)@0.5;
+
+          LookAt2D([lua(
+          Variable["Conversant"] )]Character)@0.5;
+
+          LookAt2D(Player, [lua(
+          Variable["Conversant"] )]Character)@0.7;'
         type: 0
-        typeString: 
+        typeString: CustomFieldType_Text
       conversationID: 7
       isRoot: 0
       isGroup: 0
@@ -19210,7 +19217,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: 
+        value: None();
         type: 0
         typeString: 
       conversationID: 7
