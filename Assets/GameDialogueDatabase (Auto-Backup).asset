@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 935899b62f48ae5498594680ed17d133, type: 3}
-  m_Name: GameDialogueDatabase (Auto-Backup)
+  m_Name: GameDialogueDatabase
   m_EditorClassIdentifier: 
   version: 
   author: 
@@ -335,46 +335,10 @@ MonoBehaviour:
       value: PhilSmith
       type: 0
       typeString: CustomFieldType_Text
-  - id: 1
-    fields:
-    - title: Name
-      value: Murder on the Dancefloor
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Pictures
-      value: '[]'
-      type: 3
-      typeString: CustomFieldType_Files
-    - title: Description
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: State
-      value: active
-      type: 0
-      typeString: CustomFieldType_QuestState
-    - title: Success Description
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Failure Description
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Entry Count
-      value: 0
-      type: 1
-      typeString: CustomFieldType_Number
-    - title: Is Item
-      value: False
-      type: 2
-      typeString: CustomFieldType_Boolean
-    - title: Defendant
-      value: PhilSmith
-      type: 0
-      typeString: CustomFieldType_Text
     - title: StatusDescription
-      value: I could use a drink right now.
+      value: Somebody I used to know asked me for a favor. A young man named Jameson
+        died on the dancefloor. Marjory thinks it was murder. I should look around
+        the Ornery Ostrich.
       type: 0
       typeString: CustomFieldType_Text
   - id: 2
@@ -15291,8 +15255,8 @@ MonoBehaviour:
         y: 296.70746
         width: 160
         height: 30
-    canvasScrollPosition: {x: 0, y: 24.586582}
-    canvasZoom: 0.6100004
+    canvasScrollPosition: {x: 344.8421, y: 92.68557}
+    canvasZoom: 0.9010003
   - id: 5
     fields:
     - title: Title
@@ -19891,8 +19855,8 @@ MonoBehaviour:
         y: 150.9569
         width: 160
         height: 30
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.94549996
+    canvasScrollPosition: {x: 121.362564, y: 14.903453}
+    canvasZoom: 0.9155
   - id: 8
     fields:
     - title: Title

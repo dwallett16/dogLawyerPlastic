@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PixelCrushers.DialogueSystem;
 using UnityEngine;
 
 public class GameDataSingleton : MonoBehaviour
@@ -22,8 +23,6 @@ public class GameDataSingleton : MonoBehaviour
     private List<Skill> startSkillsList;
     [SerializeField]
     private List<Character> startPartyList;
-    [SerializeField]
-    private List<Case> startCaseList;
     [SerializeField]
     private List<Character> guildCharacterList;
     [SerializeField]
@@ -53,13 +52,18 @@ public class GameDataSingleton : MonoBehaviour
                 startEvidenceList.ForEach(e => PlayerInventory.AddEvidence(e));
                 startPartyList.ForEach(p => PlayerInventory.AddPartyMember(p));
                 startSkillsList.ForEach(s => PlayerInventory.AddSkill(s));
-                startCaseList.ForEach(c => PlayerInventory.AddActiveCase(c));
             }
             else {
                 PlayerInventory = new PlayerInventory();
                 //Load from save system on initialization
             }
+            var cases = QuestLog.GetAllQuests();
+            foreach(var c in cases) {
+                if(c == Constants.MurderOnTheDancefloor)
+                    PlayerInventory.AddActiveCase(ScriptableObject.CreateInstance("MurderOnTheDancefloor") as Case);
+            }
         }
+
         if(GuildInventory == null) {
             if(UseTestData) {
                 GuildInventory = new GuildInventory();
@@ -71,6 +75,7 @@ public class GameDataSingleton : MonoBehaviour
                 //Load here
             }
         }
+
         if(Budget == null) {
             if(UseTestData) {
                 Budget = new Budget();
