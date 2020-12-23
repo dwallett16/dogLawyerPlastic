@@ -6,10 +6,11 @@ using PixelCrushers.DialogueSystem.SequencerCommands;
 
 public class InventoryListener : MonoBehaviour, IListener
 {
+    private EvidenceData evidenceData;
     // Start is called before the first frame update
     void Start()
     {
-        
+        evidenceData = GameDataSingleton.gameData.evidenceData;
     }
 
     // Update is called once per frame
@@ -22,6 +23,6 @@ public class InventoryListener : MonoBehaviour, IListener
     {
         var outId = Int32.Parse(id);
         GameDataSingleton.gameData.PlayerInventory
-        .AddEvidence(GameDataSingleton.gameData.allEvidence.GetEvidenceById(outId));
+        .AddEvidence(evidenceData.GetEvidenceById(outId));
     }
 }

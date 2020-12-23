@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Cases
+  m_EditorClassIdentifier: 
+  m_GroupName: Cases
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 65962d7ab879e234cb47f15c10841c18
+  m_SerializeEntries:
+  - m_GUID: c05e1767ee958174f9e07948e6f77d93
+    m_Address: Assets/Scripts/ScribtableObjects/CaseData/MurderOnTheDancefloor.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Cases
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: fd488c0467acc694e83129baf161bd5b, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 90194f8bd77813c499760deeb7f1f607, type: 2}
+    - {fileID: 11400000, guid: 351e77f1550a5aa4586a4a2483ce2cd0, type: 2}

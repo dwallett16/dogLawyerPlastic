@@ -18,13 +18,15 @@ MonoBehaviour:
   m_DisableCatalogUpdateOnStart: 0
   m_UniqueBundleIds: 0
   m_RemoteCatalogBuildPath:
-    m_Id: 
+    m_Id: 73c12282315c3d8438e8680ce0c5a676
   m_RemoteCatalogLoadPath:
-    m_Id: 
+    m_Id: 408b81c7740f6db4792ee074a41ffccc
   m_overridePlayerVersion: 
   m_GroupAssets:
   - {fileID: 11400000, guid: 518d0635ec03ddd43b0ae0b5c741b36c, type: 2}
   - {fileID: 11400000, guid: 3055ba3fa3a12974fa0964d9bc563aa6, type: 2}
+  - {fileID: 11400000, guid: e69e555827b85e1418923b082d376554, type: 2}
+  - {fileID: 11400000, guid: 3a6f37d7c0b07b840aade93e0a2ea4a0, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -66,6 +68,8 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - Cases
+    - Evidence
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 660520ff3d99daf4b9d122c748aeaf13, type: 2}

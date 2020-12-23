@@ -33,11 +33,7 @@ public class PlayerInventory: Inventory
 
     public void AddActiveCase(Case c)
     {
-        activeCases.Add(c);
-    }
-
-    public Case GetCaseById(int id) 
-    {
-        return ActiveCases.First(c => c.Id == id);
+        if(activeCases.TrueForAll(ac => ac.Id != c.Id))
+            activeCases.Add(c);
     }
 }

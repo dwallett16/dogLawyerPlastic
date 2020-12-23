@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using PixelCrushers.DialogueSystem;
 using UnityEngine;
 
 public class GameDataSingleton : MonoBehaviour
@@ -13,8 +12,7 @@ public class GameDataSingleton : MonoBehaviour
     [NonSerialized]
     public Budget Budget;
 
-    [SerializeField]
-    public EvidenceContainer allEvidence;
+    #region Debugfields
     [SerializeField]
     private bool UseTestData;
     [SerializeField]
@@ -31,7 +29,9 @@ public class GameDataSingleton : MonoBehaviour
     private int currentBudget;
     [SerializeField]
     private int maxBudget;
-    
+    #endregion
+    public CaseData caseData;
+    public EvidenceData evidenceData;
     public static GameDataSingleton gameData;
 
     void Awake() 
@@ -42,6 +42,8 @@ public class GameDataSingleton : MonoBehaviour
         else
             Destroy(this);
 
+        caseData = new CaseData();
+        evidenceData = new EvidenceData();
     }
 
     void Start()
@@ -57,11 +59,8 @@ public class GameDataSingleton : MonoBehaviour
                 PlayerInventory = new PlayerInventory();
                 //Load from save system on initialization
             }
-            var cases = QuestLog.GetAllQuests();
-            foreach(var c in cases) {
-                if(c == Constants.MurderOnTheDancefloor)
-                    PlayerInventory.AddActiveCase(ScriptableObject.CreateInstance("MurderOnTheDancefloor") as Case);
-            }
+            
+            caseData.PopulateCases();
         }
 
         if(GuildInventory == null) {
@@ -72,7 +71,7 @@ public class GameDataSingleton : MonoBehaviour
             }
             else {
                 GuildInventory = new GuildInventory();
-                //Load here
+                //Load from save system on initialization
             }
         }
 
@@ -89,5 +88,4 @@ public class GameDataSingleton : MonoBehaviour
         }
         
     }
-
 }

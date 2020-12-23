@@ -52,7 +52,7 @@ public class JournalController : MonoBehaviour
                 case JournalState.CaseEvidence:
                     currentState = JournalState.Evidence;
                     previousState = JournalState.CaseEvidence;
-                    activeCase = GameDataSingleton.gameData.PlayerInventory.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
+                    activeCase = GameDataSingleton.gameData.caseData.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
                 break;
                 case JournalState.CaseDefenseAttorneys:
                     currentState = JournalState.DefenseAttorneys;
@@ -120,7 +120,7 @@ public class JournalController : MonoBehaviour
                         FocusText.GetComponent<Text>().text = cData.FocusPoints;
                     break;
                     case JournalState.CaseDefenseAttorneys:
-                        activeCase = GameDataSingleton.gameData.PlayerInventory.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
+                        activeCase = GameDataSingleton.gameData.caseData.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
                         DestroyChildren(CaseDaCanvas.transform, new List<string>{Constants.DetailTag});
                         foreach(var d in activeCase.DefenseAttorneys) {
                             var inst = Instantiate(SimpleText, Vector3.zero, Quaternion.identity, CaseDaCanvas.transform);
