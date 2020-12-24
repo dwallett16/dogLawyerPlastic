@@ -302,7 +302,7 @@ MonoBehaviour:
       type: 0
       typeString: CustomFieldType_Text
     - title: State
-      value: active
+      value: unassigned
       type: 0
       typeString: CustomFieldType_QuestState
     - title: Success Description
@@ -15255,8 +15255,8 @@ MonoBehaviour:
         y: 296.70746
         width: 160
         height: 30
-    canvasScrollPosition: {x: 344.8421, y: 92.68557}
-    canvasZoom: 0.9010003
+    canvasScrollPosition: {x: 363.08176, y: 96.04738}
+    canvasZoom: 0.9310003
   - id: 5
     fields:
     - title: Title
