@@ -20,5 +20,11 @@ public class QuestListener : MonoBehaviour
     void OnQuestStateChange(string questName) 
     {
         GameDataSingleton.gameData.caseData.PopulateCases();
+        checkForActiveCase();
+    }
+
+    private void checkForActiveCase()
+    {
+        DialogueLua.SetVariable("HasActiveCase", QuestLog.GetAllQuests().Length > 0);
     }
 }

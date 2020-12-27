@@ -4576,7 +4576,7 @@ PrefabInstance:
     - target: {fileID: 5467767442433314252, guid: 8727cbba2b7a441cbaac1934433eef96,
         type: 3}
       propertyPath: conversation
-      value: MainOptions
+      value: Agatha/Bodies
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8727cbba2b7a441cbaac1934433eef96, type: 3}
