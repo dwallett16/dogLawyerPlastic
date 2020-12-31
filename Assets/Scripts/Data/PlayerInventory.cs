@@ -36,4 +36,9 @@ public class PlayerInventory: Inventory
         if(activeCases.TrueForAll(ac => ac.Id != c.Id))
             activeCases.Add(c);
     }
+
+    public void ClearCases()
+    {
+        activeCases.Clear();
+    }
 }

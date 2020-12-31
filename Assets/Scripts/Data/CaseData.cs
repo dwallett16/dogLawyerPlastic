@@ -14,24 +14,13 @@ public class CaseData {
         loadAllCases();
     }
 
-    public void PopulateCases() {
-        caseAssets = Addressables.LoadAssetsAsync<Case>(AddressablePaths.Cases, c => {
-                addCaseToInventory(c);
-            });
-        caseAssets.Completed += c => Addressables.Release(caseAssets);
-    }
-
-    private void loadAllCases() {
-        caseAssets = Addressables.LoadAssetsAsync<Case>(AddressablePaths.Cases, c => {
-                allCases.Add(c);
-            });
-        caseAssets.Completed += c => Addressables.Release(caseAssets);
-    }
-
-    private void addCaseToInventory(Case c) {
+    public void LoadCasesToInventory() {
+        GameDataSingleton.gameData.PlayerInventory.ClearCases();
         var activeCases = QuestLog.GetAllQuests();
-        if(Array.IndexOf(activeCases, c.Name) > -1)
-            GameDataSingleton.gameData.PlayerInventory.AddActiveCase(c);
+        caseAssets = Addressables.LoadAssetsAsync<Case>(AddressablePaths.Cases, c => {
+                addCaseToInventory(c, activeCases);
+            });
+        caseAssets.Completed += c => Addressables.Release(caseAssets);
     }
 
     public Case GetCaseById(int id) 
@@ -39,4 +28,15 @@ public class CaseData {
         return allCases.First(c => c.Id == id);
     }
 
+
+    private void loadAllCases() {
+        caseAssets = Addressables.LoadAssetsAsync<Case>(AddressablePaths.Cases, c => {
+                allCases.Add(c);
+            });
+        caseAssets.Completed += c => Addressables.Release(caseAssets);
+    }
+    private void addCaseToInventory(Case c, string[] activeCases) {
+        if(Array.IndexOf(activeCases, c.Name) > -1)
+            GameDataSingleton.gameData.PlayerInventory.AddActiveCase(c);
+    }
 }

@@ -78,7 +78,7 @@ public class JournalController : MonoBehaviour
             //Selecting new menu item
             if(currentItem != EventSystem.current.currentSelectedGameObject) {
                 currentItem = EventSystem.current.currentSelectedGameObject;
-                //Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+                
                 var yPos = JournalUiConstants.ButtonYStart;
                 switch(currentState) {
                     case JournalState.CaseEvidence:

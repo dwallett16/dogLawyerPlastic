@@ -60,7 +60,7 @@ public class GameDataSingleton : MonoBehaviour
                 //Load from save system on initialization
             }
             
-            caseData.PopulateCases();
+            caseData.LoadCasesToInventory();
         }
 
         if(GuildInventory == null) {

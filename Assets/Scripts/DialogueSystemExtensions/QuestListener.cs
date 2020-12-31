@@ -19,7 +19,7 @@ public class QuestListener : MonoBehaviour
 
     void OnQuestStateChange(string questName) 
     {
-        GameDataSingleton.gameData.caseData.PopulateCases();
+        GameDataSingleton.gameData.caseData.LoadCasesToInventory();
         checkForActiveCase();
     }
 
