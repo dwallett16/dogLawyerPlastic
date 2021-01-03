@@ -2070,33 +2070,33 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 0}
-        key3: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 0.18320575, g: 0.19552949, b: 0.21698111, a: 1}
+        key1: {r: 0.19521743, g: 0.20735994, b: 0.2284961, a: 0.7921569}
+        key2: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 0}
+        key3: {r: 1, g: 1, b: 1, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 65535
-        ctime2: 0
-        ctime3: 0
+        ctime1: 9830
+        ctime2: 29684
+        ctime3: 65535
         ctime4: 0
         ctime5: 0
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 65535
-        atime2: 0
+        atime1: 42405
+        atime2: 65535
         atime3: 0
         atime4: 0
         atime5: 0
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_NumColorKeys: 2
-        m_NumAlphaKeys: 2
+        m_NumColorKeys: 3
+        m_NumAlphaKeys: 3
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -6239,7 +6239,7 @@ MonoBehaviour:
   animationReferenceAssets:
   - {fileID: 11400000, guid: c6815773bdd6c43d280cf58baf8a0ef9, type: 2}
   - {fileID: 11400000, guid: b010c6b62d2be4238b2335e2b090e2a5, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: ef2b88cc075b545ca8305272685bdc16, type: 2}
 --- !u!114 &1544255253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6342,10 +6342,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -6660,7 +6660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22412716, guid: 7ad6c6a623182da45943ac32462b53dd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1124.5
+      value: 960
       objectReference: {fileID: 0}
     - target: {fileID: 22412716, guid: 7ad6c6a623182da45943ac32462b53dd, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6708,7 +6708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22438518, guid: 7ad6c6a623182da45943ac32462b53dd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 868.5
+      value: 704
       objectReference: {fileID: 0}
     - target: {fileID: 22438518, guid: 7ad6c6a623182da45943ac32462b53dd, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6991,7 +6991,7 @@ PrefabInstance:
     - target: {fileID: 1406305532954192838, guid: 7ad6c6a623182da45943ac32462b53dd,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1380.5
+      value: 1216
       objectReference: {fileID: 0}
     - target: {fileID: 1406305532954192838, guid: 7ad6c6a623182da45943ac32462b53dd,
         type: 3}

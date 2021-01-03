@@ -270,6 +270,21 @@ PrefabInstance:
       propertyPath: visibility
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9123137996933912186, guid: 2b041cd7007ba4318b74fbd500bc9865,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9123137996933912186, guid: 2b041cd7007ba4318b74fbd500bc9865,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 9123137996933912186, guid: 2b041cd7007ba4318b74fbd500bc9865,
+        type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b041cd7007ba4318b74fbd500bc9865, type: 3}
 --- !u!4 &5245630402692811227 stripped
