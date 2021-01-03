@@ -16,6 +16,9 @@ public class JournalController : MonoBehaviour
     public GameObject StrainText, StressText, FocusText;
     public GameObject TypeText, PowerText, FpCostText, SkillDescription;
     public Sprite ButtonSprite;
+    public AudioClip OpenClip;
+    public AudioClip CloseClip;
+    public AudioClip PageTurnClip;
     private GameObject player;
     private PlayerController playerController;
     private Rigidbody2D playerBody;
@@ -25,6 +28,7 @@ public class JournalController : MonoBehaviour
     private GameObject currentItem;
     private string homeSelection;
     private Case activeCase;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +36,7 @@ public class JournalController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag(Constants.PlayerTag);
         playerController = player.GetComponent<PlayerController>();
         playerBody = player.GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         currentState = JournalState.Home;
         currentItem = EventSystem.current.currentSelectedGameObject;
     }
@@ -67,8 +72,10 @@ public class JournalController : MonoBehaviour
             UpdateJournalPage(currentState);
         }
         else if(Input.GetButtonDown(Constants.Cancel) && IsActive()) {
-            if(currentState == JournalState.Home)
+            if(currentState == JournalState.Home) {
                 ToggleJournal();
+                return;
+            }
             currentState = previousState;
             previousState = JournalState.Home;
 
@@ -159,6 +166,7 @@ public class JournalController : MonoBehaviour
     
     private void UpdateJournalPage(JournalState state) 
     {
+        PlayAudio(PageTurnClip);
         var yPos = JournalUiConstants.ButtonYStart;
         var index = 0;
         switch(state) {
@@ -337,9 +345,11 @@ public class JournalController : MonoBehaviour
             Time.timeScale = 0;
             ActivateHomePage();
             EventSystem.current.SetSelectedGameObject(FirstHomeButton);
+            PlayAudio(OpenClip);
         }
         else {
             Time.timeScale = 1;
+            PlayAudio(CloseClip);
         }
     }
 
@@ -379,5 +389,11 @@ public class JournalController : MonoBehaviour
                     DestroyImmediate(children[i]);
             }
         }
+    }
+
+    private void PlayAudio(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 }
