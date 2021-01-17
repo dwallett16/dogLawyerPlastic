@@ -15,22 +15,19 @@ MonoBehaviour:
   Id: 0
   Name: Dog Lawyer
   Image: {fileID: 0}
+  Material: {fileID: 2100000, guid: 6145096f659ad4e4baaa728f6ece6447, type: 2}
+  SkeletonData: {fileID: 11400000, guid: fbef94fb5dec34248b89904576f76ecb, type: 2}
   Type: 0
   Personality: 1
-  CurrentSkills:
-  - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
-  - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
-  - {fileID: 11400000, guid: 1273754765a9aa84e8cb5ae0b77eed81, type: 2}
-  - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
-  - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
-  - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
+  Skills: []
   StressCapacity: 100
-  CurrentStress: 0
   FocusPointCapacity: 40
-  CurrentFocusPoints: 40
-  Agility: 33
+  Wit: 0
+  Resistance: 0
+  Endurance: 0
+  Passion: 0
+  Persuasion: 0
   Specialty: 0
-  Strain: 0
   Price: 0
   Headshot: {fileID: 21300000, guid: 57b5879353e87894ca95edd0807609f1, type: 3}
   SmallHeadshot: {fileID: 21300000, guid: 2b7e8b8676355694da6273a06e9053e2, type: 3}

@@ -15,16 +15,19 @@ MonoBehaviour:
   Id: 1
   Name: Phil Smith
   Image: {fileID: 0}
+  Material: {fileID: 2100000, guid: d567731f8701340d19da64a0e31f68be, type: 2}
+  SkeletonData: {fileID: 11400000, guid: 3a98d2736a7f742a490a559f570e13a1, type: 2}
   Type: 2
   Personality: 0
-  CurrentSkills: []
+  Skills: []
   StressCapacity: 20
-  CurrentStress: 0
   FocusPointCapacity: 0
-  CurrentFocusPoints: 0
-  Agility: 0
+  Wit: 0
+  Resistance: 0
+  Endurance: 0
+  Passion: 0
+  Persuasion: 0
   Specialty: 1
-  Strain: 2
   Price: 0
   Headshot: {fileID: 0}
   SmallHeadshot: {fileID: 21300000, guid: 2b7e8b8676355694da6273a06e9053e2, type: 3}

@@ -15,17 +15,19 @@ MonoBehaviour:
   Id: 2
   Name: Daisy Bell
   Image: {fileID: 0}
+  Material: {fileID: 0}
+  SkeletonData: {fileID: 0}
   Type: 0
   Personality: 0
-  CurrentSkills:
-  - {fileID: 11400000, guid: ee0ad0dad5de0d64a947700920f0a02b, type: 2}
+  Skills: []
   StressCapacity: 100
-  CurrentStress: 0
   FocusPointCapacity: 40
-  CurrentFocusPoints: 40
-  Agility: 29
+  Wit: 0
+  Resistance: 0
+  Endurance: 0
+  Passion: 0
+  Persuasion: 0
   Specialty: 0
-  Strain: 1
   Price: 100
   Headshot: {fileID: 21300000, guid: 57b5879353e87894ca95edd0807609f1, type: 3}
   SmallHeadshot: {fileID: 21300000, guid: 2b7e8b8676355694da6273a06e9053e2, type: 3}
