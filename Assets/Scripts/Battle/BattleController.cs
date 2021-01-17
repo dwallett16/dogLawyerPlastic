@@ -45,7 +45,7 @@ public class BattleController : MonoBehaviour
             var defenseAttorneyInstance = Instantiate(GenericCombatant, defensePlaceholder.transform.position, defensePlaceholder.transform.rotation);
             defenseAttorneys.Add(defenseAttorneyInstance);
         }
-        var defendant = Instantiate(GenericCombatant, DefendantPlaceholder.transform.position, DefendantPlaceholder.transform.rotation);
+        defendant = Instantiate(GenericCombatant, DefendantPlaceholder.transform.position, DefendantPlaceholder.transform.rotation);
     }
 
     private void MapFromScriptableObject()
@@ -93,9 +93,9 @@ public class BattleController : MonoBehaviour
             characterBattleData.skills = battleData.StartingDefenseParty[i].Skills;
 
             //Map Graphics
-            var meshRenderer = prosecutors[i].GetComponent<MeshRenderer>();
+            var meshRenderer = defenseAttorneys[i].GetComponent<MeshRenderer>();
             meshRenderer.material = battleData.StartingDefenseParty[i].Material;
-            var skeletonAnimation = prosecutors[i].GetComponent<SkeletonAnimation>();
+            var skeletonAnimation = defenseAttorneys[i].GetComponent<SkeletonAnimation>();
             skeletonAnimation.skeletonDataAsset = battleData.StartingDefenseParty[i].SkeletonData;
             skeletonAnimation.Initialize(true);
         }

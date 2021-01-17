@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 0
   Name: Murder on the Dancefloor
-  Defendant:
-  - {fileID: 11400000, guid: d633fd3d7c02e764295bbb454a378ff3, type: 2}
+  Defendant: {fileID: 11400000, guid: d633fd3d7c02e764295bbb454a378ff3, type: 2}
   DefenseAttorneys:
   - {fileID: 11400000, guid: e6c33f168ab20994bb8d93162d109bce, type: 2}
   - {fileID: 11400000, guid: 7d380ec81e70843449a6790210e55d3a, type: 2}
