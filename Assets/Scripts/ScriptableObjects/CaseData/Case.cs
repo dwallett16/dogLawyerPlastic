@@ -7,7 +7,7 @@ public class Case : ScriptableObject
 {
     public int Id;
     public string Name;
-    public List<Character> Defendant;
+    public Character Defendant;
     public List<Character> DefenseAttorneys;
     public int NumActiveDefenseAttorneys;
     public List<Evidence> EffectiveEvidence;

@@ -140,7 +140,6 @@ public class GuildMenuController : MonoBehaviour
                     var data = pInst.GetComponent<ButtonData>();
                     data.Id = p.Id;
                     data.Description = p.JournalDescription;
-                    data.Strain = p.Strain.ToString();
                     data.FocusPoints = p.FocusPointCapacity.ToString();
                     data.StressCapacity = p.StressCapacity.ToString();
                     data.Price = p.Price;
@@ -198,7 +197,6 @@ public class GuildMenuController : MonoBehaviour
                     var data = pInst.GetComponent<ButtonData>();
                     data.Id = p.Id;
                     data.Description = p.JournalDescription;
-                    data.Strain = p.Strain.ToString();
                     data.FocusPoints = p.FocusPointCapacity.ToString();
                     data.StressCapacity = p.StressCapacity.ToString();
                     data.Price = p.Price;

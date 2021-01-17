@@ -8,7 +8,6 @@ public class BattleDebugMenu : MonoBehaviour
     public Case CaseData;
     public List<Character> TotalParty;
     public List<Character> StartingParty;
-    public List<Character> TotalDefenseParty;
     public List<Character> StartingDefenseParty;
     public List<Evidence> EvidenceList;
 

@@ -231,10 +231,9 @@ public class JournalController : MonoBehaviour
                     pData.Id = p.Id;
                     pData.Image = p.Headshot;
                     pData.Description = p.JournalDescription;
-                    pData.Strain = Enum.GetName(typeof(StrainType), p.Strain);
                     pData.StressCapacity = p.StressCapacity.ToString();
                     pData.FocusPoints = p.FocusPointCapacity.ToString();
-                    pData.Skills = p.CurrentSkills;
+                    pData.Skills = p.Skills;
 
                     pInst.name = pInst.name + index;
                     if(index == 0)

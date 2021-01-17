@@ -9,6 +9,7 @@ TagManager:
   - MenuItem
   - GameData
   - Scrollview
+  - BattleData
   layers:
   - Default
   - TransparentFX
