@@ -1,0 +1,5 @@
+/*
+This folder contains an example of using Master Audio sequencer commands.
+Each button runs a separate sequence. It logs the sequence syntax and any
+output in the console.
+*/

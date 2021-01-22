@@ -1332,9 +1332,7 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 'BgmStop();
-
-          LoadLevel(MapTransition);'
+        value: LoadLevel(MapTransition);
         type: 0
         typeString: CustomFieldType_Text
       - title: Response Menu Sequence
