@@ -25,4 +25,5 @@ public class Character : ScriptableObject
     public Sprite Headshot;
     public Sprite SmallHeadshot;
     public string JournalDescription;
+    public GameObject BattlePrefab;
 }

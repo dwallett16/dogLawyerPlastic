@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -33,6 +32,25 @@ public class CharacterBattleData : MonoBehaviour
     public PriorityTypes specialty;
     [NonSerialized]
     public List<Skill> skills;
+
+    public void MapFromScriptableObject(Character characterData) 
+    {
+        displayName = characterData.Name;
+        type = characterData.Type;
+        
+        personality = characterData.Personality;
+        stressCapacity = characterData.StressCapacity;
+        focusPointCapacity = characterData.FocusPointCapacity;
+        wit = characterData.Wit;
+        resistance = characterData.Resistance;
+        endurance = characterData.Endurance;
+        passion = characterData.Passion;
+        persuasion = characterData.Persuasion;
+        if(characterData.Type != CharacterType.PlayerCharacter) {
+            specialty = characterData.Specialty;
+            skills = characterData.Skills;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()

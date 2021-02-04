@@ -18,7 +18,6 @@ MonoBehaviour:
   DefenseAttorneys:
   - {fileID: 11400000, guid: e6c33f168ab20994bb8d93162d109bce, type: 2}
   - {fileID: 11400000, guid: 7d380ec81e70843449a6790210e55d3a, type: 2}
-  - {fileID: 11400000, guid: 5828b449e13008446bb8eb1650488eb2, type: 2}
   NumActiveDefenseAttorneys: 2
   EffectiveEvidence:
   - {fileID: 11400000, guid: 5b95b7fb15267e44bbe9c92e65e375a7, type: 2}

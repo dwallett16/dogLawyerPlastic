@@ -130,11 +130,11 @@ public class JournalController : MonoBehaviour
                         activeCase = GameDataSingleton.gameData.caseData.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
                         DestroyChildren(CaseDaCanvas.transform, new List<string>{Constants.DetailTag});
                         foreach(var d in activeCase.DefenseAttorneys) {
+                            
                             var inst = Instantiate(SimpleText, Vector3.zero, Quaternion.identity, CaseDaCanvas.transform);
 
                             inst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXRightPage, yPos);
                             inst.GetComponentInChildren<Text>().text = d.Name;
-
                             yPos -= JournalUiConstants.ButtonYSpacing;
                         }
                     break;

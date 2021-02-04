@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class BattleData : MonoBehaviour
 {
     public Case CaseData;
-    public List<Character> TotalParty;
-    public List<Character> StartingParty;
-    public List<Character> StartingDefenseParty;
+    public Dictionary<GameObject, Character> TotalParty;
+    public Dictionary<GameObject, Character> StartingParty;
+    public Dictionary<GameObject, Character> TotalDefenseParty;
+    public Dictionary<GameObject, Character> StartingDefenseParty;
+    public KeyValuePair<GameObject, Character> Defendant;
     public List<Evidence> EvidenceList;
     // Start is called before the first frame update
     void Start()

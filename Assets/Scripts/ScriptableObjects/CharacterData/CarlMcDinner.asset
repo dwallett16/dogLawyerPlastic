@@ -15,19 +15,19 @@ MonoBehaviour:
   Id: 4
   Name: Carl McDinner
   Image: {fileID: 0}
+  Material: {fileID: 0}
+  SkeletonData: {fileID: 0}
   Type: 1
   Personality: 0
-  CurrentSkills:
-  - {fileID: 11400000, guid: 5f8bcd4fa97712a479d622ba644912c1, type: 2}
-  - {fileID: 11400000, guid: e35c0b5f17f4e18439c7273b9e23ec49, type: 2}
-  - {fileID: 11400000, guid: 46aa7e274317c4a4492ec6bfd55901a4, type: 2}
+  Skills: []
   StressCapacity: 50
-  CurrentStress: 0
   FocusPointCapacity: 20
-  CurrentFocusPoints: 20
-  Agility: 35
+  Wit: 0
+  Resistance: 0
+  Endurance: 0
+  Passion: 0
+  Persuasion: 0
   Specialty: 3
-  Strain: 3
   Price: 0
   Headshot: {fileID: 21300000, guid: 57b5879353e87894ca95edd0807609f1, type: 3}
   SmallHeadshot: {fileID: 21300000, guid: 2b7e8b8676355694da6273a06e9053e2, type: 3}
@@ -35,3 +35,5 @@ MonoBehaviour:
     He'll support the defendant like nobody else, but quickly lose his cool if anyone
     throws some choice words his way. Something to remember for when we face off
     in court.
+  BattlePrefab: {fileID: 1499682536230412511, guid: 0a161bdf71ae36f4cb3875c33c22d1d6,
+    type: 3}

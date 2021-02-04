@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Case", menuName = "Case Data")]
@@ -15,6 +14,5 @@ public class Case : ScriptableObject
     public List<Evidence> AllEvidence;
     public string CaseDescription;
     public Sprite Image;
-    //public NPC GuiltyNpc;
 
 }

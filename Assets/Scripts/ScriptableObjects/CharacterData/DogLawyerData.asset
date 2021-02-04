@@ -32,3 +32,5 @@ MonoBehaviour:
   Headshot: {fileID: 21300000, guid: 57b5879353e87894ca95edd0807609f1, type: 3}
   SmallHeadshot: {fileID: 21300000, guid: 2b7e8b8676355694da6273a06e9053e2, type: 3}
   JournalDescription: bio here
+  BattlePrefab: {fileID: 1499682536230412511, guid: 00c58e98cf28d8745b07bb6eeeec43d1,
+    type: 3}

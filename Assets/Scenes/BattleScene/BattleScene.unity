@@ -1085,8 +1085,6 @@ MonoBehaviour:
   - {fileID: 1960840436}
   - {fileID: 1556305801}
   DefendantPlaceholder: {fileID: 652771629}
-  GenericCombatant: {fileID: 1499682536230412511, guid: 00c58e98cf28d8745b07bb6eeeec43d1,
-    type: 3}
 --- !u!4 &856442815
 Transform:
   m_ObjectHideFlags: 0
@@ -1114,9 +1112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CaseData: {fileID: 0}
-  TotalParty: []
-  StartingParty: []
-  StartingDefenseParty: []
   EvidenceList: []
 --- !u!4 &866712919 stripped
 Transform:
@@ -1411,10 +1406,8 @@ MonoBehaviour:
   CaseData: {fileID: 11400000, guid: c05e1767ee958174f9e07948e6f77d93, type: 2}
   TotalParty:
   - {fileID: 11400000, guid: 4962f63575f359b40be20351488b1245, type: 2}
-  - {fileID: 11400000, guid: d8683cc7523069d4395b4e3d4cb9233d, type: 2}
   StartingParty:
   - {fileID: 11400000, guid: 4962f63575f359b40be20351488b1245, type: 2}
-  - {fileID: 11400000, guid: d8683cc7523069d4395b4e3d4cb9233d, type: 2}
   StartingDefenseParty:
   - {fileID: 11400000, guid: e6c33f168ab20994bb8d93162d109bce, type: 2}
   - {fileID: 11400000, guid: 7d380ec81e70843449a6790210e55d3a, type: 2}
