@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
     bool stateChanged;
     float moveHorizontal = 0f;
     bool isInConversation = false;
+    public SpriteRenderer spriteRenderer;
 
     // Use this for initialization
     void Start()
@@ -35,6 +36,8 @@ public class PlayerController : MonoBehaviour {
         currentState = PlayerState.Idle;
         previousState = currentState;
         spineAnimatorController.PlayNewAnimation("Idle", true);
+
+        spriteRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.TwoSided;
     }
 
     //FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
