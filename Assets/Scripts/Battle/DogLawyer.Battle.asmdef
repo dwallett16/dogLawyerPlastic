@@ -1,0 +1,16 @@
+{
+    "name": "DogLawyer.Battle",
+    "references": [
+        "GUID:950bc7e85b6c30846a385ea3fad1712f",
+        "GUID:db7c856dc3f612141a3e0860037c0f63"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

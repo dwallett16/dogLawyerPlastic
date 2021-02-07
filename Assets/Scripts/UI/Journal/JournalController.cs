@@ -20,7 +20,7 @@ public class JournalController : MonoBehaviour
     public AudioClip CloseClip;
     public AudioClip PageTurnClip;
     private GameObject player;
-    private PlayerController playerController;
+    private IComponentDisabler playerControllerDisabler;
     private Rigidbody2D playerBody;
     private List<Canvas> canvasList;
     private JournalState currentState;
@@ -34,7 +34,7 @@ public class JournalController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag(Constants.PlayerTag);
-        playerController = player.GetComponent<PlayerController>();
+        playerControllerDisabler = player.GetComponent<IComponentDisabler>();
         playerBody = player.GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         currentState = JournalState.Home;
@@ -336,7 +336,7 @@ public class JournalController : MonoBehaviour
     private void ToggleJournal() 
     {
         playerBody.velocity = Vector2.zero;
-        playerController.enabled = !playerController.enabled;
+        playerControllerDisabler.ToggleComponent();
         currentState = JournalState.Home;
         Background.SetActive(!Background.activeInHierarchy);
         JournalPanel.SetActive(!JournalPanel.activeInHierarchy);
