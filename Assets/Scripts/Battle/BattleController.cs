@@ -37,11 +37,11 @@ public class BattleController : MonoBehaviour
         {
             battleData.CaseData = DebugMenu.CaseData;
             battleData.EvidenceList = DebugMenu.EvidenceList;
-            battleData.TotalParty = GetBattlePrefabsFromCharacters(DebugMenu.TotalParty);
-            battleData.StartingParty = GetBattlePrefabsFromCharacters(DebugMenu.StartingParty);
-            battleData.StartingDefenseParty = GetBattlePrefabsFromCharacters(DebugMenu.StartingDefenseParty);
-            battleData.TotalDefenseParty = GetBattlePrefabsFromCharacters(DebugMenu.CaseData.DefenseAttorneys);
-            battleData.Defendant = new KeyValuePair<GameObject, Character>(DebugMenu.CaseData.Defendant.BattlePrefab, DebugMenu.CaseData.Defendant);
+            battleData.TotalParty = DebugMenu.TotalParty;
+            battleData.StartingParty = DebugMenu.StartingParty;
+            battleData.StartingDefenseParty = DebugMenu.StartingDefenseParty;
+            battleData.TotalDefenseParty = DebugMenu.CaseData.DefenseAttorneys;
+            battleData.Defendant = DebugMenu.CaseData.Defendant;
         }
         else
         {
@@ -59,24 +59,25 @@ public class BattleController : MonoBehaviour
 
     private void InstantiateCombatants() {
         var placeholderIndex = 0;
-        foreach(var prosecutor in battleData.StartingParty) {
+        foreach (var prosecutor in battleData.StartingParty) {
             //key is prefab, value is scriptableObject
-            var prosecutorInstance = Instantiate(prosecutor.Key, ProsecutionPlaceholders[placeholderIndex].transform.position, ProsecutionPlaceholders[placeholderIndex].transform.rotation);
+            var prosecutorInstance = Instantiate(prosecutor.BattlePrefab, ProsecutionPlaceholders[placeholderIndex].transform.position, ProsecutionPlaceholders[placeholderIndex].transform.rotation);
             var prosecutorData = prosecutorInstance.GetComponent<CharacterBattleData>();
-            prosecutorData.MapFromScriptableObject(prosecutor.Value);
+            prosecutorData.MapFromScriptableObject(prosecutor);
             prosecutors.Add(prosecutorInstance);
+            placeholderIndex++;
         }
-        foreach(var defenseAttorney in battleData.StartingDefenseParty) {
-            var defenseInstance = Instantiate(defenseAttorney.Key, DefensePlaceholders[placeholderIndex].transform.position, DefensePlaceholders[placeholderIndex].transform.rotation);
+        placeholderIndex = 0;
+        foreach (var defenseAttorney in battleData.StartingDefenseParty) {
+            var defenseInstance = Instantiate(defenseAttorney.BattlePrefab, DefensePlaceholders[placeholderIndex].transform.position, DefensePlaceholders[placeholderIndex].transform.rotation);
             var defenseData = defenseInstance.GetComponent<CharacterBattleData>();
-            defenseData.MapFromScriptableObject(defenseAttorney.Value);
+            defenseData.MapFromScriptableObject(defenseAttorney);
             defenseAttorneys.Add(defenseInstance);
+            placeholderIndex++;
         }
-        var defendantInstance = Instantiate(battleData.Defendant.Key, DefendantPlaceholder.transform.position, DefendantPlaceholder.transform.rotation);
+        var defendantInstance = Instantiate(battleData.Defendant.BattlePrefab, DefendantPlaceholder.transform.position, DefendantPlaceholder.transform.rotation);
         var defendantData = defendantInstance.GetComponent<CharacterBattleData>();
-        defendantData.MapFromScriptableObject(battleData.Defendant.Value);
+        defendantData.MapFromScriptableObject(battleData.Defendant);
         defendant = defendantInstance;
-        
-        placeholderIndex ++;
     }
 }
