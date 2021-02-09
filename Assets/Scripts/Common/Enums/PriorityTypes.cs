@@ -5,5 +5,6 @@ public enum PriorityTypes
 	Support,
 	Protection,
 	Persuasion,
-	Defendant
+	Defendant,
+	None
 }

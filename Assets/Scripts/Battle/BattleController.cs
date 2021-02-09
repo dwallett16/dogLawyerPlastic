@@ -8,9 +8,9 @@ public class BattleController : MonoBehaviour
     public List<GameObject> ProsecutionPlaceholders;
     public List<GameObject> DefensePlaceholders;
     public GameObject DefendantPlaceholder;
-    private List<GameObject> prosecutors;
-    private List<GameObject> defenseAttorneys;
-    private GameObject defendant;
+    public List<GameObject> prosecutors;
+    public List<GameObject> defenseAttorneys;
+    public GameObject defendant;
     private BattleData battleData;
     private bool isUsingTestData;
 
@@ -49,18 +49,9 @@ public class BattleController : MonoBehaviour
         }
     }
 
-    private Dictionary<GameObject, Character> GetBattlePrefabsFromCharacters(List<Character> characters) {
-        var battlePrefabDictionary = new Dictionary<GameObject, Character>();
-        foreach(var character in characters) {
-            battlePrefabDictionary.Add(character.BattlePrefab, character);
-        }
-        return battlePrefabDictionary;
-    }
-
     private void InstantiateCombatants() {
         var placeholderIndex = 0;
         foreach (var prosecutor in battleData.StartingParty) {
-            //key is prefab, value is scriptableObject
             var prosecutorInstance = Instantiate(prosecutor.BattlePrefab, ProsecutionPlaceholders[placeholderIndex].transform.position, ProsecutionPlaceholders[placeholderIndex].transform.rotation);
             var prosecutorData = prosecutorInstance.GetComponent<CharacterBattleData>();
             prosecutorData.MapFromScriptableObject(prosecutor);

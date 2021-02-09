@@ -3,6 +3,7 @@ public enum PersonalityTypes {
 	Hotheaded,
 	Passive,
 	Calculated,
-	Ruthless
+	Ruthless,
+	None
 }
 

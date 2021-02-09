@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BattleDebugMenu : MonoBehaviour
 {
-    public bool UseTestData;
     public Case CaseData;
     public List<Character> TotalParty;
     public List<Character> StartingParty;
