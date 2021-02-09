@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
         spineAnimatorController = GetComponent<SpineAnimatorController>();
         currentState = PlayerState.Idle;
         previousState = currentState;
-        spineAnimatorController.PlayNewAnimation("Idle", true);
+//        spineAnimatorController.PlayNewAnimation("Idle", true);
 
         spriteRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.TwoSided;
     }

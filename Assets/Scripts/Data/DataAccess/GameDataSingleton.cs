@@ -41,12 +41,9 @@ public class GameDataSingleton : MonoBehaviour
             gameData = this;
         else
             Destroy(this);
-
-        caseData = new CaseData();
-        evidenceData = new EvidenceData();
     }
 
-    void Start()
+    async void Start()
     {
         if(PlayerInventory == null) {
             if(UseTestData) {
@@ -59,9 +56,13 @@ public class GameDataSingleton : MonoBehaviour
                 PlayerInventory = new PlayerInventory();
                 //Load from save system on initialization
             }
-            
-            caseData.LoadCasesToInventory();
         }
+        caseData = new CaseData(new AddressableWrapper(), PlayerInventory);
+        await caseData.loadAllCasesFromAddressablesAsync();
+        caseData.LoadCasesToInventory();
+
+        evidenceData = new EvidenceData(new AddressableWrapper());
+        await evidenceData.loadAllEvidenceFromAddressablesAsync();
 
         if(GuildInventory == null) {
             if(UseTestData) {

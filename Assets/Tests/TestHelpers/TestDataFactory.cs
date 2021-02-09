@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class TestDataFactory
 {
-    public static Case CreateCase(int id, List<Character> defenseAttorneys = null, Character defendant = null) {
+    public static Case CreateCase(int id, string name = null, List<Character> defenseAttorneys = null, Character defendant = null) {
         var testCase = new Case {
             Id = id,
-            CaseDescription = $"case {id}"
+            CaseDescription = $"case {id}",
+            Name = name == null ? $"case {id}" : name
         };
         var allEvidence = new List<Evidence> { CreateEvidence(0, testCase), CreateEvidence(1, testCase), CreateEvidence(2, testCase)  };
         testCase.AllEvidence = allEvidence;

@@ -1,24 +1,32 @@
-using UnityEngine.AddressableAssets;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class EvidenceData {
+    private readonly IAddressableWrapper addressableWrapper;
     private List<Evidence> allEvidence;
 
-    public EvidenceData() {
+    public EvidenceData(IAddressableWrapper addressableWrapper) {
+        this.addressableWrapper = addressableWrapper;
         allEvidence = new List<Evidence>();
-        loadAllEvidence();
+    }
+
+    public EvidenceData(IAddressableWrapper addressableWrapper, List<Evidence> allEvidence) {
+        this.addressableWrapper = addressableWrapper;
+        this.allEvidence = allEvidence;
     }
 
     public Evidence GetEvidenceById(int id) {
-        return allEvidence != null ? allEvidence.First(e => e.Id == id) : null;
+        return allEvidence.First(e => e.Id == id);
     }
 
-    private void loadAllEvidence() {
-        var evidenceAssets = Addressables.LoadAssetsAsync<Evidence>(AddressablePaths.Evidence, e => {
+    public async Task<IList<Evidence>> loadAllEvidenceFromAddressablesAsync() {
+        AsyncOperationHandle<IList<Evidence>> evidenceAssets = addressableWrapper.LoadAssets<Evidence>(AddressablePaths.Evidence, e => {
                 allEvidence.Add(e);
             });
-        evidenceAssets.Completed += a => Addressables.Release(evidenceAssets);
+        addressableWrapper.ReleaseAssets<Evidence>(evidenceAssets);
+        return await evidenceAssets.Task;
     }
 
 }

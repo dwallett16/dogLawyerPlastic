@@ -1,42 +1,48 @@
-using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using PixelCrushers.DialogueSystem;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 public class CaseData {
-    private AsyncOperationHandle<IList<Case>> caseAssets;
+    private readonly IAddressableWrapper addressableWrapper;
+    private PlayerInventory playerInventory;
     private List<Case> allCases;
 
-    public CaseData() {
+    public CaseData(IAddressableWrapper addressableWrapper, PlayerInventory playerInventory) {
+        this.addressableWrapper = addressableWrapper;
+        this.playerInventory = playerInventory;
         allCases = new List<Case>();
-        loadAllCases();
+    }
+
+    public CaseData(IAddressableWrapper addressableWrapper, PlayerInventory playerInventory, List<Case> allCases) {
+        this.addressableWrapper = addressableWrapper;
+        this.playerInventory = playerInventory;
+        this.allCases = allCases;
     }
 
     public void LoadCasesToInventory() {
-        GameDataSingleton.gameData.PlayerInventory.ClearCases();
+        playerInventory.ClearCases();
         var activeCases = QuestLog.GetAllQuests();
-        caseAssets = Addressables.LoadAssetsAsync<Case>(AddressablePaths.Cases, c => {
-                addCaseToInventory(c, activeCases);
-            });
-        caseAssets.Completed += c => Addressables.Release(caseAssets);
+        foreach(var c in allCases) {
+            addCaseToInventory(c, activeCases);
+        }
     }
 
     public Case GetCaseById(int id) 
     {
         return allCases.First(c => c.Id == id);
     }
-
-
-    private void loadAllCases() {
-        caseAssets = Addressables.LoadAssetsAsync<Case>(AddressablePaths.Cases, c => {
-                allCases.Add(c);
-            });
-        caseAssets.Completed += c => Addressables.Release(caseAssets);
+    public async Task<IList<Case>> loadAllCasesFromAddressablesAsync() {
+        AsyncOperationHandle<IList<Case>> caseAssets = addressableWrapper.LoadAssets<Case>(AddressablePaths.Cases,
+         c => { allCases.Add(c); });
+        addressableWrapper.ReleaseAssets<Case>(caseAssets);
+        return await caseAssets.Task;
     }
+
     private void addCaseToInventory(Case c, string[] activeCases) {
         if(Array.IndexOf(activeCases, c.Name) > -1)
-            GameDataSingleton.gameData.PlayerInventory.AddActiveCase(c);
+            playerInventory.AddActiveCase(c);
     }
 }
