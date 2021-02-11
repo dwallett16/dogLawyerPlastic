@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Tests
+namespace Data
 {
     public class EvidenceDataTests
     {

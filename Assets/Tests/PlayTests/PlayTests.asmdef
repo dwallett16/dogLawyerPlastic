@@ -6,7 +6,8 @@
         "DogLawyer.Battle",
         "DogLawyer.TestHelpers",
         "Data",
-        "Common"
+        "Common",
+        "DialogueSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

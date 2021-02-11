@@ -57,7 +57,7 @@ public class JournalController : MonoBehaviour
                 case JournalState.CaseEvidence:
                     currentState = JournalState.Evidence;
                     previousState = JournalState.CaseEvidence;
-                    activeCase = GameDataSingleton.gameData.caseData.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
+                    activeCase = GameDataSingletonComponent.gameData.CaseData.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
                 break;
                 case JournalState.CaseDefenseAttorneys:
                     currentState = JournalState.DefenseAttorneys;
@@ -90,7 +90,7 @@ public class JournalController : MonoBehaviour
                 switch(currentState) {
                     case JournalState.CaseEvidence:
                         DestroyChildren(CaseEvidenceCanvas.transform, new List<string>{Constants.DetailTag});
-                        foreach(var e in GameDataSingleton.gameData.PlayerInventory.EvidenceList) {
+                        foreach(var e in GameDataSingletonComponent.gameData.PlayerInventory.EvidenceList) {
                             if(e.ParentCase.Id == currentItem.GetComponent<ButtonData>().Id) {
                                 var inst = Instantiate(SimpleText, Vector3.zero, Quaternion.identity, CaseEvidenceCanvas.transform);
 
@@ -127,7 +127,7 @@ public class JournalController : MonoBehaviour
                         FocusText.GetComponent<Text>().text = cData.FocusPoints;
                     break;
                     case JournalState.CaseDefenseAttorneys:
-                        activeCase = GameDataSingleton.gameData.caseData.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
+                        activeCase = GameDataSingletonComponent.gameData.CaseData.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
                         DestroyChildren(CaseDaCanvas.transform, new List<string>{Constants.DetailTag});
                         foreach(var d in activeCase.DefenseAttorneys) {
                             
@@ -178,7 +178,7 @@ public class JournalController : MonoBehaviour
                 EvidenceCanvas.gameObject.SetActive(false);
                 CaseEvidenceCanvas.gameObject.SetActive(true);
                 DestroyChildren(CaseEvidenceCanvas.transform);
-                foreach(var c in GameDataSingleton.gameData.PlayerInventory.ActiveCases) {
+                foreach(var c in GameDataSingletonComponent.gameData.PlayerInventory.ActiveCases) {
                     var caseInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, CaseEvidenceCanvas.transform);
                     caseInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     caseInst.GetComponentInChildren<Text>().text = c.Name;
@@ -200,7 +200,7 @@ public class JournalController : MonoBehaviour
                 caseLabel.GetComponent<Text>().text = activeCase.Name.ToUpper();
                 yPos = JournalUiConstants.ButtonLowYStart;
                 DestroyChildren(EvidenceCanvas.transform, new List<string>{Constants.MenuTag, Constants.DetailTag});
-                foreach(var e in GameDataSingleton.gameData.PlayerInventory.EvidenceList) {
+                foreach(var e in GameDataSingletonComponent.gameData.PlayerInventory.EvidenceList) {
                     var evInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, EvidenceCanvas.transform);
                     evInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     evInst.GetComponentInChildren<Text>().text = e.Name;
@@ -221,7 +221,7 @@ public class JournalController : MonoBehaviour
             break;
             case JournalState.Party:
                 DestroyChildren(PartyCanvas.transform, new List<string>{Constants.DetailTag, Constants.MenuTag});
-                foreach(var p in GameDataSingleton.gameData.PlayerInventory.PartyList) {
+                foreach(var p in GameDataSingletonComponent.gameData.PlayerInventory.PartyList) {
                     var pInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, PartyCanvas.transform);
                     pInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     pInst.GetComponentInChildren<Text>().text = p.Name;
@@ -246,7 +246,7 @@ public class JournalController : MonoBehaviour
                 CaseDaCanvas.gameObject.SetActive(true);
                 DaCanvas.gameObject.SetActive(false);
                 DestroyChildren(CaseDaCanvas.transform);
-                foreach(var c in GameDataSingleton.gameData.PlayerInventory.ActiveCases) {
+                foreach(var c in GameDataSingletonComponent.gameData.PlayerInventory.ActiveCases) {
                     var caseInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, CaseDaCanvas.transform);
                     caseInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     caseInst.GetComponentInChildren<Text>().text = c.Name;
@@ -288,7 +288,7 @@ public class JournalController : MonoBehaviour
             break;
             case JournalState.Skills:
                 DestroyChildren(SkillsCanvas.transform, new List<string>{Constants.DetailTag, Constants.MenuTag});
-                foreach(var s in GameDataSingleton.gameData.PlayerInventory.SkillsList) {
+                foreach(var s in GameDataSingletonComponent.gameData.PlayerInventory.SkillsList) {
                     var sInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, SkillsCanvas.transform);
                     sInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     sInst.GetComponentInChildren<Text>().text = s.Name;

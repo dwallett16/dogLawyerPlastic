@@ -43,7 +43,7 @@ public class GuildMenuController : MonoBehaviour
         buyScrollview = BuyCanvas.GetComponent<ScrollWithKey>();
         tabSprites = new Sprite[] {HireSprite, BuySprite, FireSprite, SellSprite};
         helpBubbles = new GameObject[] {HireHelp, BuyHelp, FireHelp, SellHelp};
-        var data = GameDataSingleton.gameData;
+        var data = GameDataSingletonComponent.gameData;
         BudgetText.GetComponent<Text>().text = data.Budget.CurrentBudget.ToString() + "/" + data.Budget.MaxBudget.ToString();
         currentState = GuildState.Hire;
         UpdateGuildData(currentState);
@@ -126,7 +126,7 @@ public class GuildMenuController : MonoBehaviour
                 HireCanvas.SetActive(true);
                 BuyCanvas.SetActive(false);
                 DestroyChildren(HireList.transform, new List<string>{Constants.MenuTag});
-                foreach(var p in GameDataSingleton.gameData.GuildInventory.PartyList) {
+                foreach(var p in GameDataSingletonComponent.gameData.GuildInventory.PartyList) {
                     var pInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, HireList.transform);
                     pInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(GuildUiConstants.MenuX, yPos);
                     pInst.name = pInst.name + index;
@@ -154,7 +154,7 @@ public class GuildMenuController : MonoBehaviour
                 HireCanvas.SetActive(false);
                 BuyCanvas.SetActive(true);
                 DestroyChildren(BuyList.transform, new List<string>{Constants.MenuTag});
-                foreach(var s in GameDataSingleton.gameData.GuildInventory.SkillsList) {
+                foreach(var s in GameDataSingletonComponent.gameData.GuildInventory.SkillsList) {
                     var sInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, BuyList.transform);
                     sInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(GuildUiConstants.MenuX, yPos);
                     sInst.name = sInst.name + index;
@@ -183,7 +183,7 @@ public class GuildMenuController : MonoBehaviour
                 HireCanvas.SetActive(true);
                 BuyCanvas.SetActive(false);
                 DestroyChildren(HireList.transform, new List<string>{Constants.MenuTag});
-                foreach(var p in GameDataSingleton.gameData.PlayerInventory.PartyList) {
+                foreach(var p in GameDataSingletonComponent.gameData.PlayerInventory.PartyList) {
                     var pInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, HireList.transform);
                     pInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(GuildUiConstants.MenuX, yPos);
                     pInst.name = pInst.name + index;
@@ -211,7 +211,7 @@ public class GuildMenuController : MonoBehaviour
                 HireCanvas.SetActive(false);
                 BuyCanvas.SetActive(true);
                 DestroyChildren(BuyList.transform, new List<string>{Constants.MenuTag});
-                foreach(var s in GameDataSingleton.gameData.PlayerInventory.SkillsList) {
+                foreach(var s in GameDataSingletonComponent.gameData.PlayerInventory.SkillsList) {
                     var sInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, BuyList.transform);
                     sInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(GuildUiConstants.MenuX, yPos);
                     sInst.name = sInst.name + index;
@@ -264,7 +264,7 @@ public class GuildMenuController : MonoBehaviour
         if(isConfirmation) {
             var id = selectedItem.GetComponent<ButtonData>().Id;
             var price = selectedItem.GetComponent<ButtonData>().Price;
-            var gameData = GameDataSingleton.gameData;
+            var gameData = GameDataSingletonComponent.gameData;
             isSuccessfulTransaction = false;
             switch(previousState) {
                 case GuildState.Hire:

@@ -1,92 +1,53 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Threading.Tasks;
 
-public class GameDataSingleton : MonoBehaviour
+public class GameDataSingleton
 {
-    #pragma warning disable 0649
-    [NonSerialized]
     public PlayerInventory PlayerInventory;
-    [NonSerialized]
     public GuildInventory GuildInventory;
-    [NonSerialized]
     public Budget Budget;
+    public CaseData CaseData;
+    public EvidenceData EvidenceData;
 
-    #region Debugfields
-    [SerializeField]
-    private bool UseTestData;
-    [SerializeField]
-    private List<Evidence> startEvidenceList;
-    [SerializeField]
-    private List<Skill> startSkillsList;
-    [SerializeField]
-    private List<Character> startPartyList;
-    [SerializeField]
-    private List<Character> guildCharacterList;
-    [SerializeField]
-    private List<Skill> guildSkillList;
-    [SerializeField]
-    private int currentBudget;
-    [SerializeField]
-    private int maxBudget;
-    #endregion
-    public CaseData caseData;
-    public EvidenceData evidenceData;
-    public static GameDataSingleton gameData;
-
-    void Awake() 
-    {
-        DontDestroyOnLoad(gameObject);
-        if (gameData == null)
-            gameData = this;
-        else
-            Destroy(this);
+    public GameDataSingleton(PlayerInventory playerInventory, GuildInventory guildInventory,
+     Budget budget, CaseData caseData, EvidenceData evidenceData) {
+        PlayerInventory = playerInventory;
+        GuildInventory = guildInventory;
+        Budget = budget;
+        CaseData = caseData;
+        EvidenceData = evidenceData;
     }
 
-    async void Start()
-    {
-        if(PlayerInventory == null) {
-            if(UseTestData) {
-                PlayerInventory = new PlayerInventory();
-                startEvidenceList.ForEach(e => PlayerInventory.AddEvidence(e));
-                startPartyList.ForEach(p => PlayerInventory.AddPartyMember(p));
-                startSkillsList.ForEach(s => PlayerInventory.AddSkill(s));
-            }
-            else {
-                PlayerInventory = new PlayerInventory();
-                //Load from save system on initialization
-            }
+    public async Task LoadSaveData(GameDataDebugSettings debugSettings) {
+        if(debugSettings.UseTestData) {
+            debugSettings.StartEvidenceList.ForEach(e => PlayerInventory.AddEvidence(e));
+            debugSettings.StartPartyList.ForEach(p => PlayerInventory.AddPartyMember(p));
+            debugSettings.StartSkillsList.ForEach(s => PlayerInventory.AddSkill(s));
         }
-        caseData = new CaseData(new AddressableWrapper(), PlayerInventory);
-        await caseData.loadAllCasesFromAddressablesAsync();
-        caseData.LoadCasesToInventory();
-
-        evidenceData = new EvidenceData(new AddressableWrapper());
-        await evidenceData.loadAllEvidenceFromAddressablesAsync();
-
-        if(GuildInventory == null) {
-            if(UseTestData) {
-                GuildInventory = new GuildInventory();
-                guildCharacterList.ForEach(g => GuildInventory.AddPartyMember(g));
-                guildSkillList.ForEach(s => GuildInventory.AddSkill(s));
-            }
-            else {
-                GuildInventory = new GuildInventory();
-                //Load from save system on initialization
-            }
+        else {
+            //Load player inventory from save system on initialization
         }
 
-        if(Budget == null) {
-            if(UseTestData) {
-                Budget = new Budget();
-                Budget.SetCurrentBudget(currentBudget);
-                Budget.SetMaxBudget(maxBudget);
-            }
-            else {
-                Budget = new Budget();
-                //load budget
-            }
+        if(debugSettings.UseTestData) {
+            debugSettings.GuildCharacterList.ForEach(g => GuildInventory.AddPartyMember(g));
+            debugSettings.GuildSkillList.ForEach(s => GuildInventory.AddSkill(s));
         }
-        
+        else {
+            //Load guild inventory from save system on initialization
+        }
+
+        if(debugSettings.UseTestData) {
+            Budget.SetCurrentBudget(debugSettings.CurrentBudget);
+            Budget.SetMaxBudget(debugSettings.MaxBudget);
+        }
+        else {
+            //load budget
+        }
+
+        await CaseData.loadAllCasesFromAddressablesAsync();
+        CaseData.LoadCasesToInventory();
+
+        await EvidenceData.loadAllEvidenceFromAddressablesAsync();
     }
 }

@@ -4,12 +4,12 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Tests
+namespace Battle
 {
     public class BattleControllerTests : PlayTestBase
     {
         [UnityTest]
-        public IEnumerator Start_UsingBattleDebugMenu_InstantiatesCombatants()
+        public IEnumerator StartWithBattleDebugMenuInstantiatesCombatants()
         {
             SetupBattleScene(true);
 
@@ -22,7 +22,7 @@ namespace Tests
         }
 
         [UnityTest]
-        public IEnumerator Start_UsingBattleDebugMenu_InstantiatesCombatantsMappedFromDebugMenu()
+        public IEnumerator StartWithBattleDebugMenuInstantiatesOpponentsMappedFromDebugMenu()
         {
             var defenseAttorney = CreateCharacter(11, CharacterType.DefenseCharacter);
             var defenseAttorney2 = CreateCharacter(111, CharacterType.DefenseCharacter);
@@ -35,7 +35,22 @@ namespace Tests
 
             Assert.AreEqual(2, battleController.defenseAttorneys.Count);
             Assert.AreEqual("character 11", battleController.defenseAttorneys[0].GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual(CharacterType.DefenseCharacter, battleController.defenseAttorneys[0].GetComponent<CharacterBattleData>().type);
             Assert.AreEqual("character 110", battleController.defendant.GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual(CharacterType.DefendantCharacter, battleController.defendant.GetComponent<CharacterBattleData>().type);
+        }
+
+        [UnityTest]
+        public IEnumerator StartWithBattleDebugMenuInstantiatesProsecutionMappedFromDebugMenu()
+        {
+            SetupBattleScene(true);
+
+            yield return new WaitForFixedUpdate();
+            var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
+
+            Assert.AreEqual(1, battleController.prosecutors.Count);
+            Assert.AreEqual("character 10", battleController.prosecutors[0].GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual(CharacterType.PlayerCharacter, battleController.prosecutors[0].GetComponent<CharacterBattleData>().type);
         }
 
         private void SetupBattleScene(bool useTestData, Case c = null) 

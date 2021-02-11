@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e7210cdd15eb4744b932b012cb8e543, type: 3}
+  m_Name: IntegrationTestCase
+  m_EditorClassIdentifier: 
+  Id: 999999
+  Name: Integration Test
+  Defendant: {fileID: 11400000, guid: d633fd3d7c02e764295bbb454a378ff3, type: 2}
+  DefenseAttorneys:
+  - {fileID: 11400000, guid: e6c33f168ab20994bb8d93162d109bce, type: 2}
+  NumActiveDefenseAttorneys: 1
+  EffectiveEvidence:
+  - {fileID: 11400000, guid: 9990ddd4c1bb7e04192f2768f77dfe33, type: 2}
+  RelevantEvidence:
+  - {fileID: 11400000, guid: 5b95b7fb15267e44bbe9c92e65e375a7, type: 2}
+  AllEvidence:
+  - {fileID: 11400000, guid: e72888074f110b346b2a4548d94e537f, type: 2}
+  - {fileID: 11400000, guid: 5b95b7fb15267e44bbe9c92e65e375a7, type: 2}
+  - {fileID: 11400000, guid: 4a9cef82ff5b6f14da651592eececaae, type: 2}
+  CaseDescription: This is only used for integration tests
+  Image: {fileID: 0}

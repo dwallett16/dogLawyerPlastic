@@ -6,7 +6,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using PixelCrushers.DialogueSystem;
 using System.Threading.Tasks;
 
-namespace Tests
+namespace Data
 {
     public class CaseDataTests
     {

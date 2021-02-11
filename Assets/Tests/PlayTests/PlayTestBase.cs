@@ -1,7 +1,9 @@
 ﻿
 using System.Collections.Generic;
 using NUnit.Framework;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayTestBase: TestDataFactory
 {
@@ -19,7 +21,7 @@ public class PlayTestBase: TestDataFactory
     protected void Teardown()
     {
         foreach(var obj in gameObjects) {
-            Object.DestroyImmediate(obj);
+            Object.Destroy(obj);
         }
         gameObjects.Clear();
     }

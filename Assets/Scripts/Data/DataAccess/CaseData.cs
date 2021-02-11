@@ -16,6 +16,7 @@ public class CaseData {
         allCases = new List<Case>();
     }
 
+    //Testing only
     public CaseData(IAddressableWrapper addressableWrapper, PlayerInventory playerInventory, List<Case> allCases) {
         this.addressableWrapper = addressableWrapper;
         this.playerInventory = playerInventory;

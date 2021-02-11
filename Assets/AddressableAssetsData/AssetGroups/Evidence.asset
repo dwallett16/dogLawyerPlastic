@@ -22,57 +22,64 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Evidence
-    m_MainAsset: {fileID: 11400000, guid: 17abb821636c1794b84207545765c301, type: 2}
-    m_TargetAsset: {fileID: 11400000, guid: 17abb821636c1794b84207545765c301, type: 2}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 43898574bb03d5c479407209636afa39
     m_Address: Assets/Scripts/ScribtableObjects/EvidenceData/JamesonsHealth.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Evidence
-    m_MainAsset: {fileID: 11400000, guid: 43898574bb03d5c479407209636afa39, type: 2}
-    m_TargetAsset: {fileID: 11400000, guid: 43898574bb03d5c479407209636afa39, type: 2}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 4a9cef82ff5b6f14da651592eececaae
     m_Address: Assets/Scripts/ScribtableObjects/EvidenceData/PoisonedCorpse.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Evidence
-    m_MainAsset: {fileID: 11400000, guid: 4a9cef82ff5b6f14da651592eececaae, type: 2}
-    m_TargetAsset: {fileID: 11400000, guid: 4a9cef82ff5b6f14da651592eececaae, type: 2}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 5b95b7fb15267e44bbe9c92e65e375a7
     m_Address: Assets/Scripts/ScribtableObjects/EvidenceData/OstrichFootage.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Evidence
-    m_MainAsset: {fileID: 11400000, guid: 5b95b7fb15267e44bbe9c92e65e375a7, type: 2}
-    m_TargetAsset: {fileID: 11400000, guid: 5b95b7fb15267e44bbe9c92e65e375a7, type: 2}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 8b1d6d5e8da360747a2d4ea0d0e81675
     m_Address: Assets/Scripts/ScribtableObjects/EvidenceData/PhysicalCondition.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Evidence
-    m_MainAsset: {fileID: 11400000, guid: 8b1d6d5e8da360747a2d4ea0d0e81675, type: 2}
-    m_TargetAsset: {fileID: 11400000, guid: 8b1d6d5e8da360747a2d4ea0d0e81675, type: 2}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: 90dfbaf85676c024c9073e402e24c125
     m_Address: Assets/Scripts/ScribtableObjects/EvidenceData/PhilsTestimony.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Evidence
-    m_MainAsset: {fileID: 11400000, guid: 90dfbaf85676c024c9073e402e24c125, type: 2}
-    m_TargetAsset: {fileID: 11400000, guid: 90dfbaf85676c024c9073e402e24c125, type: 2}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 9990ddd4c1bb7e04192f2768f77dfe33
+    m_Address: Assets/Scripts/Data/ScriptableObjects/EvidenceData/IntegrationTest.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Evidence
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: dccb0b01442c1fb488849f32ae1ba419
     m_Address: Assets/Scripts/ScribtableObjects/EvidenceData/PoisonedRum.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Evidence
-    m_MainAsset: {fileID: 11400000, guid: dccb0b01442c1fb488849f32ae1ba419, type: 2}
-    m_TargetAsset: {fileID: 11400000, guid: dccb0b01442c1fb488849f32ae1ba419, type: 2}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   - m_GUID: e72888074f110b346b2a4548d94e537f
     m_Address: Assets/Scripts/ScribtableObjects/EvidenceData/BottleOfRum.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Evidence
-    m_MainAsset: {fileID: 11400000, guid: e72888074f110b346b2a4548d94e537f, type: 2}
-    m_TargetAsset: {fileID: 11400000, guid: e72888074f110b346b2a4548d94e537f, type: 2}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: fd488c0467acc694e83129baf161bd5b, type: 2}
   m_SchemaSet:

@@ -24,6 +24,13 @@ MonoBehaviour:
     - Cases
     m_MainAsset: {fileID: 0}
     m_TargetAsset: {fileID: 0}
+  - m_GUID: f8b1010bd4a80754996094ae2574249a
+    m_Address: Assets/Scripts/Data/ScriptableObjects/CaseData/IntegrationTestCase.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Cases
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: fd488c0467acc694e83129baf161bd5b, type: 2}
   m_SchemaSet:

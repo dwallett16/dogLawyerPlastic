@@ -10,7 +10,7 @@ public class InventoryListener : MonoBehaviour, IListener
     // Start is called before the first frame update
     void Start()
     {
-        evidenceData = GameDataSingleton.gameData.evidenceData;
+        evidenceData = GameDataSingletonComponent.gameData.EvidenceData;
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class InventoryListener : MonoBehaviour, IListener
     public void NotifyEvidence(string id)
     {
         var outId = Int32.Parse(id);
-        GameDataSingleton.gameData.PlayerInventory
+        GameDataSingletonComponent.gameData.PlayerInventory
         .AddEvidence(evidenceData.GetEvidenceById(outId));
     }
 }

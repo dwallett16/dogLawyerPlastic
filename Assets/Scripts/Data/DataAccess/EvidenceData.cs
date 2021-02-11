@@ -12,6 +12,7 @@ public class EvidenceData {
         allEvidence = new List<Evidence>();
     }
 
+    //Testing only
     public EvidenceData(IAddressableWrapper addressableWrapper, List<Evidence> allEvidence) {
         this.addressableWrapper = addressableWrapper;
         this.allEvidence = allEvidence;
