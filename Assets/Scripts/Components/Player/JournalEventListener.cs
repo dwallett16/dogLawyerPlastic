@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ServiceLocator : MonoBehaviour
+public class JournalEventListener : MonoBehaviour, IJournalEventListener
 {
+    public void ToggleJournal()
+    {
+        GameObject.Find("JournalCanvas").GetComponent<JournalController>().ToggleJournal();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

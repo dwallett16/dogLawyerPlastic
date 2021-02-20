@@ -333,7 +333,7 @@ public class JournalController : MonoBehaviour
         }
     }
 
-    private void ToggleJournal() 
+    public void ToggleJournal() 
     {
         playerBody.velocity = Vector2.zero;
         playerControllerDisabler.ToggleComponent();

@@ -5,15 +5,15 @@ using PixelCrushers.DialogueSystem;
 namespace PixelCrushers.DialogueSystem.SequencerCommands
 {
 
-    public class SequencerCommandAddEvidence : SequencerCommand
+    public class SequencerCommandToggleJournal : SequencerCommand
     {
 
         public void Start()
         {
-            var evidenceId = GetParameter(0);
+            DialogueManager.StopConversation();
             var subject = GetSubject(1);
-            var listener = subject.GetComponent<IDialogueEvidenceListener>();
-            listener.NotifyEvidence(evidenceId);
+            var listener = subject.GetComponent<IJournalEventListener>();
+            listener.ToggleJournal();
             Stop();
         }
     }

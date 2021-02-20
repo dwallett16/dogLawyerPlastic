@@ -2,7 +2,8 @@
     "name": "DialogueSystem",
     "references": [
         "PixelCrushers",
-        "SoundManager"
+        "SoundManager",
+        "Common"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

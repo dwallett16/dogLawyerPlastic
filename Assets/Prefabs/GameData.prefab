@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4923594385142955133}
-  - component: {fileID: 4923594385142955106}
+  - component: {fileID: 2656150214596415841}
   m_Layer: 0
   m_Name: GameData
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4923594385142955106
+--- !u!114 &2656150214596415841
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,15 +40,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4923594385142955107}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e14ce791df91c47f39c6937c8d2a8fb4, type: 3}
+  m_Script: {fileID: 11500000, guid: 9776dea0d0eb6f74a9b771cdc2fcd53c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allEvidence: {fileID: 11400000, guid: 41b2144a5dd91c24aba979cd0b8d8d44, type: 2}
   UseTestData: 0
   startEvidenceList: []
   startSkillsList: []
   startPartyList: []
-  startCaseList: []
   guildCharacterList: []
   guildSkillList: []
   currentBudget: 0
