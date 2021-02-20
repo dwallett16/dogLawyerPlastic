@@ -22,8 +22,10 @@ public class BattleController : MonoBehaviour
         prosecutors = new List<GameObject>();
         defenseAttorneys = new List<GameObject>();
         battleData = GetComponent<BattleData>();
+        allCombatants = new Queue<GameObject>();
         MapBattleData();
         InstantiateCombatants();
+        OrderCombatants();
     }
 
     // Update is called once per frame
@@ -71,5 +73,18 @@ public class BattleController : MonoBehaviour
         var defendantData = defendantInstance.GetComponent<CharacterBattleData>();
         defendantData.MapFromScriptableObject(battleData.Defendant);
         defendant = defendantInstance;
+    }
+
+    private void OrderCombatants()
+    {
+        List<GameObject> combatantList = new List<GameObject>();
+        combatantList.AddRange(prosecutors);
+        combatantList.AddRange(defenseAttorneys);
+        IEnumerable<GameObject> query = combatantList.OrderByDescending(gameObject => gameObject.GetComponent<CharacterBattleData>().wit);
+
+        foreach (GameObject combatant in query)
+        {
+            allCombatants.Enqueue(combatant);
+        }
     }
 }
