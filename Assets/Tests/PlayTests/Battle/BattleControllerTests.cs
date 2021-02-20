@@ -53,13 +53,33 @@ namespace Battle
             Assert.AreEqual(CharacterType.PlayerCharacter, battleController.prosecutors[0].GetComponent<CharacterBattleData>().type);
         }
 
-        private void SetupBattleScene(bool useTestData, Case c = null) 
+        [UnityTest]
+        public IEnumerator StartDeterminesCombatantOrderBasedOnWit()
+        {
+            var defenseAttorney = CreateCharacter(11, CharacterType.DefenseCharacter, wit: 2);
+            var defenseAttorney2 = CreateCharacter(111, CharacterType.DefenseCharacter, wit: 3);
+            var testDefendant = CreateCharacter(110, CharacterType.DefendantCharacter);
+            var testCase = CreateCase(1, defenseAttorneys: new List<Character> {defenseAttorney, defenseAttorney2}, defendant: testDefendant);
+            var party = new List<Character> {CreateCharacter(0, CharacterType.PlayerCharacter, wit: 1), CreateCharacter(1, CharacterType.PlayerCharacter, wit: 4) };
+            SetupBattleScene(true, testCase, party);
+
+            yield return new WaitForFixedUpdate();
+            var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
+            var combatants = battleController.allCombatants.ToArray();
+
+            Assert.AreEqual("character 1", combatants[0].GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual("character 111", combatants[1].GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual("character 11", combatants[2].GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual("character 0", combatants[3].GetComponent<CharacterBattleData>().displayName);
+        }
+
+        private void SetupBattleScene(bool useTestData, Case c = null, List<Character> testParty = null) 
         {
             var debugMenuObj = new GameObject();
             var debugMenu = debugMenuObj.AddComponent<BattleDebugMenu>();
             if(useTestData) {
                 var testCase = c == null ? CreateCase(0) : c;
-                var party = new List<Character> { CreateCharacter(10, CharacterType.PlayerCharacter) };
+                var party = testParty == null ? new List<Character> { CreateCharacter(10, CharacterType.PlayerCharacter) } : testParty;
                 debugMenu.CaseData = testCase;
                 debugMenu.EvidenceList = testCase.AllEvidence;
                 debugMenu.StartingDefenseParty = testCase.DefenseAttorneys;

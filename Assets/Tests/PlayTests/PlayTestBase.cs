@@ -1,9 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using NUnit.Framework;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayTestBase: TestDataFactory
 {

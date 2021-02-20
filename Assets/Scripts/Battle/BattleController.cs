@@ -10,6 +10,7 @@ public class BattleController : MonoBehaviour
     public GameObject DefendantPlaceholder;
     public List<GameObject> prosecutors;
     public List<GameObject> defenseAttorneys;
+    public Queue<GameObject> allCombatants;
     public GameObject defendant;
     private BattleData battleData;
     private bool isUsingTestData;

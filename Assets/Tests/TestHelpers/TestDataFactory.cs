@@ -22,7 +22,7 @@ public class TestDataFactory
     }
 
     public static Character CreateCharacter(int id, CharacterType type, List<Skill> skills = null, PersonalityTypes personality = PersonalityTypes.None,
-     PriorityTypes specialty = PriorityTypes.None) {
+     PriorityTypes specialty = PriorityTypes.None, int wit = 10) {
         var character = new Character {
             Id = id,
             Name = $"character {id}",
@@ -34,7 +34,7 @@ public class TestDataFactory
             Passion = 10,
             Persuasion = 10,
             Resistance = 10,
-            Wit = 10,
+            Wit = wit,
             Specialty = specialty,
             Price = 100,
             JournalDescription = $"description for character {id}"
