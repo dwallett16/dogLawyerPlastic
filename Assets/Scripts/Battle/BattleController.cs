@@ -12,6 +12,7 @@ public class BattleController : MonoBehaviour
     public List<GameObject> defenseAttorneys;
     public Queue<GameObject> allCombatants;
     public GameObject defendant;
+    public IBattleState CurrentState;
     private BattleData battleData;
     private bool isUsingTestData;
 
@@ -32,6 +33,10 @@ public class BattleController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public bool IsActionPressed() {
+        return true;
     }
     
     private void MapBattleData()
@@ -88,3 +93,19 @@ public class BattleController : MonoBehaviour
         }
     }
 }
+
+// public class PlayerAction: Action {
+//     public PlayerAction(BattleController controller) {
+//         //
+//     }
+
+//     public Action Execute() {
+//         if(controller.isActionPressed) {
+//             //do stuff
+//         }
+//     }
+// }
+
+// public interface Action {
+//     Action Execute();
+// }

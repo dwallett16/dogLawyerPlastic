@@ -73,6 +73,17 @@ namespace Battle
             Assert.AreEqual("character 0", combatants[3].GetComponent<CharacterBattleData>().displayName);
         }
 
+        [UnityTest]
+        public IEnumerator StartSetsInitialState()
+        {
+            SetupBattleScene(true);
+
+            yield return new WaitForFixedUpdate();
+            var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
+            
+            Assert.NotNull(battleController.CurrentState);
+        }
+
         private void SetupBattleScene(bool useTestData, Case c = null, List<Character> testParty = null) 
         {
             var debugMenuObj = new GameObject();
