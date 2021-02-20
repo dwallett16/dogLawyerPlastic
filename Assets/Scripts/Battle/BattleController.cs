@@ -17,7 +17,7 @@ public class BattleController : MonoBehaviour
     private bool isUsingTestData;
 
     //states
-    public PlayerActionSelectState PlayerAction;
+    public PlayerActionSelectState PlayerActionSelect;
     public InitialState Initial;
 
     // Start is called before the first frame update
