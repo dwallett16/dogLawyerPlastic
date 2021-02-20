@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IBattleState
 {
-    IBattleState Execute();
+    IBattleState Execute(BattleController controller);
 }

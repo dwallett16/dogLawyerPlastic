@@ -16,6 +16,10 @@ public class BattleController : MonoBehaviour
     private BattleData battleData;
     private bool isUsingTestData;
 
+    //states
+    public PlayerActionSelectState PlayerAction;
+    public InitialState Initial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,11 @@ public class BattleController : MonoBehaviour
         MapBattleData();
         InstantiateCombatants();
         OrderCombatants();
+
+        PlayerAction = new PlayerActionSelectState();
+        Initial = new InitialState();
+
+        CurrentState = Initial;
     }
 
     // Update is called once per frame
