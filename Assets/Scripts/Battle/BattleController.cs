@@ -32,7 +32,7 @@ public class BattleController : MonoBehaviour
         InstantiateCombatants();
         OrderCombatants();
 
-        PlayerAction = new PlayerActionSelectState();
+        PlayerActionSelect = new PlayerActionSelectState();
         Initial = new InitialState();
 
         CurrentState = Initial;
