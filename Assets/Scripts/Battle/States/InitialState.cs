@@ -8,4 +8,9 @@ public class InitialState : IBattleState
     {
         throw new System.NotImplementedException();
     }
+
+    public void InitializeState(BattleController controller)
+    {
+        Debug.Log("CurrentState: InitialState");
+    }
 }

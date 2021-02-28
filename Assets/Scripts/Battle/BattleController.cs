@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Assets.Scripts.Battle.States;
 
 public class BattleController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class BattleController : MonoBehaviour
     public List<GameObject> defenseAttorneys;
     public Queue<GameObject> allCombatants;
     public GameObject defendant;
+    public GameObject currentCombatant;
     public IBattleState CurrentState;
     private BattleData battleData;
     private bool isUsingTestData;
@@ -19,6 +21,7 @@ public class BattleController : MonoBehaviour
     //states
     public PlayerActionSelectState PlayerActionSelect;
     public InitialState Initial;
+    public EnemyActionSelectState EnemyActionSelect;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +37,7 @@ public class BattleController : MonoBehaviour
 
         PlayerActionSelect = new PlayerActionSelectState();
         Initial = new InitialState();
+        EnemyActionSelect = new EnemyActionSelectState();
 
         CurrentState = Initial;
     }
