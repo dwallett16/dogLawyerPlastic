@@ -16,9 +16,9 @@ namespace Battle
             yield return new WaitForFixedUpdate();
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
 
-            Assert.AreEqual(1, battleController.prosecutors.Count);
-            Assert.AreEqual(1, battleController.defenseAttorneys.Count);
-            Assert.IsNotNull(battleController.defendant);
+            Assert.AreEqual(1, battleController.Prosecutors.Count);
+            Assert.AreEqual(1, battleController.DefenseAttorneys.Count);
+            Assert.IsNotNull(battleController.Defendant);
         }
 
         [UnityTest]
@@ -33,11 +33,11 @@ namespace Battle
             yield return new WaitForFixedUpdate();
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
 
-            Assert.AreEqual(2, battleController.defenseAttorneys.Count);
-            Assert.AreEqual("character 11", battleController.defenseAttorneys[0].GetComponent<CharacterBattleData>().displayName);
-            Assert.AreEqual(CharacterType.DefenseCharacter, battleController.defenseAttorneys[0].GetComponent<CharacterBattleData>().type);
-            Assert.AreEqual("character 110", battleController.defendant.GetComponent<CharacterBattleData>().displayName);
-            Assert.AreEqual(CharacterType.DefendantCharacter, battleController.defendant.GetComponent<CharacterBattleData>().type);
+            Assert.AreEqual(2, battleController.DefenseAttorneys.Count);
+            Assert.AreEqual("character 11", battleController.DefenseAttorneys[0].GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual(CharacterType.DefenseCharacter, battleController.DefenseAttorneys[0].GetComponent<CharacterBattleData>().type);
+            Assert.AreEqual("character 110", battleController.Defendant.GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual(CharacterType.DefendantCharacter, battleController.Defendant.GetComponent<CharacterBattleData>().type);
         }
 
         [UnityTest]
@@ -48,9 +48,9 @@ namespace Battle
             yield return new WaitForFixedUpdate();
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
 
-            Assert.AreEqual(1, battleController.prosecutors.Count);
-            Assert.AreEqual("character 10", battleController.prosecutors[0].GetComponent<CharacterBattleData>().displayName);
-            Assert.AreEqual(CharacterType.PlayerCharacter, battleController.prosecutors[0].GetComponent<CharacterBattleData>().type);
+            Assert.AreEqual(1, battleController.Prosecutors.Count);
+            Assert.AreEqual("character 10", battleController.Prosecutors[0].GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual(CharacterType.PlayerCharacter, battleController.Prosecutors[0].GetComponent<CharacterBattleData>().type);
         }
 
         [UnityTest]
@@ -65,7 +65,7 @@ namespace Battle
 
             yield return new WaitForFixedUpdate();
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
-            var combatants = battleController.allCombatants.ToArray();
+            var combatants = battleController.AllCombatants.ToArray();
 
             Assert.AreEqual("character 1", combatants[0].GetComponent<CharacterBattleData>().displayName);
             Assert.AreEqual("character 111", combatants[1].GetComponent<CharacterBattleData>().displayName);
@@ -84,7 +84,18 @@ namespace Battle
             Assert.NotNull(battleController.CurrentState);
         }
 
-        private void SetupBattleScene(bool useTestData, Case c = null, List<Character> testParty = null) 
+        [UnityTest]
+        public IEnumerator UpdateClearsButtonAction()
+        {
+            SetupBattleScene(true, buttonAction: "Rest");
+
+            yield return new WaitForSeconds(0.1f);
+            var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
+            
+            Assert.IsEmpty(battleController.ActionData.ButtonAction);
+        }
+
+        private void SetupBattleScene(bool useTestData, Case c = null, List<Character> testParty = null, string buttonAction = "") 
         {
             var debugMenuObj = new GameObject();
             var debugMenu = debugMenuObj.AddComponent<BattleDebugMenu>();
@@ -111,6 +122,9 @@ namespace Battle
             controller.ProsecutionPlaceholders = new List<GameObject> {new GameObject(), new GameObject()};
             controller.DefendantPlaceholder = new GameObject();
             controller.DefensePlaceholders = new List<GameObject> {new GameObject(), new GameObject()};
+            controller.ActionData = new ActionData {
+                ButtonAction = buttonAction
+            };
 
             AddToCleanup(controllerObj);
         }

@@ -9,12 +9,13 @@ public class BattleController : MonoBehaviour
     public List<GameObject> ProsecutionPlaceholders;
     public List<GameObject> DefensePlaceholders;
     public GameObject DefendantPlaceholder;
-    public List<GameObject> prosecutors;
-    public List<GameObject> defenseAttorneys;
-    public Queue<GameObject> allCombatants;
-    public GameObject defendant;
-    public GameObject currentCombatant;
+    public List<GameObject> Prosecutors;
+    public List<GameObject> DefenseAttorneys;
+    public Queue<GameObject> AllCombatants;
+    public GameObject Defendant;
+    public GameObject CurrentCombatant;
     public IBattleState CurrentState;
+    public ActionData ActionData;
     private BattleData battleData;
     private bool isUsingTestData;
 
@@ -22,22 +23,27 @@ public class BattleController : MonoBehaviour
     public PlayerActionSelectState PlayerActionSelect;
     public InitialState Initial;
     public EnemyActionSelectState EnemyActionSelect;
+    public PlayerActionState PlayerAction;
+    public NextTurnState NextTurn;
 
     // Start is called before the first frame update
     void Start()
     {
         isUsingTestData = GameObject.FindGameObjectWithTag("BattleData") == null;
-        prosecutors = new List<GameObject>();
-        defenseAttorneys = new List<GameObject>();
+        Prosecutors = new List<GameObject>();
+        DefenseAttorneys = new List<GameObject>();
         battleData = GetComponent<BattleData>();
-        allCombatants = new Queue<GameObject>();
+        AllCombatants = new Queue<GameObject>();
         MapBattleData();
         InstantiateCombatants();
         OrderCombatants();
 
+        ActionData = new ActionData();
         PlayerActionSelect = new PlayerActionSelectState();
         Initial = new InitialState();
         EnemyActionSelect = new EnemyActionSelectState();
+        PlayerAction = new PlayerActionState();
+        NextTurn = new NextTurnState();
 
         CurrentState = Initial;
     }
@@ -45,11 +51,12 @@ public class BattleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CurrentState = CurrentState.Execute(this);
+        ActionData.ButtonAction = string.Empty;
     }
 
-    public bool IsActionPressed() {
-        return true;
+    public void SetButtonAction(string action) {
+        ActionData.ButtonAction = action;
     }
     
     private void MapBattleData()
@@ -76,7 +83,7 @@ public class BattleController : MonoBehaviour
             var prosecutorInstance = Instantiate(prosecutor.BattlePrefab, ProsecutionPlaceholders[placeholderIndex].transform.position, ProsecutionPlaceholders[placeholderIndex].transform.rotation);
             var prosecutorData = prosecutorInstance.GetComponent<CharacterBattleData>();
             prosecutorData.MapFromScriptableObject(prosecutor);
-            prosecutors.Add(prosecutorInstance);
+            Prosecutors.Add(prosecutorInstance);
             placeholderIndex++;
         }
         placeholderIndex = 0;
@@ -84,41 +91,25 @@ public class BattleController : MonoBehaviour
             var defenseInstance = Instantiate(defenseAttorney.BattlePrefab, DefensePlaceholders[placeholderIndex].transform.position, DefensePlaceholders[placeholderIndex].transform.rotation);
             var defenseData = defenseInstance.GetComponent<CharacterBattleData>();
             defenseData.MapFromScriptableObject(defenseAttorney);
-            defenseAttorneys.Add(defenseInstance);
+            DefenseAttorneys.Add(defenseInstance);
             placeholderIndex++;
         }
         var defendantInstance = Instantiate(battleData.Defendant.BattlePrefab, DefendantPlaceholder.transform.position, DefendantPlaceholder.transform.rotation);
         var defendantData = defendantInstance.GetComponent<CharacterBattleData>();
         defendantData.MapFromScriptableObject(battleData.Defendant);
-        defendant = defendantInstance;
+        Defendant = defendantInstance;
     }
 
     private void OrderCombatants()
     {
         List<GameObject> combatantList = new List<GameObject>();
-        combatantList.AddRange(prosecutors);
-        combatantList.AddRange(defenseAttorneys);
+        combatantList.AddRange(Prosecutors);
+        combatantList.AddRange(DefenseAttorneys);
         IEnumerable<GameObject> query = combatantList.OrderByDescending(gameObject => gameObject.GetComponent<CharacterBattleData>().wit);
 
         foreach (GameObject combatant in query)
         {
-            allCombatants.Enqueue(combatant);
+            AllCombatants.Enqueue(combatant);
         }
     }
 }
-
-// public class PlayerAction: Action {
-//     public PlayerAction(BattleController controller) {
-//         //
-//     }
-
-//     public Action Execute() {
-//         if(controller.isActionPressed) {
-//             //do stuff
-//         }
-//     }
-// }
-
-// public interface Action {
-//     Action Execute();
-// }

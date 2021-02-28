@@ -12,7 +12,7 @@ namespace Assets.Scripts.Battle.States
         public bool newState;
         public IBattleState Execute(BattleController controller)
         {
-            if (controller.allCombatants.Peek().GetComponent<CharacterBattleData>().type == CharacterType.PlayerCharacter)
+            if (controller.AllCombatants.Peek().GetComponent<CharacterBattleData>().type == CharacterType.PlayerCharacter)
             {
                 Debug.Log("Queue Peek() next character type: " + CharacterType.PlayerCharacter);
                 return controller.PlayerActionSelect;

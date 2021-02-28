@@ -6,7 +6,9 @@ public class InitialState : IBattleState
 {
     public IBattleState Execute(BattleController controller)
     {
-        throw new System.NotImplementedException();
+        InitializeState(controller);
+        controller.PlayerActionSelect.newState = true;
+        return controller.PlayerActionSelect;
     }
 
     public void InitializeState(BattleController controller)

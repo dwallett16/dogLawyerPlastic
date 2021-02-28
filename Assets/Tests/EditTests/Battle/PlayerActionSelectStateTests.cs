@@ -12,10 +12,24 @@ namespace Battle {
         public void ExecuteReturnsBattleState() {
             var state = new PlayerActionSelectState();
             var controller = new BattleController();
+            controller.ActionData = new ActionData();
 
             var result = state.Execute(controller);
 
             Assert.NotNull(result);
+        }
+
+        [Test]
+        public void ExecuteReturnsPlayerActionStateIfRestButtonPressed() {
+            var state = new PlayerActionSelectState();
+            var controller = new BattleController();
+            controller.ActionData = new ActionData();
+            controller.PlayerAction = new PlayerActionState();
+            controller.ActionData.ButtonAction = "Rest";
+
+            var result = state.Execute(controller);
+
+            Assert.IsInstanceOf<PlayerActionState>(result);
         }
     }
 }

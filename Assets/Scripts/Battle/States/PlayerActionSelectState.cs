@@ -9,13 +9,18 @@ public class PlayerActionSelectState : IBattleState
     {
         if (newState) InitializeState(controller);
 
+        if(controller.ActionData.ButtonAction == "Rest") {
+            controller.PlayerAction.newState = true;
+            return controller.PlayerAction;
+        }
+
         return this;
     }
 
     public void InitializeState(BattleController controller)
     {
         Debug.Log("Current State: PlayerActionSelectState");
-        var currentCombatantBattleData = controller.currentCombatant.GetComponent<CharacterBattleData>();
+        var currentCombatantBattleData = controller.CurrentCombatant.GetComponent<CharacterBattleData>();
         if (currentCombatantBattleData != null)
         {
             Debug.Log("Current Combatant: " + currentCombatantBattleData.name);
