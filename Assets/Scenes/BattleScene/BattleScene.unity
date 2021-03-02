@@ -1306,10 +1306,10 @@ MonoBehaviour:
   - {fileID: 1960840436}
   - {fileID: 1556305801}
   DefendantPlaceholder: {fileID: 652771629}
-  prosecutors: []
-  defenseAttorneys: []
-  defendant: {fileID: 0}
-  currentCombatant: {fileID: 0}
+  Prosecutors: []
+  DefenseAttorneys: []
+  Defendant: {fileID: 0}
+  CurrentCombatant: {fileID: 0}
 --- !u!4 &856442815
 Transform:
   m_ObjectHideFlags: 0

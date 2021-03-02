@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using NUnit.Framework;
 using PixelCrushers.DialogueSystem;
 using UnityEditor.SceneManagement;
@@ -19,18 +20,6 @@ namespace Data
         yield return new WaitForFixedUpdate();
 
         Assert.IsNotNull(GameDataSingletonComponent.gameData);
-    }
-
-    [UnityTest]
-    public IEnumerator StartLoadsCasesFromAddressables()
-    {
-        var gameDataObject = GetGameDataObject();
-
-        yield return new WaitForSeconds(0.5f);
-        
-        var testCase = GameDataSingletonComponent.gameData.CaseData.GetCaseById(999999);
-        Assert.NotNull(testCase);
-        Assert.AreEqual("Integration Test", testCase.Name);
         GameDataSingletonComponent.gameData = null;
     }
 

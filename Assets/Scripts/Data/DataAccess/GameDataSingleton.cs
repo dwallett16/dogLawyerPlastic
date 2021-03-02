@@ -45,8 +45,7 @@ public class GameDataSingleton
             //load budget
         }
 
-        await CaseData.loadAllCasesFromAddressablesAsync();
-        CaseData.LoadCasesToInventory();
+        await CaseData.LoadCasesToInventory();
 
         await EvidenceData.loadAllEvidenceFromAddressablesAsync();
     }

@@ -42,7 +42,7 @@ public class JournalController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    async void Update()
     {
         if(Input.GetButtonDown(Constants.Journal)) {
             ToggleJournal();
@@ -57,7 +57,7 @@ public class JournalController : MonoBehaviour
                 case JournalState.CaseEvidence:
                     currentState = JournalState.Evidence;
                     previousState = JournalState.CaseEvidence;
-                    activeCase = GameDataSingletonComponent.gameData.CaseData.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
+                    activeCase = await GameDataSingletonComponent.gameData.CaseData.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
                 break;
                 case JournalState.CaseDefenseAttorneys:
                     currentState = JournalState.DefenseAttorneys;
@@ -127,7 +127,7 @@ public class JournalController : MonoBehaviour
                         FocusText.GetComponent<Text>().text = cData.FocusPoints;
                     break;
                     case JournalState.CaseDefenseAttorneys:
-                        activeCase = GameDataSingletonComponent.gameData.CaseData.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
+                        activeCase = await GameDataSingletonComponent.gameData.CaseData.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
                         DestroyChildren(CaseDaCanvas.transform, new List<string>{Constants.DetailTag});
                         foreach(var d in activeCase.DefenseAttorneys) {
                             

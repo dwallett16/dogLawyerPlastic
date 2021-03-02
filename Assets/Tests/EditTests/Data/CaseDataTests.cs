@@ -11,23 +11,7 @@ namespace Data
     public class CaseDataTests
     {
         [Test]
-        public async void loadAllCasesFromAddressablesAsyncReturnsCaseListTask()
-        {
-            var inventory = new PlayerInventory();
-            var addressableMock = Substitute.For<IAddressableWrapper>();
-            var asyncHandleResult = new AsyncOperationHandle<IList<Case>>();
-            addressableMock.LoadAssets<Case>(Arg.Any<string>(), Arg.Any<Action<Case>>()).Returns(asyncHandleResult);
-            
-            var caseData = new CaseData(addressableMock, inventory);
-            var result = await caseData.loadAllCasesFromAddressablesAsync();
-
-            Assert.AreEqual(asyncHandleResult.Task.Result, result);
-            addressableMock.Received().LoadAssets<Case>(AddressablePaths.Cases, Arg.Any<Action<Case>>());
-            addressableMock.Received().ReleaseAssets<Case>(Arg.Any<AsyncOperationHandle<IList<Case>>>());
-        }
-
-        [Test]
-        public void LoadCasesToInventoryOnlyLoadsCasesFromQuestLog()
+        public async void LoadCasesToInventoryOnlyLoadsCasesFromQuestLog()
         {
             var inventory = new PlayerInventory();
             var addressableMock = Substitute.For<IAddressableWrapper>();
@@ -40,7 +24,7 @@ namespace Data
             QuestLog.AddQuest(testCase, "description", QuestState.Active);
             var caseData = new CaseData(addressableMock, inventory, allCases);
 
-            caseData.LoadCasesToInventory();
+            await caseData.LoadCasesToInventory();
             QuestLog.DeleteQuest(testCase);
 
             Assert.AreEqual(1, inventory.ActiveCases.Count);
@@ -48,7 +32,7 @@ namespace Data
         }
 
         [Test]
-        public void GetCaseByIdReturnsMatchingCase()
+        public async void GetCaseByIdReturnsMatchingCase()
         {
             var inventory = new PlayerInventory();
             var addressableMock = Substitute.For<IAddressableWrapper>();
@@ -59,7 +43,7 @@ namespace Data
             };
             var caseData = new CaseData(addressableMock, inventory, allCases);
 
-            var result = caseData.GetCaseById(2);
+            var result = await caseData.GetCaseById(2);
 
             Assert.AreEqual(2, result.Id);
             Assert.AreEqual("case 2", result.Name);
