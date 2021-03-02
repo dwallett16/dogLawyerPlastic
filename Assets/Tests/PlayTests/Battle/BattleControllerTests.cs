@@ -85,14 +85,15 @@ namespace Battle
         }
 
         [UnityTest]
-        public IEnumerator UpdateClearsButtonAction()
+        public IEnumerator UpdateSetsCurrentCombatantToFirstInQueue()
         {
-            SetupBattleScene(true, buttonAction: "Rest");
+            var party = new List<Character> { CreateCharacter(10, CharacterType.PlayerCharacter, wit: 1000) };
+            SetupBattleScene(true, testParty: party);
 
             yield return new WaitForSeconds(0.1f);
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
             
-            Assert.IsEmpty(battleController.ActionData.ButtonAction);
+            Assert.AreEqual(battleController.CurrentCombatant, battleController.Prosecutors[0]);
         }
 
         private void SetupBattleScene(bool useTestData, Case c = null, List<Character> testParty = null, string buttonAction = "") 

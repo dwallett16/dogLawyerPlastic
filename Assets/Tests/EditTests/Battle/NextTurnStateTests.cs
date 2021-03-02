@@ -43,6 +43,24 @@ namespace Battle
             Assert.IsInstanceOf<EnemyActionSelectState>(result);
         }
 
+        [Test]
+        public void ExecuteClearsActionData()
+        {
+            var nextTurnState = new NextTurnState();
+            var battleController = new BattleController();
+            battleController.ActionData = new ActionData {
+                ButtonAction = Constants.Rest
+            };
+            NewUp(battleController);
+            var character = new GameObject();
+            character.AddComponent<CharacterBattleData>();
+            battleController.AllCombatants.Enqueue(character);
+
+            var result = nextTurnState.Execute(battleController);
+
+            Assert.AreEqual(null, battleController.ActionData.ButtonAction);
+        }
+
         private void CreateCombatantsList(BattleController battleController)
         {
             for (int i = 0; i < 2; i++)

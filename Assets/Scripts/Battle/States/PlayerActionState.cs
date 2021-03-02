@@ -9,16 +9,16 @@ public class PlayerActionState : IBattleState
     {
         if(newState) InitializeState(controller);
 
-        if(controller.ActionData.ButtonAction == "Rest") {
+        if(controller.ActionData.ButtonAction == Constants.Rest) {
             RestAction(controller);
         }
-
+        controller.AllCombatants.Enqueue(controller.CurrentCombatant);
         return controller.NextTurn;
     }
 
     public void InitializeState(BattleController controller)
     {
-        Debug.Log("Current State: PlayerActionSelectState");
+        Debug.Log("Current State: PlayerActionState");
         newState = false;
     }
 

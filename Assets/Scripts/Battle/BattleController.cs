@@ -52,7 +52,6 @@ public class BattleController : MonoBehaviour
     void Update()
     {
         CurrentState = CurrentState.Execute(this);
-        ActionData.ButtonAction = string.Empty;
     }
 
     public void SetButtonAction(string action) {

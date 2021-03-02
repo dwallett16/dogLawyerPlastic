@@ -23,8 +23,8 @@ public static class Constants
     public static string Smoke = "Smoke";
     public static string CaseStatus = "CaseStatus";
 
-    //Case Names
-    public static string MurderOnTheDancefloor = "Murder on the Dancefloor";
+    //Battle Buttons
+    public static string Rest = "Rest";
 
     public static string GetLatentPowerDefinition(int power)
     {
