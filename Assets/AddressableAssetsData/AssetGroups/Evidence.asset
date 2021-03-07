@@ -57,15 +57,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Evidence
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 11400000, guid: 90dfbaf85676c024c9073e402e24c125, type: 2}
+    m_TargetAsset: {fileID: 11400000, guid: 90dfbaf85676c024c9073e402e24c125, type: 2}
   - m_GUID: 9990ddd4c1bb7e04192f2768f77dfe33
     m_Address: Assets/Scripts/Data/ScriptableObjects/EvidenceData/IntegrationTest.asset
     m_ReadOnly: 0
     m_SerializedLabels:
+    - TestEvidence
     - Evidence
-    m_MainAsset: {fileID: 0}
-    m_TargetAsset: {fileID: 0}
+    m_MainAsset: {fileID: 11400000, guid: 9990ddd4c1bb7e04192f2768f77dfe33, type: 2}
+    m_TargetAsset: {fileID: 11400000, guid: 9990ddd4c1bb7e04192f2768f77dfe33, type: 2}
   - m_GUID: dccb0b01442c1fb488849f32ae1ba419
     m_Address: Assets/Scripts/ScribtableObjects/EvidenceData/PoisonedRum.asset
     m_ReadOnly: 0

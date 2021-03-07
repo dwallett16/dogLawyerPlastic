@@ -46,7 +46,5 @@ public class GameDataSingleton
         }
 
         await CaseData.LoadCasesToInventory();
-
-        await EvidenceData.loadAllEvidenceFromAddressablesAsync();
     }
 }

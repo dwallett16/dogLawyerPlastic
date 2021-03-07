@@ -39,19 +39,6 @@ namespace Data
         GameDataSingletonComponent.gameData = null;
     }
 
-    [UnityTest]
-    public IEnumerator StartLoadsEvidenceFromAddressables()
-    {
-        var gameDataObject = GetGameDataObject();
-
-        yield return new WaitForSeconds(0.5f);
-
-        var testEvidence = GameDataSingletonComponent.gameData.EvidenceData.GetEvidenceById(999999);
-        Assert.NotNull(testEvidence);
-        Assert.AreEqual("Integration Test Evidence", testEvidence.Name);
-        GameDataSingletonComponent.gameData = null;
-    }
-
     private GameObject GetGameDataObject() {
         var gameDataObject = new GameObject("GameData");
         AddToCleanup(gameDataObject);

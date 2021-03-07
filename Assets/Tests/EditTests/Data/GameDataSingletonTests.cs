@@ -64,25 +64,6 @@ namespace Data
         addressableMock.Received(1).LoadAssets<Case>(AddressablePaths.Cases, Arg.Any<Action<Case>>());
     }
 
-    [Test]
-    public async void LoadSaveDataLoadsEvidenceFromAddressables() 
-    {
-        var addressableMock = Substitute.For<IAddressableWrapper>();
-        var asyncHandleResult = new AsyncOperationHandle<IList<Evidence>>();
-        addressableMock.LoadAssets<Evidence>(Arg.Any<string>(), Arg.Any<Action<Evidence>>()).Returns(asyncHandleResult);
-        var playerInventory = new PlayerInventory();
-        var guildInventory = new GuildInventory();
-        var budget = new Budget();
-        var caseData = new CaseData(addressableMock, playerInventory);
-        var evidenceData = new EvidenceData(addressableMock);
-        var gameData = new GameDataSingleton(playerInventory, guildInventory, budget, caseData, evidenceData);
-        var debugSettings = GetDebugSettings();
-
-        await gameData.LoadSaveData(debugSettings);
-
-        addressableMock.Received(1).LoadAssets<Evidence>(AddressablePaths.Evidence, Arg.Any<Action<Evidence>>());
-    }
-
     private GameDataSingleton GetGameData() {
         var playerInventory = new PlayerInventory();
         var guildInventory = new GuildInventory();

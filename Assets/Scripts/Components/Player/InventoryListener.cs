@@ -18,10 +18,11 @@ public class InventoryListener : MonoBehaviour, IDialogueEvidenceListener
         
     }
 
-    public void NotifyEvidence(string id)
+    public async void NotifyEvidence(string id)
     {
         var outId = Int32.Parse(id);
+        var evidence = await GameDataSingletonComponent.gameData.EvidenceData.GetEvidenceById(outId);
         GameDataSingletonComponent.gameData.PlayerInventory
-        .AddEvidence(GameDataSingletonComponent.gameData.EvidenceData.GetEvidenceById(outId));
+        .AddEvidence(evidence);
     }
 }

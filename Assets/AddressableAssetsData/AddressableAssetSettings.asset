@@ -70,6 +70,8 @@ MonoBehaviour:
     - default
     - Cases
     - Evidence
+    - TestEvidence
+    - TestCases
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 660520ff3d99daf4b9d122c748aeaf13, type: 2}

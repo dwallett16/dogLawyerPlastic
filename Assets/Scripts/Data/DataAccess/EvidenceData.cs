@@ -5,29 +5,17 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class EvidenceData {
     private readonly IAddressableWrapper addressableWrapper;
-    private List<Evidence> allEvidence;
 
     public EvidenceData(IAddressableWrapper addressableWrapper) {
         this.addressableWrapper = addressableWrapper;
-        allEvidence = new List<Evidence>();
     }
 
-    //Testing only
-    public EvidenceData(IAddressableWrapper addressableWrapper, List<Evidence> allEvidence) {
-        this.addressableWrapper = addressableWrapper;
-        this.allEvidence = allEvidence;
-    }
-
-    public Evidence GetEvidenceById(int id) {
-        return allEvidence.First(e => e.Id == id);
-    }
-
-    public async Task<IList<Evidence>> loadAllEvidenceFromAddressablesAsync() {
-        AsyncOperationHandle<IList<Evidence>> evidenceAssets = addressableWrapper.LoadAssets<Evidence>(AddressablePaths.Evidence, e => {
-                allEvidence.Add(e);
-            });
+    public async Task<Evidence> GetEvidenceById(int id) {
+        Evidence targetEvidence = null;
+        AsyncOperationHandle<IList<Evidence>> evidenceAssets = addressableWrapper.LoadAssets<Evidence>(AddressablePaths.Evidence,
+         e => { if(e.Id == id) targetEvidence = e; });
         addressableWrapper.ReleaseAssets<Evidence>(evidenceAssets);
-        return await evidenceAssets.Task;
+        await evidenceAssets.Task;
+        return targetEvidence;
     }
-
 }

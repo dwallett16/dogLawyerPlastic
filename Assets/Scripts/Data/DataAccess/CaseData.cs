@@ -13,12 +13,6 @@ public class CaseData {
         this.playerInventory = playerInventory;
     }
 
-    //Testing only
-    public CaseData(IAddressableWrapper addressableWrapper, PlayerInventory playerInventory, List<Case> allCases) {
-        this.addressableWrapper = addressableWrapper;
-        this.playerInventory = playerInventory;
-    }
-
     public async Task<IList<Case>> LoadCasesToInventory() {
         playerInventory.ClearCases();
         var activeCases = QuestLog.GetAllQuests();
