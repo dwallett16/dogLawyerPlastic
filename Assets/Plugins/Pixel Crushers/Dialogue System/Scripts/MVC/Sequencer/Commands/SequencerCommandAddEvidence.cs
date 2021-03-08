@@ -12,7 +12,7 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
         {
             var evidenceId = GetParameter(0);
             var subject = GetSubject(1);
-            var listener = subject.GetComponent<IDialogueEvidenceListener>();
+            var listener = subject.GetComponent<IInventoryListener>();
             listener.NotifyEvidence(evidenceId);
             Stop();
         }

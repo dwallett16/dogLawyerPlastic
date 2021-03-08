@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -21,6 +22,7 @@ public class JournalController : MonoBehaviour
     public AudioClip PageTurnClip;
     private GameObject player;
     private IComponentDisabler playerControllerDisabler;
+    private IJournalEventListener playerJournalListener;
     private Rigidbody2D playerBody;
     private List<Canvas> canvasList;
     private JournalState currentState;
@@ -29,20 +31,21 @@ public class JournalController : MonoBehaviour
     private string homeSelection;
     private Case activeCase;
     private AudioSource audioSource;
+    private List<Case> allCases;
 
     // Start is called before the first frame update
-    void Start()
+    async void Start()
     {
         player = GameObject.FindGameObjectWithTag(Constants.PlayerTag);
         playerControllerDisabler = player.GetComponent<IComponentDisabler>();
+        playerJournalListener = player.GetComponent<IJournalEventListener>();
         playerBody = player.GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
-        currentState = JournalState.Home;
-        currentItem = EventSystem.current.currentSelectedGameObject;
+        allCases = await GameDataSingletonComponent.gameData.CaseData.GetAllCases();
     }
 
     // Update is called once per frame
-    async void Update()
+    void Update()
     {
         if(Input.GetButtonDown(Constants.Journal)) {
             ToggleJournal();
@@ -57,7 +60,17 @@ public class JournalController : MonoBehaviour
                 case JournalState.CaseEvidence:
                     currentState = JournalState.Evidence;
                     previousState = JournalState.CaseEvidence;
-                    activeCase = await GameDataSingletonComponent.gameData.CaseData.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
+                    activeCase = allCases.Where(x => x.Id == currentItem.GetComponent<ButtonData>().Id).First();
+                break;
+                case JournalState.ExamineCaseEvidence:
+                    currentState = JournalState.ExamineEvidence;
+                    previousState = JournalState.ExamineCaseEvidence;
+                    activeCase = allCases.Where(x => x.Id == currentItem.GetComponent<ButtonData>().Id).First();
+                break;
+                case JournalState.ExamineEvidence:
+                    ToggleExamineEvidenceJournal();
+                    playerJournalListener.StartExamineConversation();
+
                 break;
                 case JournalState.CaseDefenseAttorneys:
                     currentState = JournalState.DefenseAttorneys;
@@ -76,6 +89,10 @@ public class JournalController : MonoBehaviour
                 ToggleJournal();
                 return;
             }
+            else if(currentState == JournalState.ExamineCaseEvidence) {
+                ToggleExamineEvidenceJournal();
+                return;
+            }
             currentState = previousState;
             previousState = JournalState.Home;
 
@@ -83,11 +100,12 @@ public class JournalController : MonoBehaviour
         }
         else {
             //Selecting new menu item
-            if(currentItem != EventSystem.current.currentSelectedGameObject) {
+            if(IsActive() && EventSystem.current.currentSelectedGameObject != null && currentItem != EventSystem.current.currentSelectedGameObject) {
                 currentItem = EventSystem.current.currentSelectedGameObject;
                 
                 var yPos = JournalUiConstants.ButtonYStart;
                 switch(currentState) {
+                    case JournalState.ExamineCaseEvidence:
                     case JournalState.CaseEvidence:
                         DestroyChildren(CaseEvidenceCanvas.transform, new List<string>{Constants.DetailTag});
                         foreach(var e in GameDataSingletonComponent.gameData.PlayerInventory.EvidenceList) {
@@ -101,6 +119,7 @@ public class JournalController : MonoBehaviour
                             }
                         }
                     break;
+                    case JournalState.ExamineEvidence:
                     case JournalState.Evidence:
                         DestroyChildren(EvidenceCanvas.transform, new List<string>{Constants.DetailTag});
 
@@ -127,7 +146,7 @@ public class JournalController : MonoBehaviour
                         FocusText.GetComponent<Text>().text = cData.FocusPoints;
                     break;
                     case JournalState.CaseDefenseAttorneys:
-                        activeCase = await GameDataSingletonComponent.gameData.CaseData.GetCaseById(currentItem.GetComponent<ButtonData>().Id);
+                        activeCase = allCases.Where(x => x.Id == currentItem.GetComponent<ButtonData>().Id).First();
                         DestroyChildren(CaseDaCanvas.transform, new List<string>{Constants.DetailTag});
                         foreach(var d in activeCase.DefenseAttorneys) {
                             
@@ -174,6 +193,7 @@ public class JournalController : MonoBehaviour
                 ActivateHomePage();
                 EventSystem.current.SetSelectedGameObject(FirstHomeButton);
             break;
+            case JournalState.ExamineCaseEvidence:
             case JournalState.CaseEvidence:
                 EvidenceCanvas.gameObject.SetActive(false);
                 CaseEvidenceCanvas.gameObject.SetActive(true);
@@ -193,6 +213,7 @@ public class JournalController : MonoBehaviour
                     index++;
                 }
             break;
+            case JournalState.ExamineEvidence:
             case JournalState.Evidence:
                 EvidenceCanvas.gameObject.SetActive(true);
                 CaseEvidenceCanvas.gameObject.SetActive(false);
@@ -352,15 +373,45 @@ public class JournalController : MonoBehaviour
         }
     }
 
+    public void ToggleExamineEvidenceJournal() {
+        playerBody.velocity = Vector2.zero;
+        playerControllerDisabler.ToggleComponent();
+        currentState = JournalState.ExamineCaseEvidence;
+        Background.SetActive(!Background.activeInHierarchy);
+        JournalPanel.SetActive(!JournalPanel.activeInHierarchy);
+        if(JournalPanel.activeInHierarchy) {
+            Time.timeScale = 0;
+            ActivateExamineEvidencePage();
+            EventSystem.current.SetSelectedGameObject(FirstHomeButton);
+            PlayAudio(OpenClip);
+        }
+        else {
+            Time.timeScale = 1;
+            PlayAudio(CloseClip);
+        }
+        UpdateJournalPage(currentState);
+    }
+
     private void ActivateHomePage()
     {
-            EvidenceCanvas.gameObject.SetActive(false);
-            CaseEvidenceCanvas.gameObject.SetActive(false);
-            CaseDaCanvas.gameObject.SetActive(false);
-            PartyCanvas.gameObject.SetActive(false);
-            HomeCanvas.gameObject.SetActive(true);
-            DaCanvas.gameObject.SetActive(false);
-            SkillsCanvas.gameObject.SetActive(false);
+        EvidenceCanvas.gameObject.SetActive(false);
+        CaseEvidenceCanvas.gameObject.SetActive(false);
+        CaseDaCanvas.gameObject.SetActive(false);
+        PartyCanvas.gameObject.SetActive(false);
+        HomeCanvas.gameObject.SetActive(true);
+        DaCanvas.gameObject.SetActive(false);
+        SkillsCanvas.gameObject.SetActive(false);
+    }
+
+    private void ActivateExamineEvidencePage()
+    {
+        EvidenceCanvas.gameObject.SetActive(false);
+        CaseEvidenceCanvas.gameObject.SetActive(true);
+        CaseDaCanvas.gameObject.SetActive(false);
+        PartyCanvas.gameObject.SetActive(false);
+        HomeCanvas.gameObject.SetActive(false);
+        DaCanvas.gameObject.SetActive(false);
+        SkillsCanvas.gameObject.SetActive(false);
     }
 
     private bool IsActive() {

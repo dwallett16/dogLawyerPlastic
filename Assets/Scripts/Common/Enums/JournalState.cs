@@ -7,5 +7,7 @@ public enum JournalState
     CaseDefenseAttorneys,
     DefenseAttorneys,
     Party,
-    Skills
+    Skills,
+    ExamineCaseEvidence,
+    ExamineEvidence
 }

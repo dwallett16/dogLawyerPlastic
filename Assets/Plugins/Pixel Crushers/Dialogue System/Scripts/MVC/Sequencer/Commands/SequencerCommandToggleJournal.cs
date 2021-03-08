@@ -10,7 +10,6 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
 
         public void Start()
         {
-            DialogueManager.StopConversation();
             var subject = GetSubject(1);
             var listener = subject.GetComponent<IJournalEventListener>();
             listener.ToggleJournal();

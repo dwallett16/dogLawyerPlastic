@@ -4,7 +4,7 @@ using System;
 using UnityEngine;
 using PixelCrushers.DialogueSystem.SequencerCommands;
 
-public class InventoryListener : MonoBehaviour, IDialogueEvidenceListener
+public class InventoryListener : MonoBehaviour, IInventoryListener
 {
     // Start is called before the first frame update
     void Start()

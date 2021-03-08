@@ -21,6 +21,16 @@ public class CaseData {
         addressableWrapper.ReleaseAssets<Case>(caseAssets);
         return await caseAssets.Task;
     }
+
+    public async Task<List<Case>> GetAllCases() {
+        var list = new List<Case>();
+        AsyncOperationHandle<IList<Case>> caseAssets = addressableWrapper.LoadAssets<Case>(AddressablePaths.Cases,
+         c => { list.Add(c); });
+        addressableWrapper.ReleaseAssets<Case>(caseAssets);
+        await caseAssets.Task;
+        return list;
+    }
+
     public async Task<Case> GetCaseById(int id) 
     {
         Case targetCase = null;

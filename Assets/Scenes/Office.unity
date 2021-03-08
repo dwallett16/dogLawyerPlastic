@@ -6014,7 +6014,7 @@ PrefabInstance:
     - target: {fileID: 5654236601385499507, guid: a62ecc4f1e0d3409a900279107ccc5e5,
         type: 3}
       propertyPath: conversation
-      value: Desk
+      value: Desk/Intro
       objectReference: {fileID: 0}
     - target: {fileID: 8196354764361329628, guid: a62ecc4f1e0d3409a900279107ccc5e5,
         type: 3}
@@ -7421,6 +7421,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016826928461438688, guid: d89552e61e2cae246ae3befd6c3f9ad1,
+        type: 3}
+      propertyPath: m_FirstSelected
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d89552e61e2cae246ae3befd6c3f9ad1, type: 3}

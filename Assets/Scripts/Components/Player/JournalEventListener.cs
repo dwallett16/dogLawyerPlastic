@@ -1,23 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using PixelCrushers.DialogueSystem;
 using UnityEngine;
 
 public class JournalEventListener : MonoBehaviour, IJournalEventListener
 {
     public void ToggleJournal()
     {
-        GameObject.Find("JournalCanvas").GetComponent<JournalController>().ToggleJournal();
+        DialogueManager.StopConversation();
+        GameObject.Find("JournalCanvas").GetComponent<JournalController>().ToggleExamineEvidenceJournal();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartExamineConversation() 
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        DialogueManager.StartConversation("Desk/ExamineEvidence", transform);
     }
 }
