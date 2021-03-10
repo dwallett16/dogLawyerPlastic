@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System;
 using UnityEngine;
-using PixelCrushers.DialogueSystem.SequencerCommands;
 
 public class InventoryListener : MonoBehaviour, IInventoryListener
 {
@@ -18,11 +15,17 @@ public class InventoryListener : MonoBehaviour, IInventoryListener
         
     }
 
-    public async void NotifyEvidence(string id)
+    public async void AddEvidence(string id)
     {
         var outId = Int32.Parse(id);
         var evidence = await GameDataSingletonComponent.gameData.EvidenceData.GetEvidenceById(outId);
         GameDataSingletonComponent.gameData.PlayerInventory
         .AddEvidence(evidence);
+    }
+
+    public void RemoveEvidence(string id)
+    {
+        var outId = Int32.Parse(id);
+        GameDataSingletonComponent.gameData.PlayerInventory.RemoveEvidence(outId);
     }
 }

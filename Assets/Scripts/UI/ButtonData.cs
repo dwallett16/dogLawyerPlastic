@@ -14,4 +14,5 @@ public class ButtonData: MonoBehaviour
     public int FpCost {get; set;}
     public int LatentPower {get; set;}
     public int Price {get;set;}
+    public string ExamineConversation {get; set;}
 }

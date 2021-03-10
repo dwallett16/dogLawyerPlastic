@@ -20,4 +20,4 @@ MonoBehaviour:
     footage. If I examine it back at the office, I might be able to discover what's
     been mixed into it.
   CanBeExamined: 1
-  JournalDialogue: BottleOfRum
+  JournalDialogue: Desk/PoisonedRum

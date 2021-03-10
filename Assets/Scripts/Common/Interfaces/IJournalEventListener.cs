@@ -2,5 +2,5 @@
 public interface IJournalEventListener
 {
     void ToggleJournal();
-    void StartExamineConversation();
+    void StartExamineConversation(string conversation);
 }

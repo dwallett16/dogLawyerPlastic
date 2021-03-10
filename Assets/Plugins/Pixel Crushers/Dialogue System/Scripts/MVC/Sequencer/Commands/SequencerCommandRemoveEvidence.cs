@@ -5,7 +5,7 @@ using PixelCrushers.DialogueSystem;
 namespace PixelCrushers.DialogueSystem.SequencerCommands
 {
 
-    public class SequencerCommandAddEvidence : SequencerCommand
+    public class SequencerCommandRemoveEvidence : SequencerCommand
     {
 
         public void Start()
@@ -13,7 +13,7 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
             var evidenceId = GetParameter(0);
             var subject = GetSubject(1);
             var listener = subject.GetComponent<IInventoryListener>();
-            listener.AddEvidence(evidenceId);
+            listener.RemoveEvidence(evidenceId);
             Stop();
         }
     }

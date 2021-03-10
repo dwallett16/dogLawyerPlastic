@@ -11,8 +11,11 @@ public class JournalEventListener : MonoBehaviour, IJournalEventListener
         GameObject.Find("JournalCanvas").GetComponent<JournalController>().ToggleExamineEvidenceJournal();
     }
 
-    public void StartExamineConversation() 
+    public void StartExamineConversation(string conversation) 
     {
-        DialogueManager.StartConversation("Desk/ExamineEvidence", transform);
+        if(string.IsNullOrEmpty(conversation))
+            DialogueManager.StartConversation("Desk/NoExamination", transform);
+        else
+            DialogueManager.StartConversation(conversation, transform);
     }
 }

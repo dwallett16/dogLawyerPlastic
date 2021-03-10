@@ -31,6 +31,13 @@ public class PlayerInventory: Inventory
             evidenceList.Add(evidence);
     }
 
+    public void RemoveEvidence(int id) 
+    {
+        var evidenceToRemove = evidenceList.Where(x => x.Id == id).FirstOrDefault();
+        if(evidenceToRemove != null)
+            evidenceList.Remove(evidenceToRemove);
+    }
+
     public void AddActiveCase(Case c)
     {
         if(activeCases.TrueForAll(ac => ac.Id != c.Id))

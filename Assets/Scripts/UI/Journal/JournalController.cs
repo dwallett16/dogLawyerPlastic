@@ -68,8 +68,9 @@ public class JournalController : MonoBehaviour
                     activeCase = allCases.Where(x => x.Id == currentItem.GetComponent<ButtonData>().Id).First();
                 break;
                 case JournalState.ExamineEvidence:
+                    var conversation = currentItem.GetComponent<ButtonData>().ExamineConversation;
                     ToggleExamineEvidenceJournal();
-                    playerJournalListener.StartExamineConversation();
+                    playerJournalListener.StartExamineConversation(conversation);
 
                 break;
                 case JournalState.CaseDefenseAttorneys:
@@ -231,6 +232,7 @@ public class JournalController : MonoBehaviour
                     evData.Id = e.Id;
                     evData.Image = e.Image;
                     evData.Description = e.Description;
+                    evData.ExamineConversation = e.JournalDialogue;
 
                     evInst.name = evInst.name + index;
                     if(index == 0)

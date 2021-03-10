@@ -1,3 +1,4 @@
 public interface IInventoryListener {
-    void NotifyEvidence(string id);
+    void AddEvidence(string id);
+    void RemoveEvidence(string id);
 }
