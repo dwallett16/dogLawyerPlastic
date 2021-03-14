@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using NUnit.Framework;
 using NSubstitute;
 using System;
@@ -25,12 +24,12 @@ namespace Battle {
             var state = new PlayerActionSelectState();
             var controller = new BattleController();
             controller.ActionData = new ActionData();
-            controller.PlayerAction = new PlayerActionState();
+            controller.Action = new ActionState();
             controller.ActionData.ButtonAction = Constants.Rest;
 
             var result = state.Execute(controller);
 
-            Assert.IsInstanceOf<PlayerActionState>(result);
+            Assert.IsInstanceOf<ActionState>(result);
         }
 
         [Test]
@@ -42,11 +41,11 @@ namespace Battle {
             CreateCombatantsList(controller);
             QueueCombatantOrder(controller, true);
             controller.ActionData = new ActionData();
-            controller.PlayerAction = new PlayerActionState();
+            controller.Action = new ActionState();
 
             var result = state.Execute(controller);
 
-            Assert.AreEqual(controller.Prosecutors[0], controller.CurrentCombatant);
+            Assert.AreEqual(controller.Prosecutors[0], controller.ActionData.CurrentCombatant);
         }
 
         private void CreateCombatantsList(BattleController battleController)

@@ -13,7 +13,6 @@ public class BattleController : MonoBehaviour
     public List<GameObject> DefenseAttorneys;
     public Queue<GameObject> AllCombatants;
     public GameObject Defendant;
-    public GameObject CurrentCombatant;
     public IBattleState CurrentState;
     public ActionData ActionData;
     private BattleData battleData;
@@ -23,7 +22,7 @@ public class BattleController : MonoBehaviour
     public PlayerActionSelectState PlayerActionSelect;
     public InitialState Initial;
     public EnemyActionSelectState EnemyActionSelect;
-    public PlayerActionState PlayerAction;
+    public ActionState Action;
     public NextTurnState NextTurn;
 
     // Start is called before the first frame update
@@ -42,7 +41,7 @@ public class BattleController : MonoBehaviour
         PlayerActionSelect = new PlayerActionSelectState();
         Initial = new InitialState();
         EnemyActionSelect = new EnemyActionSelectState();
-        PlayerAction = new PlayerActionState();
+        Action = new ActionState();
         NextTurn = new NextTurnState();
 
         CurrentState = Initial;

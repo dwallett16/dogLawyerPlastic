@@ -93,7 +93,7 @@ namespace Battle
             yield return new WaitForSeconds(0.1f);
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
             
-            Assert.AreEqual(battleController.CurrentCombatant, battleController.Prosecutors[0]);
+            Assert.AreEqual(battleController.ActionData.CurrentCombatant, battleController.Prosecutors[0]);
         }
 
         private void SetupBattleScene(bool useTestData, Case c = null, List<Character> testParty = null, string buttonAction = "") 

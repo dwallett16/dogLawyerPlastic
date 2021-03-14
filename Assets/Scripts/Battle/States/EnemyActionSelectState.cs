@@ -19,7 +19,7 @@ namespace Assets.Scripts.Battle.States
         public void InitializeState(BattleController controller)
         {
             Debug.Log("Current State: EnemyActionSelectState");
-            var currentCombatantBattleData = controller.CurrentCombatant?.GetComponent<CharacterBattleData>();
+            var currentCombatantBattleData = controller.ActionData.CurrentCombatant?.GetComponent<CharacterBattleData>();
             if (currentCombatantBattleData != null)
             {
                 Debug.Log("Current Combatant: " + currentCombatantBattleData.name);

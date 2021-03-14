@@ -10,7 +10,7 @@ namespace Battle {
     {
         [Test]
         public void ExecuteReturnsNextTurnState() {
-            var playerActionState = new PlayerActionState();
+            var playerActionState = new ActionState();
             var controller = new BattleController();
             controller.ActionData = new ActionData();
             controller.AllCombatants = new Queue<GameObject>();
@@ -23,7 +23,7 @@ namespace Battle {
 
         [Test]
         public void ExecuteReplenishesFocusPointsToCurrentTurnCharacterWhenButtonActionRest() {
-            var playerActionState = new PlayerActionState();
+            var playerActionState = new ActionState();
             var controller = new BattleController();
             controller.ActionData = new ActionData {
                 ButtonAction = Constants.Rest
@@ -31,16 +31,16 @@ namespace Battle {
             controller.AllCombatants = new Queue<GameObject>();
             var character = new GameObject();
             character.AddComponent<CharacterBattleData>().currentFocusPoints = 10;
-            controller.CurrentCombatant = character;
+            controller.ActionData.CurrentCombatant = character;
 
             playerActionState.Execute(controller);
 
-            Assert.IsTrue(controller.CurrentCombatant.GetComponent<CharacterBattleData>().currentFocusPoints > 10);
+            Assert.IsTrue(controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().currentFocusPoints > 10);
         }
 
         [Test]
         public void ExecutePutsCurrentCombatantToEndOfQueue() {
-            var playerActionState = new PlayerActionState();
+            var playerActionState = new ActionState();
             var controller = new BattleController();
             NewUp(controller);
             CreateCombatantsList(controller);
@@ -48,7 +48,7 @@ namespace Battle {
             controller.ActionData = new ActionData();
             var character = new GameObject();
             character.AddComponent<CharacterBattleData>().currentFocusPoints = 10;
-            controller.CurrentCombatant = character;
+            controller.ActionData.CurrentCombatant = character;
 
             playerActionState.Execute(controller);
 
