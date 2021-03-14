@@ -50,8 +50,7 @@ public class JournalController : MonoBehaviour
         if(Input.GetButtonDown(Constants.Journal)) {
             ToggleJournal();
         }
-
-        if(Input.GetButtonDown(Constants.Submit) && IsActive()) {
+        else if(Input.GetButtonDown(Constants.Submit) && IsActive()) {
             switch(currentState) {
                 case JournalState.Home:
                     previousState = JournalState.Home;
@@ -99,9 +98,7 @@ public class JournalController : MonoBehaviour
 
             UpdateJournalPage(currentState);
         }
-        else {
-            //Selecting new menu item
-            if(IsActive() && EventSystem.current.currentSelectedGameObject != null && currentItem != EventSystem.current.currentSelectedGameObject) {
+        else if(IsActive() && EventSystem.current.currentSelectedGameObject != null && currentItem != EventSystem.current.currentSelectedGameObject) {
                 currentItem = EventSystem.current.currentSelectedGameObject;
                 
                 var yPos = JournalUiConstants.ButtonYStart;
@@ -181,7 +178,6 @@ public class JournalController : MonoBehaviour
                     break;
                 }
             }
-        }
     }
     
     private void UpdateJournalPage(JournalState state) 
@@ -372,6 +368,7 @@ public class JournalController : MonoBehaviour
         else {
             Time.timeScale = 1;
             PlayAudio(CloseClip);
+            EventSystem.current.SetSelectedGameObject(null);
         }
     }
 
@@ -384,7 +381,6 @@ public class JournalController : MonoBehaviour
         if(JournalPanel.activeInHierarchy) {
             Time.timeScale = 0;
             ActivateExamineEvidencePage();
-            EventSystem.current.SetSelectedGameObject(FirstHomeButton);
             PlayAudio(OpenClip);
         }
         else {
