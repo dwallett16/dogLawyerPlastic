@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerActionSelectState : IBattleState
 {
@@ -13,6 +11,7 @@ public class PlayerActionSelectState : IBattleState
         }
 
         if(controller.ActionData.ButtonAction == Constants.Rest) {
+            controller.ActionData.Action = new RestAction();
             controller.Action.newState = true;
             return controller.Action;
         }

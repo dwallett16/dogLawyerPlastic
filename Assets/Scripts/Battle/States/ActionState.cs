@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ActionState : IBattleState
 {
@@ -9,10 +7,11 @@ public class ActionState : IBattleState
     {
         if(newState) InitializeState(controller);
 
-        if(controller.ActionData.ButtonAction == Constants.Rest) {
-            RestAction(controller);
-        }
+        controller.ActionData.Action.Act(controller.ActionData);
+        
         controller.AllCombatants.Enqueue(controller.ActionData.CurrentCombatant);
+
+        controller.NextTurn.newState = true;
         return controller.NextTurn;
     }
 
@@ -20,12 +19,5 @@ public class ActionState : IBattleState
     {
         Debug.Log("Current State: PlayerActionState");
         newState = false;
-    }
-
-    private void RestAction(BattleController controller) {
-        Debug.Log("Rest Action");
-        Debug.Log("Previous FP - " + controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().currentFocusPoints);
-        controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().currentFocusPoints ++;
-        Debug.Log("Current FP - " + controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().currentFocusPoints);
     }
 }

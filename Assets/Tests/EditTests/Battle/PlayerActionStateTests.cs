@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NUnit.Framework;
-using NSubstitute;
 using Assets.Scripts.Battle.States;
 
 namespace Battle {
@@ -12,7 +11,13 @@ namespace Battle {
         public void ExecuteReturnsNextTurnState() {
             var playerActionState = new ActionState();
             var controller = new BattleController();
-            controller.ActionData = new ActionData();
+            NewUp(controller);
+            CreateCombatantsList(controller);
+            QueueCombatantOrder(controller, true);
+            controller.ActionData = new ActionData {
+                Action = new RestAction(),
+                CurrentCombatant = controller.AllCombatants.Dequeue()
+            };
             controller.AllCombatants = new Queue<GameObject>();
             controller.NextTurn = new NextTurnState();
 
@@ -22,30 +27,15 @@ namespace Battle {
         }
 
         [Test]
-        public void ExecuteReplenishesFocusPointsToCurrentTurnCharacterWhenButtonActionRest() {
-            var playerActionState = new ActionState();
-            var controller = new BattleController();
-            controller.ActionData = new ActionData {
-                ButtonAction = Constants.Rest
-            };
-            controller.AllCombatants = new Queue<GameObject>();
-            var character = new GameObject();
-            character.AddComponent<CharacterBattleData>().currentFocusPoints = 10;
-            controller.ActionData.CurrentCombatant = character;
-
-            playerActionState.Execute(controller);
-
-            Assert.IsTrue(controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().currentFocusPoints > 10);
-        }
-
-        [Test]
         public void ExecutePutsCurrentCombatantToEndOfQueue() {
             var playerActionState = new ActionState();
             var controller = new BattleController();
             NewUp(controller);
             CreateCombatantsList(controller);
             QueueCombatantOrder(controller, true);
-            controller.ActionData = new ActionData();
+            controller.ActionData = new ActionData {
+                Action = new RestAction()
+            };
             var character = new GameObject();
             character.AddComponent<CharacterBattleData>().currentFocusPoints = 10;
             controller.ActionData.CurrentCombatant = character;
@@ -97,6 +87,7 @@ namespace Battle {
             battleController.PlayerActionSelect = new PlayerActionSelectState();
             battleController.Initial = new InitialState();
             battleController.EnemyActionSelect = new EnemyActionSelectState();
+            battleController.NextTurn = new NextTurnState();
         }
     }
 }

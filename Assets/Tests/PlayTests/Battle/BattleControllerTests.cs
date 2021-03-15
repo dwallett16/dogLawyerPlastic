@@ -81,7 +81,7 @@ namespace Battle
             yield return new WaitForFixedUpdate();
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
             
-            Assert.NotNull(battleController.CurrentState);
+            Assert.IsInstanceOf<InitialState>(battleController.CurrentState);
         }
 
         [UnityTest]
@@ -94,6 +94,23 @@ namespace Battle
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
             
             Assert.AreEqual(battleController.ActionData.CurrentCombatant, battleController.Prosecutors[0]);
+        }
+
+        [UnityTest]
+        public IEnumerator PlayerButtonActionRest()
+        {
+            var party = new List<Character> { CreateCharacter(10, CharacterType.PlayerCharacter, wit: 1000) };
+            SetupBattleScene(true, testParty: party);
+
+            yield return new WaitForSeconds(0.1f);
+            var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
+            var oldFp = battleController.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().currentFocusPoints;
+            battleController.SetButtonAction(Constants.Rest);
+            yield return new WaitForSeconds(0.3f);
+            
+            Assert.IsTrue(battleController.Prosecutors[0].GetComponent<CharacterBattleData>().currentFocusPoints > oldFp);
+            //Assert.AreEqual(battleController.ActionData.CurrentCombatant, battleController.DefenseAttorneys[0]);
+            //need to set currentCombatant in enemyActionSelectState
         }
 
         private void SetupBattleScene(bool useTestData, Case c = null, List<Character> testParty = null, string buttonAction = "") 
