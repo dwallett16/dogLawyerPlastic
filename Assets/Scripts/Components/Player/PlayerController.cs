@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour {
     private Animator animator;
     public ParticleSystem smokeParticleSystem;
     private float currentDirection;
-    
-    public SpineAnimatorController spineAnimatorController;
+    private bool isSmoking;
+
     public enum PlayerState {
         Idle,
         Walk,
@@ -30,21 +30,23 @@ public class PlayerController : MonoBehaviour {
     {
         //Get and store a reference to the Rigidbody2D component so that we can access it.
         rigidbody2D = GetComponent<Rigidbody2D>();
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         if (transform.rotation.y == 0) currentDirection = 1f; else currentDirection = -1f;
-        spineAnimatorController = GetComponent<SpineAnimatorController>();
-        currentState = PlayerState.Idle;
-        previousState = currentState;
+        //spineAnimatorController = GetComponent<SpineAnimatorController>();
+        //currentState = PlayerState.Idle;
+        //previousState = currentState;
 //        spineAnimatorController.PlayNewAnimation("Idle", true);
 
         spriteRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.TwoSided;
+
+        isSmoking = false;
     }
 
     //FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
     void FixedUpdate()
     {
         //Store the current horizontal input in the float moveHorizontal.
-        if ((currentState == PlayerState.Idle || currentState == PlayerState.Walk) && !isInConversation) {
+        if (!isSmoking && !isInConversation) {
             moveHorizontal = Input.GetAxisRaw (Constants.Horizontal);
 
             //Movement
@@ -66,82 +68,73 @@ public class PlayerController : MonoBehaviour {
 
         //Determine next state
         if (moveHorizontal != 0) {
-            currentState = PlayerState.Walk;
+            animator.SetBool("IsWalking", true);
         }
-        else {
+        else 
+        {
+            animator.SetBool("IsWalking", false);
             if (Input.GetButtonDown(Constants.Smoke)) {
-                currentState = PlayerState.SmokeStart;
+                isSmoking = true;
+                animator.SetBool("IsSmoking", true);
             }
             else if(Input.GetButtonDown(Constants.CaseStatus)) {
                 DialogueManager.StartConversation("CaseStatus", this.gameObject.transform.Find("Monologue"));
             }
-            else  if (!IsSmoking()) {
-                currentState = PlayerState.Idle;
+            else  if (!isSmoking) {
                 currentDirection = 0;
             }
-        }
 
-        if (IsSmoking()) {
-            if (currentState == PlayerState.SmokeStart) {
-                if (spineAnimatorController.IsAnimationComplete()) {
-                    currentState = PlayerState.Smoking;
-                }
-            }
-            else if (currentState == PlayerState.Smoking) {
-                if (spineAnimatorController.IsAnimationComplete() && !Input.GetButton(Constants.Smoke)) {
-                    currentState = PlayerState.SmokeEnd;
-                }
-            }
-            else if (currentState == PlayerState.SmokeEnd) {
-                if (spineAnimatorController.IsAnimationComplete()) {
-                    currentState = PlayerState.Idle;
-                }
+            if (isSmoking && !Input.GetButton(Constants.Smoke))
+            {
+                isSmoking = false;
+                animator.SetBool("IsSmoking", false);
             }
         }
 
-        stateChanged = previousState != currentState;
-        previousState = currentState;
-        if (stateChanged) HandleStateChange();
+        //if (isSmoking)
+        //{
+        //    if (!Input.GetButtonDown(Constants.Smoke))
+        //    {
+        //        isSmoking = false;
+        //        animator.SetBool("IsSmoking", false);
+        //    }
+        //}
+
+        //stateChanged = previousState != currentState;
+        //previousState = currentState;
+        //if (stateChanged) HandleStateChange();
     }
 
-    void HandleStateChange() {
-        string stateName = null;
-        bool loop = false;
-        switch (currentState) {
-            case PlayerState.Idle:
-                stateName = "Idle";
-                loop = true;
-                break;
-            case PlayerState.Walk:
-                stateName = "Walk";
-                loop = true;
-                break;
-            case PlayerState.SmokeStart:
-                stateName = "SmokeStart";
-                loop = false;
-                break;
-            case PlayerState.Smoking:
-                stateName = "Smoking";
-                loop = true;
-                break;
-            case PlayerState.SmokeEnd:
-                stateName = "SmokeEnd";
-                loop = false;
-                break;
-            default:
-                break;
-        }
+    //void HandleStateChange() {
+    //    string stateName = null;
+    //    bool loop = false;
+    //    switch (currentState) {
+    //        case PlayerState.Idle:
+    //            stateName = "Idle";
+    //            loop = true;
+    //            break;
+    //        case PlayerState.Walk:
+    //            stateName = "Walk";
+    //            loop = true;
+    //            break;
+    //        case PlayerState.SmokeStart:
+    //            stateName = "SmokeStart";
+    //            loop = false;
+    //            break;
+    //        case PlayerState.Smoking:
+    //            stateName = "Smoking";
+    //            loop = true;
+    //            break;
+    //        case PlayerState.SmokeEnd:
+    //            stateName = "SmokeEnd";
+    //            loop = false;
+    //            break;
+    //        default:
+    //            break;
+    //    }
 
-        spineAnimatorController.PlayNewAnimation(stateName, loop);
-    }
-
-    private bool IsSmoking() {
-        if (currentState == PlayerState.SmokeStart || currentState == PlayerState.Smoking
-        || currentState == PlayerState.SmokeEnd) {
-            return true;
-        }
-        return false;
-    }
+    //    spineAnimatorController.PlayNewAnimation(stateName, loop);
+    //}
 
     public void AnimationEvent(string eventName) {
         Debug.Log("Animation event hit!");

@@ -211,8 +211,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0.06540658, w: 0.9978588}
   m_LocalPosition: {x: 1.2120706, y: 0.039108206, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 151492345}
+  m_Children: []
   m_Father: {fileID: 1848623872}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 7.5}
@@ -727,7 +726,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3.5
   smokeParticleSystem: {fileID: 0}
-  spineAnimatorController: {fileID: 0}
   spriteRenderer: {fileID: 0}
 --- !u!114 &111209161
 MonoBehaviour:
@@ -1094,12 +1092,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 151492344}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7068577, w: 0.7073558}
-  m_LocalPosition: {x: 1.4190078, y: -0.18071182, z: 0}
+  m_LocalRotation: {x: -0.000000011641105, y: -0.0000000017447743, z: 0.43840277,
+    w: 0.8987787}
+  m_LocalPosition: {x: -2.9411266, y: 1.9813517, z: -0.029999971}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7949375}
-  m_RootOrder: 0
+  m_Father: {fileID: 278153891}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &188775680
 PrefabInstance:
@@ -1407,6 +1406,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1261828097}
+  - {fileID: 151492345}
   m_Father: {fileID: 1403666233}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
