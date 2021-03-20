@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     new private Rigidbody2D rigidbody2D;
     private Animator animator;
     public ParticleSystem smokeParticleSystem;
+    public ParticleSystem CigaretteParticleSystem;
     private float currentDirection;
     private bool isSmoking;
 
@@ -23,7 +24,7 @@ public class PlayerController : MonoBehaviour {
     bool stateChanged;
     float moveHorizontal = 0f;
     bool isInConversation = false;
-    public SpriteRenderer spriteRenderer;
+    //public SpriteRenderer spriteRenderer;
 
     // Use this for initialization
     void Start()
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour {
         //previousState = currentState;
 //        spineAnimatorController.PlayNewAnimation("Idle", true);
 
-        spriteRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.TwoSided;
+        //spriteRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.TwoSided;
 
         isSmoking = false;
     }
@@ -143,8 +144,19 @@ public class PlayerController : MonoBehaviour {
             smokeParticleSystem.Play();
         }
 
-        if (eventName == "SmokeExhaleStop") {
+        if (eventName == "SmokeExhaleStop")
+        {
             smokeParticleSystem.Stop();
+        }
+
+        if (eventName == "CigaretteSmokeStart")
+        {
+            CigaretteParticleSystem.Play();
+        }
+
+        if (eventName == "CigaretteSmokeStop")
+        {
+            CigaretteParticleSystem.Stop();
         }
     }
 
