@@ -46,9 +46,9 @@ public class CharacterBattleData : MonoBehaviour
         endurance = characterData.Endurance;
         passion = characterData.Passion;
         persuasion = characterData.Persuasion;
-        if(characterData.Type != CharacterType.PlayerCharacter) {
+        skills = characterData.Skills;
+        if (characterData.Type != CharacterType.PlayerCharacter) {
             specialty = characterData.Specialty;
-            skills = characterData.Skills;
         }
     }
 }

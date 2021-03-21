@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEngine.UI;
 
 namespace Battle
 {
@@ -128,10 +129,10 @@ namespace Battle
             var skills = new List<GameObject>();
 
             foreach(Transform c in skillPanel.transform) {
-                if(c.gameObject.tag == "SkillsButton")
+                if(c.gameObject.tag == "SkillButton" && c.gameObject.activeInHierarchy)
                     skills.Add(c.gameObject);
             }
-            Assert.AreEqual(skills.Count, battleController.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().skills.Count);
+            Assert.AreEqual(battleController.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().skills.Count, skills.Count);
         }
 
         private void SetupBattleScene(bool useTestData, Case c = null, List<Character> testParty = null, string buttonAction = "") 
@@ -165,7 +166,25 @@ namespace Battle
                 ButtonAction = buttonAction
             };
 
+            var skillsPanel = new GameObject("SkillsPanel");
+
+            controller.SkillButtons = new List<GameObject>();
+            for (int i = 0; i < 4; i++)
+            {
+                var skillButton = new GameObject();
+                skillButton.tag = "SkillButton";
+
+                var textObject = new GameObject();
+                textObject.AddComponent<Text>();
+                textObject.transform.SetParent(skillButton.transform);
+
+                controller.SkillButtons.Add(skillButton);
+                controller.SkillButtons[i].transform.SetParent(skillsPanel.transform);
+            }    
+
+
             AddToCleanup(controllerObj);
+            AddToCleanup(skillsPanel);
         }
     }
 }

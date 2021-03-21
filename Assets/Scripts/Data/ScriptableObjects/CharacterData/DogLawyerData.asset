@@ -19,7 +19,9 @@ MonoBehaviour:
   SkeletonData: {fileID: 11400000, guid: fbef94fb5dec34248b89904576f76ecb, type: 2}
   Type: 0
   Personality: 1
-  Skills: []
+  Skills:
+  - {fileID: 11400000, guid: e35c0b5f17f4e18439c7273b9e23ec49, type: 2}
+  - {fileID: 11400000, guid: 395a779ae3f4e9248b60a22917adcc42, type: 2}
   StressCapacity: 100
   FocusPointCapacity: 40
   Wit: 0

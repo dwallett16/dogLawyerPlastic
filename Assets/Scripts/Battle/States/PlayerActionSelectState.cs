@@ -11,6 +11,7 @@ public class PlayerActionSelectState : BattleState
             }
 
             controller.ActionData.CurrentCombatant = controller.AllCombatants.Dequeue();
+            controller.ActionData.CurrentCombatantBattleData = controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>();
         }
 
         if(controller.ActionData.ButtonAction == Constants.Rest) {

@@ -7,4 +7,5 @@ public class ActionData
     public string ButtonAction;
     public GameObject CurrentCombatant;
     public IAction Action;
+    public CharacterBattleData CurrentCombatantBattleData;
 }

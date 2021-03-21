@@ -15,6 +15,8 @@ public class BattleController : MonoBehaviour
     public GameObject Defendant;
     public BattleState CurrentState;
     public ActionData ActionData;
+    public List<GameObject> SkillButtons;
+
     private BattleData battleData;
     private bool isUsingTestData;
 
@@ -45,6 +47,7 @@ public class BattleController : MonoBehaviour
         Action = new ActionState();
         NextTurn = new NextTurnState();
         PlayerSkillSelect = new PlayerSkillSelectState();
+
 
         CurrentState = Initial;
     }
