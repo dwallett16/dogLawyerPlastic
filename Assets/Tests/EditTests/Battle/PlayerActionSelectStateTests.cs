@@ -35,7 +35,7 @@ namespace Battle {
         [Test]
         public void ExecuteSetsCurrentCombatantFromQueueIfNewState() {
             var state = new PlayerActionSelectState();
-            state.newState = true;
+            state.NewState = true;
             var controller = new BattleController();
             NewUp(controller);
             CreateCombatantsList(controller);

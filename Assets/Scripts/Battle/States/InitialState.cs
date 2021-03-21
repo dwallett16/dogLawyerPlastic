@@ -2,18 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InitialState : IBattleState
+public class InitialState : BattleState
 {
-    public IBattleState Execute(BattleController controller)
+    public override BattleState Execute(BattleController controller)
     {
-        InitializeState(controller);
+        InitializeState("InitialState");
         //TODO: Start with correct state depending on first combatant
-        controller.PlayerActionSelect.newState = true;
+        controller.PlayerActionSelect.NewState = true;
         return controller.PlayerActionSelect;
-    }
-
-    public void InitializeState(BattleController controller)
-    {
-        Debug.Log("CurrentState: InitialState");
     }
 }

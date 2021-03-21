@@ -7,28 +7,24 @@ using UnityEngine;
 
 namespace Assets.Scripts.Battle.States
 {
-    public class NextTurnState : IBattleState
+    public class NextTurnState : BattleState
     {
-        public bool newState;
-        public IBattleState Execute(BattleController controller)
+        public override BattleState Execute(BattleController controller)
         {
-            if(newState) InitializeState(controller);
+            if(NewState) InitializeState("NextTurnState");
             Debug.Log("Queue Peek() next character type: " + controller.AllCombatants.Peek().GetComponent<CharacterBattleData>().type.ToString());
             
             controller.ActionData = new ActionData();
             if (controller.AllCombatants.Peek().GetComponent<CharacterBattleData>().type == CharacterType.PlayerCharacter)
             {
+                controller.PlayerActionSelect.NewState = true;
                 return controller.PlayerActionSelect;
             }
             else
             {
+                controller.EnemyActionSelect.NewState = true;
                 return controller.EnemyActionSelect;
             }
-        }
-
-        public void InitializeState(BattleController controller)
-        {
-            Debug.Log("CurrentState: NextTurnState");
         }
     }
 }

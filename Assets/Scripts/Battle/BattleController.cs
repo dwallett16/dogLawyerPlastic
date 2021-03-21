@@ -13,7 +13,7 @@ public class BattleController : MonoBehaviour
     public List<GameObject> DefenseAttorneys;
     public Queue<GameObject> AllCombatants;
     public GameObject Defendant;
-    public IBattleState CurrentState;
+    public BattleState CurrentState;
     public ActionData ActionData;
     private BattleData battleData;
     private bool isUsingTestData;
