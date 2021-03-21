@@ -113,6 +113,27 @@ namespace Battle
             //need to set currentCombatant in enemyActionSelectState
         }
 
+        [UnityTest]
+        public IEnumerator PlayerButtonActionSkillsPopulatesSkillsMenuWithCurrentCombatantSkills()
+        {
+            var playerSkills = new List<Skill> {CreateSkill(0), CreateSkill(1)};
+            var party = new List<Character> { CreateCharacter(10, CharacterType.PlayerCharacter, skills: playerSkills, wit: 1000) };
+            SetupBattleScene(true, testParty: party);
+
+            yield return new WaitForSeconds(0.1f);
+            var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
+            battleController.SetButtonAction(Constants.Skills);
+            yield return new WaitForSeconds(0.3f);
+            var skillPanel = GameObject.Find("SkillsPanel");
+            var skills = new List<GameObject>();
+
+            foreach(Transform c in skillPanel.transform) {
+                if(c.gameObject.tag == "SkillsButton")
+                    skills.Add(c.gameObject);
+            }
+            Assert.AreEqual(skills.Count, battleController.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().skills.Count);
+        }
+
         private void SetupBattleScene(bool useTestData, Case c = null, List<Character> testParty = null, string buttonAction = "") 
         {
             var debugMenuObj = new GameObject();
