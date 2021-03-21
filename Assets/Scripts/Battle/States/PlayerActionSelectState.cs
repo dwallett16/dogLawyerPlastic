@@ -20,6 +20,12 @@ public class PlayerActionSelectState : BattleState
             return controller.Action;
         }
 
+        if (controller.ActionData.ButtonAction == Constants.Skills)
+        {
+            controller.PlayerSkillSelect.NewState = true;
+            return controller.PlayerSkillSelect;
+        }
+
         return this;
     }
 }

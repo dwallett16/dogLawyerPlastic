@@ -56,7 +56,7 @@ namespace Battle {
             CreateCombatantsList(controller);
             QueueCombatantOrder(controller, true);
             controller.ActionData = new ActionData {
-                ButtonAction = Constants.Skill
+                ButtonAction = Constants.Skills
             };
             controller.PlayerSkillSelect = new PlayerSkillSelectState();
 
