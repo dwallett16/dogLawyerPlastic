@@ -25,6 +25,7 @@ public static class Constants
 
     //Battle Buttons
     public static string Rest = "Rest";
+    public static string Skill = "Skill";
 
     public static string GetLatentPowerDefinition(int power)
     {

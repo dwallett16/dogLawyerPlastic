@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using NUnit.Framework;
 using NSubstitute;
 using System;
@@ -6,64 +6,9 @@ using System.Collections.Generic;
 using Assets.Scripts.Battle.States;
 
 namespace Battle {
-    public class PlayerActionSelectStateTests {
+    public class PlayerSkillSelectStateTests {
 
-        [Test]
-        public void ExecuteReturnsBattleState() {
-            var state = new PlayerActionSelectState();
-            var controller = new BattleController();
-            controller.ActionData = new ActionData();
-
-            var result = state.Execute(controller);
-
-            Assert.NotNull(result);
-        }
-
-        [Test]
-        public void ExecuteReturnsPlayerActionStateIfRestButtonPressed() {
-            var state = new PlayerActionSelectState();
-            var controller = new BattleController();
-            controller.ActionData = new ActionData();
-            controller.Action = new ActionState();
-            controller.ActionData.ButtonAction = Constants.Rest;
-
-            var result = state.Execute(controller);
-
-            Assert.IsInstanceOf<ActionState>(result);
-        }
-
-        [Test]
-        public void ExecuteSetsCurrentCombatantFromQueueIfNewState() {
-            var state = new PlayerActionSelectState();
-            state.NewState = true;
-            var controller = new BattleController();
-            NewUp(controller);
-            CreateCombatantsList(controller);
-            QueueCombatantOrder(controller, true);
-            controller.ActionData = new ActionData();
-            controller.Action = new ActionState();
-
-            var result = state.Execute(controller);
-
-            Assert.AreEqual(controller.Prosecutors[0], controller.ActionData.CurrentCombatant);
-        }
-
-        [Test]
-        public void ExecuteReturnsPlayerSkillSelectStateWhenButtonActionSkill() {
-            var state = new PlayerActionSelectState();
-            var controller = new BattleController();
-            NewUp(controller);
-            CreateCombatantsList(controller);
-            QueueCombatantOrder(controller, true);
-            controller.ActionData = new ActionData {
-                ButtonAction = Constants.Skill
-            };
-            controller.PlayerSkillSelect = new PlayerSkillSelectState();
-
-            var result = state.Execute(controller);
-
-            Assert.IsInstanceOf<PlayerSkillSelectState>(result);
-        }
+        
 
         private void CreateCombatantsList(BattleController battleController)
         {

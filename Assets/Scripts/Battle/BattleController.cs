@@ -24,6 +24,7 @@ public class BattleController : MonoBehaviour
     public EnemyActionSelectState EnemyActionSelect;
     public ActionState Action;
     public NextTurnState NextTurn;
+    public PlayerSkillSelectState PlayerSkillSelect;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,7 @@ public class BattleController : MonoBehaviour
         EnemyActionSelect = new EnemyActionSelectState();
         Action = new ActionState();
         NextTurn = new NextTurnState();
+        PlayerSkillSelect = new PlayerSkillSelectState();
 
         CurrentState = Initial;
     }
