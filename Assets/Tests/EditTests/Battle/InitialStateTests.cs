@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NUnit.Framework;
+using Assets.Scripts.Battle.States;
 
 namespace Battle{
     public class InitialStateTests {
         
         [Test]
-        public void ExecuteReturnsPlayerActionSelectState() {
+        public void ExecuteReturnsNextTurnState() {
             var state = new InitialState();
             var controller = new BattleController();
-            controller.PlayerActionSelect = new PlayerActionSelectState();
+            controller.NextTurn = new NextTurnState();
 
             var result = state.Execute(controller);
 
-            Assert.IsInstanceOf<PlayerActionSelectState>(result);
+            Assert.IsInstanceOf<NextTurnState>(result);
         }
 
     }

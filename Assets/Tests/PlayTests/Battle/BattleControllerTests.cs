@@ -98,20 +98,19 @@ namespace Battle
         }
 
         [UnityTest]
-        public IEnumerator PlayerButtonActionRest()
+        public IEnumerator PlayerButtonActionRestRestoresFocusPointsToCurrentCombatant()
         {
             var party = new List<Character> { CreateCharacter(10, CharacterType.PlayerCharacter, wit: 1000) };
             SetupBattleScene(true, testParty: party);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
             var oldFp = battleController.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().currentFocusPoints;
             battleController.SetButtonAction(Constants.Rest);
             yield return new WaitForSeconds(0.3f);
             
             Assert.IsTrue(battleController.Prosecutors[0].GetComponent<CharacterBattleData>().currentFocusPoints > oldFp);
-            //Assert.AreEqual(battleController.ActionData.CurrentCombatant, battleController.DefenseAttorneys[0]);
-            //need to set currentCombatant in enemyActionSelectState
+            Assert.AreEqual(battleController.ActionData.CurrentCombatant, battleController.DefenseAttorneys[0]);
         }
 
         [UnityTest]
@@ -129,7 +128,7 @@ namespace Battle
             var skills = new List<GameObject>();
 
             foreach(Transform c in skillPanel.transform) {
-                if(c.gameObject.tag == "SkillButton" && c.gameObject.activeInHierarchy)
+                if(c.gameObject.tag == Constants.SkillButton && c.gameObject.activeInHierarchy)
                     skills.Add(c.gameObject);
             }
             Assert.AreEqual(battleController.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().skills.Count, skills.Count);
@@ -137,6 +136,7 @@ namespace Battle
 
         private void SetupBattleScene(bool useTestData, Case c = null, List<Character> testParty = null, string buttonAction = "") 
         {
+            //Debug Menu
             var debugMenuObj = new GameObject();
             var debugMenu = debugMenuObj.AddComponent<BattleDebugMenu>();
             if(useTestData) {
@@ -155,7 +155,9 @@ namespace Battle
             }
             AddToCleanup(debugMenuObj);
             
+            //Battle Controller
             var controllerObj = new GameObject("BattleController");
+            AddToCleanup(controllerObj);
             controllerObj.AddComponent<BattleData>();
             var controller = controllerObj.AddComponent<BattleController>();
             controller.DebugMenu = debugMenu;
@@ -166,13 +168,20 @@ namespace Battle
                 ButtonAction = buttonAction
             };
 
-            var skillsPanel = new GameObject("SkillsPanel");
+            //Action Buttons
+            var actionButtonPanel = new GameObject("ActionPanel");
+            AddToCleanup(actionButtonPanel);
 
+            //Skills Panel
+            var skillsPanel = new GameObject("SkillsPanel");
+            AddToCleanup(skillsPanel);
+            controller.SkillPanel = skillsPanel;
+            controller.ActionButtonPanel = actionButtonPanel;
             controller.SkillButtons = new List<GameObject>();
             for (int i = 0; i < 4; i++)
             {
                 var skillButton = new GameObject();
-                skillButton.tag = "SkillButton";
+                skillButton.tag = Constants.SkillButton;
 
                 var textObject = new GameObject();
                 textObject.AddComponent<Text>();
@@ -180,11 +189,7 @@ namespace Battle
 
                 controller.SkillButtons.Add(skillButton);
                 controller.SkillButtons[i].transform.SetParent(skillsPanel.transform);
-            }    
-
-
-            AddToCleanup(controllerObj);
-            AddToCleanup(skillsPanel);
+            }
         }
     }
 }

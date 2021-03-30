@@ -12,6 +12,22 @@ namespace Battle
     public class NextTurnStateTests
     {
         [Test]
+        public void ExecuteSetsCurrentCombatantFromQueue() {
+            var state = new NextTurnState();
+            state.NewState = true;
+            var controller = new BattleController();
+            NewUp(controller);
+            CreateCombatantsList(controller);
+            QueueCombatantOrder(controller, true);
+            controller.ActionData = new ActionData();
+            controller.Action = new ActionState();
+
+            var result = state.Execute(controller);
+
+            Assert.AreEqual(controller.Prosecutors[0], controller.ActionData.CurrentCombatant);
+        }
+
+        [Test]
         public void ExecuteReturnsPlayerActionSelectStateIfPlayerCharacterIsNextInTurnOrder()
         {
             var nextTurnState = new NextTurnState();
@@ -34,7 +50,6 @@ namespace Battle
             var battleController = new BattleController();
 
             NewUp(battleController);
-
             CreateCombatantsList(battleController);
             QueueCombatantOrder(battleController, false);
 
@@ -52,6 +67,8 @@ namespace Battle
                 ButtonAction = Constants.Rest
             };
             NewUp(battleController);
+            CreateCombatantsList(battleController);
+            QueueCombatantOrder(battleController, false);
             var character = new GameObject();
             character.AddComponent<CharacterBattleData>();
             battleController.AllCombatants.Enqueue(character);

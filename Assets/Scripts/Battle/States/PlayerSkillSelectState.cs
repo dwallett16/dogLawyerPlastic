@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerSkillSelectState : BattleState
 {
@@ -9,18 +7,29 @@ public class PlayerSkillSelectState : BattleState
     {
         if (NewState)
         {
+            InitializeState("PlayerSkillSelectState");
+            controller.SkillPanel.SetActive(true);
+            controller.ActionButtonPanel.SetActive(false);
             for(int i = 0; i < controller.SkillButtons.Count; i++)
             {
                 if (i < controller.ActionData.CurrentCombatantBattleData.skills.Count)
                 {
+                    if(i == 0)
+                        EventSystem.current?.SetSelectedGameObject(controller.SkillButtons[i]);
+
                     controller.SkillButtons[i].SetActive(true);
-                    controller.SkillButtons[i].GetComponentInChildren<Text>().text = controller.ActionData.CurrentCombatantBattleData.skills[i].name;
+                    controller.SkillButtons[i].GetComponentInChildren<Text>().text = controller.ActionData.CurrentCombatantBattleData.skills[i].Name;
                 }
                 else
                 {
                     controller.SkillButtons[i].SetActive(false);
                 }
             }
+        }
+        else if(controller.IsBackButtonPressed) 
+        {
+            controller.PlayerActionSelect.NewState = true;
+            return controller.PlayerActionSelect;
         }
         return this;
     }

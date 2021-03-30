@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Linq;
 using Assets.Scripts.Battle.States;
+using System;
 
 public class BattleController : MonoBehaviour
 {
@@ -9,16 +10,25 @@ public class BattleController : MonoBehaviour
     public List<GameObject> ProsecutionPlaceholders;
     public List<GameObject> DefensePlaceholders;
     public GameObject DefendantPlaceholder;
+    [NonSerialized]
     public List<GameObject> Prosecutors;
+    [NonSerialized]
     public List<GameObject> DefenseAttorneys;
     public Queue<GameObject> AllCombatants;
+    [NonSerialized]
     public GameObject Defendant;
     public BattleState CurrentState;
     public ActionData ActionData;
-    public List<GameObject> SkillButtons;
-
     private BattleData battleData;
     private bool isUsingTestData;
+
+    //Inputs
+    public bool IsBackButtonPressed;
+
+    //UI
+    public List<GameObject> SkillButtons;
+    public GameObject SkillPanel;
+    public GameObject ActionButtonPanel;
 
     //states
     public PlayerActionSelectState PlayerActionSelect;
@@ -48,13 +58,13 @@ public class BattleController : MonoBehaviour
         NextTurn = new NextTurnState();
         PlayerSkillSelect = new PlayerSkillSelectState();
 
-
         CurrentState = Initial;
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckForInput();
         CurrentState = CurrentState.Execute(this);
     }
 
@@ -114,5 +124,9 @@ public class BattleController : MonoBehaviour
         {
             AllCombatants.Enqueue(combatant);
         }
+    }
+
+    private void CheckForInput() {
+        IsBackButtonPressed = Input.GetButtonDown(Constants.Cancel);
     }
 }

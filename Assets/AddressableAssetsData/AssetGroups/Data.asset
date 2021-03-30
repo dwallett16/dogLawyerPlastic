@@ -16,7 +16,13 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 819f941dc7ca4be4cb3f9018e7d0aeb5
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 7e13825daf95c334d8e3a60a6f2b9727
+    m_Address: Assets/Prefabs/BattlePrefabs/UI/SkillButton.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: fd488c0467acc694e83129baf161bd5b, type: 2}
   m_SchemaSet:

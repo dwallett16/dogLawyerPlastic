@@ -4,54 +4,112 @@ using NSubstitute;
 using System;
 using System.Collections.Generic;
 using Assets.Scripts.Battle.States;
+using UnityEngine.UI;
+using System.Linq;
 
 namespace Battle {
     public class PlayerSkillSelectStateTests {
 
-        
+        [Test]
+        public void ExecuteIfNewStateDisablesUnusedDefaultButtons() {
+            var skillSelectState = new PlayerSkillSelectState();
+            skillSelectState.NewState = true;
+            var controller = new BattleController();
+            SetSkillPanel(controller, 4);
+            SetActionButtons(controller);
+            controller.ActionData = new ActionData {
+                CurrentCombatantBattleData = new CharacterBattleData {
+                    skills = new List<Skill> {
+                        TestDataFactory.CreateSkill(0),
+                        TestDataFactory.CreateSkill(1)
+                    }
+                }
+            };
 
-        private void CreateCombatantsList(BattleController battleController)
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                var prosecutor = new GameObject();
-                prosecutor.AddComponent<CharacterBattleData>();
-                prosecutor.GetComponent<CharacterBattleData>().type = CharacterType.PlayerCharacter;
-                battleController.Prosecutors.Add(prosecutor);
-            }
-            for (int i = 0; i < 2; i++)
-            {
-                var defenseAttorney = new GameObject();
-                defenseAttorney.AddComponent<CharacterBattleData>();
-                defenseAttorney.GetComponent<CharacterBattleData>().type = CharacterType.DefenseCharacter;
-                battleController.DefenseAttorneys.Add(defenseAttorney);
+            skillSelectState.Execute(controller);
+
+            Assert.AreEqual(2, controller.SkillButtons.Where(x => x.activeInHierarchy).Count());
+        }
+
+        [Test]
+        public void ExecuteIfNewStateMapsNameToSkillButtons() {
+            var skillSelectState = new PlayerSkillSelectState();
+            skillSelectState.NewState = true;
+            var controller = new BattleController();
+            SetSkillPanel(controller, 4);
+            SetActionButtons(controller);
+            controller.ActionData = new ActionData {
+                CurrentCombatantBattleData = new CharacterBattleData {
+                    skills = new List<Skill> {
+                        TestDataFactory.CreateSkill(0),
+                        TestDataFactory.CreateSkill(1)
+                    }
+                }
+            };
+
+            skillSelectState.Execute(controller);
+
+            Assert.NotNull(controller.SkillButtons.First(x => x.GetComponentInChildren<Text>().text == "Skill 0"));
+            Assert.NotNull(controller.SkillButtons.First(x => x.GetComponentInChildren<Text>().text == "Skill 1"));
+        }
+
+        [Test]
+        public void ExecuteIfNewStateSetsSkillPanelActive() {
+            var skillSelectState = new PlayerSkillSelectState();
+            skillSelectState.NewState = true;
+            var controller = new BattleController();
+            SetSkillPanel(controller, 0);
+            SetActionButtons(controller);
+
+            skillSelectState.Execute(controller);
+            
+            Assert.True(controller.SkillPanel.activeInHierarchy);
+        }
+
+        [Test]
+        public void ExecuteIfNewStateDisablesActionButtons() {
+            var skillSelectState = new PlayerSkillSelectState();
+            skillSelectState.NewState = true;
+            var controller = new BattleController();
+            SetSkillPanel(controller, 0);
+            SetActionButtons(controller);
+
+            skillSelectState.Execute(controller);
+            
+            Assert.False(controller.ActionButtonPanel.activeInHierarchy);
+        }
+
+        [Test]
+        public void ExecuteNotNewStateCancelButtonPressedReturnsPlayerActionSelectState() {
+            var skillSelectState = new PlayerSkillSelectState();
+            skillSelectState.NewState = false;
+            var controller = new BattleController {
+                IsBackButtonPressed = true,
+                PlayerActionSelect = new PlayerActionSelectState()
+            };
+
+            var result = skillSelectState.Execute(controller);
+            
+            Assert.IsInstanceOf<PlayerActionSelectState>(result);
+        }
+
+        private void SetSkillPanel(BattleController controller, int numButtons) {
+            var skillPanel = new GameObject();
+            skillPanel.SetActive(false);
+            controller.SkillPanel = skillPanel;
+            controller.SkillButtons = new List<GameObject>();
+            for(int i = 0; i < numButtons; i++) {
+                var button = new GameObject();
+                var textObject = new GameObject();
+                textObject.AddComponent<Text>();
+                textObject.transform.SetParent(button.transform);
+                controller.SkillButtons.Add(button);
             }
         }
 
-        private void QueueCombatantOrder(BattleController battleController, bool isPlayerCharacterNext)
-        {
-            if (isPlayerCharacterNext)
-            {
-                battleController.AllCombatants.Enqueue(battleController.Prosecutors[0]);
-                battleController.AllCombatants.Enqueue(battleController.DefenseAttorneys[0]);
-            }
-            else
-            {
-                battleController.AllCombatants.Enqueue(battleController.DefenseAttorneys[0]);
-                battleController.AllCombatants.Enqueue(battleController.Prosecutors[0]);
-            }
-            battleController.AllCombatants.Enqueue(battleController.Prosecutors[1]);
-            battleController.AllCombatants.Enqueue(battleController.DefenseAttorneys[1]);
-        }
-
-        private void NewUp(BattleController battleController)
-        {
-            battleController.AllCombatants = new Queue<GameObject>();
-            battleController.Prosecutors = new List<GameObject>();
-            battleController.DefenseAttorneys = new List<GameObject>();
-            battleController.PlayerActionSelect = new PlayerActionSelectState();
-            battleController.Initial = new InitialState();
-            battleController.EnemyActionSelect = new EnemyActionSelectState();
+        private void SetActionButtons(BattleController controller) {
+           controller.ActionButtonPanel = new GameObject();
+           controller.ActionButtonPanel.SetActive(true);
         }
     }
 }

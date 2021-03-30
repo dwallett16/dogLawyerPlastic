@@ -11,11 +11,13 @@ namespace Assets.Scripts.Battle.States
     {
         public override BattleState Execute(BattleController controller)
         {
-            if(NewState) InitializeState("NextTurnState");
-            Debug.Log("Queue Peek() next character type: " + controller.AllCombatants.Peek().GetComponent<CharacterBattleData>().type.ToString());
-            
+            InitializeState("NextTurnState");
             controller.ActionData = new ActionData();
-            if (controller.AllCombatants.Peek().GetComponent<CharacterBattleData>().type == CharacterType.PlayerCharacter)
+            controller.ActionData.CurrentCombatant = controller.AllCombatants.Dequeue();
+            controller.ActionData.CurrentCombatantBattleData = controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>();
+            Debug.Log("Next character type: " + controller.ActionData.CurrentCombatantBattleData.type.ToString());
+
+            if (controller.ActionData.CurrentCombatantBattleData.type == CharacterType.PlayerCharacter)
             {
                 controller.PlayerActionSelect.NewState = true;
                 return controller.PlayerActionSelect;

@@ -13,6 +13,7 @@ public static class Constants
     public static string MenuTag = "MenuItem";
     public static string PlayerTag = "Player";
     public static string Scrollview = "Scrollview";
+    public static string SkillButton = "SkillButton";
 
     //Inputs
     public static string Submit = "Submit";

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerActionSelectState : BattleState
 {
@@ -9,9 +10,10 @@ public class PlayerActionSelectState : BattleState
             if (controller.ActionData.CurrentCombatant != null) {
                 Debug.Log("Current Combatant: " + controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().name);
             }
-
-            controller.ActionData.CurrentCombatant = controller.AllCombatants.Dequeue();
-            controller.ActionData.CurrentCombatantBattleData = controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>();
+            controller.ActionButtonPanel.SetActive(true);
+            EventSystem.current?.SetSelectedGameObject(controller.ActionButtonPanel.transform.GetChild(0).gameObject);
+            controller.SkillPanel.SetActive(false);
+            controller.ActionData.ButtonAction = string.Empty;
         }
 
         if(controller.ActionData.ButtonAction == Constants.Rest) {
