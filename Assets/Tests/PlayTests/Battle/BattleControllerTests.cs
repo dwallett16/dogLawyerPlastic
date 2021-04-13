@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Battle.States;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -63,9 +64,10 @@ namespace Battle
             var testCase = CreateCase(1, defenseAttorneys: new List<Character> {defenseAttorney, defenseAttorney2}, defendant: testDefendant);
             var party = new List<Character> {CreateCharacter(0, CharacterType.PlayerCharacter, wit: 1), CreateCharacter(1, CharacterType.PlayerCharacter, wit: 4) };
             SetupBattleScene(true, testCase, party);
-
-            yield return new WaitForFixedUpdate();
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
+
+            yield return new WaitUntil(() => battleController.CurrentState == battleController.Initial);
+            
             var combatants = battleController.AllCombatants.ToArray();
 
             Assert.AreEqual("character 1", combatants[0].GetComponent<CharacterBattleData>().displayName);
@@ -78,11 +80,11 @@ namespace Battle
         public IEnumerator StartSetsInitialState()
         {
             SetupBattleScene(true);
-
-            yield return new WaitForFixedUpdate();
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
             
-            Assert.IsInstanceOf<InitialState>(battleController.CurrentState);
+            yield return new WaitUntil(() => battleController.CurrentState == battleController.Initial);
+            
+            Assert.IsInstanceOf<NextTurnState>(battleController.CurrentState);
         }
 
         [UnityTest]
