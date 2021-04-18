@@ -10,6 +10,7 @@ public class PlayerSkillSelectState : BattleState
             InitializeState("PlayerSkillSelectState");
             controller.SkillPanel.SetActive(true);
             controller.ActionButtonPanel.SetActive(false);
+            controller.TargetSelector.SetActive(false);
             for(int i = 0; i < controller.SkillButtons.Count; i++)
             {
                 if (i < controller.ActionData.CurrentCombatantBattleData.skills.Count)

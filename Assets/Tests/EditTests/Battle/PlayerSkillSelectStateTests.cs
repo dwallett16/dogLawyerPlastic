@@ -15,6 +15,7 @@ namespace Battle {
             var skillSelectState = new PlayerSkillSelectState();
             skillSelectState.NewState = true;
             var controller = new BattleController();
+            controller.TargetSelector = new GameObject();
             SetSkillPanel(controller, 4);
             SetActionButtons(controller);
             controller.ActionData = new ActionData {
@@ -36,6 +37,7 @@ namespace Battle {
             var skillSelectState = new PlayerSkillSelectState();
             skillSelectState.NewState = true;
             var controller = new BattleController();
+            controller.TargetSelector = new GameObject();
             SetSkillPanel(controller, 4);
             SetActionButtons(controller);
             controller.ActionData = new ActionData {
@@ -58,6 +60,7 @@ namespace Battle {
             var skillSelectState = new PlayerSkillSelectState();
             skillSelectState.NewState = true;
             var controller = new BattleController();
+            controller.TargetSelector = new GameObject();
             SetSkillPanel(controller, 0);
             SetActionButtons(controller);
 
@@ -71,6 +74,7 @@ namespace Battle {
             var skillSelectState = new PlayerSkillSelectState();
             skillSelectState.NewState = true;
             var controller = new BattleController();
+            controller.TargetSelector = new GameObject();
             SetSkillPanel(controller, 0);
             SetActionButtons(controller);
 
@@ -87,6 +91,7 @@ namespace Battle {
                 IsBackButtonPressed = true,
                 PlayerActionSelect = new PlayerActionSelectState()
             };
+            controller.TargetSelector = new GameObject();
 
             var result = skillSelectState.Execute(controller);
             
@@ -104,6 +109,7 @@ namespace Battle {
                 PlayerActionSelect = new PlayerActionSelectState(),
                 PlayerTargetSelect = new PlayerTargetSelectState()
             };
+            controller.TargetSelector = new GameObject();
 
             var result = skillSelectState.Execute(controller);
 

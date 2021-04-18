@@ -23,6 +23,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e35c0b5f17f4e18439c7273b9e23ec49, type: 2}
   - {fileID: 11400000, guid: 395a779ae3f4e9248b60a22917adcc42, type: 2}
   - {fileID: 11400000, guid: 9b7678e470ded2d4dbecfcfc8ec47045, type: 2}
+  - {fileID: 11400000, guid: 4fd3da3f140ab4f44a07c06528e5f4d7, type: 2}
   StressCapacity: 100
   FocusPointCapacity: 40
   Wit: 0

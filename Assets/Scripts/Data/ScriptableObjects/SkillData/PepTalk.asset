@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 5
   Name: Pep Talk
-  Target: 2
+  Target: 1
   Type: 2
   LatentPower: 15
   StatusEffect: 

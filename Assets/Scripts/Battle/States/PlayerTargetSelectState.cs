@@ -28,25 +28,33 @@ namespace Assets.Scripts.Battle.States
                 controller.TargetSelector.SetActive(true);
             }
 
-            int index = 0;
-            if (controller.HorizontalAxis != 0)
+            if (controller.IsBackButtonPressed)
             {
-                index = controller.TargetList.FindIndex(x => x.name == controller.ActionData.Target.name);
-
-                if (controller.HorizontalAxis < 0)
-                {
-                    if (index == 0) controller.ActionData.Target = controller.TargetList.Last();
-                    else controller.ActionData.Target = controller.TargetList[index - 1];
-                }
-                else if (controller.HorizontalAxis > 0)
-                {
-                    if (index == controller.TargetList.Count - 1) controller.ActionData.Target = controller.TargetList.First();
-                    else controller.ActionData.Target = controller.TargetList[index + 1];
-                }
+                controller.PlayerSkillSelect.NewState = true;
+                return controller.PlayerSkillSelect;
             }
+            else
+            {
+                int index = 0;
+                if (controller.HorizontalAxis != 0)
+                {
+                    index = controller.TargetList.FindIndex(x => x.name == controller.ActionData.Target.name);
 
-            controller.TargetSelector.transform.position = new UnityEngine.Vector3(controller.ActionData.Target.transform.position.x, controller.TargetSelector.transform.position.y, controller.TargetSelector.transform.position.z);
-            return this;
+                    if (controller.HorizontalAxis < 0)
+                    {
+                        if (index == 0) controller.ActionData.Target = controller.TargetList.Last();
+                        else controller.ActionData.Target = controller.TargetList[index - 1];
+                    }
+                    else if (controller.HorizontalAxis > 0)
+                    {
+                        if (index == controller.TargetList.Count - 1) controller.ActionData.Target = controller.TargetList.First();
+                        else controller.ActionData.Target = controller.TargetList[index + 1];
+                    }
+                }
+
+                controller.TargetSelector.transform.position = new UnityEngine.Vector3(controller.ActionData.Target.transform.position.x, controller.TargetSelector.transform.position.y, controller.TargetSelector.transform.position.z);
+                return this;
+            }
         }
     }
 }
