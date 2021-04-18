@@ -634,6 +634,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 528390961}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &252664998 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7891093930578317900, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+    type: 3}
+  m_PrefabInstance: {fileID: 528390961}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252664996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5eb2cd7ba27b844a5f42669037090f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &252811565 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4858336108983422181, guid: 260c27e80aff6458d814e3702414d4ee,
@@ -815,6 +827,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1700209768}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &329887191 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7891093930578317900, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+    type: 3}
+  m_PrefabInstance: {fileID: 1700209768}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329887189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5eb2cd7ba27b844a5f42669037090f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &348465576 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4858336108983422181, guid: 260c27e80aff6458d814e3702414d4ee,
@@ -942,6 +966,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 286944767}
     m_Modifications:
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 856442814}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActionDataSkill
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BattleController, DogLawyer.Battle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 252664998}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: SkillButtonData, DogLawyer.Battle
+      objectReference: {fileID: 0}
     - target: {fileID: 4176553305976835065, guid: 7e13825daf95c334d8e3a60a6f2b9727,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1920,6 +1984,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1430777602}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1184751973 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7891093930578317900, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+    type: 3}
+  m_PrefabInstance: {fileID: 1430777602}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184751971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5eb2cd7ba27b844a5f42669037090f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1187356139
 GameObject:
   m_ObjectHideFlags: 0
@@ -2608,6 +2684,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 286944767}
     m_Modifications:
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 856442814}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActionDataSkill
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BattleController, DogLawyer.Battle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1184751973}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: SkillButtonData, DogLawyer.Battle
+      objectReference: {fileID: 0}
     - target: {fileID: 4176553305976835065, guid: 7e13825daf95c334d8e3a60a6f2b9727,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2851,6 +2967,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1601113804}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1473240312 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7891093930578317900, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+    type: 3}
+  m_PrefabInstance: {fileID: 1601113804}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473240310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5eb2cd7ba27b844a5f42669037090f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1541917017
 GameObject:
   m_ObjectHideFlags: 0
@@ -3157,6 +3285,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 286944767}
     m_Modifications:
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 856442814}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActionDataSkill
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BattleController, DogLawyer.Battle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1473240312}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: SkillButtonData, DogLawyer.Battle
+      objectReference: {fileID: 0}
     - target: {fileID: 4176553305976835065, guid: 7e13825daf95c334d8e3a60a6f2b9727,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3563,6 +3731,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 286944767}
     m_Modifications:
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 856442814}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActionDataSkill
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BattleController, DogLawyer.Battle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 329887191}
+    - target: {fileID: 3314776583999526762, guid: 7e13825daf95c334d8e3a60a6f2b9727,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: SkillButtonData, DogLawyer.Battle
+      objectReference: {fileID: 0}
     - target: {fileID: 4176553305976835065, guid: 7e13825daf95c334d8e3a60a6f2b9727,
         type: 3}
       propertyPath: m_Pivot.x

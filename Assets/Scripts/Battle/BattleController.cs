@@ -74,9 +74,9 @@ public class BattleController : MonoBehaviour
         ActionData.ButtonAction = action;
     }
 
-    public void SetActionDataSkill(Skill skill)
+    public void SetActionDataSkill(SkillButtonData skillButtonData)
     {
-        ActionData.SelectedSkill = skill;
+        ActionData.SelectedSkill = skillButtonData.SkillData;
     }
     
     private void MapBattleData()
