@@ -34,7 +34,7 @@ public class PlayerSkillSelectState : BattleState
         }
         else if (controller.IsSubmitButtonPressed)
         {
-            controller.PlayerActionSelect.NewState = false;
+            controller.PlayerTargetSelect.NewState = true;
             return controller.PlayerTargetSelect;
         }
         

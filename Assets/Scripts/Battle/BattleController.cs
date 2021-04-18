@@ -30,6 +30,7 @@ public class BattleController : MonoBehaviour
     public List<GameObject> SkillButtons;
     public GameObject SkillPanel;
     public GameObject ActionButtonPanel;
+    public GameObject TargetSelector;
 
     //states
     public PlayerActionSelectState PlayerActionSelect;
@@ -59,6 +60,7 @@ public class BattleController : MonoBehaviour
         Action = new ActionState();
         NextTurn = new NextTurnState();
         PlayerSkillSelect = new PlayerSkillSelectState();
+        PlayerTargetSelect = new PlayerTargetSelectState();
 
         CurrentState = Initial;
     }
