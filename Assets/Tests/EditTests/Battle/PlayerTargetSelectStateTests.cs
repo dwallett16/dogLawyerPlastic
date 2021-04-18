@@ -56,6 +56,7 @@ namespace Battle
 
             state.Execute(controller);
 
+            Assert.AreEqual(controller.DefenseAttorneys, controller.TargetList);
             Assert.AreEqual("DA 0", controller.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
         }
 
@@ -107,6 +108,31 @@ namespace Battle
             Assert.AreEqual("DA 1", controller.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
         }
 
+        [Test]
+        public void ExecuteNewStateSkillTargetTypeProsecutorsSetsTargetToFirstProsecutor()
+        {
+            var controller = new BattleController
+            {
+                ActionData = new ActionData
+                {
+                    SelectedSkill = TestDataFactory.CreateSkill(0, SkillTarget.Prosecutors)
+                },
+                TargetSelector = new GameObject()
+            };
+            SetProsecutors(controller);
+            SetSkillPanel(controller, 2);
+            controller.SkillPanel.SetActive(true);
+            var state = new PlayerTargetSelectState
+            {
+                NewState = true
+            };
+
+            state.Execute(controller);
+
+            Assert.AreEqual(controller.Prosecutors, controller.TargetList);
+            Assert.AreEqual("Prosecutor 0", controller.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
+        }
+
         private void SetSkillPanel(BattleController controller, int numButtons)
         {
             var skillPanel = new GameObject();
@@ -134,6 +160,19 @@ namespace Battle
                 defenseAttorney.GetComponent<CharacterBattleData>().type = CharacterType.DefenseCharacter;
                 defenseAttorney.GetComponent<CharacterBattleData>().displayName = "DA " + i;
                 controller.DefenseAttorneys.Add(defenseAttorney);
+            }
+        }
+
+        private void SetProsecutors(BattleController controller)
+        {
+            controller.Prosecutors = new List<GameObject>();
+            for (int i = 0; i < 2; i++)
+            {
+                var prosecutor = new GameObject();
+                prosecutor.AddComponent<CharacterBattleData>();
+                prosecutor.GetComponent<CharacterBattleData>().type = CharacterType.PlayerCharacter;
+                prosecutor.GetComponent<CharacterBattleData>().displayName = "Prosecutor " + i;
+                controller.Prosecutors.Add(prosecutor);
             }
         }
     }
