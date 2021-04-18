@@ -101,7 +101,8 @@ namespace Battle {
             var controller = new BattleController
             {
                 IsSubmitButtonPressed = true,
-                PlayerActionSelect = new PlayerActionSelectState()
+                PlayerActionSelect = new PlayerActionSelectState(),
+                PlayerTargetSelect = new PlayerTargetSelectState()
             };
 
             var result = skillSelectState.Execute(controller);
@@ -116,6 +117,7 @@ namespace Battle {
             controller.SkillButtons = new List<GameObject>();
             for(int i = 0; i < numButtons; i++) {
                 var button = new GameObject();
+                button.AddComponent<SkillButtonData>();
                 var textObject = new GameObject();
                 textObject.AddComponent<Text>();
                 textObject.transform.SetParent(button.transform);

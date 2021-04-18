@@ -1,8 +1,8 @@
 ﻿
 public enum SkillTarget
 {
-    Opponent,
-    Ally,
+    DefenseAttorneys,
+    Prosecutors,
     Defendant,
     Jury
 }

@@ -183,6 +183,7 @@ namespace Battle
             for (int i = 0; i < 4; i++)
             {
                 var skillButton = new GameObject();
+                skillButton.AddComponent<SkillButtonData>();
                 skillButton.tag = Constants.SkillButton;
 
                 var textObject = new GameObject();

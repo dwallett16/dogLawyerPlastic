@@ -9,4 +9,5 @@ public class ActionData
     public IAction Action;
     public CharacterBattleData CurrentCombatantBattleData;
     public Skill SelectedSkill;
+    public GameObject Target;
 }
