@@ -741,7 +741,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &286944767
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1528,6 +1528,7 @@ MonoBehaviour:
   - {fileID: 1556305801}
   DefendantPlaceholder: {fileID: 652771629}
   IsBackButtonPressed: 0
+  IsSubmitButtonPressed: 0
   SkillButtons:
   - {fileID: 1184751971}
   - {fileID: 329887189}

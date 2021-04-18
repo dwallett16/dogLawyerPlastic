@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assets.Scripts.Battle.States
 {
-    public class TargetSelectEnemyState : BattleState
+    public class PlayerTargetSelectState : BattleState
     {
         public override BattleState Execute(BattleController controller)
         {

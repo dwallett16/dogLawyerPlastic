@@ -19,6 +19,7 @@ public class PlayerSkillSelectState : BattleState
 
                     controller.SkillButtons[i].SetActive(true);
                     controller.SkillButtons[i].GetComponentInChildren<Text>().text = controller.ActionData.CurrentCombatantBattleData.skills[i].Name;
+                    controller.SkillButtons[i].GetComponent<SkillButtonData>().SkillData = controller.ActionData.CurrentCombatantBattleData.skills[i];
                 }
                 else
                 {
@@ -31,6 +32,12 @@ public class PlayerSkillSelectState : BattleState
             controller.PlayerActionSelect.NewState = true;
             return controller.PlayerActionSelect;
         }
+        else if (controller.IsSubmitButtonPressed)
+        {
+            controller.PlayerActionSelect.NewState = false;
+            return controller.PlayerTargetSelect;
+        }
+        
         return this;
     }
 }

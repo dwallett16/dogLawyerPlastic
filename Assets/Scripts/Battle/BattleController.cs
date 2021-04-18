@@ -38,6 +38,7 @@ public class BattleController : MonoBehaviour
     public ActionState Action;
     public NextTurnState NextTurn;
     public PlayerSkillSelectState PlayerSkillSelect;
+    public PlayerTargetSelectState PlayerTargetSelect;
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +72,11 @@ public class BattleController : MonoBehaviour
 
     public void SetButtonAction(string action) {
         ActionData.ButtonAction = action;
+    }
+
+    public void SetActionDataSkill(Skill skill)
+    {
+        ActionData.SelectedSkill = skill;
     }
     
     private void MapBattleData()
@@ -127,7 +133,9 @@ public class BattleController : MonoBehaviour
         }
     }
 
-    private void CheckForInput() {
+    private void CheckForInput() 
+    {
         IsBackButtonPressed = Input.GetButtonDown(Constants.Cancel);
+        IsSubmitButtonPressed = Input.GetButtonDown(Constants.Submit);
     }
 }

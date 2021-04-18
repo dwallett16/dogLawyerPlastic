@@ -106,25 +106,7 @@ namespace Battle {
 
             var result = skillSelectState.Execute(controller);
 
-            Assert.IsInstanceOf<TargetSelectEnemyState>(result);
-        }
-
-        [Test]
-        public void ExecuteNotNewStateSubmitButtonPressedSetsSelectedSkill()
-        {
-            var skillSelectState = new PlayerSkillSelectState();
-            skillSelectState.NewState = false;
-            var controller = new BattleController
-            {
-                IsSubmitButtonPressed = true,
-                PlayerActionSelect = new PlayerActionSelectState()
-            };
-            SetSkillPanel(controller, 2);
-            controller.SkillButtons[0].GetComponentInChildren<Text>().text = "Skill 0";
-            controller.SkillButtons[1].GetComponentInChildren<Text>().text = "Skill 1";
-            var result = skillSelectState.Execute(controller);
-
-            Assert.AreEqual("Skill 1", controller.ActionData.SelectedSkill.Name);
+            Assert.IsInstanceOf<PlayerTargetSelectState>(result);
         }
 
         private void SetSkillPanel(BattleController controller, int numButtons) {
