@@ -14,8 +14,16 @@ namespace Battle
         [Test]
         public void ExecuteIfNewStateDisablesSkillPanel()
         {
-            var controller = new BattleController();
+            var controller = new BattleController
+            {
+                ActionData = new ActionData
+                {
+                    SelectedSkill = TestDataFactory.CreateSkill(0)
+                },
+                TargetSelector = new GameObject()
+            };
             SetSkillPanel(controller, 2);
+            SetDefenseAttorneys(controller);
             controller.SkillPanel.SetActive(true);
             var state = new PlayerTargetSelectState
             {
@@ -35,7 +43,8 @@ namespace Battle
                 ActionData = new ActionData
                 {
                     SelectedSkill = TestDataFactory.CreateSkill(0)
-                }
+                },
+                TargetSelector = new GameObject()
             };
             SetDefenseAttorneys(controller);
             SetSkillPanel(controller, 2);
@@ -48,6 +57,52 @@ namespace Battle
             state.Execute(controller);
 
             Assert.AreEqual("DA 0", controller.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
+        }
+
+        [Test]
+        public void ExecuteNotNewStateRightLeftInputsUpdatesTargetIndex()
+        {
+            var controller = new BattleController
+            {
+                TargetSelector = new GameObject(),
+                HorizontalAxis = 1
+            };
+            SetDefenseAttorneys(controller);
+            controller.ActionData = new ActionData
+            {
+                SelectedSkill = TestDataFactory.CreateSkill(0),
+                Target = controller.DefenseAttorneys[0]
+            };
+            SetSkillPanel(controller, 2);
+            controller.TargetSelector.SetActive(true);
+            var state = new PlayerTargetSelectState();
+
+            state.Execute(controller);
+
+            Assert.AreEqual("DA 1", controller.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
+        }
+
+        [Test]
+        public void ExecuteNotNewStateRightLeftInputsUpdatesTargetIndexToStartOfListWhenAtEndOfList()
+        {
+            var controller = new BattleController
+            {
+                TargetSelector = new GameObject(),
+                HorizontalAxis = -1
+            };
+            SetDefenseAttorneys(controller);
+            controller.ActionData = new ActionData
+            {
+                SelectedSkill = TestDataFactory.CreateSkill(0),
+                Target = controller.DefenseAttorneys[0]
+            };
+            SetSkillPanel(controller, 2);
+            controller.TargetSelector.SetActive(true);
+            var state = new PlayerTargetSelectState();
+
+            state.Execute(controller);
+
+            Assert.AreEqual("DA 1", controller.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
         }
 
         private void SetSkillPanel(BattleController controller, int numButtons)

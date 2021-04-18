@@ -25,6 +25,7 @@ public class BattleController : MonoBehaviour
     //Inputs
     public bool IsBackButtonPressed;
     public bool IsSubmitButtonPressed;
+    public float HorizontalAxis;
 
     //UI
     public List<GameObject> SkillButtons;
@@ -139,5 +140,6 @@ public class BattleController : MonoBehaviour
     {
         IsBackButtonPressed = Input.GetButtonDown(Constants.Cancel);
         IsSubmitButtonPressed = Input.GetButtonDown(Constants.Submit);
+        HorizontalAxis = Input.GetAxisRaw(Constants.Horizontal);
     }
 }
