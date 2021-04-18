@@ -21,6 +21,8 @@ public class BattleController : MonoBehaviour
     public ActionData ActionData;
     private BattleData battleData;
     private bool isUsingTestData;
+    [NonSerialized]
+    public List<GameObject> TargetList;
 
     //Inputs
     public bool IsBackButtonPressed;
@@ -50,6 +52,7 @@ public class BattleController : MonoBehaviour
         DefenseAttorneys = new List<GameObject>();
         battleData = GetComponent<BattleData>();
         AllCombatants = new Queue<GameObject>();
+        TargetList = new List<GameObject>();
         MapBattleData();
         InstantiateCombatants();
         OrderCombatants();
@@ -140,6 +143,13 @@ public class BattleController : MonoBehaviour
     {
         IsBackButtonPressed = Input.GetButtonDown(Constants.Cancel);
         IsSubmitButtonPressed = Input.GetButtonDown(Constants.Submit);
-        HorizontalAxis = Input.GetAxisRaw(Constants.Horizontal);
+        if (Input.GetButtonDown(Constants.Horizontal))
+        {
+            HorizontalAxis = Input.GetAxisRaw(Constants.Horizontal);
+        }
+        else
+        {
+            HorizontalAxis = 0;
+        }
     }
 }

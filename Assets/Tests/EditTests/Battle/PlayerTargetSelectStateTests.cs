@@ -68,6 +68,7 @@ namespace Battle
                 HorizontalAxis = 1
             };
             SetDefenseAttorneys(controller);
+            controller.TargetList = controller.DefenseAttorneys;
             controller.ActionData = new ActionData
             {
                 SelectedSkill = TestDataFactory.CreateSkill(0),
@@ -83,7 +84,7 @@ namespace Battle
         }
 
         [Test]
-        public void ExecuteNotNewStateRightLeftInputsUpdatesTargetIndexToStartOfListWhenAtEndOfList()
+        public void ExecuteNotNewStateRightLeftInputsUpdatesTargetIndexToEndOfListWhenAtStartOfList()
         {
             var controller = new BattleController
             {
@@ -91,6 +92,7 @@ namespace Battle
                 HorizontalAxis = -1
             };
             SetDefenseAttorneys(controller);
+            controller.TargetList = controller.DefenseAttorneys;
             controller.ActionData = new ActionData
             {
                 SelectedSkill = TestDataFactory.CreateSkill(0),
