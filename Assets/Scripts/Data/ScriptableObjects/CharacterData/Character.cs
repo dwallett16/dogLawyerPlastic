@@ -20,7 +20,7 @@ public class Character : ScriptableObject
     public int Endurance;
     public int Passion;
     public int Persuasion;
-    public PriorityTypes Specialty;
+    public AiPriorityTypes Specialty;
     public int Price;
     public Sprite Headshot;
     public Sprite SmallHeadshot;

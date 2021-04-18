@@ -1,5 +1,5 @@
 ﻿
-public enum PriorityTypes
+public enum AiPriorityTypes
 {
     Offense,
 	Support,

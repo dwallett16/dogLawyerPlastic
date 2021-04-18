@@ -29,7 +29,7 @@ public class CharacterBattleData : MonoBehaviour
     [NonSerialized]
     public int persuasion;
     [NonSerialized]
-    public PriorityTypes specialty;
+    public AiPriorityTypes specialty;
     [NonSerialized]
     public List<Skill> skills;
 

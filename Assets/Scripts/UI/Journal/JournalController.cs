@@ -171,7 +171,7 @@ public class JournalController : MonoBehaviour
                     case JournalState.Skills:
                         var sData = currentItem.GetComponent<ButtonData>();
 
-                        TypeText.GetComponent<Text>().text = Enum.GetName(typeof(PriorityTypes), sData.SkillType);
+                        TypeText.GetComponent<Text>().text = Enum.GetName(typeof(AiPriorityTypes), sData.SkillType);
                         PowerText.GetComponent<Text>().text = Constants.GetLatentPowerDefinition(sData.LatentPower);
                         FpCostText.GetComponent<Text>().text = sData.FpCost.ToString();
                         SkillDescription.GetComponent<Text>().text = sData.Description.ToString();

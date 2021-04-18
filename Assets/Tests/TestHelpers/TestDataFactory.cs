@@ -22,7 +22,7 @@ public class TestDataFactory
     }
 
     public static Character CreateCharacter(int id, CharacterType type, List<Skill> skills = null, PersonalityTypes personality = PersonalityTypes.None,
-     PriorityTypes specialty = PriorityTypes.None, int wit = 10) {
+     AiPriorityTypes specialty = AiPriorityTypes.None, int wit = 10) {
         var character = new Character {
             Id = id,
             Name = $"character {id}",
@@ -46,7 +46,7 @@ public class TestDataFactory
         return character;
     }
 
-    public static Skill CreateSkill(int id, SkillTarget target = SkillTarget.Opponent, PriorityTypes type = PriorityTypes.Offense) {
+    public static Skill CreateSkill(int id, SkillTarget target = SkillTarget.Opponent, AiPriorityTypes type = AiPriorityTypes.Offense) {
         var skill = new Skill {
             Id = id,
             Name = $"Skill {id}",

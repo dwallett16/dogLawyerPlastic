@@ -24,6 +24,7 @@ public class BattleController : MonoBehaviour
 
     //Inputs
     public bool IsBackButtonPressed;
+    public bool IsSubmitButtonPressed;
 
     //UI
     public List<GameObject> SkillButtons;
