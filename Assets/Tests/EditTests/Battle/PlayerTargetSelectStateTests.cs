@@ -133,6 +133,21 @@ namespace Battle
             Assert.AreEqual("Prosecutor 0", controller.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
         }
 
+        [Test]
+        public void ExecuteNotNewStateCancelButtonPressedReturnsPlayerSkillSelectState()
+        {
+            var state = new PlayerTargetSelectState();
+            var controller = new BattleController
+            {
+                IsBackButtonPressed = true,
+                PlayerSkillSelect = new PlayerSkillSelectState()
+            };
+
+            var result = state.Execute(controller);
+
+            Assert.IsInstanceOf<PlayerSkillSelectState>(result);
+        }
+
         private void SetSkillPanel(BattleController controller, int numButtons)
         {
             var skillPanel = new GameObject();
