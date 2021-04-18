@@ -20,6 +20,11 @@ namespace Assets.Scripts.Battle.States
                     controller.TargetList = controller.DefenseAttorneys;
                     controller.ActionData.Target = controller.TargetList[0];
                 }
+                else if (controller.ActionData.SelectedSkill.Target == SkillTarget.Prosecutors)
+                {
+                    controller.TargetList = controller.Prosecutors;
+                    controller.ActionData.Target = controller.TargetList[0];
+                }
                 controller.TargetSelector.SetActive(true);
             }
 
