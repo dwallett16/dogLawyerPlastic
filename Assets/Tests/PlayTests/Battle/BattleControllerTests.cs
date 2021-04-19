@@ -133,7 +133,58 @@ namespace Battle
                 if(c.gameObject.tag == Constants.SkillButton && c.gameObject.activeInHierarchy)
                     skills.Add(c.gameObject);
             }
+
             Assert.AreEqual(battleController.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().skills.Count, skills.Count);
+        }
+
+        [UnityTest]
+        public IEnumerator PlayerButtonActionSkillsOffenseSkillSelectsBetweenDefenseAttorneys()
+        {
+            var offenseSkill = CreateSkill(0);
+            var playerSkills = new List<Skill> { offenseSkill };
+            var party = new List<Character> { CreateCharacter(10, CharacterType.PlayerCharacter, skills: playerSkills, wit: 1000) };
+            SetupBattleScene(true, testParty: party);
+
+            yield return new WaitForSeconds(0.1f);
+            var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
+            battleController.SetButtonAction(Constants.Skills);
+            yield return new WaitForSeconds(0.3f);
+            var selectedSkillData = new SkillButtonData
+            {
+                SkillData = offenseSkill
+            };
+            battleController.SetActionDataSkill(selectedSkillData);
+            battleController.PlayerTargetSelect.NewState = true;
+            battleController.CurrentState = battleController.PlayerTargetSelect;
+            yield return new WaitForSeconds(0.1f);
+
+            Assert.AreEqual("character 1", battleController.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual(CharacterType.DefenseCharacter, battleController.ActionData.Target.GetComponent<CharacterBattleData>().type);
+        }
+
+        [UnityTest]
+        public IEnumerator PlayerButtonActionSkillsSupportSkillSelectsBetweenProsecutors()
+        {
+            var supportSkill = CreateSkill(0, SkillTarget.Prosecutors);
+            var playerSkills = new List<Skill> { supportSkill };
+            var party = new List<Character> { CreateCharacter(10, CharacterType.PlayerCharacter, skills: playerSkills, wit: 1000) };
+            SetupBattleScene(true, testParty: party);
+
+            yield return new WaitForSeconds(0.1f);
+            var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
+            battleController.SetButtonAction(Constants.Skills);
+            yield return new WaitForSeconds(0.3f);
+            var selectedSkillData = new SkillButtonData
+            {
+                SkillData = supportSkill
+            };
+            battleController.SetActionDataSkill(selectedSkillData);
+            battleController.PlayerTargetSelect.NewState = true;
+            battleController.CurrentState = battleController.PlayerTargetSelect;
+            yield return new WaitForSeconds(0.1f);
+
+            Assert.AreEqual("character 10", battleController.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual(CharacterType.PlayerCharacter, battleController.ActionData.Target.GetComponent<CharacterBattleData>().type);
         }
 
         private void SetupBattleScene(bool useTestData, Case c = null, List<Character> testParty = null, string buttonAction = "") 
@@ -193,6 +244,8 @@ namespace Battle
                 controller.SkillButtons.Add(skillButton);
                 controller.SkillButtons[i].transform.SetParent(skillsPanel.transform);
             }
+            controller.TargetSelector = new GameObject();
+            AddToCleanup(controller.TargetSelector);
         }
     }
 }

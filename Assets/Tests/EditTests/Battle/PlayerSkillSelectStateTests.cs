@@ -56,7 +56,7 @@ namespace Battle {
         }
 
         [Test]
-        public void ExecuteIfNewStateSetsSkillPanelActive() {
+        public void ExecuteIfNewStateTogglesPanels() {
             var skillSelectState = new PlayerSkillSelectState();
             skillSelectState.NewState = true;
             var controller = new BattleController();
@@ -67,20 +67,8 @@ namespace Battle {
             skillSelectState.Execute(controller);
             
             Assert.True(controller.SkillPanel.activeInHierarchy);
-        }
-
-        [Test]
-        public void ExecuteIfNewStateDisablesActionButtons() {
-            var skillSelectState = new PlayerSkillSelectState();
-            skillSelectState.NewState = true;
-            var controller = new BattleController();
-            controller.TargetSelector = new GameObject();
-            SetSkillPanel(controller, 0);
-            SetActionButtons(controller);
-
-            skillSelectState.Execute(controller);
-            
             Assert.False(controller.ActionButtonPanel.activeInHierarchy);
+            Assert.False(controller.TargetSelector.activeInHierarchy);
         }
 
         [Test]
