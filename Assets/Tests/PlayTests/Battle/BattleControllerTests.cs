@@ -246,6 +246,11 @@ namespace Battle
             }
             controller.TargetSelector = new GameObject();
             AddToCleanup(controller.TargetSelector);
+
+            //Evidence Panel
+            var evidencePanel = new GameObject("EvidencePanel");
+            AddToCleanup(evidencePanel);
+            controller.EvidencePanel = evidencePanel;
         }
     }
 }

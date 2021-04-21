@@ -19,7 +19,7 @@ public class BattleController : MonoBehaviour
     public GameObject Defendant;
     public BattleState CurrentState;
     public ActionData ActionData;
-    private BattleData battleData;
+    public BattleData battleData;
     private bool isUsingTestData;
     [NonSerialized]
     public List<GameObject> TargetList;
@@ -32,6 +32,8 @@ public class BattleController : MonoBehaviour
     //UI
     public List<GameObject> SkillButtons;
     public GameObject SkillPanel;
+    public GameObject EvidencePanel;
+    public List<GameObject> EvidenceButtons;
     public GameObject ActionButtonPanel;
     public GameObject TargetSelector;
 
@@ -43,6 +45,7 @@ public class BattleController : MonoBehaviour
     public NextTurnState NextTurn;
     public PlayerSkillSelectState PlayerSkillSelect;
     public PlayerTargetSelectState PlayerTargetSelect;
+    public PlayerEvidenceSelectState PlayerEvidenceSelect;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +68,7 @@ public class BattleController : MonoBehaviour
         NextTurn = new NextTurnState();
         PlayerSkillSelect = new PlayerSkillSelectState();
         PlayerTargetSelect = new PlayerTargetSelectState();
+        PlayerEvidenceSelect = new PlayerEvidenceSelectState();
 
         CurrentState = Initial;
     }

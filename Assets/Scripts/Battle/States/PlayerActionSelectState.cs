@@ -13,6 +13,7 @@ public class PlayerActionSelectState : BattleState
             controller.ActionButtonPanel.SetActive(true);
             EventSystem.current?.SetSelectedGameObject(controller.ActionButtonPanel.transform.GetChild(0).gameObject);
             controller.SkillPanel.SetActive(false);
+            controller.EvidencePanel.SetActive(false);
             controller.ActionData.ButtonAction = string.Empty;
         }
 
@@ -27,6 +28,12 @@ public class PlayerActionSelectState : BattleState
         {
             controller.PlayerSkillSelect.NewState = true;
             return controller.PlayerSkillSelect;
+        }
+
+        if(controller.ActionData.ButtonAction == Constants.Evidence)
+        {
+            controller.PlayerEvidenceSelect.NewState = true;
+            return controller.PlayerEvidenceSelect;
         }
 
         return this;

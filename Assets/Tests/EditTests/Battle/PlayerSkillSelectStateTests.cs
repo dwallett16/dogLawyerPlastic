@@ -33,7 +33,7 @@ namespace Battle {
         }
 
         [Test]
-        public void ExecuteIfNewStateMapsNameToSkillButtons() {
+        public void ExecuteIfNewStateMapsToSkillButtons() {
             var skillSelectState = new PlayerSkillSelectState();
             skillSelectState.NewState = true;
             var controller = new BattleController();
@@ -53,6 +53,8 @@ namespace Battle {
 
             Assert.NotNull(controller.SkillButtons.First(x => x.GetComponentInChildren<Text>().text == "Skill 0"));
             Assert.NotNull(controller.SkillButtons.First(x => x.GetComponentInChildren<Text>().text == "Skill 1"));
+            Assert.NotNull(controller.SkillButtons.First(x => x.GetComponentInChildren<SkillButtonData>().SkillData.Id == 0));
+            Assert.NotNull(controller.SkillButtons.First(x => x.GetComponentInChildren<SkillButtonData>().SkillData.Id == 1));
         }
 
         [Test]

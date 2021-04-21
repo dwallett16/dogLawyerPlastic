@@ -33,7 +33,7 @@ namespace Battle {
         }
 
         [Test]
-        public void ExecuteSetsActionButtonPanelActiveIfNewState() {
+        public void ExecuteTogglesPanelsIfNewState() {
             var state = new PlayerActionSelectState();
             state.NewState = true;
             var controller = new BattleController();
@@ -42,30 +42,15 @@ namespace Battle {
             QueueCombatantOrder(controller, true);
             SetActionButtons(controller);
             SetSkillPanel(controller);
+            SetEvidencePanel(controller);
             controller.ActionData = new ActionData();
             controller.Action = new ActionState();
 
             var result = state.Execute(controller);
 
             Assert.True(controller.ActionButtonPanel.activeInHierarchy);
-        }
-
-        [Test]
-        public void ExecuteSetsSkillPanelInactiveIfNewState() {
-            var state = new PlayerActionSelectState();
-            state.NewState = true;
-            var controller = new BattleController();
-            NewUp(controller);
-            CreateCombatantsList(controller);
-            QueueCombatantOrder(controller, true);
-            SetActionButtons(controller);
-            SetSkillPanel(controller);
-            controller.ActionData = new ActionData();
-            controller.Action = new ActionState();
-
-            var result = state.Execute(controller);
-
             Assert.False(controller.SkillPanel.activeInHierarchy);
+            Assert.False(controller.EvidencePanel.activeInHierarchy);
         }
 
         [Test]
@@ -78,6 +63,7 @@ namespace Battle {
             QueueCombatantOrder(controller, true);
             SetActionButtons(controller);
             SetSkillPanel(controller);
+            SetEvidencePanel(controller);
             controller.ActionData = new ActionData {
                 ButtonAction = Constants.Skills
             };
@@ -105,6 +91,21 @@ namespace Battle {
             Assert.IsInstanceOf<PlayerSkillSelectState>(result);
         }
 
+        [Test]
+        public void ExecuteReturnsPlayerEvidenceSelectStateIfEvidenceButtonPressed()
+        {
+            var state = new PlayerActionSelectState();
+            var controller = new BattleController();
+            NewUp(controller);
+            controller.ActionData = new ActionData();
+            controller.Action = new ActionState();
+            controller.ActionData.ButtonAction = Constants.Evidence;
+
+            var result = state.Execute(controller);
+
+            Assert.IsInstanceOf<PlayerEvidenceSelectState>(result);
+        }
+
         private void SetActionButtons(BattleController controller) {
            controller.ActionButtonPanel = new GameObject();
            controller.ActionButtonPanel.SetActive(false);
@@ -114,6 +115,13 @@ namespace Battle {
             var skillPanel = new GameObject();
             skillPanel.SetActive(true);
             controller.SkillPanel = skillPanel;
+        }
+
+        private void SetEvidencePanel(BattleController controller)
+        {
+            var evidencePanel = new GameObject();
+            evidencePanel.SetActive(true);
+            controller.EvidencePanel = evidencePanel;
         }
 
         private void CreateCombatantsList(BattleController battleController)
@@ -158,6 +166,7 @@ namespace Battle {
             battleController.PlayerActionSelect = new PlayerActionSelectState();
             battleController.Initial = new InitialState();
             battleController.EnemyActionSelect = new EnemyActionSelectState();
+            battleController.PlayerEvidenceSelect = new PlayerEvidenceSelectState();
         }
     }
 }
