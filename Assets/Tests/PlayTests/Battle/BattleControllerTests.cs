@@ -187,6 +187,29 @@ namespace Battle
             Assert.AreEqual(CharacterType.PlayerCharacter, battleController.ActionData.Target.GetComponent<CharacterBattleData>().type);
         }
 
+        [UnityTest]
+        public IEnumerator PlayerButtonActionEvidencePopulatesEvidencePanel()
+        {
+            SetupBattleScene(true);
+
+            yield return new WaitForSeconds(0.1f);
+            var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
+            battleController.SetButtonAction(Constants.Evidence);
+            yield return new WaitForSeconds(0.3f);
+            var evidencePanel = GameObject.Find("EvidencePanel");
+            var evidenceButtons = new List<GameObject>();
+            foreach (Transform c in evidencePanel.transform)
+            {
+                if (c.gameObject.activeInHierarchy)
+                    evidenceButtons.Add(c.gameObject);
+            }
+
+            Assert.AreEqual(3, evidenceButtons.Count);
+            Assert.AreEqual("evidence 0", evidenceButtons[0].GetComponent<EvidenceButtonData>().EvidenceData.Name);
+            Assert.AreEqual("evidence 1", evidenceButtons[1].GetComponent<EvidenceButtonData>().EvidenceData.Name);
+            Assert.AreEqual("evidence 2", evidenceButtons[2].GetComponent<EvidenceButtonData>().EvidenceData.Name);
+        }
+
         private void SetupBattleScene(bool useTestData, Case c = null, List<Character> testParty = null, string buttonAction = "") 
         {
             //Debug Menu
@@ -223,13 +246,13 @@ namespace Battle
 
             //Action Buttons
             var actionButtonPanel = new GameObject("ActionPanel");
+            controller.ActionButtonPanel = actionButtonPanel;
             AddToCleanup(actionButtonPanel);
 
             //Skills Panel
             var skillsPanel = new GameObject("SkillsPanel");
             AddToCleanup(skillsPanel);
             controller.SkillPanel = skillsPanel;
-            controller.ActionButtonPanel = actionButtonPanel;
             controller.SkillButtons = new List<GameObject>();
             for (int i = 0; i < 4; i++)
             {
@@ -251,6 +274,20 @@ namespace Battle
             var evidencePanel = new GameObject("EvidencePanel");
             AddToCleanup(evidencePanel);
             controller.EvidencePanel = evidencePanel;
+            controller.EvidenceButtons = new List<GameObject>();
+            for (int i = 0; i < 3; i++)
+            {
+                var evidenceButton = new GameObject();
+                evidenceButton.AddComponent<EvidenceButtonData>();
+
+                var textObject = new GameObject();
+                textObject.AddComponent<Text>();
+                textObject.transform.SetParent(evidenceButton.transform);
+
+                controller.EvidenceButtons.Add(evidenceButton);
+                controller.EvidenceButtons[i].transform.SetParent(evidencePanel.transform);
+            }
+            controller.EvidencePanel.SetActive(false);
         }
     }
 }
