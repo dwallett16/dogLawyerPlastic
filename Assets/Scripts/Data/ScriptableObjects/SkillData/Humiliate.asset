@@ -15,8 +15,9 @@ MonoBehaviour:
   Id: 2
   Name: Humiliate
   Target: 0
+  AiPriorityType: 0
   Type: 0
-  LatentPower: 0
+  Power: 7
   StatusEffect: Embarrassed
   FocusPointCost: 8
   RefreshRate: 3

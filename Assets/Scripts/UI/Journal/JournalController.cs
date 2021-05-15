@@ -316,8 +316,8 @@ public class JournalController : MonoBehaviour
                     var sData = sInst.GetComponent<ButtonData>();
                     sData.Id = s.Id;
                     sData.Description = s.Description;
-                    sData.SkillType = s.Type;
-                    sData.LatentPower = s.LatentPower;
+                    sData.SkillType = s.AiPriorityType;
+                    sData.LatentPower = s.Power;
                     sData.FpCost = s.FocusPointCost;
 
                     sInst.name = sInst.name + index;

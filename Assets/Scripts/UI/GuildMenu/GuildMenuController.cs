@@ -168,8 +168,8 @@ public class GuildMenuController : MonoBehaviour
                     var data = sInst.GetComponent<ButtonData>();
                     data.Id = s.Id;
                     data.Description = s.Description;
-                    data.SkillType = s.Type;
-                    data.LatentPower = s.LatentPower;
+                    data.SkillType = s.AiPriorityType;
+                    data.LatentPower = s.Power;
                     data.FpCost = s.FocusPointCost;
                     data.Price = s.Price;
 
@@ -225,8 +225,8 @@ public class GuildMenuController : MonoBehaviour
                     var data = sInst.GetComponent<ButtonData>();
                     data.Id = s.Id;
                     data.Description = s.Description;
-                    data.SkillType = s.Type;
-                    data.LatentPower = s.LatentPower;
+                    data.SkillType = s.AiPriorityType;
+                    data.LatentPower = s.Power;
                     data.FpCost = s.FocusPointCost;
                     data.Price = s.Price;
 

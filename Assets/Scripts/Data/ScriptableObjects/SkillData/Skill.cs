@@ -8,8 +8,9 @@ public class Skill : ScriptableObject
     public int Id;
     public string Name;
     public SkillTarget Target;
-    public AiPriorityTypes Type;
-    public int LatentPower;
+    public AiPriorityTypes AiPriorityType;
+    public SkillTypes Type;
+    public int Power;
     public string StatusEffect;
     public int FocusPointCost;
     public int RefreshRate;

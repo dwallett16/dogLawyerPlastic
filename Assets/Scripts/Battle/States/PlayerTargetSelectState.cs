@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Battle.Actions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,7 @@ namespace Assets.Scripts.Battle.States
                 controller.PlayerSkillSelect.NewState = true;
                 return controller.PlayerSkillSelect;
             }
+
             int index = 0;
             if (controller.HorizontalAxis != 0)
             {
@@ -48,6 +50,13 @@ namespace Assets.Scripts.Battle.States
                     if (index == controller.TargetList.Count - 1) controller.ActionData.Target = controller.TargetList.First();
                     else controller.ActionData.Target = controller.TargetList[index + 1];
                 }
+            }
+
+            if (controller.IsSubmitButtonPressed)
+            {
+                controller.ActionData.Action = new StressAttackAction();
+                controller.ActionData.Target = controller.TargetList[index];
+                return controller.Action;
             }
 
             controller.TargetSelector.transform.position = new UnityEngine.Vector3(controller.ActionData.Target.transform.position.x, controller.TargetSelector.transform.position.y, controller.TargetSelector.transform.position.z);
