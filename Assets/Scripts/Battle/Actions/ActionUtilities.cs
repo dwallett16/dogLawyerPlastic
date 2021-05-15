@@ -9,6 +9,19 @@ namespace Assets.Scripts.Battle.Actions
 {
     public static class ActionUtilities
     {
+        public static void SetAction(ActionData actionData)
+        {
+            switch (actionData.SelectedSkill.ActionType)
+            {
+                case ActionTypes.StressAttack:
+                    actionData.Action = new StressAttackAction();
+                    break;
+                case ActionTypes.StressRecovery:
+                    actionData.Action = new StressRecoveryAction();
+                    break;
+            }
+        }
+
         public static bool CalculateAttackSuccess(GameObject target)
         {
             var data = target.GetComponent<CharacterBattleData>();
@@ -20,7 +33,19 @@ namespace Assets.Scripts.Battle.Actions
             return false;
         }
 
-        public static int CalculateSkillPower(GameObject actor, Skill skill)
+        public static int CalculateStressAttackPower(GameObject actor, Skill skill)
+        {
+            var actorData = actor.GetComponent<CharacterBattleData>();
+
+            if (skill.Type == SkillTypes.Passion)
+                return actorData.passion + skill.Power;
+            else
+            {
+                return actorData.persuasion + skill.Power;
+            }
+        }
+
+        public static int CalculateStressRecoveryPower(GameObject actor, Skill skill)
         {
             var actorData = actor.GetComponent<CharacterBattleData>();
 

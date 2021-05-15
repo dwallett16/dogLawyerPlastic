@@ -18,5 +18,6 @@ public class Skill : ScriptableObject
     public string Description;
     public Animation SkillAnimation;
     public Animation TargetAnimation;
+    public ActionTypes ActionType;
     public int Price;
 }

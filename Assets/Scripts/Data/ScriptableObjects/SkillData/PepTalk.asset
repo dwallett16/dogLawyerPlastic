@@ -15,8 +15,9 @@ MonoBehaviour:
   Id: 5
   Name: Pep Talk
   Target: 1
+  AiPriorityType: 0
   Type: 2
-  LatentPower: 15
+  Power: 0
   StatusEffect: 
   FocusPointCost: 4
   RefreshRate: 0
@@ -25,4 +26,5 @@ MonoBehaviour:
   Description: Pep Talk Description
   SkillAnimation: {fileID: 0}
   TargetAnimation: {fileID: 0}
+  ActionType: 1
   Price: 100

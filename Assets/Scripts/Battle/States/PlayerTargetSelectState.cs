@@ -26,13 +26,16 @@ namespace Assets.Scripts.Battle.States
                     controller.TargetList = controller.Prosecutors;
                     controller.ActionData.Target = controller.TargetList[0];
                 }
+
+                ActionUtilities.SetAction(controller.ActionData);
+
                 controller.TargetSelector.SetActive(true);
             }
 
             if (controller.IsBackButtonPressed)
             {
                 controller.PlayerSkillSelect.NewState = true;
-                return controller.PlayerSkillSelect;
+                return controller.PlayerSkillSelect ;
             }
 
             int index = 0;
@@ -54,7 +57,6 @@ namespace Assets.Scripts.Battle.States
 
             if (controller.IsSubmitButtonPressed)
             {
-                controller.ActionData.Action = new StressAttackAction();
                 controller.ActionData.Target = controller.TargetList[index];
                 return controller.Action;
             }
