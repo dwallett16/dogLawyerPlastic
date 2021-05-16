@@ -27,7 +27,7 @@ namespace Assets.Scripts.Battle.States
                     controller.ActionData.Target = controller.TargetList[0];
                 }
 
-                ActionUtilities.SetAction(controller.ActionData);
+                controller.ActionData.ActionUtilities.SetAction(controller.ActionData);
 
                 controller.TargetSelector.SetActive(true);
             }

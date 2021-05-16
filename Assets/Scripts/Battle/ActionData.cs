@@ -1,9 +1,15 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Battle.Actions;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ActionData
 {
+    public ActionData()
+    {
+        ActionUtilities = new ActionUtilities();
+    }
+    public IActionUtilities ActionUtilities;
     public string ButtonAction;
     public GameObject CurrentCombatant;
     public IAction Action;

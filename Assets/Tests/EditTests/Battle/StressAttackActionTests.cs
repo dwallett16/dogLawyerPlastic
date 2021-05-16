@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Battle.Actions;
 using NUnit.Framework;
+using NSubstitute;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,13 +92,16 @@ namespace Battle
             skill.FocusPointCost = 10;
 
             var targetData = target.AddComponent<CharacterBattleData>();
-            targetData.resistance = 26;
+            //targetData.resistance = 26;
             targetData.currentStress = 10;
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
             currentCombatantData.focusPointCapacity = 100;
             currentCombatantData.currentFocusPoints = 100;
             currentCombatantData.persuasion = 10;
+
+            var utilities = Substitute.For<IActionUtilities>();
+            utilities.CalculateAttackSuccess(Arg.Any<GameObject>()).Returns(false);
 
             var actionData = new ActionData()
             {
@@ -106,6 +110,7 @@ namespace Battle
                 Target = target,
                 SelectedSkill = skill
             };
+            actionData.ActionUtilities = utilities;
 
             stressAttackAction.Act(actionData);
 

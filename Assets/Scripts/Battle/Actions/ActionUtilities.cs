@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Battle.Actions
 {
-    public static class ActionUtilities
+    public class ActionUtilities : IActionUtilities
     {
-        public static void SetAction(ActionData actionData)
+        public void SetAction(ActionData actionData)
         {
             switch (actionData.SelectedSkill.ActionType)
             {
@@ -22,7 +22,7 @@ namespace Assets.Scripts.Battle.Actions
             }
         }
 
-        public static bool CalculateAttackSuccess(GameObject target)
+        public bool CalculateAttackSuccess(GameObject target)
         {
             var data = target.GetComponent<CharacterBattleData>();
 
@@ -33,7 +33,7 @@ namespace Assets.Scripts.Battle.Actions
             return false;
         }
 
-        public static int CalculateStressAttackPower(GameObject actor, Skill skill)
+        public int CalculateStressAttackPower(GameObject actor, Skill skill)
         {
             var actorData = actor.GetComponent<CharacterBattleData>();
 
@@ -45,7 +45,7 @@ namespace Assets.Scripts.Battle.Actions
             }
         }
 
-        public static int CalculateStressRecoveryPower(GameObject actor, Skill skill)
+        public int CalculateStressRecoveryPower(GameObject actor, Skill skill)
         {
             var actorData = actor.GetComponent<CharacterBattleData>();
 

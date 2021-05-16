@@ -9,12 +9,12 @@ namespace Assets.Scripts.Battle.Actions
         {
             Debug.Log("Stress Attack Action");
 
-            var attackSucceeds = ActionUtilities.CalculateAttackSuccess(actionData.Target);
+            var attackSucceeds = actionData.ActionUtilities.CalculateAttackSuccess(actionData.Target);
             actionData.CurrentCombatantBattleData.currentFocusPoints -= actionData.SelectedSkill.FocusPointCost;
 
             if (attackSucceeds)
             {
-                actionData.Target.GetComponent<CharacterBattleData>().currentStress += ActionUtilities.CalculateStressAttackPower(actionData.CurrentCombatant, actionData.SelectedSkill);
+                actionData.Target.GetComponent<CharacterBattleData>().currentStress += actionData.ActionUtilities.CalculateStressAttackPower(actionData.CurrentCombatant, actionData.SelectedSkill);
                 Debug.Log("Attack Success, Target Stress: " + actionData.Target.GetComponent<CharacterBattleData>().currentStress);
             }
             else
