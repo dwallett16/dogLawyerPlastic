@@ -19,10 +19,24 @@ namespace Assets.Scripts.Battle.Actions
                 case ActionTypes.StressRecovery:
                     actionData.Action = new StressRecoveryAction();
                     break;
+                case ActionTypes.Debuff:
+                    actionData.Action = new DebuffAction();
+                    break;
             }
         }
 
         public bool CalculateAttackSuccess(GameObject target)
+        {
+            var data = target.GetComponent<CharacterBattleData>();
+
+            if (data.resistance < 25)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool CalculateDebuffSuccess(GameObject target)
         {
             var data = target.GetComponent<CharacterBattleData>();
 

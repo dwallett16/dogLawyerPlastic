@@ -1,5 +1,7 @@
 ﻿public enum ActionTypes
 {
     StressAttack,
-    StressRecovery
+    StressRecovery,
+    Debuff,
+    Buff
 }

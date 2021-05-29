@@ -14,7 +14,8 @@ public class Skill : ScriptableObject
     public string StatusEffect;
     public int FocusPointCost;
     public int RefreshRate;
-    public List<string> EffectsToRemove;
+    public List<StatusEffects> EffectsToRemove;
+    public List<StatusEffects> EffectsToAdd;
     public string Description;
     public Animation SkillAnimation;
     public Animation TargetAnimation;

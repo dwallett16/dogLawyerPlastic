@@ -32,6 +32,8 @@ public class CharacterBattleData : MonoBehaviour
     public AiPriorityTypes specialty;
     [NonSerialized]
     public List<Skill> skills;
+    [NonSerialized]
+    public List<StatusEffects> activeStatusEffects;
 
     public void MapFromScriptableObject(Character characterData) 
     {
@@ -50,5 +52,6 @@ public class CharacterBattleData : MonoBehaviour
         if (characterData.Type != CharacterType.PlayerCharacter) {
             specialty = characterData.Specialty;
         }
+        activeStatusEffects = new List<StatusEffects>();
     }
 }
