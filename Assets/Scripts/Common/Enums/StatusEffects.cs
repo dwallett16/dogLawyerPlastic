@@ -1,4 +1,5 @@
 ﻿public enum StatusEffects
 {
-    Embarrassed
+    Embarrassed,
+    Pumped
 }

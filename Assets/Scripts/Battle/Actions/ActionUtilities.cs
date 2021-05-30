@@ -22,6 +22,9 @@ namespace Assets.Scripts.Battle.Actions
                 case ActionTypes.Debuff:
                     actionData.Action = new DebuffAction();
                     break;
+                case ActionTypes.Buff:
+                    actionData.Action = new BuffAction();
+                    break;
             }
         }
 

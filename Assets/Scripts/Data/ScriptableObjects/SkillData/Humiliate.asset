@@ -21,8 +21,10 @@ MonoBehaviour:
   StatusEffect: Embarrassed
   FocusPointCost: 8
   RefreshRate: 3
-  EffectsToRemove: []
+  EffectsToRemove: 
+  EffectsToAdd: 00000000
   Description: Inflicts Embarrassed status effect.
   SkillAnimation: {fileID: 0}
   TargetAnimation: {fileID: 0}
+  ActionType: 2
   Price: 100

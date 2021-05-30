@@ -16,15 +16,15 @@ MonoBehaviour:
   Name: Pep Talk
   Target: 1
   AiPriorityType: 0
-  Type: 2
+  Type: 0
   Power: 0
   StatusEffect: 
   FocusPointCost: 4
   RefreshRate: 0
-  EffectsToRemove:
-  - Embarrassed
+  EffectsToRemove: 00000000
+  EffectsToAdd: 01000000
   Description: Pep Talk Description
   SkillAnimation: {fileID: 0}
   TargetAnimation: {fileID: 0}
-  ActionType: 1
+  ActionType: 3
   Price: 100
