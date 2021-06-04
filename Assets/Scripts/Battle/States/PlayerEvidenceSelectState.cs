@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PlayerEvidenceSelectState : BattleState
 {
+    private GameObject topEvidenceItem;
     public override BattleState Execute(BattleController controller)
     {
         if(NewState)
@@ -19,8 +16,11 @@ public class PlayerEvidenceSelectState : BattleState
             {
                 if(i < controller.battleData.EvidenceList.Count)
                 {
-                    if (i == 0)
-                        EventSystem.current?.SetSelectedGameObject(controller.EvidenceButtons[i]);
+                    if (i == 0) 
+                    {
+                        topEvidenceItem = controller.EvidenceButtons[i];
+                        EventSystem.current?.SetSelectedGameObject(topEvidenceItem);
+                    }
 
                     controller.EvidenceButtons[i].SetActive(true);
                     controller.EvidenceButtons[i].GetComponentInChildren<Text>().text = controller.battleData.EvidenceList[i].Name;
@@ -35,8 +35,20 @@ public class PlayerEvidenceSelectState : BattleState
 
         if(controller.IsBackButtonPressed)
         {
+            if(controller.EvidenceConfirmPanel.activeInHierarchy) 
+            {
+                controller.EvidenceConfirmPanel.SetActive(false);
+                EventSystem.current?.SetSelectedGameObject(topEvidenceItem);
+                return this;
+            }
             controller.PlayerActionSelect.NewState = true;
             return controller.PlayerActionSelect;
+        }
+
+        if(controller.IsSubmitButtonPressed)
+        {
+            controller.EvidenceConfirmPanel.SetActive(true);
+            EventSystem.current?.SetSelectedGameObject(controller.EvidenceConfirmButton);
         }
 
         return this;

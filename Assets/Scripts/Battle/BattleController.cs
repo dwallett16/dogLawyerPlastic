@@ -35,6 +35,8 @@ public class BattleController : MonoBehaviour
     public GameObject EvidencePanel;
     public List<GameObject> EvidenceButtons;
     public GameObject ActionButtonPanel;
+    public GameObject EvidenceConfirmPanel;
+    public GameObject EvidenceConfirmButton;
     public GameObject TargetSelector;
 
     //states

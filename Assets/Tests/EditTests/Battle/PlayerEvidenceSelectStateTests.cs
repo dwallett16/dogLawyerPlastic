@@ -88,6 +88,7 @@ namespace Battle
 
             Assert.True(controller.EvidencePanel.activeInHierarchy);
             Assert.False(controller.ActionButtonPanel.activeInHierarchy);
+            Assert.False(controller.EvidenceConfirmPanel.activeInHierarchy);
         }
 
         [Test]
@@ -100,10 +101,45 @@ namespace Battle
                 IsBackButtonPressed = true,
                 PlayerActionSelect = new PlayerActionSelectState()
             };
+            SetEvidencePanel(controller, 0);
 
             var result = evidenceSelectState.Execute(controller);
 
             Assert.IsInstanceOf<PlayerActionSelectState>(result);
+        }
+
+        [Test]
+        public void ExecuteNotNewStateSubmitButtonPressedOnEvidenceDisplaysConfirmMenu() 
+        {
+            var evidenceSelectState = new PlayerEvidenceSelectState();
+            evidenceSelectState.NewState = false;
+            var controller = new BattleController
+            {
+                IsSubmitButtonPressed = true
+            };
+            SetEvidencePanel(controller, 3);
+
+            var result = evidenceSelectState.Execute(controller);
+
+            Assert.True(controller.EvidenceConfirmPanel.activeInHierarchy);
+        }
+
+        [Test]
+        public void ExecuteNotNewStateEvidenceConfirmMenuDisplayedBackButtonPressedHidesConfirmMenu() 
+        {
+            var evidenceSelectState = new PlayerEvidenceSelectState();
+            evidenceSelectState.NewState = false;
+            var controller = new BattleController
+            {
+                IsBackButtonPressed = true
+            };
+            SetEvidencePanel(controller, 3);
+            controller.EvidenceConfirmPanel.SetActive(true);
+
+            var result = evidenceSelectState.Execute(controller);
+
+            Assert.False(controller.EvidenceConfirmPanel.activeInHierarchy);
+            Assert.IsInstanceOf<PlayerEvidenceSelectState>(result);
         }
 
         private void SetEvidencePanel(BattleController controller, int numButtons)
@@ -121,6 +157,8 @@ namespace Battle
                 textObject.transform.SetParent(button.transform);
                 controller.EvidenceButtons.Add(button);
             }
+            controller.EvidenceConfirmPanel = new GameObject();
+            controller.EvidenceConfirmPanel.SetActive(false);
         }
 
         private void SetActionButtons(BattleController controller)
