@@ -92,7 +92,6 @@ namespace Battle
             skill.FocusPointCost = 10;
 
             var targetData = target.AddComponent<CharacterBattleData>();
-            //targetData.resistance = 26;
             targetData.currentStress = 10;
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
