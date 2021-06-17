@@ -17,6 +17,5 @@ namespace Battle{
 
             Assert.IsInstanceOf<NextTurnState>(result);
         }
-
     }
 }
