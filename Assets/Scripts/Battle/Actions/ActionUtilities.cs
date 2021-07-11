@@ -25,6 +25,9 @@ namespace Assets.Scripts.Battle.Actions
                 case ActionTypes.Buff:
                     actionData.Action = new BuffAction();
                     break;
+                case ActionTypes.PersuadeJury:
+                    actionData.Action = new PersuadeJuryAction();
+                    break;
             }
         }
 
@@ -63,6 +66,18 @@ namespace Assets.Scripts.Battle.Actions
         }
 
         public int CalculateStressRecoveryPower(GameObject actor, Skill skill)
+        {
+            var actorData = actor.GetComponent<CharacterBattleData>();
+
+            if (skill.Type == SkillTypes.Passion)
+                return actorData.passion + skill.Power;
+            else
+            {
+                return actorData.persuasion + skill.Power;
+            }
+        }
+
+        public int CalculateJuryPoints(GameObject actor, Skill skill)
         {
             var actorData = actor.GetComponent<CharacterBattleData>();
 

@@ -15,13 +15,16 @@ MonoBehaviour:
   Id: 7
   Name: Short Speech
   Target: 3
-  Type: 3
-  LatentPower: 5
+  AiPriorityType: 0
+  Type: 0
+  Power: 0
   StatusEffect: 
   FocusPointCost: 4
   RefreshRate: 0
-  EffectsToRemove: []
+  EffectsToRemove: 
+  EffectsToAdd: 
   Description: Presents a basic argument to the Jury. Low latent power.
   SkillAnimation: {fileID: 0}
   TargetAnimation: {fileID: 0}
+  ActionType: 4
   Price: 100

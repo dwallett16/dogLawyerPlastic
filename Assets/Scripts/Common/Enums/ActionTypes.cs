@@ -3,5 +3,6 @@
     StressAttack,
     StressRecovery,
     Debuff,
-    Buff
+    Buff,
+    PersuadeJury
 }

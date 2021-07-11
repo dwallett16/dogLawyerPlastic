@@ -11,6 +11,7 @@ namespace Assets.Scripts.Battle.Actions
     {
         void SetAction(ActionData actionData);
         bool CalculateAttackSuccess(GameObject target);
+        int CalculateJuryPoints(GameObject currentCombatant, Skill selectedSkill);
         bool CalculateDebuffSuccess(GameObject target);
         int CalculateStressAttackPower(GameObject actor, Skill skill);
         int CalculateStressRecoveryPower(GameObject actor, Skill skill);

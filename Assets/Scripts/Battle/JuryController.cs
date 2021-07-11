@@ -30,4 +30,14 @@ public class JuryController : MonoBehaviour
     {
         juryData.ChangePoints(points);
     }
+
+    public int GetJuryPoints()
+    {
+        return juryData.CurrentPoints;
+    }
+
+    public void CreateJuryData()
+    {
+        juryData = new JuryData(NumberOfJurors, PointsPerJuror);
+    }
 }

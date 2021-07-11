@@ -26,6 +26,11 @@ namespace Assets.Scripts.Battle.States
                     controller.TargetList = controller.Prosecutors;
                     controller.ActionData.Target = controller.TargetList[0];
                 }
+                else if (controller.ActionData.SelectedSkill.Target == SkillTarget.Jury)
+                {
+                    controller.TargetList = new List<GameObject> { controller.Jury };
+                    controller.ActionData.Target = controller.TargetList[0];
+                }
 
                 controller.ActionData.ActionUtilities.SetAction(controller.ActionData);
 
