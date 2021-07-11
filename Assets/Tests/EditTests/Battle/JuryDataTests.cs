@@ -11,20 +11,36 @@ namespace Battle
         public void GetLockedInJurorsWithJuryPointsReturnsNumberOfLockedInJurors()
         {
             var juryData = new JuryData(5, 10);
-            juryData.AddPoints(35);
+            juryData.ChangePoints(35);
 
             Assert.AreEqual(3, juryData.LockedInJurors);
         }
 
         [Test]
-        public void RemovePointsNegativeValueWontSubtractPointsIfJurorLocked()
+        public void ChangePointsWontAddMoreThanTotal()
         {
             var juryData = new JuryData(5, 10);
-            juryData.AddPoints(32);
+            juryData.ChangePoints(60);
 
-            juryData.RemovePoints(-10);
+            Assert.AreEqual(50, juryData.CurrentPoints);
+        }
 
-            Assert.AreEqual(30, juryData.CurrentPoints);
+        [Test]
+        public void ChangePointsWontSubtractLessThanZero()
+        {
+            var juryData = new JuryData(5, 10);
+            juryData.ChangePoints(-60);
+
+            Assert.AreEqual(0, juryData.CurrentPoints);
+        }
+
+        [Test]
+        public void ChangePointsAddsPoints()
+        {
+            var juryData = new JuryData(5, 10);
+            juryData.ChangePoints(40);
+
+            Assert.AreEqual(40, juryData.CurrentPoints);
         }
 
     }

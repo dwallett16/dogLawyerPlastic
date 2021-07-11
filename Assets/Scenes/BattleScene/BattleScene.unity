@@ -3182,7 +3182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NumberOfJurors: 5
-  TotalInfluencePoints: 50
+  PointsPerJuror: 10
 --- !u!1001 &1272330100
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,32 +8,27 @@ public class JuryData
     public int LockedInJurors { 
         get
         {
-            return CurrentPoints / PointsPerJuror;
+            return CurrentPoints / pointsPerJuror;
         }
     }
     private int currentPoints;
-    private int NumberOfJurors;
-    private int PointsPerJuror;
-    private int TotalPoints;
+    private int pointsPerJuror;
+    private int totalPoints;
     
     public JuryData(int numJurors, int pointsPerJuror)
     {
-        NumberOfJurors = numJurors;
-        PointsPerJuror = pointsPerJuror;
-        TotalPoints = numJurors * pointsPerJuror;
+        this.pointsPerJuror = pointsPerJuror;
+        totalPoints = numJurors * pointsPerJuror;
         currentPoints = 0;
     }
 
-    public void AddPoints(int pointsToAdd)
+    public void ChangePoints(int pointsToAdd)
     {
         currentPoints += pointsToAdd;
-    }
 
-    public void RemovePoints(int pointsToSubtract)
-    {
-        var minPoints = LockedInJurors * PointsPerJuror;
-        currentPoints += pointsToSubtract;
-        if (currentPoints < minPoints)
-            currentPoints = minPoints;
+        if (currentPoints > totalPoints)
+            currentPoints = totalPoints;
+        else if (currentPoints < 0)
+            currentPoints = 0;
     }
 }
