@@ -2085,6 +2085,7 @@ MonoBehaviour:
   - {fileID: 1960840436}
   - {fileID: 1556305801}
   DefendantPlaceholder: {fileID: 652771629}
+  Jury: {fileID: 1261379271}
   battleData: {fileID: 0}
   IsBackButtonPressed: 0
   IsSubmitButtonPressed: 0

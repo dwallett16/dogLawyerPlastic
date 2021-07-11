@@ -14,6 +14,7 @@ public class BattleController : MonoBehaviour
     public List<GameObject> Prosecutors;
     [NonSerialized]
     public List<GameObject> DefenseAttorneys;
+    public GameObject Jury;
     public Queue<GameObject> AllCombatants;
     [NonSerialized]
     public GameObject Defendant;
