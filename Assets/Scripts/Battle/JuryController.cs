@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class JuryController : MonoBehaviour
 {
-    public JuryData JuryData;
+    private JuryData juryData;
     public int NumberOfJurors;
     public int PointsPerJuror;
 
     // Start is called before the first frame update
     void Start()
     {
-        JuryData = new JuryData(NumberOfJurors, PointsPerJuror);
+        juryData = new JuryData(NumberOfJurors, PointsPerJuror);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void ChangePoints(int points)
+    {
+        juryData.ChangePoints(points);
     }
 }
