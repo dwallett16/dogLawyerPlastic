@@ -7,12 +7,6 @@ public class JuryController : MonoBehaviour
     private JuryData juryData;
     public int NumberOfJurors;
     public int PointsPerJuror;
-    public int CurrentPoints { get { return juryData.CurrentPoints; } }
-
-    public JuryController()
-    {
-        juryData = new JuryData(NumberOfJurors, PointsPerJuror);
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +30,8 @@ public class JuryController : MonoBehaviour
         return juryData.CurrentPoints;
     }
 
-    public void CreateJuryData()
+    public void CreateJuryData(int numberOfJurors, int pointsPerJuror)
     {
-        juryData = new JuryData(NumberOfJurors, PointsPerJuror);
+        juryData = new JuryData(numberOfJurors, pointsPerJuror);
     }
 }

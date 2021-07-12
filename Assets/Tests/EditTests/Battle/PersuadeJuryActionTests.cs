@@ -23,9 +23,7 @@ namespace Battle
             skill.FocusPointCost = 10;
 
             var targetData = target.AddComponent<JuryController>();
-            targetData.PointsPerJuror = 10;
-            targetData.NumberOfJurors = 5;
-            targetData.CreateJuryData();
+            targetData.CreateJuryData(10, 5);
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
             currentCombatantData.focusPointCapacity = 100;

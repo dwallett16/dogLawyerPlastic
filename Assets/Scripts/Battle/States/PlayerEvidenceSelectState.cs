@@ -47,8 +47,19 @@ public class PlayerEvidenceSelectState : BattleState
 
         if(controller.IsSubmitButtonPressed)
         {
-            controller.EvidenceConfirmPanel.SetActive(true);
-            EventSystem.current?.SetSelectedGameObject(controller.EvidenceConfirmButton);
+            if(controller.EvidenceConfirmPanel.activeInHierarchy)
+            {
+                if(controller.MenuConfirmSelection == false)
+                {
+                    controller.EvidenceConfirmPanel.SetActive(false);
+                    EventSystem.current?.SetSelectedGameObject(topEvidenceItem);
+                }
+            }
+            else
+            {
+                controller.EvidenceConfirmPanel.SetActive(true);
+                EventSystem.current?.SetSelectedGameObject(controller.EvidenceConfirmButton);
+            }
         }
 
         return this;

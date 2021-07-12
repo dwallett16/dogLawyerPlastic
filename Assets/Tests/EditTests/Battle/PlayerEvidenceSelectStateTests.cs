@@ -142,6 +142,25 @@ namespace Battle
             Assert.IsInstanceOf<PlayerEvidenceSelectState>(result);
         }
 
+        [Test]
+        public void ExecuteNotNewStateEvidenceConfirmMenuDisplayedGoBackOptionSelectedHidesConfirmMenu()
+        {
+            var evidenceSelectState = new PlayerEvidenceSelectState();
+            evidenceSelectState.NewState = false;
+            var controller = new BattleController
+            {
+                MenuConfirmSelection = false,
+                IsSubmitButtonPressed = true
+            };
+            SetEvidencePanel(controller, 3);
+            controller.EvidenceConfirmPanel.SetActive(true);
+
+            var result = evidenceSelectState.Execute(controller);
+
+            Assert.False(controller.EvidenceConfirmPanel.activeInHierarchy);
+            Assert.IsInstanceOf<PlayerEvidenceSelectState>(result);
+        }
+
         private void SetEvidencePanel(BattleController controller, int numButtons)
         {
             var evidencePanel = new GameObject();

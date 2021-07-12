@@ -12,8 +12,11 @@ public class ActionData
     public IActionUtilities ActionUtilities;
     public string ButtonAction;
     public GameObject CurrentCombatant;
+    public Case CurrentCase;
+    public GameObject Jury;
     public IAction Action;
     public CharacterBattleData CurrentCombatantBattleData;
     public Skill SelectedSkill;
+    public Evidence SelectedEvidence;
     public GameObject Target;
 }

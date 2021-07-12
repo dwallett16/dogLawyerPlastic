@@ -29,6 +29,7 @@ public class BattleController : MonoBehaviour
     public bool IsBackButtonPressed;
     public bool IsSubmitButtonPressed;
     public float HorizontalAxis;
+    public bool MenuConfirmSelection;
 
     //UI
     public List<GameObject> SkillButtons;
@@ -90,6 +91,11 @@ public class BattleController : MonoBehaviour
     public void SetActionDataSkill(SkillButtonData skillButtonData)
     {
         ActionData.SelectedSkill = skillButtonData.SkillData;
+    }
+
+    public void SetMenuConfirmSelection(bool isConfirmed)
+    {
+        MenuConfirmSelection = isConfirmed;
     }
     
     private void MapBattleData()
