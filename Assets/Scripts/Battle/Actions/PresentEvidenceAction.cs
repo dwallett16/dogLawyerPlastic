@@ -1,25 +1,33 @@
 ﻿
 using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
 
 public class PresentEvidenceAction : IAction
 {
     public void Act(ActionData actionData)
     {
-        if (actionData.CurrentCase.RelevantEvidence.Any(x => x.Id == actionData.SelectedEvidence.Id))
+        var effectiveness = GetEffectiveness(actionData.CurrentCase.RelevantEvidence, actionData.CurrentCase.EffectiveEvidence, actionData.SelectedEvidence);
+        var juryInfluencePoints = actionData.ActionUtilities.CalculateJuryPointsFromPresentedEvidence(effectiveness);
+        actionData.Jury.GetComponent<JuryController>().ChangePoints(juryInfluencePoints);
+        Debug.Log("Presenting" + effectiveness.ToString() + "evidence");
+        
+        //need to remove evidence from inventory
+    }
+
+    private EvidenceEffectivenessTypes GetEffectiveness(List<Evidence> relevantEvidence, List<Evidence> effectiveEvidence, Evidence selectedEvidence) 
+    {
+        if (relevantEvidence.Any(x => x.Id == selectedEvidence.Id))
         {
-            Debug.Log("Presenting relevant evidence");
-            actionData.Jury.GetComponent<JuryController>().ChangePoints(10);
+            return EvidenceEffectivenessTypes.Relevant;
         }  
-        else if (actionData.CurrentCase.EffectiveEvidence.Any(x => x.Id == actionData.SelectedEvidence.Id))
+        else if (effectiveEvidence.Any(x => x.Id == selectedEvidence.Id))
         {
-            Debug.Log("Presenting effective evidence");
-            actionData.Jury.GetComponent<JuryController>().ChangePoints(20);
+            return EvidenceEffectivenessTypes.Effective;
         }
         else
         {
-            Debug.Log("Presenting ineffective evidence");
+            return EvidenceEffectivenessTypes.Ineffective;
         }
-        //use enums and put logic in utilities
     }
 }

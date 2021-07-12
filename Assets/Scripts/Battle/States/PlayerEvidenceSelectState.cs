@@ -54,6 +54,7 @@ public class PlayerEvidenceSelectState : BattleState
                     controller.EvidenceConfirmPanel.SetActive(false);
                     EventSystem.current?.SetSelectedGameObject(topEvidenceItem);
                 }
+                //remove evidence in else statement
             }
             else
             {

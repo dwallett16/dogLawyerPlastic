@@ -88,5 +88,23 @@ namespace Assets.Scripts.Battle.Actions
                 return actorData.persuasion + skill.Power;
             }
         }
+
+        public int CalculateJuryPointsFromPresentedEvidence(EvidenceEffectivenessTypes effectiveness) 
+        {
+            switch(effectiveness) 
+            {
+                case EvidenceEffectivenessTypes.Effective:
+                return 20;
+
+                case EvidenceEffectivenessTypes.Relevant:
+                return 10;
+
+                case EvidenceEffectivenessTypes.Ineffective:
+                return 0;
+
+                default:
+                return 0;
+            }
+        }
     }
 }
