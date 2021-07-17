@@ -85,6 +85,32 @@ namespace Battle
         }
 
         [Test]
+        public void ExecuteNotNewStateSubmitButtonPressedReturnsActionState()
+        {
+            var controller = new BattleController
+            {
+                TargetSelector = new GameObject(),
+                HorizontalAxis = 1,
+                IsSubmitButtonPressed = true,
+                Action = new ActionState()
+            };
+            SetDefenseAttorneys(controller);
+            controller.TargetList = controller.DefenseAttorneys;
+            controller.ActionData = new ActionData
+            {
+                SelectedSkill = TestDataFactory.CreateSkill(0),
+                Target = controller.DefenseAttorneys[0]
+            };
+            SetSkillPanel(controller, 2);
+            controller.TargetSelector.SetActive(true);
+            var state = new PlayerTargetSelectState();
+
+            var result = state.Execute(controller);
+
+            Assert.IsInstanceOf<ActionState>(result);
+        }
+
+        [Test]
         public void ExecuteNotNewStateRightLeftInputsUpdatesTargetIndexToEndOfListWhenAtStartOfList()
         {
             var controller = new BattleController

@@ -22,9 +22,35 @@ namespace Battle
             controller.ActionData = new ActionData();
             controller.Action = new ActionState();
 
-            var result = state.Execute(controller);
+            state.Execute(controller);
 
             Assert.AreEqual(controller.Prosecutors[0], controller.ActionData.CurrentCombatant);
+        }
+
+        [Test]
+        public void ExecuteSetsBasicActionDataProperties()
+        {
+            var state = new NextTurnState();
+            state.NewState = true;
+            var juryObject = new GameObject();
+            var controller = new BattleController
+            {
+                battleData = new BattleData
+                {
+                    CaseData = TestDataFactory.CreateCase(0)
+                },
+                Jury = juryObject
+            };
+            NewUp(controller);
+            CreateCombatantsList(controller);
+            QueueCombatantOrder(controller, true);
+            controller.ActionData = new ActionData();
+            controller.Action = new ActionState();
+
+            state.Execute(controller);
+
+            Assert.AreEqual(controller.battleData.CaseData, controller.ActionData.CurrentCase);
+            Assert.AreEqual(controller.Jury, controller.ActionData.Jury);
         }
 
         [Test]
@@ -73,7 +99,7 @@ namespace Battle
             character.AddComponent<CharacterBattleData>();
             battleController.AllCombatants.Enqueue(character);
 
-            var result = nextTurnState.Execute(battleController);
+            nextTurnState.Execute(battleController);
 
             Assert.AreEqual(null, battleController.ActionData.ButtonAction);
         }
@@ -120,6 +146,7 @@ namespace Battle
             battleController.PlayerActionSelect = new PlayerActionSelectState();
             battleController.Initial = new InitialState();
             battleController.EnemyActionSelect = new EnemyActionSelectState();
+            battleController.battleData = new BattleData();
         }
     }
 }

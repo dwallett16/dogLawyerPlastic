@@ -93,6 +93,11 @@ public class BattleController : MonoBehaviour
         ActionData.SelectedSkill = skillButtonData.SkillData;
     }
 
+    public void SetActionDataEvidence(EvidenceButtonData evidenceButtonData)
+    {
+        ActionData.SelectedEvidence = evidenceButtonData.EvidenceData;
+    }
+
     public void SetMenuConfirmSelection(bool isConfirmed)
     {
         MenuConfirmSelection = isConfirmed;

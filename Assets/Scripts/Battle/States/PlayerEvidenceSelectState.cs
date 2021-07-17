@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -49,12 +50,20 @@ public class PlayerEvidenceSelectState : BattleState
         {
             if(controller.EvidenceConfirmPanel.activeInHierarchy)
             {
-                if(controller.MenuConfirmSelection == false)
+                EventSystem.current?.SetSelectedGameObject(topEvidenceItem);
+                controller.EvidenceConfirmPanel.SetActive(false);
+
+                if (controller.MenuConfirmSelection)
                 {
-                    controller.EvidenceConfirmPanel.SetActive(false);
-                    EventSystem.current?.SetSelectedGameObject(topEvidenceItem);
+                    var presentedEvidence = controller.battleData.EvidenceList.Single(x => x.Id == controller.ActionData.SelectedEvidence.Id);
+                    controller.battleData.EvidenceList.Remove(presentedEvidence);
+
+                    controller.EvidencePanel.SetActive(false);
+
+                    controller.ActionData.Action = new PresentEvidenceAction();
+                    controller.Action.NewState = true;
+                    return controller.Action;
                 }
-                //remove evidence in else statement
             }
             else
             {

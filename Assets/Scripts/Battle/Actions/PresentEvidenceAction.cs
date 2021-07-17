@@ -10,9 +10,9 @@ public class PresentEvidenceAction : IAction
         var effectiveness = GetEffectiveness(actionData.CurrentCase.RelevantEvidence, actionData.CurrentCase.EffectiveEvidence, actionData.SelectedEvidence);
         var juryInfluencePoints = actionData.ActionUtilities.CalculateJuryPointsFromPresentedEvidence(effectiveness);
         actionData.Jury.GetComponent<JuryController>().ChangePoints(juryInfluencePoints);
-        Debug.Log("Presenting" + effectiveness.ToString() + "evidence");
+        Debug.Log("Presenting " + effectiveness.ToString() + " evidence. Added " + juryInfluencePoints + " jury points");
         
-        //need to remove evidence from inventory
+        //add fp and sp
     }
 
     private EvidenceEffectivenessTypes GetEffectiveness(List<Evidence> relevantEvidence, List<Evidence> effectiveEvidence, Evidence selectedEvidence) 

@@ -92,7 +92,7 @@ namespace Battle
         }
 
         [Test]
-        public void ExecuteNotNewStateCancelButtonPressedReturnsPlayerActionSelectState()
+        public void ExecuteCancelButtonPressedReturnsPlayerActionSelectState()
         {
             var evidenceSelectState = new PlayerEvidenceSelectState();
             evidenceSelectState.NewState = false;
@@ -109,7 +109,7 @@ namespace Battle
         }
 
         [Test]
-        public void ExecuteNotNewStateSubmitButtonPressedOnEvidenceDisplaysConfirmMenu() 
+        public void ExecuteSubmitButtonPressedOnEvidenceDisplaysConfirmMenu() 
         {
             var evidenceSelectState = new PlayerEvidenceSelectState();
             evidenceSelectState.NewState = false;
@@ -125,7 +125,7 @@ namespace Battle
         }
 
         [Test]
-        public void ExecuteNotNewStateEvidenceConfirmMenuDisplayedBackButtonPressedHidesConfirmMenu() 
+        public void ExecuteEvidenceConfirmMenuDisplayedBackButtonPressedHidesConfirmMenu() 
         {
             var evidenceSelectState = new PlayerEvidenceSelectState();
             evidenceSelectState.NewState = false;
@@ -143,7 +143,7 @@ namespace Battle
         }
 
         [Test]
-        public void ExecuteNotNewStateEvidenceConfirmMenuDisplayedGoBackOptionSelectedHidesConfirmMenu()
+        public void ExecuteEvidenceConfirmMenuDisplayedGoBackOptionSelectedHidesConfirmMenu()
         {
             var evidenceSelectState = new PlayerEvidenceSelectState();
             evidenceSelectState.NewState = false;
@@ -159,6 +159,74 @@ namespace Battle
 
             Assert.False(controller.EvidenceConfirmPanel.activeInHierarchy);
             Assert.IsInstanceOf<PlayerEvidenceSelectState>(result);
+        }
+
+        [Test]
+        public void ExecuteEvidenceConfirmMenuDisplaedConfirmOptionSelectedRemovesSelectedEvidenceFromBattleData()
+        {
+            var evidenceSelectState = new PlayerEvidenceSelectState();
+            evidenceSelectState.NewState = false;
+            var selectedEvidence = TestDataFactory.CreateEvidence(0, new Case());
+            var controller = new BattleController
+            {
+                MenuConfirmSelection = true,
+                IsSubmitButtonPressed = true,
+                battleData = new BattleData
+                {
+                    EvidenceList = new List<Evidence>
+                    {
+                        selectedEvidence,
+                        TestDataFactory.CreateEvidence(1, new Case())
+                    }
+                },
+                ActionData = new ActionData
+                {
+                    SelectedEvidence = selectedEvidence
+                },
+                Action = new ActionState()
+            };
+            SetEvidencePanel(controller, 3);
+            controller.EvidenceConfirmPanel.SetActive(true);
+
+            var result = evidenceSelectState.Execute(controller);
+
+            Assert.False(controller.battleData.EvidenceList.Any(x => x.Id == selectedEvidence.Id));
+        }
+
+        [Test]
+        public void ExecuteEvidenceConfirmMenuDisplaedConfirmOptionSelectedReturnsActionState()
+        {
+            var evidenceSelectState = new PlayerEvidenceSelectState();
+            evidenceSelectState.NewState = false;
+            var selectedEvidence = TestDataFactory.CreateEvidence(0, new Case());
+            var controller = new BattleController
+            {
+                MenuConfirmSelection = true,
+                IsSubmitButtonPressed = true,
+                battleData = new BattleData
+                {
+                    EvidenceList = new List<Evidence>
+                    {
+                        selectedEvidence,
+                        TestDataFactory.CreateEvidence(1, new Case())
+                    }
+                },
+                ActionData = new ActionData
+                {
+                    SelectedEvidence = selectedEvidence
+                },
+                Action = new ActionState()
+            };
+            SetEvidencePanel(controller, 3);
+            controller.EvidencePanel.SetActive(true);
+            controller.EvidenceConfirmPanel.SetActive(true);
+
+            var result = evidenceSelectState.Execute(controller);
+
+            Assert.IsInstanceOf<ActionState>(result);
+            Assert.IsInstanceOf<PresentEvidenceAction>(controller.ActionData.Action);
+            Assert.False(controller.EvidenceConfirmPanel.activeInHierarchy);
+            Assert.False(controller.EvidencePanel.activeInHierarchy);
         }
 
         private void SetEvidencePanel(BattleController controller, int numButtons)
