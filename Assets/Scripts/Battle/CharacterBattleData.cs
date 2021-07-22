@@ -13,7 +13,7 @@ public class CharacterBattleData : MonoBehaviour
     [NonSerialized]
     public int stressCapacity;
     [NonSerialized]
-    public int currentStress;
+    public int currentStress; //TODO: Make single access function to change stress and fp
     [NonSerialized]
     public int focusPointCapacity;
     [NonSerialized]

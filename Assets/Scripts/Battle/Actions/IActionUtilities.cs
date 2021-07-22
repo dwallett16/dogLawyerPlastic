@@ -15,6 +15,8 @@ namespace Assets.Scripts.Battle.Actions
         bool CalculateDebuffSuccess(GameObject target);
         int CalculateStressAttackPower(GameObject actor, Skill skill);
         int CalculateStressRecoveryPower(GameObject actor, Skill skill);
-        int CalculateJuryPointsFromPresentedEvidence(EvidenceEffectivenessTypes effectiveness);
+        int CalculateJuryPointsFromPresentedEvidence(EvidenceEffectivenessType effectiveness);
+        int CalculateSpRestorationFromPresentedEvidence(EvidenceEffectivenessType effectiveness);
+        int CalculateFpRestorationFromPresentedEvidence(EvidenceEffectivenessType effectiveness);
     }
 }

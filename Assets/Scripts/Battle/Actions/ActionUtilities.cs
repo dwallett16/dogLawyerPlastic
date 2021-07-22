@@ -89,21 +89,57 @@ namespace Assets.Scripts.Battle.Actions
             }
         }
 
-        public int CalculateJuryPointsFromPresentedEvidence(EvidenceEffectivenessTypes effectiveness) 
+        public int CalculateJuryPointsFromPresentedEvidence(EvidenceEffectivenessType effectiveness) 
         {
             switch(effectiveness) 
             {
-                case EvidenceEffectivenessTypes.Effective:
+                case EvidenceEffectivenessType.Effective:
                 return 20;
 
-                case EvidenceEffectivenessTypes.Relevant:
+                case EvidenceEffectivenessType.Relevant:
                 return 10;
 
-                case EvidenceEffectivenessTypes.Ineffective:
+                case EvidenceEffectivenessType.Ineffective:
                 return 0;
 
                 default:
                 return 0;
+            }
+        }
+
+        public int CalculateSpRestorationFromPresentedEvidence(EvidenceEffectivenessType effectiveness)
+        {
+            switch (effectiveness)
+            {
+                case EvidenceEffectivenessType.Effective:
+                    return 10;
+
+                case EvidenceEffectivenessType.Relevant:
+                    return 5;
+
+                case EvidenceEffectivenessType.Ineffective:
+                    return 0;
+
+                default:
+                    return 0;
+            }
+        }
+
+        public int CalculateFpRestorationFromPresentedEvidence(EvidenceEffectivenessType effectiveness)
+        {
+            switch (effectiveness)
+            {
+                case EvidenceEffectivenessType.Effective:
+                    return 10;
+
+                case EvidenceEffectivenessType.Relevant:
+                    return 5;
+
+                case EvidenceEffectivenessType.Ineffective:
+                    return 0;
+
+                default:
+                    return 0;
             }
         }
     }

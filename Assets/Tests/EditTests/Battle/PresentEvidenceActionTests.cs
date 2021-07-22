@@ -1,5 +1,8 @@
 ﻿
+using Assets.Scripts.Battle.Actions;
+using NSubstitute;
 using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Battle
@@ -18,7 +21,8 @@ namespace Battle
             {
                 CurrentCase = testCase,
                 SelectedEvidence = TestDataFactory.CreateEvidence(2, testCase),
-                Jury = juryObject
+                Jury = juryObject,
+                Prosecutors = new List<GameObject>()
             };
 
             presentEvidenceAction.Act(actionData);
@@ -27,7 +31,7 @@ namespace Battle
         }
 
         [Test]
-        public void ActRelevantEvidenceAddsModerateJuryPoints()
+        public void ActAddsJuryPointsBasedOnEffectiveness()
         {
             var presentEvidenceAction = new PresentEvidenceAction();
             var testCase = TestDataFactory.CreateCase(0);
@@ -38,32 +42,59 @@ namespace Battle
             {
                 CurrentCase = testCase,
                 SelectedEvidence = TestDataFactory.CreateEvidence(1, testCase),
-                Jury = juryObject
+                Jury = juryObject,
+                Prosecutors = new List<GameObject>()
             };
+            var utilitiesMock = Substitute.For<IActionUtilities>();
+            utilitiesMock.CalculateJuryPointsFromPresentedEvidence(EvidenceEffectivenessType.Relevant).Returns(25);
+            actionData.ActionUtilities = utilitiesMock;
 
             presentEvidenceAction.Act(actionData);
 
-            Assert.IsTrue(juryObject.GetComponent<JuryController>().GetJuryPoints() > 0);
+            Assert.AreEqual(25, juryObject.GetComponent<JuryController>().GetJuryPoints());
         }
 
         [Test]
-        public void ActEffectiveEvidenceAddsManyJuryPoints()
+        public void ActAddsSpAndFpBasedOnEffectivenessToAllProsecutors()
         {
             var presentEvidenceAction = new PresentEvidenceAction();
             var testCase = TestDataFactory.CreateCase(0);
             var juryObject = new GameObject();
             juryObject.AddComponent<JuryController>();
             juryObject.GetComponent<JuryController>().CreateJuryData(10, 5);
+
+            var prosecutor1 = new GameObject();
+            prosecutor1.AddComponent<CharacterBattleData>();
+            prosecutor1.GetComponent<CharacterBattleData>().MapFromScriptableObject(TestDataFactory.CreateCharacter(0, CharacterType.PlayerCharacter));
+            prosecutor1.GetComponent<CharacterBattleData>().currentStress = 100;
+            var prosecutor2 = new GameObject();
+            prosecutor2.AddComponent<CharacterBattleData>();
+            prosecutor2.GetComponent<CharacterBattleData>().MapFromScriptableObject(TestDataFactory.CreateCharacter(1, CharacterType.PlayerCharacter));
+            prosecutor2.GetComponent<CharacterBattleData>().currentStress = 100;
+
             var actionData = new ActionData
             {
                 CurrentCase = testCase,
-                SelectedEvidence = TestDataFactory.CreateEvidence(0, testCase),
-                Jury = juryObject
+                SelectedEvidence = TestDataFactory.CreateEvidence(1, testCase),
+                Jury = juryObject,
+                Prosecutors = new List<GameObject>
+                {
+                    prosecutor1,
+                    prosecutor2
+                }
             };
+            var utilitiesMock = Substitute.For<IActionUtilities>();
+            utilitiesMock.CalculateSpRestorationFromPresentedEvidence(EvidenceEffectivenessType.Relevant).Returns(20);
+            utilitiesMock.CalculateFpRestorationFromPresentedEvidence(EvidenceEffectivenessType.Relevant).Returns(10);
+            actionData.ActionUtilities = utilitiesMock;
 
             presentEvidenceAction.Act(actionData);
 
-            Assert.IsTrue(juryObject.GetComponent<JuryController>().GetJuryPoints() > 10);
+            Assert.AreEqual(80, actionData.Prosecutors[0].GetComponent<CharacterBattleData>().currentStress);
+            Assert.AreEqual(10, actionData.Prosecutors[0].GetComponent<CharacterBattleData>().currentFocusPoints);
+
+            Assert.AreEqual(80, actionData.Prosecutors[1].GetComponent<CharacterBattleData>().currentStress);
+            Assert.AreEqual(10, actionData.Prosecutors[1].GetComponent<CharacterBattleData>().currentFocusPoints);
         }
     }
 }

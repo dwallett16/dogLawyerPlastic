@@ -1,5 +1,5 @@
 ﻿
-public enum EvidenceEffectivenessTypes
+public enum EvidenceEffectivenessType
 {
     Ineffective,
     Relevant,
