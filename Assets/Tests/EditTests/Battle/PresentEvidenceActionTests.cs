@@ -21,8 +21,8 @@ namespace Battle
             {
                 CurrentCase = testCase,
                 SelectedEvidence = TestDataFactory.CreateEvidence(2, testCase),
-                Jury = juryObject,
-                Prosecutors = new List<GameObject>()
+                Prosecutors = new List<GameObject>(),
+                Target = juryObject
             };
 
             presentEvidenceAction.Act(actionData);
@@ -42,8 +42,8 @@ namespace Battle
             {
                 CurrentCase = testCase,
                 SelectedEvidence = TestDataFactory.CreateEvidence(1, testCase),
-                Jury = juryObject,
-                Prosecutors = new List<GameObject>()
+                Prosecutors = new List<GameObject>(),
+                Target = juryObject
             };
             var utilitiesMock = Substitute.For<IActionUtilities>();
             utilitiesMock.CalculateJuryPointsFromPresentedEvidence(EvidenceEffectivenessType.Relevant).Returns(25);
@@ -76,12 +76,12 @@ namespace Battle
             {
                 CurrentCase = testCase,
                 SelectedEvidence = TestDataFactory.CreateEvidence(1, testCase),
-                Jury = juryObject,
                 Prosecutors = new List<GameObject>
                 {
                     prosecutor1,
                     prosecutor2
-                }
+                },
+                Target = juryObject
             };
             var utilitiesMock = Substitute.For<IActionUtilities>();
             utilitiesMock.CalculateSpRestorationFromPresentedEvidence(EvidenceEffectivenessType.Relevant).Returns(20);

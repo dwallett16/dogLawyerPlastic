@@ -39,7 +39,6 @@ namespace Battle
                 {
                     CaseData = TestDataFactory.CreateCase(0)
                 },
-                Jury = juryObject,
                 Prosecutors = new List<GameObject>
                 {
                     new GameObject()
@@ -54,7 +53,6 @@ namespace Battle
             state.Execute(controller);
 
             Assert.AreEqual(controller.battleData.CaseData, controller.ActionData.CurrentCase);
-            Assert.AreEqual(controller.Jury, controller.ActionData.Jury);
             Assert.AreEqual(controller.Prosecutors.Count(), controller.ActionData.Prosecutors.Count);
         }
 

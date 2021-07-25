@@ -10,7 +10,7 @@ public class PresentEvidenceAction : IAction
         var effectiveness = GetEffectiveness(actionData.CurrentCase.RelevantEvidence, actionData.CurrentCase.EffectiveEvidence, actionData.SelectedEvidence);
 
         var juryInfluencePoints = actionData.ActionUtilities.CalculateJuryPointsFromPresentedEvidence(effectiveness);
-        actionData.Jury.GetComponent<JuryController>().ChangePoints(juryInfluencePoints);
+        actionData.Target.GetComponent<JuryController>().ChangePoints(juryInfluencePoints);
 
         var fpRestoration = actionData.ActionUtilities.CalculateFpRestorationFromPresentedEvidence(effectiveness);
         var spRestoration = actionData.ActionUtilities.CalculateSpRestorationFromPresentedEvidence(effectiveness);

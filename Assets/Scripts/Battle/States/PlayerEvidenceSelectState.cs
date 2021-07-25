@@ -59,7 +59,7 @@ public class PlayerEvidenceSelectState : BattleState
                     controller.battleData.EvidenceList.Remove(presentedEvidence);
 
                     controller.EvidencePanel.SetActive(false);
-
+                    controller.ActionData.Target = controller.Jury;
                     controller.ActionData.Action = new PresentEvidenceAction();
                     controller.Action.NewState = true;
                     return controller.Action;
