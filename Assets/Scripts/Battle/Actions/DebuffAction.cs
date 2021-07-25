@@ -10,7 +10,7 @@ namespace Assets.Scripts.Battle.Actions
             Debug.Log("Debuff Action");
 
             var debuffSucceeds = actionData.ActionUtilities.CalculateDebuffSuccess(actionData.Target);
-            actionData.CurrentCombatantBattleData.currentFocusPoints -= actionData.SelectedSkill.FocusPointCost;
+            actionData.CurrentCombatantBattleData.DecreaseFocusPoints(actionData.SelectedSkill.FocusPointCost);
 
             if (debuffSucceeds)
             {

@@ -12,12 +12,10 @@ public class CharacterBattleData : MonoBehaviour
     public PersonalityTypes personality;
     [NonSerialized]
     public int stressCapacity;
-    [NonSerialized]
-    public int currentStress; //TODO: Make single access function to change stress and fp
+    public int currentStress { get { return _currentStress; } }
     [NonSerialized]
     public int focusPointCapacity;
-    [NonSerialized]
-    public int currentFocusPoints;
+    public int currentFocusPoints { get { return _currentFocusPoints; } }
     [NonSerialized]
     public int wit;
     [NonSerialized]
@@ -34,6 +32,37 @@ public class CharacterBattleData : MonoBehaviour
     public List<Skill> skills;
     [NonSerialized]
     public List<StatusEffects> activeStatusEffects;
+
+    private int _currentStress;
+    private int _currentFocusPoints;
+
+    public void IncreaseStress(int points)
+    {
+        _currentStress += points;
+        if (_currentStress > stressCapacity)
+            _currentStress = stressCapacity;
+    }
+
+    public void ReduceStress(int points)
+    {
+        _currentStress -= points;
+        if (_currentStress < 0)
+            _currentStress = 0;
+    }
+
+    public void IncreaseFocusPoints(int points)
+    {
+        _currentFocusPoints += points;
+        if (_currentFocusPoints > focusPointCapacity)
+            _currentFocusPoints = focusPointCapacity;
+    }
+
+    public void DecreaseFocusPoints(int points)
+    {
+        _currentFocusPoints -= points;
+        if (_currentFocusPoints < 0)
+            _currentFocusPoints = 0;
+    }
 
     public void MapFromScriptableObject(Character characterData) 
     {

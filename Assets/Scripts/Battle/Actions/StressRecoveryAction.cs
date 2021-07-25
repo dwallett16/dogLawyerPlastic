@@ -13,15 +13,9 @@ namespace Assets.Scripts.Battle.Actions
         {
             Debug.Log("Stress Recovery Action");
 
-            actionData.CurrentCombatantBattleData.currentFocusPoints -= actionData.SelectedSkill.FocusPointCost;
+            actionData.CurrentCombatantBattleData.DecreaseFocusPoints(actionData.SelectedSkill.FocusPointCost);
 
-
-            actionData.Target.GetComponent<CharacterBattleData>().currentStress -= actionData.ActionUtilities.CalculateStressRecoveryPower(actionData.CurrentCombatant, actionData.SelectedSkill);
-
-            if (actionData.Target.GetComponent<CharacterBattleData>().currentStress < 0)
-            {
-                actionData.Target.GetComponent<CharacterBattleData>().currentStress = 0;
-            }
+            actionData.Target.GetComponent<CharacterBattleData>().ReduceStress(actionData.ActionUtilities.CalculateStressRecoveryPower(actionData.CurrentCombatant, actionData.SelectedSkill));
 
             Debug.Log("Recovery, Target Stress: " + actionData.Target.GetComponent<CharacterBattleData>().currentStress);
         }

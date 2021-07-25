@@ -27,7 +27,7 @@ namespace Battle
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
             currentCombatantData.focusPointCapacity = 100;
-            currentCombatantData.currentFocusPoints = 100;
+            currentCombatantData.IncreaseFocusPoints(100);
             currentCombatantData.passion = 10;
 
             var actionData = new ActionData()

@@ -8,7 +8,8 @@ namespace Battle {
         public void ActReplenishesFocusPointsToCurrentTurnCharacter() {
             var restAction = new RestAction();
             var character = new GameObject();
-            character.AddComponent<CharacterBattleData>().currentFocusPoints = 10;
+            character.AddComponent<CharacterBattleData>().focusPointCapacity = 100;
+            character.GetComponent<CharacterBattleData>().IncreaseFocusPoints(10);
             var actionData = new ActionData {
                 CurrentCombatant = character
             };

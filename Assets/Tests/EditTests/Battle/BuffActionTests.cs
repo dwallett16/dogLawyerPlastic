@@ -28,12 +28,12 @@ namespace Battle
 
             var targetData = target.AddComponent<CharacterBattleData>();
             targetData.resistance = 10;
-            targetData.currentStress = 10;
+            targetData.IncreaseStress(10);
             targetData.activeStatusEffects = new List<StatusEffects> { StatusEffects.Embarrassed };
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
             currentCombatantData.focusPointCapacity = 100;
-            currentCombatantData.currentFocusPoints = 100;
+            currentCombatantData.IncreaseFocusPoints(100);
             currentCombatantData.passion = 10;
 
             var actionData = new ActionData()
@@ -68,12 +68,12 @@ namespace Battle
 
             var targetData = target.AddComponent<CharacterBattleData>();
             targetData.resistance = 10;
-            targetData.currentStress = 10;
+            targetData.IncreaseStress(10);
             targetData.activeStatusEffects = new List<StatusEffects>();
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
             currentCombatantData.focusPointCapacity = 100;
-            currentCombatantData.currentFocusPoints = 100;
+            currentCombatantData.IncreaseFocusPoints(100);
             currentCombatantData.passion = 10;
 
             var actionData = new ActionData()

@@ -7,18 +7,30 @@ public class PresentEvidenceAction : IAction
 {
     public void Act(ActionData actionData)
     {
-        var effectiveness = GetEffectiveness(actionData.CurrentCase.RelevantEvidence, actionData.CurrentCase.EffectiveEvidence, actionData.SelectedEvidence);
+        var controller = GameObject.Find("BattleController").GetComponent<BattleController>();
+        var currentCase = controller.battleData.CaseData;
+        var prosecutors = controller.Prosecutors;
+
+        var effectiveness = GetEffectiveness(currentCase.RelevantEvidence, currentCase.EffectiveEvidence, actionData.SelectedEvidence);
 
         var juryInfluencePoints = actionData.ActionUtilities.CalculateJuryPointsFromPresentedEvidence(effectiveness);
         actionData.Target.GetComponent<JuryController>().ChangePoints(juryInfluencePoints);
 
         var fpRestoration = actionData.ActionUtilities.CalculateFpRestorationFromPresentedEvidence(effectiveness);
         var spRestoration = actionData.ActionUtilities.CalculateSpRestorationFromPresentedEvidence(effectiveness);
-        foreach(GameObject prosecutor in actionData.Prosecutors)
+        foreach(GameObject prosecutor in prosecutors)
         {
             var data = prosecutor.GetComponent<CharacterBattleData>();
-            data.currentFocusPoints += fpRestoration;
-            data.currentStress -= spRestoration;
+            data.IncreaseFocusPoints(fpRestoration);
+            data.ReduceStress(spRestoration);
+        }
+        
+        if (effectiveness == EvidenceEffectivenessType.Effective)
+            controller.EffectiveEvidenceCount++;
+
+        if (controller.EffectiveEvidenceCount == 3)
+        {
+
         }
 
         Debug.Log("Presenting " + effectiveness.ToString() + " evidence. Added " + juryInfluencePoints + " jury points. Restored " + 

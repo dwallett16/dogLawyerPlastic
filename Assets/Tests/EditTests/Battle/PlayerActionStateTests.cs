@@ -37,7 +37,7 @@ namespace Battle {
                 Action = new RestAction()
             };
             var character = new GameObject();
-            character.AddComponent<CharacterBattleData>().currentFocusPoints = 10;
+            character.AddComponent<CharacterBattleData>().IncreaseFocusPoints(10);
             controller.ActionData.CurrentCombatant = character;
 
             playerActionState.Execute(controller);

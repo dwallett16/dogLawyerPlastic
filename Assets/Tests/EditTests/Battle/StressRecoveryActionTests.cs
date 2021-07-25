@@ -23,11 +23,12 @@ namespace Battle
             skill.FocusPointCost = 10;
 
             var targetData = target.AddComponent<CharacterBattleData>();
-            targetData.currentStress = 100;
+            targetData.stressCapacity = 100;
+            targetData.IncreaseStress(100);
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
             currentCombatantData.focusPointCapacity = 100;
-            currentCombatantData.currentFocusPoints = 100;
+            currentCombatantData.IncreaseFocusPoints(100);
             currentCombatantData.passion = 10;
 
             var actionData = new ActionData()

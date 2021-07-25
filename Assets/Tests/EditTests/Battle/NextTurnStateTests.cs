@@ -28,35 +28,6 @@ namespace Battle
         }
 
         [Test]
-        public void ExecuteSetsBasicActionDataProperties()
-        {
-            var state = new NextTurnState();
-            state.NewState = true;
-            var juryObject = new GameObject();
-            var controller = new BattleController
-            {
-                battleData = new BattleData
-                {
-                    CaseData = TestDataFactory.CreateCase(0)
-                },
-                Prosecutors = new List<GameObject>
-                {
-                    new GameObject()
-                }
-            };
-            NewUp(controller);
-            CreateCombatantsList(controller);
-            QueueCombatantOrder(controller, true);
-            controller.ActionData = new ActionData();
-            controller.Action = new ActionState();
-
-            state.Execute(controller);
-
-            Assert.AreEqual(controller.battleData.CaseData, controller.ActionData.CurrentCase);
-            Assert.AreEqual(controller.Prosecutors.Count(), controller.ActionData.Prosecutors.Count);
-        }
-
-        [Test]
         public void ExecuteReturnsPlayerActionSelectStateIfPlayerCharacterIsNextInTurnOrder()
         {
             var nextTurnState = new NextTurnState();

@@ -15,8 +15,6 @@ namespace Assets.Scripts.Battle.States
             controller.ActionData = new ActionData();
             controller.ActionData.CurrentCombatant = controller.AllCombatants.Dequeue();
             controller.ActionData.CurrentCombatantBattleData = controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>();
-            controller.ActionData.CurrentCase = controller.battleData.CaseData;
-            controller.ActionData.Prosecutors = controller.Prosecutors;
 
             Debug.Log("Next character type: " + controller.ActionData.CurrentCombatantBattleData.type.ToString());
 

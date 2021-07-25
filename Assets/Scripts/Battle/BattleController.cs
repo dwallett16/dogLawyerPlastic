@@ -24,6 +24,7 @@ public class BattleController : MonoBehaviour
     private bool isUsingTestData;
     [NonSerialized]
     public List<GameObject> TargetList;
+    public int EffectiveEvidenceCount;
 
     //Inputs
     public bool IsBackButtonPressed;

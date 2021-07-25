@@ -25,11 +25,12 @@ namespace Battle
 
             var targetData = target.AddComponent<CharacterBattleData>();
             targetData.resistance = 10;
-            targetData.currentStress = 10;
+            targetData.stressCapacity = 100;
+            targetData.IncreaseStress(10);
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
             currentCombatantData.focusPointCapacity = 100;
-            currentCombatantData.currentFocusPoints = 100;
+            currentCombatantData.IncreaseFocusPoints(100);
             currentCombatantData.passion = 10;
 
             var actionData = new ActionData()
@@ -59,11 +60,12 @@ namespace Battle
 
             var targetData = target.AddComponent<CharacterBattleData>();
             targetData.resistance = 10;
-            targetData.currentStress = 10;
+            targetData.stressCapacity = 100;
+            targetData.IncreaseStress(10);
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
             currentCombatantData.focusPointCapacity = 100;
-            currentCombatantData.currentFocusPoints = 100;
+            currentCombatantData.IncreaseFocusPoints(100);
             currentCombatantData.persuasion = 10;
 
             var actionData = new ActionData()
@@ -92,11 +94,12 @@ namespace Battle
             skill.FocusPointCost = 10;
 
             var targetData = target.AddComponent<CharacterBattleData>();
-            targetData.currentStress = 10;
+            targetData.stressCapacity = 100;
+            targetData.IncreaseStress(10);
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
             currentCombatantData.focusPointCapacity = 100;
-            currentCombatantData.currentFocusPoints = 100;
+            currentCombatantData.IncreaseFocusPoints(100);
             currentCombatantData.persuasion = 10;
 
             var utilities = Substitute.For<IActionUtilities>();

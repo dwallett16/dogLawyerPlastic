@@ -9,7 +9,7 @@ namespace Assets.Scripts.Battle.Actions
         {
             Debug.Log("Buff Action");
 
-            actionData.CurrentCombatantBattleData.currentFocusPoints -= actionData.SelectedSkill.FocusPointCost;
+            actionData.CurrentCombatantBattleData.DecreaseFocusPoints(actionData.SelectedSkill.FocusPointCost);
 
             actionData.Target.GetComponent<CharacterBattleData>().activeStatusEffects.AddRange(actionData.SelectedSkill.EffectsToAdd);
             foreach (var effect in actionData.SelectedSkill.EffectsToRemove)

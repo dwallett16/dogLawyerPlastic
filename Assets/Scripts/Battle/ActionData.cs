@@ -12,8 +12,6 @@ public class ActionData
     public IActionUtilities ActionUtilities;
     public string ButtonAction;
     public GameObject CurrentCombatant;
-    public List<GameObject> Prosecutors;
-    public Case CurrentCase;
     public IAction Action;
     public CharacterBattleData CurrentCombatantBattleData;
     public Skill SelectedSkill;
