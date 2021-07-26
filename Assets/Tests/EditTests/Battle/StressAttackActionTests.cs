@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Assets.Tests.EditTests;
 
 namespace Battle
 {
-    class StressAttackActionTests
+    class StressAttackActionTests: EditTestBase
     {
         [Test]
         public void SuccessfulPassionAttackIncreasesTargetStressValue()
@@ -40,6 +41,10 @@ namespace Battle
                 Target = target,
                 SelectedSkill = skill
             };
+            var utilities = Substitute.For<IActionUtilities>();
+            utilities.CalculateStressAttackPower(Arg.Any<GameObject>(), Arg.Any<Skill>()).Returns(20);
+            utilities.CalculateAttackSuccess(Arg.Any<GameObject>()).Returns(true);
+            SetActionUtilitiesMock(utilities);
 
             stressAttackAction.Act(actionData);
 
@@ -75,6 +80,10 @@ namespace Battle
                 Target = target,
                 SelectedSkill = skill
             };
+            var utilities = Substitute.For<IActionUtilities>();
+            utilities.CalculateStressAttackPower(Arg.Any<GameObject>(), Arg.Any<Skill>()).Returns(20);
+            utilities.CalculateAttackSuccess(Arg.Any<GameObject>()).Returns(true);
+            SetActionUtilitiesMock(utilities);
 
             stressAttackAction.Act(actionData);
 
@@ -112,7 +121,7 @@ namespace Battle
                 Target = target,
                 SelectedSkill = skill
             };
-            actionData.ActionUtilities = utilities;
+            SetActionUtilitiesMock(utilities);
 
             stressAttackAction.Act(actionData);
 

@@ -18,5 +18,6 @@ namespace Assets.Scripts.Battle.Actions
         int CalculateJuryPointsFromPresentedEvidence(EvidenceEffectivenessType effectiveness);
         int CalculateSpRestorationFromPresentedEvidence(EvidenceEffectivenessType effectiveness);
         int CalculateFpRestorationFromPresentedEvidence(EvidenceEffectivenessType effectiveness);
+        BattleController GetBattleController();
     }
 }

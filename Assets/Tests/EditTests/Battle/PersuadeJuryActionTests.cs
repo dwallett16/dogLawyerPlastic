@@ -1,4 +1,6 @@
 ﻿using Assets.Scripts.Battle.Actions;
+using Assets.Tests.EditTests;
+using NSubstitute;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using UnityEngine;
 
 namespace Battle
 {
-    class PersuadeJuryActionTests
+    class PersuadeJuryActionTests : EditTestBase
     {
         [Test]
         public void PersuadeJuryActionChangesJuryPoints()
@@ -37,6 +39,9 @@ namespace Battle
                 Target = target,
                 SelectedSkill = skill
             };
+            var utilities = Substitute.For<IActionUtilities>();
+            utilities.CalculateJuryPoints(Arg.Any<GameObject>(), Arg.Any<Skill>()).Returns(20);
+            SetActionUtilitiesMock(utilities);
 
             persuadeJuryAction.Act(actionData);
 

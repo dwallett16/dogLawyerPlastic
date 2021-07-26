@@ -1,7 +1,14 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Battle.Actions;
+using UnityEngine;
 
 public class ActionState : BattleState
 {
+    private readonly IActionUtilities actionUtilities;
+    public ActionState()
+    {
+        actionUtilities = new ActionUtilities();
+    }
+
     public override BattleState Execute(BattleController controller)
     {
         if(NewState) InitializeState("PlayerActionState");

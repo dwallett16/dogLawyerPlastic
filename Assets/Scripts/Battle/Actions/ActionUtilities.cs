@@ -9,6 +9,19 @@ namespace Assets.Scripts.Battle.Actions
 {
     public class ActionUtilities : IActionUtilities
     {
+        public static IActionUtilities Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new ActionUtilities();
+                }
+                return instance;
+            }
+        }
+        private static IActionUtilities instance;
+
         public void SetAction(ActionData actionData)
         {
             switch (actionData.SelectedSkill.ActionType)
@@ -141,6 +154,11 @@ namespace Assets.Scripts.Battle.Actions
                 default:
                     return 0;
             }
+        }
+
+        public BattleController GetBattleController()
+        {
+            return GameObject.Find("BattleController").GetComponent<BattleController>();
         }
     }
 }

@@ -5,11 +5,6 @@ using UnityEngine;
 
 public class ActionData
 {
-    public ActionData()
-    {
-        ActionUtilities = new ActionUtilities();
-    }
-    public IActionUtilities ActionUtilities;
     public string ButtonAction;
     public GameObject CurrentCombatant;
     public IAction Action;

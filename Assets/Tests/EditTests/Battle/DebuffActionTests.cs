@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Assets.Tests.EditTests;
 
 namespace Battle
 {
-    class DebuffActionTests
+    class DebuffActionTests : EditTestBase
     {
         [Test]
         public void SuccessfulDebuffAddsStatusEffectToTarget()
@@ -43,6 +44,10 @@ namespace Battle
                 Target = target,
                 SelectedSkill = skill
             };
+
+            var utilities = Substitute.For<IActionUtilities>();
+            utilities.CalculateDebuffSuccess(Arg.Any<GameObject>()).Returns(true);
+            SetActionUtilitiesMock(utilities);
 
             List<StatusEffects> expectedEffects = new List<StatusEffects> { StatusEffects.Embarrassed };
 
@@ -86,7 +91,7 @@ namespace Battle
                 Target = target,
                 SelectedSkill = skill
             };
-            actionData.ActionUtilities = utilities;
+            SetActionUtilitiesMock(utilities);
 
             debuffAction.Act(actionData);
 

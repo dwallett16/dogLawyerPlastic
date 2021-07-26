@@ -32,7 +32,7 @@ namespace Assets.Scripts.Battle.States
                     controller.ActionData.Target = controller.TargetList[0];
                 }
 
-                controller.ActionData.ActionUtilities.SetAction(controller.ActionData);
+                ActionUtilities.Instance.SetAction(controller.ActionData);
 
                 controller.TargetSelector.SetActive(true);
             }

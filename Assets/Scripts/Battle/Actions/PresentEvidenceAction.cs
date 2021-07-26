@@ -2,22 +2,23 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
+using Assets.Scripts.Battle.Actions;
 
 public class PresentEvidenceAction : IAction
 {
     public void Act(ActionData actionData)
     {
-        var controller = GameObject.Find("BattleController").GetComponent<BattleController>();
+        var controller = ActionUtilities.Instance.GetBattleController();
         var currentCase = controller.battleData.CaseData;
         var prosecutors = controller.Prosecutors;
 
         var effectiveness = GetEffectiveness(currentCase.RelevantEvidence, currentCase.EffectiveEvidence, actionData.SelectedEvidence);
 
-        var juryInfluencePoints = actionData.ActionUtilities.CalculateJuryPointsFromPresentedEvidence(effectiveness);
+        var juryInfluencePoints = ActionUtilities.Instance.CalculateJuryPointsFromPresentedEvidence(effectiveness);
         actionData.Target.GetComponent<JuryController>().ChangePoints(juryInfluencePoints);
 
-        var fpRestoration = actionData.ActionUtilities.CalculateFpRestorationFromPresentedEvidence(effectiveness);
-        var spRestoration = actionData.ActionUtilities.CalculateSpRestorationFromPresentedEvidence(effectiveness);
+        var fpRestoration = ActionUtilities.Instance.CalculateFpRestorationFromPresentedEvidence(effectiveness);
+        var spRestoration = ActionUtilities.Instance.CalculateSpRestorationFromPresentedEvidence(effectiveness);
         foreach(GameObject prosecutor in prosecutors)
         {
             var data = prosecutor.GetComponent<CharacterBattleData>();
@@ -30,7 +31,7 @@ public class PresentEvidenceAction : IAction
 
         if (controller.EffectiveEvidenceCount == 3)
         {
-
+            // apply stunned status effect to all DAs
         }
 
         Debug.Log("Presenting " + effectiveness.ToString() + " evidence. Added " + juryInfluencePoints + " jury points. Restored " + 
