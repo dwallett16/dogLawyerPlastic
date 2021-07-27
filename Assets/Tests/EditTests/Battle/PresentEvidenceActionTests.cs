@@ -72,6 +72,77 @@ namespace Battle
         }
 
         [Test]
+        public void ActAddsEffectiveEvidenceCountOnController()
+        {
+            var presentEvidenceAction = new PresentEvidenceAction();
+            var testCase = TestDataFactory.CreateCase(0);
+            var juryObject = new GameObject();
+            juryObject.AddComponent<JuryController>();
+            juryObject.GetComponent<JuryController>().CreateJuryData(10, 5);
+            var controller = new BattleController
+            {
+                battleData = new BattleData
+                {
+                    CaseData = testCase
+                },
+                Prosecutors = new List<GameObject>(),
+                EffectiveEvidenceCount = 0
+            };
+            var actionData = new ActionData
+            {
+                SelectedEvidence = TestDataFactory.CreateEvidence(0, testCase),
+                Target = juryObject
+            };
+            var utilitiesMock = Substitute.For<IActionUtilities>();
+            utilitiesMock.CalculateJuryPointsFromPresentedEvidence(EvidenceEffectivenessType.Relevant).Returns(25);
+            utilitiesMock.GetBattleController().Returns(controller);
+            SetActionUtilitiesMock(utilitiesMock);
+
+            presentEvidenceAction.Act(actionData);
+
+            Assert.AreEqual(1, controller.EffectiveEvidenceCount);
+        }
+
+        [Test]
+        public void ActAddsStunnedStatusEffectToDefenseAttorneysWithThirdEffectiveEvidence()
+        {
+            var presentEvidenceAction = new PresentEvidenceAction();
+            var testCase = TestDataFactory.CreateCase(0);
+            var juryObject = new GameObject();
+            juryObject.AddComponent<JuryController>();
+            juryObject.GetComponent<JuryController>().CreateJuryData(10, 5);
+            var prosecutor1 = GetProsecutor();
+            var prosecutor2 = GetProsecutor();
+            var controller = new BattleController
+            {
+                battleData = new BattleData
+                {
+                    CaseData = testCase
+                },
+                Prosecutors = new List<GameObject>
+                {
+                    prosecutor1,
+                    prosecutor2
+                },
+                EffectiveEvidenceCount = 2
+            };
+            var actionData = new ActionData
+            {
+                SelectedEvidence = TestDataFactory.CreateEvidence(0, testCase),
+                Target = juryObject
+            };
+            var utilitiesMock = Substitute.For<IActionUtilities>();
+            utilitiesMock.CalculateJuryPointsFromPresentedEvidence(EvidenceEffectivenessType.Relevant).Returns(25);
+            utilitiesMock.GetBattleController().Returns(controller);
+            SetActionUtilitiesMock(utilitiesMock);
+
+            presentEvidenceAction.Act(actionData);
+
+            Assert.AreEqual(StatusEffects.Stunned, controller.Prosecutors[0].GetComponent<CharacterBattleData>().activeStatusEffects[0]);
+            Assert.AreEqual(StatusEffects.Stunned, controller.Prosecutors[1].GetComponent<CharacterBattleData>().activeStatusEffects[0]);
+        }
+
+        [Test]
         public void ActAddsSpAndFpBasedOnEffectivenessToAllProsecutors()
         {
             var presentEvidenceAction = new PresentEvidenceAction();
@@ -86,16 +157,8 @@ namespace Battle
                     CaseData = testCase
                 }
             };
-            var prosecutor1 = new GameObject();
-            prosecutor1.AddComponent<CharacterBattleData>();
-            prosecutor1.GetComponent<CharacterBattleData>().MapFromScriptableObject(TestDataFactory.CreateCharacter(0, CharacterType.PlayerCharacter));
-            prosecutor1.GetComponent<CharacterBattleData>().stressCapacity = 100;
-            prosecutor1.GetComponent<CharacterBattleData>().IncreaseStress(100);
-            var prosecutor2 = new GameObject();
-            prosecutor2.AddComponent<CharacterBattleData>();
-            prosecutor2.GetComponent<CharacterBattleData>().MapFromScriptableObject(TestDataFactory.CreateCharacter(1, CharacterType.PlayerCharacter));
-            prosecutor2.GetComponent<CharacterBattleData>().stressCapacity = 100;
-            prosecutor2.GetComponent<CharacterBattleData>().IncreaseStress(100);
+            var prosecutor1 = GetProsecutor();
+            var prosecutor2 = GetProsecutor();
             controller.Prosecutors = new List<GameObject>
             {
                 prosecutor1,
@@ -119,6 +182,16 @@ namespace Battle
 
             Assert.AreEqual(80, controller.Prosecutors[1].GetComponent<CharacterBattleData>().currentStress);
             Assert.AreEqual(10, controller.Prosecutors[1].GetComponent<CharacterBattleData>().currentFocusPoints);
+        }
+
+        private GameObject GetProsecutor()
+        {
+            var prosecutor = new GameObject();
+            prosecutor.AddComponent<CharacterBattleData>();
+            prosecutor.GetComponent<CharacterBattleData>().MapFromScriptableObject(TestDataFactory.CreateCharacter(0, CharacterType.PlayerCharacter));
+            prosecutor.GetComponent<CharacterBattleData>().stressCapacity = 100;
+            prosecutor.GetComponent<CharacterBattleData>().IncreaseStress(100);
+            return prosecutor;
         }
     }
 }

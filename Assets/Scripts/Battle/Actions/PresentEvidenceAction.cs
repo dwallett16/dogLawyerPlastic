@@ -31,7 +31,11 @@ public class PresentEvidenceAction : IAction
 
         if (controller.EffectiveEvidenceCount == 3)
         {
-            // apply stunned status effect to all DAs
+            foreach (GameObject prosecutor in prosecutors)
+            {
+                prosecutor.GetComponent<CharacterBattleData>().AddStatusEffect(StatusEffects.Stunned);
+                Debug.Log("DA " + prosecutor.GetComponent<CharacterBattleData>().displayName + " now stunned");
+            }
         }
 
         Debug.Log("Presenting " + effectiveness.ToString() + " evidence. Added " + juryInfluencePoints + " jury points. Restored " + 

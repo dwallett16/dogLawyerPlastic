@@ -30,7 +30,6 @@ namespace Battle
             var targetData = target.AddComponent<CharacterBattleData>();
             targetData.resistance = 10;
             targetData.IncreaseStress(10);
-            targetData.activeStatusEffects = new List<StatusEffects>();
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
             currentCombatantData.focusPointCapacity = 100;
@@ -72,7 +71,6 @@ namespace Battle
 
             var targetData = target.AddComponent<CharacterBattleData>();
             targetData.IncreaseStress(10);
-            targetData.activeStatusEffects = new List<StatusEffects>();
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
             currentCombatantData.focusPointCapacity = 100;

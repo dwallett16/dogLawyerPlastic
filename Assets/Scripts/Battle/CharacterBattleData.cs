@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public class CharacterBattleData : MonoBehaviour
 {
@@ -30,11 +31,11 @@ public class CharacterBattleData : MonoBehaviour
     public AiPriorityTypes specialty;
     [NonSerialized]
     public List<Skill> skills;
-    [NonSerialized]
-    public List<StatusEffects> activeStatusEffects;
+    public List<StatusEffects> activeStatusEffects { get { return _activeStatusEffects; } }
 
     private int _currentStress;
     private int _currentFocusPoints;
+    private List<StatusEffects> _activeStatusEffects = new List<StatusEffects>();
 
     public void IncreaseStress(int points)
     {
@@ -64,6 +65,12 @@ public class CharacterBattleData : MonoBehaviour
             _currentFocusPoints = 0;
     }
 
+    public void AddStatusEffect(StatusEffects statusEffect)
+    {
+        if (!_activeStatusEffects.Any(x => x == statusEffect))
+            _activeStatusEffects.Add(statusEffect);
+    }
+
     public void MapFromScriptableObject(Character characterData) 
     {
         displayName = characterData.Name;
@@ -81,6 +88,6 @@ public class CharacterBattleData : MonoBehaviour
         if (characterData.Type != CharacterType.PlayerCharacter) {
             specialty = characterData.Specialty;
         }
-        activeStatusEffects = new List<StatusEffects>();
+        _activeStatusEffects = new List<StatusEffects>();
     }
 }
