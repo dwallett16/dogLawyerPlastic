@@ -14,10 +14,10 @@ namespace Assets.Scripts.Battle.Actions
 
             if (debuffSucceeds)
             {
-                actionData.Target.GetComponent<CharacterBattleData>().activeStatusEffects.AddRange(actionData.SelectedSkill.EffectsToAdd);
-                foreach(var effect in actionData.SelectedSkill.EffectsToRemove)
+                actionData.SelectedSkill.EffectsToAdd.ForEach((effect) => { actionData.Target.GetComponent<CharacterBattleData>().AddStatusEffect(effect); });
+                foreach (var effect in actionData.SelectedSkill.EffectsToRemove)
                 {
-                    actionData.Target.GetComponent<CharacterBattleData>().activeStatusEffects.Remove(effect);
+                    actionData.Target.GetComponent<CharacterBattleData>().RemoveStatusEffect(effect);
                 }
                 Debug.Log("Debuff Success, Added Effects: ");
                 foreach (var effect in actionData.SelectedSkill.EffectsToAdd)

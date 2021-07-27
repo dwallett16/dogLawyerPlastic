@@ -8,7 +8,7 @@ public class PlayerInventory: Inventory
         evidenceList = new List<Evidence>();
         activeCases = new List<Case>();
     }
-    public List<Evidence> EvidenceList { 
+    public IReadOnlyList<Evidence> EvidenceList { 
         get 
         {
             return evidenceList;
@@ -16,7 +16,7 @@ public class PlayerInventory: Inventory
     }
     private List<Evidence> evidenceList;
 
-    public List<Case> ActiveCases
+    public IReadOnlyList<Case> ActiveCases
     {
         get 
         {

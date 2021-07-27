@@ -31,7 +31,7 @@ public class CharacterBattleData : MonoBehaviour
     public AiPriorityTypes specialty;
     [NonSerialized]
     public List<Skill> skills;
-    public List<StatusEffects> activeStatusEffects { get { return _activeStatusEffects; } }
+    public IReadOnlyList<StatusEffects> activeStatusEffects { get { return _activeStatusEffects; } }
 
     private int _currentStress;
     private int _currentFocusPoints;
@@ -67,8 +67,13 @@ public class CharacterBattleData : MonoBehaviour
 
     public void AddStatusEffect(StatusEffects statusEffect)
     {
-        if (!_activeStatusEffects.Any(x => x == statusEffect))
+        if (!_activeStatusEffects.Contains(statusEffect))
             _activeStatusEffects.Add(statusEffect);
+    }
+
+    public void RemoveStatusEffect(StatusEffects statusEffect)
+    {
+        _activeStatusEffects.Remove(statusEffect);
     }
 
     public void MapFromScriptableObject(Character characterData) 

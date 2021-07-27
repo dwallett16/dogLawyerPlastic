@@ -9,7 +9,7 @@ public abstract class Inventory
         partyList = new List<Character>();
     }
 
-    public List<Skill> SkillsList
+    public IReadOnlyList<Skill> SkillsList
     {
         get 
         {
@@ -18,7 +18,7 @@ public abstract class Inventory
     }
     private List<Skill> skillsList;
 
-    public List<Character> PartyList
+    public IReadOnlyList<Character> PartyList
     {
         get 
         {
