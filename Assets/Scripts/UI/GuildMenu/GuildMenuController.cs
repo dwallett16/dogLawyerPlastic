@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class GuildMenuController : MonoBehaviour
 {
     public GameObject HireCanvas, BuyCanvas;
-    public GameObject HireDescription, HireStrain, HireFp, HireStress, HireList;
+    public GameObject HireDescription, HireFp, HireStress, HireList;
     public GameObject BuyDescription, BuyType, BuyPower, BuyCost, BuyList;
     public GameObject MenuItem;
     public GameObject ItemName;
@@ -75,7 +75,6 @@ public class GuildMenuController : MonoBehaviour
                 case GuildState.Hire:
                     var cData = currentItem.GetComponent<ButtonData>();
                     HireDescription.GetComponent<Text>().text = cData.Description;
-                    HireStrain.GetComponent<Text>().text = cData.Strain;
                     HireFp.GetComponent<Text>().text = cData.FocusPoints;
                     HireStress.GetComponent<Text>().text = cData.StressCapacity;
                 break;

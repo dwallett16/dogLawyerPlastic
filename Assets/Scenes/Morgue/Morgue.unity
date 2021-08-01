@@ -582,7 +582,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3.5
   smokeParticleSystem: {fileID: 0}
-  spineAnimatorController: {fileID: 0}
+  CigaretteParticleSystem: {fileID: 0}
 --- !u!114 &111209161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3822,6 +3822,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 47499547, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.024683328
+      objectReference: {fileID: 0}
+    - target: {fileID: 414861442, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 3.6305396e-11
+      objectReference: {fileID: 0}
+    - target: {fileID: 414861442, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0000000021410014
+      objectReference: {fileID: 0}
+    - target: {fileID: 414861442, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0106014805
+      objectReference: {fileID: 0}
     - target: {fileID: 519217133, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -3829,6 +3845,10 @@ PrefabInstance:
     - target: {fileID: 519217133, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 617540750, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.042208306
       objectReference: {fileID: 0}
     - target: {fileID: 768928240, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4035,6 +4055,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ef2b88cc075b545ca8305272685bdc16,
         type: 2}
+    - target: {fileID: 1848623872, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.19201045
+      objectReference: {fileID: 0}
     - target: {fileID: 1916026006, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4576,7 +4600,7 @@ PrefabInstance:
     - target: {fileID: 5467767442433314252, guid: 8727cbba2b7a441cbaac1934433eef96,
         type: 3}
       propertyPath: conversation
-      value: Agatha/Bodies
+      value: MainOptions
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8727cbba2b7a441cbaac1934433eef96, type: 3}

@@ -14,7 +14,7 @@ public class JournalController : MonoBehaviour
     public GameObject SimpleText;
     public GameObject LongText;
     public GameObject FirstHomeButton;
-    public GameObject StrainText, StressText, FocusText;
+    public GameObject StressText, FocusText;
     public GameObject TypeText, PowerText, FpCostText, SkillDescription;
     public Sprite ButtonSprite;
     public AudioClip OpenClip;
@@ -139,7 +139,6 @@ public class JournalController : MonoBehaviour
                         JournalUiConstants.ImageYStart);
                         headshot.GetComponent<Image>().sprite = cData.Image;
                         
-                        StrainText.GetComponent<Text>().text = cData.Strain;
                         StressText.GetComponent<Text>().text = cData.StressCapacity;
                         FocusText.GetComponent<Text>().text = cData.FocusPoints;
                     break;
@@ -218,7 +217,8 @@ public class JournalController : MonoBehaviour
                 caseLabel.GetComponent<Text>().text = activeCase.Name.ToUpper();
                 yPos = JournalUiConstants.ButtonLowYStart;
                 DestroyChildren(EvidenceCanvas.transform, new List<string>{Constants.MenuTag, Constants.DetailTag});
-                foreach(var e in GameDataSingletonComponent.gameData.PlayerInventory.EvidenceList) {
+                var caseEvidence = GameDataSingletonComponent.gameData.PlayerInventory.EvidenceList.Where(x => x.ParentCase.Id == activeCase.Id);
+                foreach (var e in caseEvidence) {
                     var evInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, EvidenceCanvas.transform);
                     evInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     evInst.GetComponentInChildren<Text>().text = e.Name;

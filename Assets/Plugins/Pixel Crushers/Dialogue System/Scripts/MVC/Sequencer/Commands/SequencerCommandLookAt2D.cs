@@ -39,13 +39,29 @@ namespace PixelCrushers.DialogueSystem.SequencerCommands
 
             if ((subject != null) && (target != null) && (subject != target))
             {
-                var difference = subject.position - target.position;
                 var scale = subject.transform.localScale;
-                if(difference.x < 0) {
-                    scale.x = scale.x < 0 ? scale.x * -1 : scale.x;
+                var difference = subject.position - target.position;
+                if (subject.name == Constants.PlayerTag)
+                {
+                    if (difference.x < 0)
+                    {
+                        scale.x = scale.x < 0 ? scale.x * -1f : scale.x;
+                    }
+                    else
+                    {
+                        scale.x = scale.x >= 0 ? scale.x * -1f : scale.x;
+                    }
                 }
-                else {
-                    scale.x = scale.x >=0 ? scale.x * -1 : scale.x;
+                else
+                {
+                    var facingPoint = GameObject.Find(DialogueLua.GetVariable("Conversant").AsString + "FacingPoint");
+                    var isFacingRight = facingPoint.transform.position.x - subject.position.x > 0;
+
+                    if ((!isFacingRight && difference.x < 0) || (isFacingRight && difference.x > 0))
+                    {
+                        scale.x = scale.x * -1f;
+                    }
+                    
                 }
                     
                 subject.transform.localScale = scale;
