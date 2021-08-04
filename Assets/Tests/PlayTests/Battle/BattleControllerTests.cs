@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Battle.States;
 using NUnit.Framework;
 using UnityEngine;
+using NSubstitute;
 using UnityEngine.TestTools;
 using UnityEngine.UI;
 
@@ -192,10 +193,11 @@ namespace Battle
         {
             SetupBattleScene(true);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(1f);
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
             battleController.SetButtonAction(Constants.Evidence);
             yield return new WaitForSeconds(0.3f);
+            
             var evidencePanel = GameObject.Find("EvidencePanel");
             var evidenceButtons = new List<GameObject>();
             foreach (Transform c in evidencePanel.transform)
@@ -208,6 +210,35 @@ namespace Battle
             Assert.AreEqual("evidence 0", evidenceButtons[0].GetComponent<EvidenceButtonData>().EvidenceData.Name);
             Assert.AreEqual("evidence 1", evidenceButtons[1].GetComponent<EvidenceButtonData>().EvidenceData.Name);
             Assert.AreEqual("evidence 2", evidenceButtons[2].GetComponent<EvidenceButtonData>().EvidenceData.Name);
+        }
+
+        [UnityTest]
+        public IEnumerator PlayerButtonActionEvidencePresentingEvidenceAffectsJury()
+        {
+            SetupBattleScene(true);
+
+            yield return new WaitForSeconds(1f);
+            var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
+            battleController.SetButtonAction(Constants.Evidence);
+            yield return new WaitForSeconds(0.3f);
+
+            var evidencePanel = GameObject.Find("EvidencePanel");
+            var evidenceButtons = new List<GameObject>();
+            foreach (Transform c in evidencePanel.transform)
+            {
+                if (c.gameObject.activeInHierarchy)
+                    evidenceButtons.Add(c.gameObject);
+            }
+            battleController.SetActionDataEvidence(new EvidenceButtonData { EvidenceData = CreateEvidence(0, CreateCase(0)) });
+            yield return new WaitUntil(() => battleController.CurrentState == battleController.PlayerEvidenceSelect);
+            var inputMock = Substitute.For<IInputManager>();
+            inputMock.GetButtonDown(Constants.Submit).Returns(true);
+            battleController.InputManager = inputMock;
+            battleController.MenuConfirmSelection = true;
+            yield return new WaitForSeconds(0.3f);
+            var jury = GameObject.Find("Jury");
+
+            Assert.True(jury.GetComponent<JuryController>().GetJuryPoints() > 0);
         }
 
         private void SetupBattleScene(bool useTestData, Case c = null, List<Character> testParty = null, string buttonAction = "") 
@@ -287,7 +318,18 @@ namespace Battle
                 controller.EvidenceButtons.Add(evidenceButton);
                 controller.EvidenceButtons[i].transform.SetParent(evidencePanel.transform);
             }
+            var evidenceConfirmPanel = new GameObject();
+            AddToCleanup(evidenceConfirmPanel);
+            controller.EvidenceConfirmPanel = evidenceConfirmPanel;
             controller.EvidencePanel.SetActive(false);
+
+            //Jury
+            var juryObject = new GameObject("Jury");
+            juryObject.AddComponent<JuryController>();
+            juryObject.GetComponent<JuryController>().NumberOfJurors = 5;
+            juryObject.GetComponent<JuryController>().PointsPerJuror = 10;
+            AddToCleanup(juryObject);
+            controller.Jury = juryObject;
         }
     }
 }

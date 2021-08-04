@@ -27,6 +27,7 @@ public class BattleController : MonoBehaviour
     public int EffectiveEvidenceCount;
 
     //Inputs
+    public IInputManager InputManager;
     public bool IsBackButtonPressed;
     public bool IsSubmitButtonPressed;
     public float HorizontalAxis;
@@ -61,6 +62,8 @@ public class BattleController : MonoBehaviour
         battleData = GetComponent<BattleData>();
         AllCombatants = new Queue<GameObject>();
         TargetList = new List<GameObject>();
+        InputManager = new InputManager();
+
         MapBattleData();
         InstantiateCombatants();
         OrderCombatants();
@@ -160,11 +163,11 @@ public class BattleController : MonoBehaviour
 
     private void CheckForInput() 
     {
-        IsBackButtonPressed = Input.GetButtonDown(Constants.Cancel);
-        IsSubmitButtonPressed = Input.GetButtonDown(Constants.Submit);
-        if (Input.GetButtonDown(Constants.Horizontal))
+        IsBackButtonPressed = InputManager.GetButtonDown(Constants.Cancel);
+        IsSubmitButtonPressed = InputManager.GetButtonDown(Constants.Submit);
+        if (InputManager.GetButtonDown(Constants.Horizontal))
         {
-            HorizontalAxis = Input.GetAxisRaw(Constants.Horizontal);
+            HorizontalAxis = InputManager.GetAxisRaw(Constants.Horizontal);
         }
         else
         {
