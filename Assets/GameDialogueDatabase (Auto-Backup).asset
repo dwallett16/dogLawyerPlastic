@@ -19122,10 +19122,6 @@ MonoBehaviour:
       - title: Sequence
         value: 'MoveToCharacter([lua( Variable["Conversant"] )], Player, 0.6, true);
 
-          SpineAnimation(Walk);
-
-          SpineAnimation(Idle)@0.5;
-
           LookAt2D([lua(
           Variable["Conversant"] )]Character)@0.5;
 
@@ -19952,7 +19948,7 @@ MonoBehaviour:
         y: 150.9569
         width: 160
         height: 30
-    canvasScrollPosition: {x: 121.362564, y: 14.903453}
+    canvasScrollPosition: {x: 0, y: 13.107605}
     canvasZoom: 0.9155
   - id: 7
     fields:
