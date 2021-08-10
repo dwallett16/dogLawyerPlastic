@@ -14,14 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 6
   Name: Yoga Session
-  Target: 2
+  Target: 1
+  AiPriorityType: 0
   Type: 2
-  LatentPower: 30
+  Power: 0
   StatusEffect: 
   FocusPointCost: 10
   RefreshRate: 2
-  EffectsToRemove: []
+  EffectsToRemove: 
+  EffectsToAdd: 
   Description: Yoga session description.
   SkillAnimation: {fileID: 0}
   TargetAnimation: {fileID: 0}
+  ActionType: 0
   Price: 100

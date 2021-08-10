@@ -11,7 +11,7 @@ public class ActionState : BattleState
 
     public override BattleState Execute(BattleController controller)
     {
-        if(NewState) InitializeState("PlayerActionState");
+        if(NewState) InitializeState("ActionState");
 
         controller.ActionData.Action.Act(controller.ActionData);
         

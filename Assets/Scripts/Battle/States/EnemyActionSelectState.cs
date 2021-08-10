@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.Battle.Actions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,16 +12,38 @@ namespace Assets.Scripts.Battle.States
     {
         public override BattleState Execute(BattleController controller)
         {
+            CharacterBattleData currentCombatantBattleData = controller.ActionData.CurrentCombatantBattleData;
             if (NewState) {
                 InitializeState("EnemyActionSelectState");
-                var currentCombatantBattleData = controller.ActionData.CurrentCombatant?.GetComponent<CharacterBattleData>();
                 if (currentCombatantBattleData != null)
                 {
                     Debug.Log("Current Combatant: " + currentCombatantBattleData.name);
                 }
             }
 
-            return this;
+            Skill selectedSkill = null;
+            foreach(var skill in currentCombatantBattleData.skills)
+            {
+                if(currentCombatantBattleData.currentFocusPoints >= skill.FocusPointCost)
+                {
+                    selectedSkill = skill;
+                    break;
+                }
+            }
+
+            if(selectedSkill == null)
+            {
+                controller.ActionData.Action = new RestAction();
+            }
+            else
+            {
+                controller.ActionData.Action = new StressAttackAction();
+                controller.ActionData.SelectedSkill = selectedSkill;
+                controller.ActionData.Target = controller.Prosecutors[0];
+            }
+
+            controller.Action.NewState = true;
+            return controller.Action;
         }
     }
 }

@@ -84,6 +84,7 @@ public class CharacterBattleData : MonoBehaviour
         personality = characterData.Personality;
         stressCapacity = characterData.StressCapacity;
         focusPointCapacity = characterData.FocusPointCapacity;
+        IncreaseFocusPoints(characterData.FocusPointCapacity);
         wit = characterData.Wit;
         resistance = characterData.Resistance;
         endurance = characterData.Endurance;

@@ -110,7 +110,7 @@ namespace Battle
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
             var oldFp = battleController.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().currentFocusPoints;
             battleController.SetButtonAction(Constants.Rest);
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForFixedUpdate();
             
             Assert.IsTrue(battleController.Prosecutors[0].GetComponent<CharacterBattleData>().currentFocusPoints > oldFp);
             Assert.AreEqual(battleController.ActionData.CurrentCombatant, battleController.DefenseAttorneys[0]);
