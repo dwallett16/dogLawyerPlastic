@@ -108,12 +108,12 @@ namespace Battle
 
             yield return new WaitForSeconds(0.2f);
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
+            battleController.Prosecutors[0].GetComponent<CharacterBattleData>().DecreaseFocusPoints(5);
             var oldFp = battleController.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().currentFocusPoints;
             battleController.SetButtonAction(Constants.Rest);
             yield return new WaitForFixedUpdate();
             
             Assert.IsTrue(battleController.Prosecutors[0].GetComponent<CharacterBattleData>().currentFocusPoints > oldFp);
-            Assert.AreEqual(battleController.ActionData.CurrentCombatant, battleController.DefenseAttorneys[0]);
         }
 
         [UnityTest]
