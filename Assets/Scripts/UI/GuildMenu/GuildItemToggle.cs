@@ -23,5 +23,6 @@ public class GuildItemToggle : MonoBehaviour
         for(var i = 0; i < ButtonLabels.Length; i++) {
             ButtonLabels[i].color= active ? Color.white : Color.black;
         }
+        //if(active)Debug.Log(GetComponent<RectTransform>().localPosition);
     }
 }

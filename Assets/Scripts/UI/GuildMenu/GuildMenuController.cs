@@ -40,7 +40,7 @@ public class GuildMenuController : MonoBehaviour
     void Start()
     {
         hireScrollview = HireCanvas.GetComponent<ScrollWithKey>();
-        buyScrollview = BuyCanvas.GetComponent<ScrollWithKey>();
+        //buyScrollview = BuyCanvas.GetComponent<ScrollWithKey>();
         tabSprites = new Sprite[] {HireSprite, BuySprite, FireSprite, SellSprite};
         helpBubbles = new GameObject[] {HireHelp, BuyHelp, FireHelp, SellHelp};
         var data = GameDataSingletonComponent.gameData;
@@ -117,7 +117,7 @@ public class GuildMenuController : MonoBehaviour
         ConfirmPanel.SetActive(false);
         MessagePanel.SetActive(false);
         hireScrollview.ScrollToTop();
-        buyScrollview.ScrollToTop();
+        //buyScrollview.ScrollToTop();
         var yPos = GuildUiConstants.MenuY;
         var index = 0;
         switch(state) {
