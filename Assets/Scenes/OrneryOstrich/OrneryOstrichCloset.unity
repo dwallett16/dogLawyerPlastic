@@ -2360,11 +2360,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6339554685193931732, guid: 69d0cd3e520784ec0be3a75a1e829213,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6339554685193931733, guid: 69d0cd3e520784ec0be3a75a1e829213,
         type: 3}
       propertyPath: m_RootOrder
@@ -2425,7 +2420,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6339554685193931732, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
+    - {fileID: 6339554685193931739, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 69d0cd3e520784ec0be3a75a1e829213, type: 3}
 --- !u!1001 &1317704689
 PrefabInstance:

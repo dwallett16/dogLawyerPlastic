@@ -1,5 +1,4 @@
-﻿using Spine.Unity;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Character", menuName = "Character Data")]
@@ -9,7 +8,6 @@ public class Character : ScriptableObject
     public string Name;
     public Sprite Image;
     public Material Material;
-    public SkeletonDataAsset SkeletonData;
     public CharacterType Type;
     public PersonalityTypes Personality;
     public List<Skill> Skills;
