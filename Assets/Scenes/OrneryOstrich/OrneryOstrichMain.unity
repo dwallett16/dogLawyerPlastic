@@ -9043,23 +9043,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 428496222, guid: bb10ef43b422641d3b3e4310987c368f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 2038455143, guid: bb10ef43b422641d3b3e4310987c368f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 307.53723
-      objectReference: {fileID: 0}
     - target: {fileID: 3915841001710658042, guid: bb10ef43b422641d3b3e4310987c368f,
         type: 3}
       propertyPath: m_RootOrder
       value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 3915841001710658042, guid: bb10ef43b422641d3b3e4310987c368f,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: -0.65
       objectReference: {fileID: 0}
     - target: {fileID: 3915841001710658042, guid: bb10ef43b422641d3b3e4310987c368f,
         type: 3}
