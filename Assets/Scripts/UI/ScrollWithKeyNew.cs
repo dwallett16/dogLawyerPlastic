@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,123 +8,54 @@ using UnityEngine.EventSystems;
 
 public class ScrollWithKeyNew : MonoBehaviour
 {
-    int Index;
-    int MaxIndex;
-    bool isPressUp, isPressDown, isPressConfirm;
-    [SerializeField] 
-    bool isKeyPressed;
-    RectTransform rectTransform;
-    IInputManager inputManager;
-    int verticalMovement;
-    int itemSize = 30;
-    int viewRangeStart = 0;
-    int viewRangeEnd = 0;
+    public int itemSize;
+    public int viewRangeStart; //the rect transform posY of the first menu item under Content panel. You can check this while running the scene
+    private int viewRangeEnd;
+    public RectTransform PanelMask;
+    private RectTransform contentPanel;
+    private IInputManager inputManager;
+    private int verticalMovement;
+    private int itemsInView;
 
     void Start()
     {
-        rectTransform = GetComponent<RectTransform>();
+        contentPanel = GetComponent<RectTransform>();
         inputManager = new InputManager();
-        MaxIndex = transform.childCount;
-        Debug.Log("Max index: " + MaxIndex);
-        viewRangeStart = 120;
-        viewRangeEnd = -120;
+        itemsInView = (int)PanelMask.rect.height / itemSize;
+        viewRangeEnd = viewRangeStart - ((itemsInView - 1) * itemSize);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //verticalMovement = inputManager.GetButtonDown(Constants.Vertical) ? (int)Math.Round(inputManager.GetAxisRaw(Constants.Vertical), 0) : 0;
         verticalMovement = (int)Math.Round(inputManager.GetAxisRaw(Constants.Vertical), 0);
         var mouseWheelMovement = Input.mouseScrollDelta.y;
-        //if(verticalMovement == 0 && mouseWheelMovement != 0)
-        //{
-        //    verticalMovement = (int)mouseWheelMovement;
-        //}
-        var currentItemY = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().localPosition.y;
+        var currentItemY = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().anchoredPosition.y;
         if (verticalMovement != 0)
         {
-            //if (!isKeyPressed)
-            //{
-                if (verticalMovement < 0)
+            if (verticalMovement < 0)
+            {
+                if (currentItemY < viewRangeEnd)
                 {
-                    //if (Index < MaxIndex)
-                    //{
-                        Index++;
-                        if (currentItemY < viewRangeEnd)
-                        {
-                           rectTransform.offsetMax -= new Vector2(0, -itemSize);
-                           updateRange(true);
-                        }
-                    //}
-                    //else
-                    //{
-                        //rectTransform.offsetMax = Vector2.zero;
-                    //}
-
+                    contentPanel.offsetMax -= new Vector2(0, -itemSize);
+                    updateRange(true);
                 }
-                else if (verticalMovement > 0)
+            }
+            else if (verticalMovement > 0)
+            {
+                if (currentItemY > viewRangeStart)
                 {
-
-                    //if (Index > 0)
-                    //{
-                        Index--;
-                        if (currentItemY > viewRangeStart)
-                        {
-                           rectTransform.offsetMax -= new Vector2(0, itemSize);
-                           updateRange(false);
-                        }
-                    //}
-                    //else
-                    //{
-                        //8 comes from- (maxIndex - (visibleOptions - 1)) * height 
-                        //rectTransform.offsetMax = new Vector2(0, (MaxIndex - 8) * itemSize);
-                    //}
+                    contentPanel.offsetMax -= new Vector2(0, itemSize);
+                    updateRange(false);
                 }
-                isKeyPressed = true;
-            //}
+            }
         }
-        else
-        {
-            isKeyPressed = false;
-        }
-        Debug.Log(Input.mouseScrollDelta.y);
     }
 
     private void updateRange(bool isShiftingDown)
     {
-        var amountToShift = (isShiftingDown ? -itemSize : itemSize) / 2;
+        var amountToShift = (isShiftingDown ? -itemSize : itemSize);
         viewRangeStart += amountToShift;
         viewRangeEnd += amountToShift;
-        Debug.Log("new range" + viewRangeStart + ": " + viewRangeEnd);
-    }
-
-    public void onPressUp()
-    {
-        isPressUp = true;
-    }
-
-    public void onReleaseUp()
-    {
-        isPressUp = false;
-    }
-
-    public void onPressDown()
-    {
-        isPressDown = true;
-    }
-
-    public void onReleaseDown()
-    {
-        isPressDown = false;
-    }
-
-    public void onPressConfirm()
-    {
-        isPressConfirm = true;
-    }
-
-    public void onReleaseConfirm()
-    {
-        isPressConfirm = false;
     }
 }

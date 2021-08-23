@@ -3345,7 +3345,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32849d9e43a1d904bb662c6050834852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isKeyPressed: 0
+  itemSize: 30
+  viewRangeStart: -15
+  PanelMask: {fileID: 974097125}
 --- !u!114 &1321930952 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9011467508762739435, guid: ff3d3cacfc59ce444ab5762b6c793ba2,
