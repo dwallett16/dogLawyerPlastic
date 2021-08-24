@@ -116,7 +116,7 @@ public class GuildMenuController : MonoBehaviour
     void UpdateGuildData(GuildState state) {
         ConfirmPanel.SetActive(false);
         MessagePanel.SetActive(false);
-        hireScrollview.ScrollToTop();
+        //hireScrollview.ScrollToTop();
         //buyScrollview.ScrollToTop();
         var yPos = GuildUiConstants.MenuY;
         var index = 0;
