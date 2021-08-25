@@ -27,8 +27,6 @@ public class GuildMenuController : MonoBehaviour
     private GuildState previousState;
     private GameObject currentItem;
     private GameObject selectedItem;
-    private ScrollWithKey hireScrollview;
-    private ScrollWithKey buyScrollview;
     private bool isConfirmation;
     private bool isSuccessfulTransaction;
     private GuildState[] tabs = new GuildState[] {GuildState.Hire, GuildState.Buy, GuildState.Fire, GuildState.Sell};
@@ -39,8 +37,6 @@ public class GuildMenuController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hireScrollview = HireCanvas.GetComponent<ScrollWithKey>();
-        //buyScrollview = BuyCanvas.GetComponent<ScrollWithKey>();
         tabSprites = new Sprite[] {HireSprite, BuySprite, FireSprite, SellSprite};
         helpBubbles = new GameObject[] {HireHelp, BuyHelp, FireHelp, SellHelp};
         var data = GameDataSingletonComponent.gameData;
@@ -59,7 +55,9 @@ public class GuildMenuController : MonoBehaviour
                 currentState = GuildState.Confirm;
             }
             else if(currentState == GuildState.Confirm) {
-               HandleConfirmation();
+                HireList.GetComponentInChildren<ScrollableList>().enabled = true;
+                BuyList.GetComponentInChildren<ScrollableList>().enabled = true;
+                HandleConfirmation();
             }
             else if(currentState == GuildState.Message) {
                 currentState = previousState;
@@ -68,7 +66,7 @@ public class GuildMenuController : MonoBehaviour
             UpdateGuildData(currentState);
         }
 
-        if(currentItem != EventSystem.current.currentSelectedGameObject) {
+        if(EventSystem.current.currentSelectedGameObject != null && currentItem != EventSystem.current.currentSelectedGameObject) {
             currentItem = EventSystem.current.currentSelectedGameObject;
             switch(currentState) {
                 case GuildState.Fire:
@@ -116,8 +114,6 @@ public class GuildMenuController : MonoBehaviour
     void UpdateGuildData(GuildState state) {
         ConfirmPanel.SetActive(false);
         MessagePanel.SetActive(false);
-        //hireScrollview.ScrollToTop();
-        //buyScrollview.ScrollToTop();
         var yPos = GuildUiConstants.MenuY;
         var index = 0;
         switch(state) {
@@ -236,6 +232,8 @@ public class GuildMenuController : MonoBehaviour
                 }
             break;
             case GuildState.Confirm:
+                HireList.GetComponentInChildren<ScrollableList>().enabled = false;
+                BuyList.GetComponentInChildren<ScrollableList>().enabled = false;
                 selectedItem = currentItem;
                 ConfirmPanel.SetActive(true);
                 ConfirmText.GetComponent<Text>().text = GetConfirmText(previousState);
@@ -244,7 +242,8 @@ public class GuildMenuController : MonoBehaviour
             case GuildState.Message:
                 MessagePanel.SetActive(true);
                 MessageText.GetComponent<Text>().text = GetMessageText(previousState);
-            break;
+                EventSystem.current.SetSelectedGameObject(null);
+                break;
         }
     }
 

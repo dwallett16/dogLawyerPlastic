@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ScrollWithKeyNew : MonoBehaviour
+public class ScrollableList : MonoBehaviour
 {
     public int itemHeight;
     public int viewRangeStart; //the rect transform posY of the first menu item created under Content panel. Check this while running the scene
@@ -20,14 +20,13 @@ public class ScrollWithKeyNew : MonoBehaviour
 
     void Start()
     {
-        contentPanel = GetComponent<RectTransform>();
-        inputManager = new InputManager();
-        itemsInView = (int)PanelMask.rect.height / itemHeight;
-        viewRangeEnd = viewRangeStart - ((itemsInView - 1) * itemHeight);
+        Initialize();
     }
 
     void Update()
     {
+        if (EventSystem.current.currentSelectedGameObject == null)
+            return;
         verticalMovement = (int)Math.Round(inputManager.GetAxisRaw(Constants.Vertical), 0);
         currentItemY = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().anchoredPosition.y;
         if (verticalMovement != 0)
@@ -53,6 +52,7 @@ public class ScrollWithKeyNew : MonoBehaviour
 
     void OnEnable()
     {
+        Initialize();
         if(contentPanel != null && contentPanel.childCount > 0)
         {
             EventSystem.current.SetSelectedGameObject(contentPanel.GetChild(0).gameObject);
@@ -71,6 +71,14 @@ public class ScrollWithKeyNew : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Initialize()
+    {
+        contentPanel = GetComponent<RectTransform>();
+        inputManager = new InputManager();
+        itemsInView = (int)PanelMask.rect.height / itemHeight;
+        viewRangeEnd = viewRangeStart - ((itemsInView - 1) * itemHeight);
     }
 
     private void updateRange(bool isShiftingDown)

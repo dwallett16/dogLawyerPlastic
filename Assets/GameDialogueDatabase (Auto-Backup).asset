@@ -19120,13 +19120,18 @@ MonoBehaviour:
         type: 0
         typeString: CustomFieldType_Text
       - title: Sequence
-        value: 'MoveToCharacter([lua( Variable["Conversant"] )], Player, 0.6, true);
+        value: 'AnimatorPlay(WalkDogLawyer, Player, 0.6);
 
-          LookAt2D([lua(
-          Variable["Conversant"] )]Character)@0.5;
+          MoveToCharacter([lua(
+          Variable["Conversant"] )], Player, 0.6, true);
 
-          LookAt2D(Player, [lua(
-          Variable["Conversant"] )]Character)@0.7;'
+          AnimatorPlay(Idle,
+          Player, 0);
+
+          LookAt2D([lua( Variable["Conversant"] )]Character)@0.5;
+
+          LookAt2D(Player,
+          [lua( Variable["Conversant"] )]Character)@0.7;'
         type: 0
         typeString: CustomFieldType_Text
       conversationID: 7
