@@ -32,6 +32,9 @@ public class GuildMenuController : MonoBehaviour
     private Sprite[] tabSprites;
     private int tabIndex = 0;
     private GameObject[] helpBubbles;
+    private bool skipFrame;
+    private int mouseClicks;
+    private float timeBetweenClicks = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -47,31 +50,53 @@ public class GuildMenuController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (EventSystem.current.currentSelectedGameObject != null && currentItem != EventSystem.current.currentSelectedGameObject) {
-        currentItem = EventSystem.current.currentSelectedGameObject;
-        switch(currentState) {
-            case GuildState.Fire:
-            case GuildState.Hire:
-                var cData = currentItem.GetComponent<ButtonData>();
-                HireDescription.GetComponent<Text>().text = cData.Description;
-                HireFp.GetComponent<Text>().text = cData.FocusPoints;
-                HireStress.GetComponent<Text>().text = cData.StressCapacity;
-            break;
-            case GuildState.Sell:
-            case GuildState.Buy:
-                var sData = currentItem.GetComponent<ButtonData>();
-                BuyDescription.GetComponent<Text>().text = sData.Description;
-                BuyType.GetComponent<Text>().text = sData.SkillType.ToString();
-                BuyPower.GetComponent<Text>().text = Constants.GetLatentPowerDefinition(sData.LatentPower);
-                BuyCost.GetComponent<Text>().text = sData.FpCost.ToString();
-            break;
-            case GuildState.Message:
-            case GuildState.Confirm:
-            break;
+        if(mouseClicks == 1)
+        {
+            timeBetweenClicks -= Time.deltaTime;
+            if(timeBetweenClicks <= 0)
+            {
+                mouseClicks = 0;
+                timeBetweenClicks = 1f;
+            }
         }
+        if(skipFrame)
+        {
+            skipFrame = false;
+            return;
         }
 
-        if(Input.GetButtonDown(Constants.Horizontal)) {
+        if((Input.GetButtonDown(Constants.Submit) || Input.GetKeyDown("mouse 0")) && currentState == GuildState.Message) 
+        {
+            currentState = previousState;
+            UpdateGuildData(currentState);
+        }
+
+        if (EventSystem.current.currentSelectedGameObject != null && currentItem != EventSystem.current.currentSelectedGameObject) {
+            mouseClicks = 0;
+            currentItem = EventSystem.current.currentSelectedGameObject;
+            switch (currentState) {
+                case GuildState.Fire:
+                case GuildState.Hire:
+                    var cData = currentItem.GetComponent<ButtonData>();
+                    HireDescription.GetComponent<Text>().text = cData.Description;
+                    HireFp.GetComponent<Text>().text = cData.FocusPoints;
+                    HireStress.GetComponent<Text>().text = cData.StressCapacity;
+                break;
+                case GuildState.Sell:
+                case GuildState.Buy:
+                    var sData = currentItem.GetComponent<ButtonData>();
+                    BuyDescription.GetComponent<Text>().text = sData.Description;
+                    BuyType.GetComponent<Text>().text = sData.SkillType.ToString();
+                    BuyPower.GetComponent<Text>().text = Constants.GetLatentPowerDefinition(sData.LatentPower);
+                    BuyCost.GetComponent<Text>().text = sData.FpCost.ToString();
+                break;
+                case GuildState.Message:
+                case GuildState.Confirm:
+                break;
+            }
+        }
+
+        if(Input.GetButtonDown(Constants.Horizontal) && currentState != GuildState.Confirm && currentState != GuildState.Message) {
             var dir = Input.GetAxisRaw(Constants.Horizontal) < 0 ? -1 : 1;
             if(tabIndex + dir >= tabs.Length)
                 tabIndex = tabs.Length - 1;
@@ -237,6 +262,7 @@ public class GuildMenuController : MonoBehaviour
         HandleConfirmationClick();
         HandleConfirmation(true);
         UpdateGuildData(currentState);
+        skipFrame = true;
     }
 
     public void CancelSelection()
@@ -244,10 +270,16 @@ public class GuildMenuController : MonoBehaviour
         HandleConfirmationClick();
         HandleConfirmation(false);
         UpdateGuildData(currentState);
+        skipFrame = true;
     }
 
     private void MenuItemClick()
     {
+        mouseClicks++;
+        if(mouseClicks < 2 && !Input.GetButtonDown(Constants.Submit))
+        {
+            return;
+        }
         if (currentState != GuildState.Confirm && currentState != GuildState.Message)
         {
             previousState = currentState;
