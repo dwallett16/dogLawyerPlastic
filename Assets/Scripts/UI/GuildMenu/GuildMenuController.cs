@@ -15,6 +15,7 @@ public class GuildMenuController : MonoBehaviour
     public GameObject ItemCost;
     public GameObject ConfirmPanel;
     public GameObject ConfirmYes;
+    public GameObject ConfirmNo;
     public GameObject MessagePanel;
     public GameObject MessageText;
     public GameObject ConfirmText;
@@ -26,6 +27,7 @@ public class GuildMenuController : MonoBehaviour
     private GuildState currentState;
     private GuildState previousState;
     private GameObject currentItem;
+    private GameObject previousItem;
     private GameObject selectedItem;
     private bool isSuccessfulTransaction;
     private GuildState[] tabs = new GuildState[] {GuildState.Hire, GuildState.Buy, GuildState.Fire, GuildState.Sell};
@@ -34,7 +36,7 @@ public class GuildMenuController : MonoBehaviour
     private GameObject[] helpBubbles;
     private bool skipFrame;
     private int mouseClicks;
-    private float timeBetweenClicks = 1f;
+    private float timeBetweenClicks = 0.6f;
 
     // Start is called before the first frame update
     void Start()
@@ -65,15 +67,34 @@ public class GuildMenuController : MonoBehaviour
             return;
         }
 
-        if((Input.GetButtonDown(Constants.Submit) || Input.GetKeyDown("mouse 0")) && currentState == GuildState.Message) 
+        if(currentState == GuildState.Message)
         {
-            currentState = previousState;
-            UpdateGuildData(currentState);
+            if (Input.GetButtonDown(Constants.Submit) || Input.GetKeyDown("mouse 0")) 
+            {
+                currentState = previousState;
+                UpdateGuildData(currentState);
+            }
+
+        }
+        else if(currentState == GuildState.Confirm)
+        {
+            if(EventSystem.current.currentSelectedGameObject != ConfirmYes && EventSystem.current.currentSelectedGameObject != ConfirmNo)
+            {
+                EventSystem.current.SetSelectedGameObject(previousItem);
+            }
+        }
+        else
+        {
+            if(EventSystem.current.currentSelectedGameObject == null)
+            {
+                EventSystem.current.SetSelectedGameObject(previousItem);
+            }
         }
 
         if (EventSystem.current.currentSelectedGameObject != null && currentItem != EventSystem.current.currentSelectedGameObject) {
             mouseClicks = 0;
             currentItem = EventSystem.current.currentSelectedGameObject;
+            previousItem = currentItem;
             switch (currentState) {
                 case GuildState.Fire:
                 case GuildState.Hire:
@@ -244,6 +265,14 @@ public class GuildMenuController : MonoBehaviour
             case GuildState.Confirm:
                 HireList.GetComponentInChildren<ScrollableList>().enabled = false;
                 BuyList.GetComponentInChildren<ScrollableList>().enabled = false;
+                foreach (Transform c in HireList.transform)
+                {
+                    var buttonItem = c.GetComponent<Button>().interactable = false;
+                }
+                foreach (Transform c in BuyList.transform)
+                {
+                    var buttonItem = c.GetComponent<Button>().interactable = false;
+                }
                 selectedItem = currentItem;
                 ConfirmPanel.SetActive(true);
                 ConfirmText.GetComponent<Text>().text = GetConfirmText(previousState);

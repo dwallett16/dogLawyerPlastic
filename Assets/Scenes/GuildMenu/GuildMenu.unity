@@ -347,6 +347,7 @@ MonoBehaviour:
     type: 3}
   ConfirmPanel: {fileID: 1432202710}
   ConfirmYes: {fileID: 632010370}
+  ConfirmNo: {fileID: 581315077}
   MessagePanel: {fileID: 525161650}
   MessageText: {fileID: 2118064292}
   ConfirmText: {fileID: 1417938355}
@@ -2391,6 +2392,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 525399116}
   m_CullTransparentMesh: 0
+--- !u!1 &581315077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1596058297528750704, guid: cf5d3f09fdf1c004bba629a826116271,
+    type: 3}
+  m_PrefabInstance: {fileID: 41622731}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &615119844 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2029872120754640087, guid: 5545dbf5031439845b0b06d365de966c,
@@ -3635,7 +3642,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 41622731}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 581315077}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
