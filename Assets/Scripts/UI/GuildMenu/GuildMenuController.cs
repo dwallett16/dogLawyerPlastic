@@ -125,20 +125,12 @@ public class GuildMenuController : MonoBehaviour
                 tabIndex = 0;
             else
                 tabIndex += dir;
-            currentState = tabs[tabIndex];
-            Background.GetComponent<Image>().sprite = tabSprites[tabIndex];
-            for(var i = 0; i < tabs.Length; i++) {
-                if(i == tabIndex)
-                    helpBubbles[i].SetActive(true);
-                else
-                    helpBubbles[i].SetActive(false);
-            }
 
-            UpdateGuildData(currentState);
+            ChangeTab(tabIndex);
         }
     }
 
-    void UpdateGuildData(GuildState state) {
+    private void UpdateGuildData(GuildState state) {
         ConfirmPanel.SetActive(false);
         MessagePanel.SetActive(false);
         var yPos = GuildUiConstants.MenuY;
@@ -300,6 +292,24 @@ public class GuildMenuController : MonoBehaviour
         HandleConfirmation(false);
         UpdateGuildData(currentState);
         skipFrame = true;
+    }
+
+    public void ChangeTab(int tabIndex)
+    {
+        if (currentState == GuildState.Confirm || currentState == GuildState.Message)
+            return;
+        this.tabIndex = tabIndex;
+        currentState = tabs[tabIndex];
+        Background.GetComponent<Image>().sprite = tabSprites[tabIndex];
+        for (var i = 0; i < tabs.Length; i++)
+        {
+            if (i == tabIndex)
+                helpBubbles[i].SetActive(true);
+            else
+                helpBubbles[i].SetActive(false);
+        }
+
+        UpdateGuildData(currentState);
     }
 
     private void MenuItemClick()
