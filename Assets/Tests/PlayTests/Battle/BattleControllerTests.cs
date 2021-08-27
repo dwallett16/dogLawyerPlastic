@@ -111,8 +111,8 @@ namespace Battle
             battleController.Prosecutors[0].GetComponent<CharacterBattleData>().DecreaseFocusPoints(5);
             var oldFp = battleController.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().currentFocusPoints;
             battleController.SetButtonAction(Constants.Rest);
-            yield return new WaitForFixedUpdate();
-            
+            yield return new WaitForSeconds(0.1f);
+
             Assert.IsTrue(battleController.Prosecutors[0].GetComponent<CharacterBattleData>().currentFocusPoints > oldFp);
         }
 
