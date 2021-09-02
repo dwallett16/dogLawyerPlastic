@@ -52,6 +52,7 @@ public class BattleController : MonoBehaviour
     public PlayerSkillSelectState PlayerSkillSelect;
     public PlayerTargetSelectState PlayerTargetSelect;
     public PlayerEvidenceSelectState PlayerEvidenceSelect;
+    public EndTurnState EndTurn;
 
     // Start is called before the first frame update
     void Start()
@@ -77,6 +78,7 @@ public class BattleController : MonoBehaviour
         PlayerSkillSelect = new PlayerSkillSelectState();
         PlayerTargetSelect = new PlayerTargetSelectState();
         PlayerEvidenceSelect = new PlayerEvidenceSelectState();
+        EndTurn = new EndTurnState();
 
         CurrentState = Initial;
     }

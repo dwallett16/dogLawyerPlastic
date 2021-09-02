@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using Assets.Scripts.Battle;
 
 namespace Battle
 {
@@ -29,7 +30,7 @@ namespace Battle
             var targetData = target.AddComponent<CharacterBattleData>();
             targetData.resistance = 10;
             targetData.IncreaseStress(10);
-            targetData.AddStatusEffect(StatusEffects.Embarrassed);
+            targetData.AddStatusEffect(StatusEffects.Embarrassed, 2);
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
             currentCombatantData.focusPointCapacity = 100;
@@ -44,12 +45,12 @@ namespace Battle
                 SelectedSkill = skill
             };
 
-            List<StatusEffects> expectedEffects = new List<StatusEffects>();
+            List<ActiveStatusEffect> expectedEffects = new List<ActiveStatusEffect>();
 
             buffAction.Act(actionData);
 
             Assert.AreEqual(90, currentCombatantData.currentFocusPoints);
-            Assert.AreEqual(expectedEffects, targetData.activeStatusEffects);
+            Assert.AreEqual(expectedEffects, targetData.ActiveStatusEffects);
         }
 
         [Test]
@@ -65,6 +66,7 @@ namespace Battle
             skill.EffectsToAdd = new List<StatusEffects>();
             skill.EffectsToRemove = new List<StatusEffects>();
             skill.EffectsToAdd.Add(StatusEffects.Pumped);
+            skill.StatusEffectTurnCount = 1;
 
             var targetData = target.AddComponent<CharacterBattleData>();
             targetData.resistance = 10;
@@ -83,12 +85,12 @@ namespace Battle
                 SelectedSkill = skill
             };
 
-            List<StatusEffects> expectedEffects = new List<StatusEffects> { StatusEffects.Pumped };
+            List<ActiveStatusEffect> expectedEffects = new List<ActiveStatusEffect> { new ActiveStatusEffect(StatusEffects.Pumped, 1) };
 
             buffAction.Act(actionData);
 
             Assert.AreEqual(90, currentCombatantData.currentFocusPoints);
-            Assert.AreEqual(expectedEffects, targetData.activeStatusEffects);
+            Assert.AreEqual(expectedEffects[0].StatusEffect, targetData.ActiveStatusEffects[0].StatusEffect);
         }
     }
 }

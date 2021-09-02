@@ -14,10 +14,7 @@ public class ActionState : BattleState
         if(NewState) InitializeState("ActionState");
 
         controller.ActionData.Action.Act(controller.ActionData);
-        
-        controller.AllCombatants.Enqueue(controller.ActionData.CurrentCombatant);
 
-        controller.NextTurn.NewState = true;
-        return controller.NextTurn;
+        return controller.EndTurn;
     }
 }

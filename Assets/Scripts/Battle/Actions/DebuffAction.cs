@@ -14,7 +14,7 @@ namespace Assets.Scripts.Battle.Actions
 
             if (debuffSucceeds)
             {
-                actionData.SelectedSkill.EffectsToAdd.ForEach((effect) => { actionData.Target.GetComponent<CharacterBattleData>().AddStatusEffect(effect); });
+                actionData.SelectedSkill.EffectsToAdd.ForEach((effect) => { actionData.Target.GetComponent<CharacterBattleData>().AddStatusEffect(effect, actionData.SelectedSkill.StatusEffectTurnCount); });
                 foreach (var effect in actionData.SelectedSkill.EffectsToRemove)
                 {
                     actionData.Target.GetComponent<CharacterBattleData>().RemoveStatusEffect(effect);

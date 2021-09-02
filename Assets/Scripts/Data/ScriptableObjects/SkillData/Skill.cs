@@ -16,6 +16,7 @@ public class Skill : ScriptableObject
     public int RefreshRate;
     public List<StatusEffects> EffectsToRemove;
     public List<StatusEffects> EffectsToAdd;
+    public int StatusEffectTurnCount;
     public string Description;
     public Animation SkillAnimation;
     public Animation TargetAnimation;

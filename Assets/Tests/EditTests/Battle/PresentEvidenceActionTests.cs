@@ -138,8 +138,8 @@ namespace Battle
 
             presentEvidenceAction.Act(actionData);
 
-            Assert.AreEqual(StatusEffects.Stunned, controller.Prosecutors[0].GetComponent<CharacterBattleData>().activeStatusEffects[0]);
-            Assert.AreEqual(StatusEffects.Stunned, controller.Prosecutors[1].GetComponent<CharacterBattleData>().activeStatusEffects[0]);
+            Assert.AreEqual(StatusEffects.Stunned, controller.Prosecutors[0].GetComponent<CharacterBattleData>().ActiveStatusEffects[0].StatusEffect);
+            Assert.AreEqual(StatusEffects.Stunned, controller.Prosecutors[1].GetComponent<CharacterBattleData>().ActiveStatusEffects[0].StatusEffect);
         }
 
         [Test]

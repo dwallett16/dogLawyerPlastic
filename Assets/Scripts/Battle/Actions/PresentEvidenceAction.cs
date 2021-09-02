@@ -33,7 +33,7 @@ public class PresentEvidenceAction : IAction
         {
             foreach (GameObject prosecutor in prosecutors)
             {
-                prosecutor.GetComponent<CharacterBattleData>().AddStatusEffect(StatusEffects.Stunned);
+                prosecutor.GetComponent<CharacterBattleData>().AddStatusEffect(StatusEffects.Stunned, 3);
                 Debug.Log("DA " + prosecutor.GetComponent<CharacterBattleData>().displayName + " now stunned");
             }
         }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Assets.Tests.EditTests;
+using Assets.Scripts.Battle;
 
 namespace Battle
 {
@@ -26,6 +27,7 @@ namespace Battle
             skill.EffectsToAdd = new List<StatusEffects>();
             skill.EffectsToRemove = new List<StatusEffects>();
             skill.EffectsToAdd.Add(StatusEffects.Embarrassed);
+            skill.StatusEffectTurnCount = 1;
 
             var targetData = target.AddComponent<CharacterBattleData>();
             targetData.resistance = 10;
@@ -48,12 +50,12 @@ namespace Battle
             utilities.CalculateDebuffSuccess(Arg.Any<GameObject>()).Returns(true);
             SetActionUtilitiesMock(utilities);
 
-            List<StatusEffects> expectedEffects = new List<StatusEffects> { StatusEffects.Embarrassed };
+            List<ActiveStatusEffect> expectedEffects = new List<ActiveStatusEffect> { new ActiveStatusEffect(StatusEffects.Embarrassed, 1) };
 
             debuffAction.Act(actionData);
 
             Assert.AreEqual(90, currentCombatantData.currentFocusPoints);
-            Assert.AreEqual(expectedEffects, targetData.activeStatusEffects);
+            Assert.AreEqual(expectedEffects[0].StatusEffect, targetData.ActiveStatusEffects[0].StatusEffect);
         }
 
         [Test]
@@ -80,7 +82,7 @@ namespace Battle
             var utilities = Substitute.For<IActionUtilities>();
             utilities.CalculateDebuffSuccess(Arg.Any<GameObject>()).Returns(false);
 
-            List<StatusEffects> expectedEffects = new List<StatusEffects>();
+            List<ActiveStatusEffect> expectedEffects = new List<ActiveStatusEffect>();
 
             var actionData = new ActionData()
             {
@@ -94,7 +96,7 @@ namespace Battle
             debuffAction.Act(actionData);
 
             Assert.AreEqual(90, currentCombatantData.currentFocusPoints);
-            Assert.AreEqual(expectedEffects, targetData.activeStatusEffects);
+            Assert.AreEqual(expectedEffects, targetData.ActiveStatusEffects);
         }
     }
 }

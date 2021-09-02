@@ -12,6 +12,10 @@ namespace Assets.Scripts.Battle.States
         public override BattleState Execute(BattleController controller)
         {
             InitializeState("NextTurnState");
+            //Current combatant is shifted to the end of the turn order
+            controller.AllCombatants.Enqueue(controller.ActionData.CurrentCombatant);
+
+            //Prepare next combatant
             controller.ActionData = new ActionData();
             controller.ActionData.CurrentCombatant = controller.AllCombatants.Dequeue();
             controller.ActionData.CurrentCombatantBattleData = controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>();

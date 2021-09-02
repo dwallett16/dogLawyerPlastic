@@ -8,7 +8,7 @@ namespace Battle {
     public class PlayerActionStateTests
     {
         [Test]
-        public void ExecuteReturnsNextTurnState() {
+        public void ExecuteReturnsEndTurnState() {
             var playerActionState = new ActionState();
             var controller = new BattleController();
             NewUp(controller);
@@ -19,30 +19,11 @@ namespace Battle {
                 CurrentCombatant = controller.AllCombatants.Dequeue()
             };
             controller.AllCombatants = new Queue<GameObject>();
-            controller.NextTurn = new NextTurnState();
+            controller.EndTurn = new EndTurnState();
 
             var result = playerActionState.Execute(controller);
 
-            Assert.IsInstanceOf<NextTurnState>(result);
-        }
-
-        [Test]
-        public void ExecutePutsCurrentCombatantToEndOfQueue() {
-            var playerActionState = new ActionState();
-            var controller = new BattleController();
-            NewUp(controller);
-            CreateCombatantsList(controller);
-            QueueCombatantOrder(controller, true);
-            controller.ActionData = new ActionData {
-                Action = new RestAction()
-            };
-            var character = new GameObject();
-            character.AddComponent<CharacterBattleData>().IncreaseFocusPoints(10);
-            controller.ActionData.CurrentCombatant = character;
-
-            playerActionState.Execute(controller);
-
-            Assert.AreEqual(character, controller.AllCombatants.ToArray()[controller.AllCombatants.Count-1]);
+            Assert.IsInstanceOf<EndTurnState>(result);
         }
 
         private void CreateCombatantsList(BattleController battleController)

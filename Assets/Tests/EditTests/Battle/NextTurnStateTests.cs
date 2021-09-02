@@ -28,6 +28,29 @@ namespace Battle
         }
 
         [Test]
+        public void ExecutePutsCurrentCombatantToEndOfQueue()
+        {
+            var nextTurnState = new NextTurnState();
+            var controller = new BattleController();
+            NewUp(controller);
+            CreateCombatantsList(controller);
+            QueueCombatantOrder(controller, true);
+
+            var character = new GameObject();
+            character.AddComponent<CharacterBattleData>().IncreaseFocusPoints(10);
+            controller.ActionData = new ActionData
+            {
+                Action = new RestAction()
+            };
+            controller.ActionData.CurrentCombatant = character;
+
+
+            nextTurnState.Execute(controller);
+
+            Assert.AreEqual(character, controller.AllCombatants.ToArray()[controller.AllCombatants.Count - 1]);
+        }
+
+        [Test]
         public void ExecuteReturnsPlayerActionSelectStateIfPlayerCharacterIsNextInTurnOrder()
         {
             var nextTurnState = new NextTurnState();
@@ -37,6 +60,12 @@ namespace Battle
 
             CreateCombatantsList(battleController);
             QueueCombatantOrder(battleController, true);
+
+            battleController.ActionData = new ActionData
+            {
+                Action = new RestAction(),
+                CurrentCombatant = new GameObject()
+            };
 
             var result = nextTurnState.Execute(battleController);
 
@@ -52,6 +81,12 @@ namespace Battle
             NewUp(battleController);
             CreateCombatantsList(battleController);
             QueueCombatantOrder(battleController, false);
+
+            battleController.ActionData = new ActionData
+            {
+                Action = new RestAction(),
+                CurrentCombatant = new GameObject()
+            };
 
             var result = nextTurnState.Execute(battleController);
 

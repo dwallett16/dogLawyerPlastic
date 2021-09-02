@@ -2,6 +2,7 @@
 using UnityEngine;
 using System;
 using System.Linq;
+using Assets.Scripts.Battle;
 
 public class CharacterBattleData : MonoBehaviour
 {
@@ -31,11 +32,11 @@ public class CharacterBattleData : MonoBehaviour
     public AiPriorityTypes specialty;
     [NonSerialized]
     public List<Skill> skills;
-    public IReadOnlyList<StatusEffects> activeStatusEffects { get { return _activeStatusEffects; } }
+    public IReadOnlyList<ActiveStatusEffect> ActiveStatusEffects { get { return _activeStatusEffects; } }
 
     private int _currentStress;
     private int _currentFocusPoints;
-    private List<StatusEffects> _activeStatusEffects = new List<StatusEffects>();
+    private List<ActiveStatusEffect> _activeStatusEffects = new List<ActiveStatusEffect>();
 
     public void IncreaseStress(int points)
     {
@@ -65,15 +66,17 @@ public class CharacterBattleData : MonoBehaviour
             _currentFocusPoints = 0;
     }
 
-    public void AddStatusEffect(StatusEffects statusEffect)
+    public void AddStatusEffect(StatusEffects statusEffect, int statusEffectTurnCount)
     {
-        if (!_activeStatusEffects.Contains(statusEffect))
-            _activeStatusEffects.Add(statusEffect);
+        if (!_activeStatusEffects.Exists(s => s.StatusEffect == statusEffect))
+        {
+            _activeStatusEffects.Add(new ActiveStatusEffect(statusEffect, statusEffectTurnCount));
+        }
     }
 
     public void RemoveStatusEffect(StatusEffects statusEffect)
     {
-        _activeStatusEffects.Remove(statusEffect);
+        _activeStatusEffects.RemoveAll(s => s.StatusEffect == statusEffect);
     }
 
     public void MapFromScriptableObject(Character characterData) 
@@ -94,6 +97,6 @@ public class CharacterBattleData : MonoBehaviour
         if (characterData.Type != CharacterType.PlayerCharacter) {
             specialty = characterData.Specialty;
         }
-        _activeStatusEffects = new List<StatusEffects>();
+        _activeStatusEffects = new List<ActiveStatusEffect>();
     }
 }
