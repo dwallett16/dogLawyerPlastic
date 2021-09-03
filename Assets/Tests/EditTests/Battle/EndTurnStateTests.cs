@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Battle.States;
+using Assets.Scripts.Data.ScriptableObjects.StatusEffectData;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -44,8 +45,10 @@ namespace Battle
                 CurrentCombatant = controller.Prosecutors[0]
             };
 
+            var embarrassedEffect = new StatusEffect { Name = "Embarrassed" };
+
             controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().MapFromScriptableObject(new Character());
-            controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().AddStatusEffect(StatusEffects.Embarrassed, 3);
+            controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().AddStatusEffect(embarrassedEffect, 3);
 
             var result = state.Execute(controller);
 
@@ -65,8 +68,10 @@ namespace Battle
                 CurrentCombatant = controller.Prosecutors[0]
             };
 
+            var embarrassedEffect = new StatusEffect { Name = "Embarrassed" };
+
             controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().MapFromScriptableObject(new Character());
-            controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().AddStatusEffect(StatusEffects.Embarrassed, 1);
+            controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().AddStatusEffect(embarrassedEffect, 1);
 
             var result = state.Execute(controller);
 

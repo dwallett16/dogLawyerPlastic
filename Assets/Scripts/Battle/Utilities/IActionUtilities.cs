@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.Battle.Actions
+namespace Assets.Scripts.Battle.Utilities
 {
     public interface IActionUtilities
     {

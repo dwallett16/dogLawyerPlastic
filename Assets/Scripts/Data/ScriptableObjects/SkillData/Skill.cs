@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Data.ScriptableObjects.StatusEffectData;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,8 +15,8 @@ public class Skill : ScriptableObject
     public string StatusEffect;
     public int FocusPointCost;
     public int RefreshRate;
-    public List<StatusEffects> EffectsToRemove;
-    public List<StatusEffects> EffectsToAdd;
+    public List<StatusEffect> EffectsToRemove;
+    public List<StatusEffect> EffectsToAdd;
     public int StatusEffectTurnCount;
     public string Description;
     public Animation SkillAnimation;

@@ -15,13 +15,17 @@ MonoBehaviour:
   Id: 3
   Name: Shoulder Rub
   Target: 1
+  AiPriorityType: 0
   Type: 1
-  LatentPower: 20
+  Power: 0
   StatusEffect: 
   FocusPointCost: 8
   RefreshRate: 0
-  EffectsToRemove: []
+  EffectsToRemove: 00000000
+  EffectsToAdd: 
+  StatusEffectTurnCount: 0
   Description: Reduces stress of ally by 20%
   SkillAnimation: {fileID: 0}
   TargetAnimation: {fileID: 0}
+  ActionType: 0
   Price: 100

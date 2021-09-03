@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using Assets.Scripts.Battle;
+using Assets.Scripts.Data.ScriptableObjects.StatusEffectData;
 
 public class CharacterBattleData : MonoBehaviour
 {
@@ -66,17 +67,17 @@ public class CharacterBattleData : MonoBehaviour
             _currentFocusPoints = 0;
     }
 
-    public void AddStatusEffect(StatusEffects statusEffect, int statusEffectTurnCount)
+    public void AddStatusEffect(StatusEffect statusEffect, int statusEffectTurnCount)
     {
-        if (!_activeStatusEffects.Exists(s => s.StatusEffect == statusEffect))
+        if (!_activeStatusEffects.Exists(s => s.StatusEffect.Name == statusEffect.Name))
         {
             _activeStatusEffects.Add(new ActiveStatusEffect(statusEffect, statusEffectTurnCount));
         }
     }
 
-    public void RemoveStatusEffect(StatusEffects statusEffect)
+    public void RemoveStatusEffect(StatusEffect statusEffect)
     {
-        _activeStatusEffects.RemoveAll(s => s.StatusEffect == statusEffect);
+        _activeStatusEffects.RemoveAll(s => s.StatusEffect.Name == statusEffect.Name);
     }
 
     public void MapFromScriptableObject(Character characterData) 

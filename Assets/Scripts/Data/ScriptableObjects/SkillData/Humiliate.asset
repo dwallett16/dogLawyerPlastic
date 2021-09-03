@@ -23,6 +23,7 @@ MonoBehaviour:
   RefreshRate: 3
   EffectsToRemove: 
   EffectsToAdd: 00000000
+  StatusEffectTurnCount: 1
   Description: Inflicts Embarrassed status effect.
   SkillAnimation: {fileID: 0}
   TargetAnimation: {fileID: 0}

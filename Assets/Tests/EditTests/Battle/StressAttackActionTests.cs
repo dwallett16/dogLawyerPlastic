@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Assets.Tests.EditTests;
+using Assets.Scripts.Battle.Utilities;
 
 namespace Battle
 {

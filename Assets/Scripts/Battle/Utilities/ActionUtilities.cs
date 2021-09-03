@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Assets.Scripts.Battle.Actions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts.Battle.Actions
+namespace Assets.Scripts.Battle.Utilities
 {
     public class ActionUtilities : IActionUtilities
     {
@@ -102,21 +103,21 @@ namespace Assets.Scripts.Battle.Actions
             }
         }
 
-        public int CalculateJuryPointsFromPresentedEvidence(EvidenceEffectivenessType effectiveness) 
+        public int CalculateJuryPointsFromPresentedEvidence(EvidenceEffectivenessType effectiveness)
         {
-            switch(effectiveness) 
+            switch (effectiveness)
             {
                 case EvidenceEffectivenessType.Effective:
-                return 20;
+                    return 20;
 
                 case EvidenceEffectivenessType.Relevant:
-                return 10;
+                    return 10;
 
                 case EvidenceEffectivenessType.Ineffective:
-                return 0;
+                    return 0;
 
                 default:
-                return 0;
+                    return 0;
             }
         }
 

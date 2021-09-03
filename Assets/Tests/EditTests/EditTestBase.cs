@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Battle.Actions;
+﻿using Assets.Scripts.Battle.Utilities;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

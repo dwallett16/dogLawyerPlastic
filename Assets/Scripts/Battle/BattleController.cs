@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Linq;
 using Assets.Scripts.Battle.States;
 using System;
+using Assets.Scripts.Data.ScriptableObjects.StatusEffectData;
 
 public class BattleController : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class BattleController : MonoBehaviour
     [NonSerialized]
     public List<GameObject> TargetList;
     public int EffectiveEvidenceCount;
+    public StatusEffect StunnedEffect;
 
     //Inputs
     public IInputManager InputManager;

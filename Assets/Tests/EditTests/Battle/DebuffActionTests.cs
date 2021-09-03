@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Assets.Tests.EditTests;
 using Assets.Scripts.Battle;
+using Assets.Scripts.Battle.Utilities;
+using Assets.Scripts.Data.ScriptableObjects.StatusEffectData;
 
 namespace Battle
 {
@@ -24,9 +26,12 @@ namespace Battle
             skill.Type = SkillTypes.Passion;
             skill.Power = 10;
             skill.FocusPointCost = 10;
-            skill.EffectsToAdd = new List<StatusEffects>();
-            skill.EffectsToRemove = new List<StatusEffects>();
-            skill.EffectsToAdd.Add(StatusEffects.Embarrassed);
+
+            var embarrassedEffect = new StatusEffect { Name = "Embarrassed" };
+
+            skill.EffectsToAdd = new List<StatusEffect>();
+            skill.EffectsToRemove = new List<StatusEffect>();
+            skill.EffectsToAdd.Add(embarrassedEffect);
             skill.StatusEffectTurnCount = 1;
 
             var targetData = target.AddComponent<CharacterBattleData>();
@@ -50,7 +55,7 @@ namespace Battle
             utilities.CalculateDebuffSuccess(Arg.Any<GameObject>()).Returns(true);
             SetActionUtilitiesMock(utilities);
 
-            List<ActiveStatusEffect> expectedEffects = new List<ActiveStatusEffect> { new ActiveStatusEffect(StatusEffects.Embarrassed, 1) };
+            List<ActiveStatusEffect> expectedEffects = new List<ActiveStatusEffect> { new ActiveStatusEffect(embarrassedEffect, 1) };
 
             debuffAction.Act(actionData);
 
@@ -68,8 +73,11 @@ namespace Battle
             skill.Type = SkillTypes.Persuasion;
             skill.Power = 10;
             skill.FocusPointCost = 10;
-            skill.EffectsToAdd = new List<StatusEffects>();
-            skill.EffectsToAdd.Add(StatusEffects.Embarrassed);
+
+            var embarrassedEffect = new StatusEffect { Name = "Embarrassed" };
+
+            skill.EffectsToAdd = new List<StatusEffect>();
+            skill.EffectsToAdd.Add(embarrassedEffect);
 
             var targetData = target.AddComponent<CharacterBattleData>();
             targetData.IncreaseStress(10);

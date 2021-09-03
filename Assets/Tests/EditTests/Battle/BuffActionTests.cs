@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Assets.Scripts.Battle;
+using Assets.Scripts.Data.ScriptableObjects.StatusEffectData;
 
 namespace Battle
 {
@@ -23,14 +24,17 @@ namespace Battle
             skill.Type = SkillTypes.Passion;
             skill.Power = 10;
             skill.FocusPointCost = 10;
-            skill.EffectsToAdd = new List<StatusEffects>();
-            skill.EffectsToRemove = new List<StatusEffects>();
-            skill.EffectsToRemove.Add(StatusEffects.Embarrassed);
+
+            var embarrassedEffect = new StatusEffect { Name = "Embarrassed" };
+
+            skill.EffectsToAdd = new List<StatusEffect>();
+            skill.EffectsToRemove = new List<StatusEffect>();
+            skill.EffectsToRemove.Add(embarrassedEffect);
 
             var targetData = target.AddComponent<CharacterBattleData>();
             targetData.resistance = 10;
             targetData.IncreaseStress(10);
-            targetData.AddStatusEffect(StatusEffects.Embarrassed, 2);
+            targetData.AddStatusEffect(embarrassedEffect, 2);
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
             currentCombatantData.focusPointCapacity = 100;
@@ -63,9 +67,12 @@ namespace Battle
             skill.Type = SkillTypes.Passion;
             skill.Power = 10;
             skill.FocusPointCost = 10;
-            skill.EffectsToAdd = new List<StatusEffects>();
-            skill.EffectsToRemove = new List<StatusEffects>();
-            skill.EffectsToAdd.Add(StatusEffects.Pumped);
+
+            var embarrassedEffect = new StatusEffect { Name = "Embarrassed" };
+
+            skill.EffectsToAdd = new List<StatusEffect>();
+            skill.EffectsToRemove = new List<StatusEffect>();
+            skill.EffectsToAdd.Add(embarrassedEffect);
             skill.StatusEffectTurnCount = 1;
 
             var targetData = target.AddComponent<CharacterBattleData>();
@@ -85,7 +92,7 @@ namespace Battle
                 SelectedSkill = skill
             };
 
-            List<ActiveStatusEffect> expectedEffects = new List<ActiveStatusEffect> { new ActiveStatusEffect(StatusEffects.Pumped, 1) };
+            List<ActiveStatusEffect> expectedEffects = new List<ActiveStatusEffect> { new ActiveStatusEffect(embarrassedEffect, 1) };
 
             buffAction.Act(actionData);
 

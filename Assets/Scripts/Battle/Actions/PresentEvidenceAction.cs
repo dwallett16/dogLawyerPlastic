@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
-using Assets.Scripts.Battle.Actions;
+using Assets.Scripts.Battle.Utilities;
 
 public class PresentEvidenceAction : IAction
 {
@@ -33,7 +33,7 @@ public class PresentEvidenceAction : IAction
         {
             foreach (GameObject prosecutor in prosecutors)
             {
-                prosecutor.GetComponent<CharacterBattleData>().AddStatusEffect(StatusEffects.Stunned, 3);
+                prosecutor.GetComponent<CharacterBattleData>().AddStatusEffect(controller.StunnedEffect, 3);
                 Debug.Log("DA " + prosecutor.GetComponent<CharacterBattleData>().displayName + " now stunned");
             }
         }

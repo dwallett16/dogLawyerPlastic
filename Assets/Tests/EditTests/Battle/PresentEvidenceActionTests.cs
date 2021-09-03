@@ -1,5 +1,5 @@
-﻿
-using Assets.Scripts.Battle.Actions;
+﻿using Assets.Scripts.Battle.Utilities;
+using Assets.Scripts.Data.ScriptableObjects.StatusEffectData;
 using Assets.Tests.EditTests;
 using NSubstitute;
 using NUnit.Framework;
@@ -106,6 +106,7 @@ namespace Battle
         [Test]
         public void ActAddsStunnedStatusEffectToDefenseAttorneysWithThirdEffectiveEvidence()
         {
+            var stunnedEffect = new StatusEffect { Name = "Stunned" };
             var presentEvidenceAction = new PresentEvidenceAction();
             var testCase = TestDataFactory.CreateCase(0);
             var juryObject = new GameObject();
@@ -124,7 +125,8 @@ namespace Battle
                     prosecutor1,
                     prosecutor2
                 },
-                EffectiveEvidenceCount = 2
+                EffectiveEvidenceCount = 2,
+                StunnedEffect = stunnedEffect
             };
             var actionData = new ActionData
             {
@@ -138,8 +140,9 @@ namespace Battle
 
             presentEvidenceAction.Act(actionData);
 
-            Assert.AreEqual(StatusEffects.Stunned, controller.Prosecutors[0].GetComponent<CharacterBattleData>().ActiveStatusEffects[0].StatusEffect);
-            Assert.AreEqual(StatusEffects.Stunned, controller.Prosecutors[1].GetComponent<CharacterBattleData>().ActiveStatusEffects[0].StatusEffect);
+
+            Assert.AreEqual(stunnedEffect, controller.Prosecutors[0].GetComponent<CharacterBattleData>().ActiveStatusEffects[0].StatusEffect.Name);
+            Assert.AreEqual(stunnedEffect, controller.Prosecutors[1].GetComponent<CharacterBattleData>().ActiveStatusEffects[0].StatusEffect.Name);
         }
 
         [Test]
