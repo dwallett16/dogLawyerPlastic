@@ -106,7 +106,7 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 8ff91e0a3a171af4e8e14e3d1accfd1d,
+    m_HighlightedSprite: {fileID: 21300000, guid: 918b58659c3182440b4bec5b9113cc3f,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 8ff91e0a3a171af4e8e14e3d1accfd1d, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: 8ff91e0a3a171af4e8e14e3d1accfd1d, type: 3}
@@ -134,6 +134,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd31d21c363aa7f4097fffafc80e980d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HighlightedBackground: {fileID: 21300000, guid: 918b58659c3182440b4bec5b9113cc3f,
+    type: 3}
 --- !u!114 &5851230128131799669
 MonoBehaviour:
   m_ObjectHideFlags: 0

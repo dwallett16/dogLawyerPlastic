@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a485c1bc2d8f6c4480b302b216150a7, type: 3}
-  m_Name: Stunned
+  m_Name: StunnedEffect
   m_EditorClassIdentifier: 
   Id: 0
   Name: 
+  EffectDescription: Description of the nonstandard effect. This is for documentation
+    only; no code will reference this value.
   UsePercentages: 0
   IsRecurring: 0
   AdjustImmediately: 0
   NonstandardEffect: 0
-  NonstandardEffectDescription: 
   ResistanceAdjustment: 0
   EnduranceAdjustment: 0
   PassionAdjustment: 0
