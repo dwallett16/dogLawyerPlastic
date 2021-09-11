@@ -10,13 +10,16 @@ public class ScrollableList : MonoBehaviour
 {
     public int itemHeight;
     public int viewRangeStart; //the rect transform posY of the first menu item created under Content panel. Check this while running the scene
-    private int viewRangeEnd;
+    public GameObject ScrollIndicatorUp;
+    public GameObject ScrollIndicatorDown;
     public RectTransform PanelMask;
+    private int viewRangeEnd;
     private RectTransform contentPanel;
     private IInputManager inputManager;
     private int verticalMovement;
     private int itemsInView;
     private float currentItemY;
+    private bool initializedIndicators;
 
     void Start()
     {
@@ -25,6 +28,11 @@ public class ScrollableList : MonoBehaviour
 
     void Update()
     {
+        if(!initializedIndicators)
+        {
+            initializedIndicators = true;
+            ScrollIndicatorDown.SetActive(contentPanel.childCount > itemsInView);
+        }
         if (EventSystem.current.currentSelectedGameObject == null)
             return;
         verticalMovement = (int)Math.Round(inputManager.GetAxisRaw(Constants.Vertical), 0);
@@ -79,6 +87,8 @@ public class ScrollableList : MonoBehaviour
         inputManager = new InputManager();
         itemsInView = (int)PanelMask.rect.height / itemHeight;
         viewRangeEnd = viewRangeStart - ((itemsInView - 1) * itemHeight);
+        ScrollIndicatorUp.SetActive(false);
+        ScrollIndicatorDown.SetActive(contentPanel.childCount > itemsInView);
     }
 
     private void updateRange(bool isShiftingDown)
@@ -86,5 +96,10 @@ public class ScrollableList : MonoBehaviour
         var amountToShift = (isShiftingDown ? -itemHeight : itemHeight);
         viewRangeStart += amountToShift;
         viewRangeEnd += amountToShift;
+        var firstItemY = contentPanel.GetChild(0).GetComponent<RectTransform>().anchoredPosition.y;
+        var lastItemY = contentPanel.GetChild(contentPanel.childCount-1).GetComponent<RectTransform>().anchoredPosition.y;
+
+        ScrollIndicatorUp.SetActive(firstItemY > viewRangeStart);
+        ScrollIndicatorDown.SetActive(lastItemY < viewRangeEnd);
     }
 }
