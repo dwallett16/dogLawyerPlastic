@@ -7,9 +7,11 @@ using UnityEngine.EventSystems;
 
 public class GuildMenuController : MonoBehaviour
 {
-    public GameObject HireCanvas, BuyCanvas;
+    public GameObject HireCanvas, BuyCanvas, FireCanvas, SellCanvas;
     public GameObject HireDescription, HireFp, HireStress, HireList;
     public GameObject BuyDescription, BuyType, BuyPower, BuyCost, BuyList;
+    public GameObject FireDescription, FireFp, FireStress, FireList;
+    public GameObject SellDescription, SellType, SellPower, SellCost, SellList;
     public GameObject MenuItem;
     public GameObject ItemName;
     public GameObject ItemCost;
@@ -97,6 +99,11 @@ public class GuildMenuController : MonoBehaviour
             previousItem = currentItem;
             switch (currentState) {
                 case GuildState.Fire:
+                    var fData = currentItem.GetComponent<ButtonData>();
+                    FireDescription.GetComponent<Text>().text = fData.Description;
+                    FireFp.GetComponent<Text>().text = fData.FocusPoints;
+                    FireStress.GetComponent<Text>().text = fData.StressCapacity;
+                    break;
                 case GuildState.Hire:
                     var cData = currentItem.GetComponent<ButtonData>();
                     HireDescription.GetComponent<Text>().text = cData.Description;
@@ -104,6 +111,12 @@ public class GuildMenuController : MonoBehaviour
                     HireStress.GetComponent<Text>().text = cData.StressCapacity;
                 break;
                 case GuildState.Sell:
+                    var sellData = currentItem.GetComponent<ButtonData>();
+                    SellDescription.GetComponent<Text>().text = sellData.Description;
+                    SellType.GetComponent<Text>().text = sellData.SkillType.ToString();
+                    SellPower.GetComponent<Text>().text = Constants.GetLatentPowerDefinition(sellData.LatentPower);
+                    SellCost.GetComponent<Text>().text = sellData.FpCost.ToString();
+                    break;
                 case GuildState.Buy:
                     var sData = currentItem.GetComponent<ButtonData>();
                     BuyDescription.GetComponent<Text>().text = sData.Description;
@@ -139,6 +152,8 @@ public class GuildMenuController : MonoBehaviour
             case GuildState.Hire:
                 HireCanvas.SetActive(true);
                 BuyCanvas.SetActive(false);
+                FireCanvas.SetActive(false);
+                SellCanvas.SetActive(false);
                 DestroyChildren(HireList.transform, new List<string>{Constants.MenuTag});
                 foreach(var p in GameDataSingletonComponent.gameData.GuildInventory.PartyList) {
                     var pInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, HireList.transform);
@@ -168,6 +183,8 @@ public class GuildMenuController : MonoBehaviour
             case GuildState.Buy:
                 HireCanvas.SetActive(false);
                 BuyCanvas.SetActive(true);
+                FireCanvas.SetActive(false);
+                SellCanvas.SetActive(false);
                 DestroyChildren(BuyList.transform, new List<string>{Constants.MenuTag});
                 foreach(var s in GameDataSingletonComponent.gameData.GuildInventory.SkillsList) {
                     var sInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, BuyList.transform);
@@ -196,11 +213,13 @@ public class GuildMenuController : MonoBehaviour
                 }
             break;
             case GuildState.Fire:
-                HireCanvas.SetActive(true);
+                HireCanvas.SetActive(false);
                 BuyCanvas.SetActive(false);
-                DestroyChildren(HireList.transform, new List<string>{Constants.MenuTag});
+                FireCanvas.SetActive(true);
+                SellCanvas.SetActive(false);
+                DestroyChildren(FireList.transform, new List<string>{Constants.MenuTag});
                 foreach(var p in GameDataSingletonComponent.gameData.PlayerInventory.PartyList) {
-                    var pInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, HireList.transform);
+                    var pInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, FireList.transform);
                     pInst.GetComponent<Button>().onClick.AddListener(MenuItemClick);
                     pInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(GuildUiConstants.MenuX, yPos);
                     pInst.name = pInst.name + index;
@@ -226,10 +245,12 @@ public class GuildMenuController : MonoBehaviour
             break;
             case GuildState.Sell:
                 HireCanvas.SetActive(false);
-                BuyCanvas.SetActive(true);
-                DestroyChildren(BuyList.transform, new List<string>{Constants.MenuTag});
+                BuyCanvas.SetActive(false);
+                FireCanvas.SetActive(false);
+                SellCanvas.SetActive(true);
+                DestroyChildren(SellList.transform, new List<string>{Constants.MenuTag});
                 foreach(var s in GameDataSingletonComponent.gameData.PlayerInventory.SkillsList) {
-                    var sInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, BuyList.transform);
+                    var sInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, SellList.transform);
                     sInst.GetComponent<Button>().onClick.AddListener(MenuItemClick);
                     sInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(GuildUiConstants.MenuX, yPos);
                     sInst.name = sInst.name + index;
