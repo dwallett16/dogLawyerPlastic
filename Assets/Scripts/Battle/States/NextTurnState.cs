@@ -13,7 +13,8 @@ namespace Assets.Scripts.Battle.States
         {
             InitializeState("NextTurnState");
             //Current combatant is shifted to the end of the turn order
-            controller.AllCombatants.Enqueue(controller.ActionData.CurrentCombatant);
+            if(controller.ActionData.CurrentCombatant != null)
+                controller.AllCombatants.Enqueue(controller.ActionData.CurrentCombatant);
 
             //Prepare next combatant
             controller.ActionData = new ActionData();
