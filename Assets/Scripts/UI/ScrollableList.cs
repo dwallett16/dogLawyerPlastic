@@ -19,22 +19,31 @@ public class ScrollableList : MonoBehaviour
     private int verticalMovement;
     private int itemsInView;
     private float currentItemY;
-    private bool initializedIndicators;
+    private bool callInitialize;
+    private bool callResetRange;
 
     void Start()
     {
-        Initialize();
+        callInitialize = true; //doing this because content panel child objects arent instantiated by the time start is called. need to do this in update method
+        callResetRange = false;
     }
 
     void Update()
     {
-        if(!initializedIndicators)
+        if(callInitialize)
         {
-            initializedIndicators = true;
-            ScrollIndicatorDown.SetActive(contentPanel.childCount > itemsInView);
+            callInitialize = false;
+            Initialize();
+            if(callResetRange)
+            {
+                callResetRange = false;
+                resetRange();
+            }
         }
+
         if (EventSystem.current.currentSelectedGameObject == null)
             return;
+
         verticalMovement = (int)Math.Round(inputManager.GetAxisRaw(Constants.Vertical), 0);
         currentItemY = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().anchoredPosition.y;
         if (verticalMovement != 0)
@@ -60,12 +69,40 @@ public class ScrollableList : MonoBehaviour
 
     void OnEnable()
     {
-        Initialize();
-        if(contentPanel != null && contentPanel.childCount > 0)
+        callInitialize = true;
+        callResetRange = true;
+    }
+
+    private void Initialize()
+    {
+        contentPanel = GetComponent<RectTransform>();
+        inputManager = new InputManager();
+        itemsInView = (int)PanelMask.rect.height / itemHeight;
+        viewRangeEnd = viewRangeStart - ((itemsInView - 1) * itemHeight);
+
+        ScrollIndicatorUp.SetActive(false);
+        ScrollIndicatorDown.SetActive(contentPanel.childCount > 0 && contentPanel.childCount > itemsInView);
+    }
+
+    private void updateRange(bool isShiftingDown)
+    {
+        var amountToShift = (isShiftingDown ? -itemHeight : itemHeight);
+        viewRangeStart += amountToShift;
+        viewRangeEnd += amountToShift;
+        var firstItemY = contentPanel.GetChild(0).GetComponent<RectTransform>().anchoredPosition.y;
+        var lastItemY = contentPanel.GetChild(contentPanel.childCount-1).GetComponent<RectTransform>().anchoredPosition.y;
+
+        ScrollIndicatorUp.SetActive(firstItemY > viewRangeStart);
+        ScrollIndicatorDown.SetActive(lastItemY < viewRangeEnd);
+    }
+
+    private void resetRange()
+    {
+        if (contentPanel != null && contentPanel.childCount > 0)
         {
             EventSystem.current.SetSelectedGameObject(contentPanel.GetChild(0).gameObject);
             currentItemY = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>().anchoredPosition.y;
-            while(currentItemY < viewRangeEnd || currentItemY > viewRangeStart)
+            while (currentItemY < viewRangeEnd || currentItemY > viewRangeStart)
             {
                 if (currentItemY < viewRangeEnd)
                 {
@@ -79,27 +116,5 @@ public class ScrollableList : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void Initialize()
-    {
-        contentPanel = GetComponent<RectTransform>();
-        inputManager = new InputManager();
-        itemsInView = (int)PanelMask.rect.height / itemHeight;
-        viewRangeEnd = viewRangeStart - ((itemsInView - 1) * itemHeight);
-        ScrollIndicatorUp.SetActive(false);
-        ScrollIndicatorDown.SetActive(contentPanel.childCount > itemsInView);
-    }
-
-    private void updateRange(bool isShiftingDown)
-    {
-        var amountToShift = (isShiftingDown ? -itemHeight : itemHeight);
-        viewRangeStart += amountToShift;
-        viewRangeEnd += amountToShift;
-        var firstItemY = contentPanel.GetChild(0).GetComponent<RectTransform>().anchoredPosition.y;
-        var lastItemY = contentPanel.GetChild(contentPanel.childCount-1).GetComponent<RectTransform>().anchoredPosition.y;
-
-        ScrollIndicatorUp.SetActive(firstItemY > viewRangeStart);
-        ScrollIndicatorDown.SetActive(lastItemY < viewRangeEnd);
     }
 }
