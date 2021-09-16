@@ -6,7 +6,6 @@ using UnityEngine.EventSystems;
 
 public class GuildItemToggle : MonoBehaviour
 {
-    private Image Background;
     private Text[] ButtonLabels;
 
     void Start() 
