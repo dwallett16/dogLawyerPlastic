@@ -17,11 +17,15 @@ namespace Assets.Scripts.Battle.States
                 controller.AllCombatants.Enqueue(controller.ActionData.CurrentCombatant);
 
             //Prepare next combatant
-            controller.ActionData = new ActionData();
-            controller.ActionData.CurrentCombatant = controller.AllCombatants.Dequeue();
-            controller.ActionData.CurrentCombatantBattleData = controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>();
+            PrepareNextCombatant(controller);
 
             Debug.Log("Next character type: " + controller.ActionData.CurrentCombatantBattleData.type.ToString());
+
+            if (controller.ActionData.CurrentCombatantBattleData.ActiveStatusEffects.Any(s => s.StatusEffect == controller.StunnedEffect))
+            {
+                Debug.Log(controller.ActionData.CurrentCombatantBattleData.displayName + " is Stunned. Skipping turn.");
+                return controller.EndTurn;
+            }
 
             if (controller.ActionData.CurrentCombatantBattleData.type == CharacterType.PlayerCharacter)
             {
@@ -33,6 +37,13 @@ namespace Assets.Scripts.Battle.States
                 controller.EnemyActionSelect.NewState = true;
                 return controller.EnemyActionSelect;
             }
+        }
+
+        private void PrepareNextCombatant(BattleController controller)
+        {
+            controller.ActionData = new ActionData();
+            controller.ActionData.CurrentCombatant = controller.AllCombatants.Dequeue();
+            controller.ActionData.CurrentCombatantBattleData = controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>();
         }
     }
 }

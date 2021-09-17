@@ -12,9 +12,6 @@ namespace Assets.Scripts.Battle.States
         public override BattleState Execute(BattleController controller)
         {
             InitializeState("EndTurnState");
-            
-
-            //FUTURE CARD -- execute recurring stress/focus/etc?
 
             var currentCombatantBattleData = controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>();
 

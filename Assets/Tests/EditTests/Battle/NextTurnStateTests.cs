@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assets.Scripts.Battle.States;
+using Assets.Scripts.Data.ScriptableObjects.StatusEffectData;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -94,6 +95,29 @@ namespace Battle
         }
 
         [Test]
+        public void ExecuteReturnsEndTurnStateIfNextCombatantIsStunned()
+        {
+            var nextTurnState = new NextTurnState();
+            var battleController = new BattleController();
+
+            NewUp(battleController);
+            CreateCombatantsList(battleController);
+            QueueCombatantOrder(battleController, false);
+
+            battleController.ActionData = new ActionData
+            {
+                Action = new RestAction(),
+                CurrentCombatant = new GameObject()
+            };
+
+            battleController.DefenseAttorneys[0].GetComponent<CharacterBattleData>().AddStatusEffect(battleController.StunnedEffect, 3);
+
+            var result = nextTurnState.Execute(battleController);
+
+            Assert.IsInstanceOf<EndTurnState>(result);
+        }
+
+        [Test]
         public void ExecuteClearsActionData()
         {
             var nextTurnState = new NextTurnState();
@@ -155,7 +179,9 @@ namespace Battle
             battleController.PlayerActionSelect = new PlayerActionSelectState();
             battleController.Initial = new InitialState();
             battleController.EnemyActionSelect = new EnemyActionSelectState();
+            battleController.EndTurn = new EndTurnState();
             battleController.battleData = new BattleData();
+            battleController.StunnedEffect = new StatusEffect { Name = "Stunned" };
         }
     }
 }

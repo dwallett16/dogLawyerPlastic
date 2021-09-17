@@ -16,10 +16,9 @@ MonoBehaviour:
   Name: Stunned
   EffectDescription: Character will be unable to take any Action on their turn.
   UsePercentages: 0
-  IsRecurring: 1
+  IsRecurring: 0
   AdjustImmediately: 0
   DoNotRestoreOnExpiration: 0
-  DoNotIgnoreZero: 0
   NonstandardEffect: 1
   ResistanceAdjustment: 0
   EnduranceAdjustment: 0
