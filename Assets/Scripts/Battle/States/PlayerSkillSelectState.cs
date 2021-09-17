@@ -13,14 +13,14 @@ public class PlayerSkillSelectState : BattleState
             controller.TargetSelector.SetActive(false);
             for(int i = 0; i < controller.SkillButtons.Count; i++)
             {
-                if (i < controller.ActionData.CurrentCombatantBattleData.skills.Count)
+                if (i < controller.ActionData.CurrentCombatantBattleData.Skills.Count)
                 {
                     if(i == 0)
                         EventSystem.current?.SetSelectedGameObject(controller.SkillButtons[i]);
 
                     controller.SkillButtons[i].SetActive(true);
-                    controller.SkillButtons[i].GetComponentInChildren<Text>().text = controller.ActionData.CurrentCombatantBattleData.skills[i].Name;
-                    controller.SkillButtons[i].GetComponent<SkillButtonData>().SkillData = controller.ActionData.CurrentCombatantBattleData.skills[i];
+                    controller.SkillButtons[i].GetComponentInChildren<Text>().text = controller.ActionData.CurrentCombatantBattleData.Skills[i].Name;
+                    controller.SkillButtons[i].GetComponent<SkillButtonData>().SkillData = controller.ActionData.CurrentCombatantBattleData.Skills[i];
                 }
                 else
                 {

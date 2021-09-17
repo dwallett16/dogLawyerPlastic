@@ -180,19 +180,19 @@ namespace Battle
 
             presentEvidenceAction.Act(actionData);
 
-            Assert.AreEqual(80, controller.Prosecutors[0].GetComponent<CharacterBattleData>().currentStress);
-            Assert.AreEqual(10, controller.Prosecutors[0].GetComponent<CharacterBattleData>().currentFocusPoints);
+            Assert.AreEqual(80, controller.Prosecutors[0].GetComponent<CharacterBattleData>().CurrentStress);
+            Assert.AreEqual(10, controller.Prosecutors[0].GetComponent<CharacterBattleData>().CurrentFocusPoints);
 
-            Assert.AreEqual(80, controller.Prosecutors[1].GetComponent<CharacterBattleData>().currentStress);
-            Assert.AreEqual(10, controller.Prosecutors[1].GetComponent<CharacterBattleData>().currentFocusPoints);
+            Assert.AreEqual(80, controller.Prosecutors[1].GetComponent<CharacterBattleData>().CurrentStress);
+            Assert.AreEqual(10, controller.Prosecutors[1].GetComponent<CharacterBattleData>().CurrentFocusPoints);
         }
 
         private GameObject GetProsecutor()
         {
             var prosecutor = new GameObject();
             prosecutor.AddComponent<CharacterBattleData>();
-            prosecutor.GetComponent<CharacterBattleData>().MapFromScriptableObject(TestDataFactory.CreateCharacter(0, CharacterType.PlayerCharacter));
-            prosecutor.GetComponent<CharacterBattleData>().stressCapacity = 100;
+            prosecutor.GetComponent<CharacterBattleData>().InitializeCharacter(TestDataFactory.CreateCharacter(0, CharacterType.PlayerCharacter));
+            prosecutor.GetComponent<CharacterBattleData>().StressCapacity = 100;
             prosecutor.GetComponent<CharacterBattleData>().IncreaseStress(100);
             return prosecutor;
         }

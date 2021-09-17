@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Battle.Actions
@@ -12,10 +13,17 @@ namespace Assets.Scripts.Battle.Actions
             actionData.CurrentCombatantBattleData.DecreaseFocusPoints(actionData.SelectedSkill.FocusPointCost);
 
             actionData.SelectedSkill.EffectsToAdd.ForEach((effect) => { actionData.Target.GetComponent<CharacterBattleData>().AddStatusEffect(effect, actionData.SelectedSkill.StatusEffectTurnCount); });
-            foreach (var effect in actionData.SelectedSkill.EffectsToRemove)
+
+            var activeStatusEffects = new List<ActiveStatusEffect>();
+            activeStatusEffects.AddRange(actionData.Target.GetComponent<CharacterBattleData>().ActiveStatusEffects);
+            foreach (var activeStatusEffect in activeStatusEffects)
             {
-                actionData.Target.GetComponent<CharacterBattleData>().RemoveStatusEffect(effect);
+                if (actionData.SelectedSkill.EffectsToRemove.Contains(activeStatusEffect.StatusEffect))
+                {
+                    activeStatusEffect.EndStatusEffect(actionData.Target.GetComponent<CharacterBattleData>());
+                }
             }
+
             Debug.Log("Debuff Success, Added Effects: ");
             foreach (var effect in actionData.SelectedSkill.EffectsToAdd)
             {

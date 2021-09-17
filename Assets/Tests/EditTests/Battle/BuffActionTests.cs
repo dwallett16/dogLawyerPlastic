@@ -32,14 +32,14 @@ namespace Battle
             skill.EffectsToRemove.Add(embarrassedEffect);
 
             var targetData = target.AddComponent<CharacterBattleData>();
-            targetData.resistance = 10;
+            targetData.Resistance = 10;
             targetData.IncreaseStress(10);
             targetData.AddStatusEffect(embarrassedEffect, 2);
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
-            currentCombatantData.focusPointCapacity = 100;
+            currentCombatantData.FocusPointCapacity = 100;
             currentCombatantData.IncreaseFocusPoints(100);
-            currentCombatantData.passion = 10;
+            currentCombatantData.Passion = 10;
 
             var actionData = new ActionData()
             {
@@ -53,7 +53,7 @@ namespace Battle
 
             buffAction.Act(actionData);
 
-            Assert.AreEqual(90, currentCombatantData.currentFocusPoints);
+            Assert.AreEqual(90, currentCombatantData.CurrentFocusPoints);
             Assert.AreEqual(expectedEffects, targetData.ActiveStatusEffects);
         }
 
@@ -76,13 +76,13 @@ namespace Battle
             skill.StatusEffectTurnCount = 1;
 
             var targetData = target.AddComponent<CharacterBattleData>();
-            targetData.resistance = 10;
+            targetData.Resistance = 10;
             targetData.IncreaseStress(10);
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
-            currentCombatantData.focusPointCapacity = 100;
+            currentCombatantData.FocusPointCapacity = 100;
             currentCombatantData.IncreaseFocusPoints(100);
-            currentCombatantData.passion = 10;
+            currentCombatantData.Passion = 10;
 
             var actionData = new ActionData()
             {
@@ -96,7 +96,7 @@ namespace Battle
 
             buffAction.Act(actionData);
 
-            Assert.AreEqual(90, currentCombatantData.currentFocusPoints);
+            Assert.AreEqual(90, currentCombatantData.CurrentFocusPoints);
             Assert.AreEqual(expectedEffects[0].StatusEffect, targetData.ActiveStatusEffects[0].StatusEffect);
         }
     }

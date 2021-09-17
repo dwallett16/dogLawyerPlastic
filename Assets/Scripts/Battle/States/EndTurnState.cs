@@ -34,7 +34,13 @@ namespace Assets.Scripts.Battle.States
 
         private void ApplyEndOfTurnStatusEffects(CharacterBattleData currentCombatantBattleData)
         {
-           // throw new NotImplementedException();
+            foreach(var effect in currentCombatantBattleData.ActiveStatusEffects)
+            {
+                if (!effect.StatusEffect.NonstandardEffect && (effect.StatusEffect.IsRecurring || !effect.HasBeenApplied))
+                {
+                    effect.ApplyStandardEffect(currentCombatantBattleData);
+                }
+            }
         }
 
         private void DecreaseStatusEffectTurnCounters(CharacterBattleData currentCombatantBattleData)
@@ -52,7 +58,7 @@ namespace Assets.Scripts.Battle.States
 
             foreach (var effect in expiredEffects.ToList())
             {
-                currentCombatantBattleData.RemoveStatusEffect(effect.StatusEffect);
+                effect.EndStatusEffect(currentCombatantBattleData);
                 Debug.Log($"Effect Expired: {effect.StatusEffect}");
             }
         }

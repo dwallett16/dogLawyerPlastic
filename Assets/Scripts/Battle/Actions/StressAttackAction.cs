@@ -16,7 +16,7 @@ namespace Assets.Scripts.Battle.Actions
             if (attackSucceeds)
             {
                 actionData.Target.GetComponent<CharacterBattleData>().IncreaseStress(ActionUtilities.Instance.CalculateStressAttackPower(actionData.CurrentCombatant, actionData.SelectedSkill));
-                Debug.Log("Attack Success, Target Stress: " + actionData.Target.GetComponent<CharacterBattleData>().currentStress);
+                Debug.Log("Attack Success, Target Stress: " + actionData.Target.GetComponent<CharacterBattleData>().CurrentStress);
             }
             else
             {

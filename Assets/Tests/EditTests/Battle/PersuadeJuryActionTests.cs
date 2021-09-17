@@ -29,9 +29,9 @@ namespace Battle
             targetData.CreateJuryData(10, 5);
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
-            currentCombatantData.focusPointCapacity = 100;
+            currentCombatantData.FocusPointCapacity = 100;
             currentCombatantData.IncreaseFocusPoints(100);
-            currentCombatantData.passion = 10;
+            currentCombatantData.Passion = 10;
 
             var actionData = new ActionData()
             {
@@ -46,7 +46,7 @@ namespace Battle
 
             persuadeJuryAction.Act(actionData);
 
-            Assert.AreEqual(90, currentCombatantData.currentFocusPoints);
+            Assert.AreEqual(90, currentCombatantData.CurrentFocusPoints);
             Assert.AreEqual(20, targetData.GetJuryPoints());
         }
     }

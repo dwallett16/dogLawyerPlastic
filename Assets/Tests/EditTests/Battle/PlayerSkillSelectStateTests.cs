@@ -20,7 +20,7 @@ namespace Battle {
             SetActionButtons(controller);
             controller.ActionData = new ActionData {
                 CurrentCombatantBattleData = new CharacterBattleData {
-                    skills = new List<Skill> {
+                    Skills = new List<Skill> {
                         TestDataFactory.CreateSkill(0),
                         TestDataFactory.CreateSkill(1)
                     }
@@ -42,7 +42,7 @@ namespace Battle {
             SetActionButtons(controller);
             controller.ActionData = new ActionData {
                 CurrentCombatantBattleData = new CharacterBattleData {
-                    skills = new List<Skill> {
+                    Skills = new List<Skill> {
                         TestDataFactory.CreateSkill(0),
                         TestDataFactory.CreateSkill(1)
                     }

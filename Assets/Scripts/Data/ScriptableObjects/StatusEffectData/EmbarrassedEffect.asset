@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 0
   Name: Embarrassed
-  EffectDescription: Description of the nonstandard effect. This is for documentation
-    only; no code will reference this value.
+  EffectDescription: Resistance is decreased by a percentage value
   UsePercentages: 1
   IsRecurring: 0
   AdjustImmediately: 1
+  DoNotRestoreOnExpiration: 0
+  DoNotIgnoreZero: 0
   NonstandardEffect: 0
   ResistanceAdjustment: -20
   EnduranceAdjustment: 0
@@ -26,4 +27,5 @@ MonoBehaviour:
   PersuasionAdjustment: 0
   WitAdjustment: 0
   StressPointAdjustment: 0
-  FocusPointAdjustment: 0
+  CurrentFocusPointAdjustment: 0
+  FocusPointCapacityAdjustment: 0

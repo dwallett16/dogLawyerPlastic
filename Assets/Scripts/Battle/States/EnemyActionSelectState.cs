@@ -22,9 +22,9 @@ namespace Assets.Scripts.Battle.States
             }
 
             Skill selectedSkill = null;
-            foreach(var skill in currentCombatantBattleData.skills)
+            foreach(var skill in currentCombatantBattleData.Skills)
             {
-                if(currentCombatantBattleData.currentFocusPoints >= skill.FocusPointCost)
+                if(currentCombatantBattleData.CurrentFocusPoints >= skill.FocusPointCost)
                 {
                     selectedSkill = skill;
                     break;

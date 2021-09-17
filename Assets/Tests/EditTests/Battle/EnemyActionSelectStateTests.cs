@@ -55,12 +55,12 @@ namespace Battle
         {
             var enemyCharacter = new CharacterBattleData
             {
-                skills = new List<Skill>
+                Skills = new List<Skill>
                 {
                     TestDataFactory.CreateSkill(0, fpCost: 5),
                     TestDataFactory.CreateSkill(1, fpCost: 3)
                 },
-                focusPointCapacity = 10
+                FocusPointCapacity = 10
             };
 
             var prosecutors = new List<GameObject>() { new GameObject() };

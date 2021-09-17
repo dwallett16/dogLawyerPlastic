@@ -18,7 +18,7 @@ namespace Assets.Scripts.Battle.Actions
 
             actionData.Target.GetComponent<CharacterBattleData>().ReduceStress(ActionUtilities.Instance.CalculateStressRecoveryPower(actionData.CurrentCombatant, actionData.SelectedSkill));
 
-            Debug.Log("Recovery, Target Stress: " + actionData.Target.GetComponent<CharacterBattleData>().currentStress);
+            Debug.Log("Recovery, Target Stress: " + actionData.Target.GetComponent<CharacterBattleData>().CurrentStress);
         }
     }
 }

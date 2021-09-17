@@ -134,7 +134,7 @@ public class BattleController : MonoBehaviour
         foreach (var prosecutor in battleData.StartingParty) {
             var prosecutorInstance = Instantiate(prosecutor.BattlePrefab, ProsecutionPlaceholders[placeholderIndex].transform.position, ProsecutionPlaceholders[placeholderIndex].transform.rotation);
             var prosecutorData = prosecutorInstance.GetComponent<CharacterBattleData>();
-            prosecutorData.MapFromScriptableObject(prosecutor);
+            prosecutorData.InitializeCharacter(prosecutor);
             Prosecutors.Add(prosecutorInstance);
             placeholderIndex++;
         }
@@ -142,13 +142,13 @@ public class BattleController : MonoBehaviour
         foreach (var defenseAttorney in battleData.StartingDefenseParty) {
             var defenseInstance = Instantiate(defenseAttorney.BattlePrefab, DefensePlaceholders[placeholderIndex].transform.position, DefensePlaceholders[placeholderIndex].transform.rotation);
             var defenseData = defenseInstance.GetComponent<CharacterBattleData>();
-            defenseData.MapFromScriptableObject(defenseAttorney);
+            defenseData.InitializeCharacter(defenseAttorney);
             DefenseAttorneys.Add(defenseInstance);
             placeholderIndex++;
         }
         var defendantInstance = Instantiate(battleData.Defendant.BattlePrefab, DefendantPlaceholder.transform.position, DefendantPlaceholder.transform.rotation);
         var defendantData = defendantInstance.GetComponent<CharacterBattleData>();
-        defendantData.MapFromScriptableObject(battleData.Defendant);
+        defendantData.InitializeCharacter(battleData.Defendant);
         Defendant = defendantInstance;
     }
 
@@ -157,7 +157,7 @@ public class BattleController : MonoBehaviour
         List<GameObject> combatantList = new List<GameObject>();
         combatantList.AddRange(Prosecutors);
         combatantList.AddRange(DefenseAttorneys);
-        IEnumerable<GameObject> query = combatantList.OrderByDescending(gameObject => gameObject.GetComponent<CharacterBattleData>().wit);
+        IEnumerable<GameObject> query = combatantList.OrderByDescending(gameObject => gameObject.GetComponent<CharacterBattleData>().Wit);
 
         foreach (GameObject combatant in query)
         {

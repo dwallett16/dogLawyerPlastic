@@ -109,11 +109,11 @@ namespace Battle
             yield return new WaitForSeconds(0.2f);
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
             battleController.Prosecutors[0].GetComponent<CharacterBattleData>().DecreaseFocusPoints(5);
-            var oldFp = battleController.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().currentFocusPoints;
+            var oldFp = battleController.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().CurrentFocusPoints;
             battleController.SetButtonAction(Constants.Rest);
             yield return new WaitForSeconds(0.1f);
 
-            Assert.IsTrue(battleController.Prosecutors[0].GetComponent<CharacterBattleData>().currentFocusPoints > oldFp);
+            Assert.IsTrue(battleController.Prosecutors[0].GetComponent<CharacterBattleData>().CurrentFocusPoints > oldFp);
         }
 
         [UnityTest]
@@ -135,7 +135,7 @@ namespace Battle
                     skills.Add(c.gameObject);
             }
 
-            Assert.AreEqual(battleController.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().skills.Count, skills.Count);
+            Assert.AreEqual(battleController.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().Skills.Count, skills.Count);
         }
 
         [UnityTest]

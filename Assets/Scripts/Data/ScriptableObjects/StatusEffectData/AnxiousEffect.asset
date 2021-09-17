@@ -10,22 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a485c1bc2d8f6c4480b302b216150a7, type: 3}
-  m_Name: StunnedEffect
+  m_Name: AnxiousEffect
   m_EditorClassIdentifier: 
-  Id: 1
-  Name: Stunned
-  EffectDescription: Character will be unable to take any Action on their turn.
+  Id: 2
+  Name: Anxious
+  EffectDescription: Stress Points increase each turn.
   UsePercentages: 0
   IsRecurring: 1
   AdjustImmediately: 0
   DoNotRestoreOnExpiration: 0
-  DoNotIgnoreZero: 0
-  NonstandardEffect: 1
+  NonstandardEffect: 0
   ResistanceAdjustment: 0
   EnduranceAdjustment: 0
   PassionAdjustment: 0
   PersuasionAdjustment: 0
   WitAdjustment: 0
-  StressPointAdjustment: 0
+  StressPointAdjustment: 10
   CurrentFocusPointAdjustment: 0
   FocusPointCapacityAdjustment: 0

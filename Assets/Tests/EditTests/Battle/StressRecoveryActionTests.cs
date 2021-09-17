@@ -26,13 +26,13 @@ namespace Battle
             skill.FocusPointCost = 10;
 
             var targetData = target.AddComponent<CharacterBattleData>();
-            targetData.stressCapacity = 100;
+            targetData.StressCapacity = 100;
             targetData.IncreaseStress(100);
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
-            currentCombatantData.focusPointCapacity = 100;
+            currentCombatantData.FocusPointCapacity = 100;
             currentCombatantData.IncreaseFocusPoints(100);
-            currentCombatantData.passion = 10;
+            currentCombatantData.Passion = 10;
 
             var actionData = new ActionData()
             {
@@ -47,8 +47,8 @@ namespace Battle
 
             stressRecoveryAction.Act(actionData);
 
-            Assert.AreEqual(90, currentCombatantData.currentFocusPoints);
-            Assert.AreEqual(80, targetData.currentStress);
+            Assert.AreEqual(90, currentCombatantData.CurrentFocusPoints);
+            Assert.AreEqual(80, targetData.CurrentStress);
         }
     }
 }

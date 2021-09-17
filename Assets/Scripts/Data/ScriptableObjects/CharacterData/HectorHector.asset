@@ -16,7 +16,6 @@ MonoBehaviour:
   Name: Hector Hector
   Image: {fileID: 0}
   Material: {fileID: 0}
-  SkeletonData: {fileID: 0}
   Type: 1
   Personality: 3
   Skills:
@@ -25,7 +24,7 @@ MonoBehaviour:
   StressCapacity: 100
   FocusPointCapacity: 40
   Wit: 0
-  Resistance: 0
+  Resistance: 10
   Endurance: 0
   Passion: 0
   Persuasion: 0

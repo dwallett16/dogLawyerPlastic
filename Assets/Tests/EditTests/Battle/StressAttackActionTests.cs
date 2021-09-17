@@ -26,14 +26,14 @@ namespace Battle
             skill.FocusPointCost = 10;
 
             var targetData = target.AddComponent<CharacterBattleData>();
-            targetData.resistance = 10;
-            targetData.stressCapacity = 100;
+            targetData.Resistance = 10;
+            targetData.StressCapacity = 100;
             targetData.IncreaseStress(10);
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
-            currentCombatantData.focusPointCapacity = 100;
+            currentCombatantData.FocusPointCapacity = 100;
             currentCombatantData.IncreaseFocusPoints(100);
-            currentCombatantData.passion = 10;
+            currentCombatantData.Passion = 10;
 
             var actionData = new ActionData()
             {
@@ -49,8 +49,8 @@ namespace Battle
 
             stressAttackAction.Act(actionData);
 
-            Assert.AreEqual(90, currentCombatantData.currentFocusPoints);
-            Assert.AreEqual(30, targetData.currentStress);
+            Assert.AreEqual(90, currentCombatantData.CurrentFocusPoints);
+            Assert.AreEqual(30, targetData.CurrentStress);
         }
 
         [Test]
@@ -65,14 +65,14 @@ namespace Battle
             skill.FocusPointCost = 10;
 
             var targetData = target.AddComponent<CharacterBattleData>();
-            targetData.resistance = 10;
-            targetData.stressCapacity = 100;
+            targetData.Resistance = 10;
+            targetData.StressCapacity = 100;
             targetData.IncreaseStress(10);
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
-            currentCombatantData.focusPointCapacity = 100;
+            currentCombatantData.FocusPointCapacity = 100;
             currentCombatantData.IncreaseFocusPoints(100);
-            currentCombatantData.persuasion = 10;
+            currentCombatantData.Persuasion = 10;
 
             var actionData = new ActionData()
             {
@@ -88,8 +88,8 @@ namespace Battle
 
             stressAttackAction.Act(actionData);
 
-            Assert.AreEqual(90, currentCombatantData.currentFocusPoints);
-            Assert.AreEqual(30, targetData.currentStress);
+            Assert.AreEqual(90, currentCombatantData.CurrentFocusPoints);
+            Assert.AreEqual(30, targetData.CurrentStress);
         }
 
         [Test]
@@ -104,13 +104,13 @@ namespace Battle
             skill.FocusPointCost = 10;
 
             var targetData = target.AddComponent<CharacterBattleData>();
-            targetData.stressCapacity = 100;
+            targetData.StressCapacity = 100;
             targetData.IncreaseStress(10);
 
             var currentCombatantData = currentCombatant.AddComponent<CharacterBattleData>();
-            currentCombatantData.focusPointCapacity = 100;
+            currentCombatantData.FocusPointCapacity = 100;
             currentCombatantData.IncreaseFocusPoints(100);
-            currentCombatantData.persuasion = 10;
+            currentCombatantData.Persuasion = 10;
 
             var utilities = Substitute.For<IActionUtilities>();
             utilities.CalculateAttackSuccess(Arg.Any<GameObject>()).Returns(false);
@@ -126,8 +126,8 @@ namespace Battle
 
             stressAttackAction.Act(actionData);
 
-            Assert.AreEqual(90, currentCombatantData.currentFocusPoints);
-            Assert.AreEqual(10, targetData.currentStress);
+            Assert.AreEqual(90, currentCombatantData.CurrentFocusPoints);
+            Assert.AreEqual(10, targetData.CurrentStress);
         }
     }
 }

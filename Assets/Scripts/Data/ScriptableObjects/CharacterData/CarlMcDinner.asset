@@ -16,7 +16,6 @@ MonoBehaviour:
   Name: Carl McDinner
   Image: {fileID: 0}
   Material: {fileID: 0}
-  SkeletonData: {fileID: 0}
   Type: 1
   Personality: 0
   Skills:
@@ -25,7 +24,7 @@ MonoBehaviour:
   StressCapacity: 50
   FocusPointCapacity: 20
   Wit: 0
-  Resistance: 0
+  Resistance: 100
   Endurance: 0
   Passion: 0
   Persuasion: 0

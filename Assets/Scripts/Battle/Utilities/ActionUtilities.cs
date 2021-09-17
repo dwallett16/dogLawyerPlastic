@@ -49,7 +49,7 @@ namespace Assets.Scripts.Battle.Utilities
         {
             var data = target.GetComponent<CharacterBattleData>();
 
-            if (data.resistance < 25)
+            if (data.Resistance < 25)
             {
                 return true;
             }
@@ -60,7 +60,7 @@ namespace Assets.Scripts.Battle.Utilities
         {
             var data = target.GetComponent<CharacterBattleData>();
 
-            if (data.resistance < 25)
+            if (data.Resistance < 25)
             {
                 return true;
             }
@@ -72,10 +72,10 @@ namespace Assets.Scripts.Battle.Utilities
             var actorData = actor.GetComponent<CharacterBattleData>();
 
             if (skill.Type == SkillTypes.Passion)
-                return actorData.passion + skill.Power;
+                return actorData.Passion + skill.Power;
             else
             {
-                return actorData.persuasion + skill.Power;
+                return actorData.Persuasion + skill.Power;
             }
         }
 
@@ -84,10 +84,10 @@ namespace Assets.Scripts.Battle.Utilities
             var actorData = actor.GetComponent<CharacterBattleData>();
 
             if (skill.Type == SkillTypes.Passion)
-                return actorData.passion + skill.Power;
+                return actorData.Passion + skill.Power;
             else
             {
-                return actorData.persuasion + skill.Power;
+                return actorData.Persuasion + skill.Power;
             }
         }
 
@@ -96,10 +96,10 @@ namespace Assets.Scripts.Battle.Utilities
             var actorData = actor.GetComponent<CharacterBattleData>();
 
             if (skill.Type == SkillTypes.Passion)
-                return actorData.passion + skill.Power;
+                return actorData.Passion + skill.Power;
             else
             {
-                return actorData.persuasion + skill.Power;
+                return actorData.Persuasion + skill.Power;
             }
         }
 
