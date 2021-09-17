@@ -114,6 +114,8 @@ namespace Battle
             juryObject.GetComponent<JuryController>().CreateJuryData(10, 5);
             var prosecutor1 = GetProsecutor();
             var prosecutor2 = GetProsecutor();
+            var defenseAttorney1 = GetDefenseAttorney();
+            var defenseAttorney2 = GetDefenseAttorney();
             var controller = new BattleController
             {
                 battleData = new BattleData
@@ -124,6 +126,11 @@ namespace Battle
                 {
                     prosecutor1,
                     prosecutor2
+                },
+                DefenseAttorneys = new List<GameObject>
+                {
+                    defenseAttorney1,
+                    defenseAttorney2
                 },
                 EffectiveEvidenceCount = 2,
                 StunnedEffect = stunnedEffect
@@ -141,8 +148,8 @@ namespace Battle
             presentEvidenceAction.Act(actionData);
 
 
-            Assert.AreEqual("Stunned", controller.Prosecutors[0].GetComponent<CharacterBattleData>().ActiveStatusEffects[0].StatusEffect.Name);
-            Assert.AreEqual("Stunned", controller.Prosecutors[1].GetComponent<CharacterBattleData>().ActiveStatusEffects[0].StatusEffect.Name);
+            Assert.AreEqual(stunnedEffect, controller.DefenseAttorneys[0].GetComponent<CharacterBattleData>().ActiveStatusEffects[0].StatusEffect);
+            Assert.AreEqual(stunnedEffect, controller.DefenseAttorneys[1].GetComponent<CharacterBattleData>().ActiveStatusEffects[0].StatusEffect);
         }
 
         [Test]
@@ -195,6 +202,16 @@ namespace Battle
             prosecutor.GetComponent<CharacterBattleData>().StressCapacity = 100;
             prosecutor.GetComponent<CharacterBattleData>().IncreaseStress(100);
             return prosecutor;
+        }
+
+        private GameObject GetDefenseAttorney()
+        {
+            var defenseAttorney = new GameObject();
+            defenseAttorney.AddComponent<CharacterBattleData>();
+            defenseAttorney.GetComponent<CharacterBattleData>().InitializeCharacter(TestDataFactory.CreateCharacter(0, CharacterType.DefenseCharacter));
+            defenseAttorney.GetComponent<CharacterBattleData>().StressCapacity = 100;
+            defenseAttorney.GetComponent<CharacterBattleData>().IncreaseStress(100);
+            return defenseAttorney;
         }
     }
 }

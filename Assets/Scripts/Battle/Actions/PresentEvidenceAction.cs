@@ -11,6 +11,7 @@ public class PresentEvidenceAction : IAction
         var controller = ActionUtilities.Instance.GetBattleController();
         var currentCase = controller.battleData.CaseData;
         var prosecutors = controller.Prosecutors;
+        var defenseAttorneys = controller.DefenseAttorneys;
 
         var effectiveness = GetEffectiveness(currentCase.RelevantEvidence, currentCase.EffectiveEvidence, actionData.SelectedEvidence);
 
@@ -31,10 +32,10 @@ public class PresentEvidenceAction : IAction
 
         if (controller.EffectiveEvidenceCount == 3)
         {
-            foreach (GameObject prosecutor in prosecutors)
+            foreach (GameObject defenseAttorney in defenseAttorneys)
             {
-                prosecutor.GetComponent<CharacterBattleData>().AddStatusEffect(controller.StunnedEffect, 3);
-                Debug.Log("DA " + prosecutor.GetComponent<CharacterBattleData>().displayName + " now stunned");
+                defenseAttorney.GetComponent<CharacterBattleData>().AddStatusEffect(controller.StunnedEffect, 3);
+                Debug.Log("DA " + defenseAttorney.GetComponent<CharacterBattleData>().displayName + " now stunned");
             }
         }
 
