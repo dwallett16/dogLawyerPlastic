@@ -21,13 +21,13 @@ public class TestDataFactory
         return testCase;
     }
 
-    public static Character CreateCharacter(int id, CharacterType type, List<Skill> skills = null, PersonalityTypes personality = PersonalityTypes.None,
+    public static Character CreateCharacter(int id, CharacterType type, List<Skill> skills = null, Personality personality = null,
      AiPriorityTypes specialty = AiPriorityTypes.None, int wit = 10) {
         var character = new Character {
             Id = id,
             Name = $"character {id}",
             Type = type,
-            Personality = personality,
+            Personality = personality == null ? CreatePersonality(0) : personality,
             StressCapacity = 10,
             FocusPointCapacity = 10,
             Endurance = 10,
@@ -70,5 +70,15 @@ public class TestDataFactory
             ParentCase = parentCase
         };
         return evidence;
+    }
+
+    public static Personality CreatePersonality(int id, ActionTypes[] priorities = null)
+    {
+        var personality = new Personality
+        {
+            Id = id,
+            Priorities = priorities == null ? new ActionTypes[5] { ActionTypes.StressAttack, ActionTypes.Buff, ActionTypes.PersuadeJury, ActionTypes.Debuff, ActionTypes.StressRecovery } : priorities
+        };
+        return personality;
     }
 }

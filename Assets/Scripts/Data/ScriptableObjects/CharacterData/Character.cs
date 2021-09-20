@@ -9,7 +9,7 @@ public class Character : ScriptableObject
     public Sprite Image;
     public Material Material;
     public CharacterType Type;
-    public PersonalityTypes Personality;
+    public Personality Personality;
     public List<Skill> Skills;
     public int StressCapacity;
     public int FocusPointCapacity;

@@ -12,7 +12,7 @@ public class CharacterBattleData : MonoBehaviour
     [NonSerialized]
     public CharacterType type;
     [NonSerialized]
-    public PersonalityTypes personality;
+    public Personality personality;
     [NonSerialized]
     public int StressCapacity;
     public int CurrentStress { get { return _currentStress; } }
