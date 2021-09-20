@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Data.ScriptableObjects.StatusEffectData;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -70,6 +71,29 @@ public class TestDataFactory
             ParentCase = parentCase
         };
         return evidence;
+    }
+
+    public static StatusEffect CreateStatusEffect(bool usePercentages, bool isRecurring, bool adjustImmediately, bool doNotRestoreOnExpiration, int resistanceAdjustment, int enduranceAdjustment,
+            int passionAdjustment, int persuasionAdjustment, int witAdjustment, int spAdjustment, int currentFpAdjustment, int fpCapacityAdjustment)
+    {
+        var newEffect = new StatusEffect()
+        {
+            Name = "TestEffect",
+            UsePercentages = usePercentages,
+            IsRecurring = isRecurring,
+            AdjustImmediately = adjustImmediately,
+            DoNotRestoreOnExpiration = doNotRestoreOnExpiration,
+            ResistanceAdjustment = resistanceAdjustment,
+            EnduranceAdjustment = enduranceAdjustment,
+            PassionAdjustment = passionAdjustment,
+            PersuasionAdjustment = persuasionAdjustment,
+            WitAdjustment = witAdjustment,
+            StressPointAdjustment = spAdjustment,
+            CurrentFocusPointAdjustment = currentFpAdjustment,
+            FocusPointCapacityAdjustment = fpCapacityAdjustment
+        };
+
+        return newEffect;
     }
 
     public static Personality CreatePersonality(int id, ActionTypes[] priorities = null)
