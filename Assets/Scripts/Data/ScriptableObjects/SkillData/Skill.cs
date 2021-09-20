@@ -12,7 +12,6 @@ public class Skill : ScriptableObject
     public AiPriorityTypes AiPriorityType;
     public SkillTypes Type;
     public int Power;
-    public string StatusEffect;
     public int FocusPointCost;
     public int RefreshRate;
     public List<StatusEffect> EffectsToRemove;
