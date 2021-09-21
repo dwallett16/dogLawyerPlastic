@@ -35,7 +35,7 @@ public class PresentEvidenceAction : IAction
             foreach (GameObject defenseAttorney in defenseAttorneys)
             {
                 defenseAttorney.GetComponent<CharacterBattleData>().AddStatusEffect(controller.StunnedEffect, 3);
-                Debug.Log("DA " + defenseAttorney.GetComponent<CharacterBattleData>().displayName + " now stunned");
+                Debug.Log("DA " + defenseAttorney.GetComponent<CharacterBattleData>().DisplayName + " now stunned");
             }
         }
 

@@ -37,10 +37,10 @@ namespace Battle
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
 
             Assert.AreEqual(2, battleController.DefenseAttorneys.Count);
-            Assert.AreEqual("character 11", battleController.DefenseAttorneys[0].GetComponent<CharacterBattleData>().displayName);
-            Assert.AreEqual(CharacterType.DefenseCharacter, battleController.DefenseAttorneys[0].GetComponent<CharacterBattleData>().type);
-            Assert.AreEqual("character 110", battleController.Defendant.GetComponent<CharacterBattleData>().displayName);
-            Assert.AreEqual(CharacterType.DefendantCharacter, battleController.Defendant.GetComponent<CharacterBattleData>().type);
+            Assert.AreEqual("character 11", battleController.DefenseAttorneys[0].GetComponent<CharacterBattleData>().DisplayName);
+            Assert.AreEqual(CharacterType.DefenseCharacter, battleController.DefenseAttorneys[0].GetComponent<CharacterBattleData>().Type);
+            Assert.AreEqual("character 110", battleController.Defendant.GetComponent<CharacterBattleData>().DisplayName);
+            Assert.AreEqual(CharacterType.DefendantCharacter, battleController.Defendant.GetComponent<CharacterBattleData>().Type);
         }
 
         [UnityTest]
@@ -52,8 +52,8 @@ namespace Battle
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
 
             Assert.AreEqual(1, battleController.Prosecutors.Count);
-            Assert.AreEqual("character 10", battleController.Prosecutors[0].GetComponent<CharacterBattleData>().displayName);
-            Assert.AreEqual(CharacterType.PlayerCharacter, battleController.Prosecutors[0].GetComponent<CharacterBattleData>().type);
+            Assert.AreEqual("character 10", battleController.Prosecutors[0].GetComponent<CharacterBattleData>().DisplayName);
+            Assert.AreEqual(CharacterType.PlayerCharacter, battleController.Prosecutors[0].GetComponent<CharacterBattleData>().Type);
         }
 
         [UnityTest]
@@ -71,10 +71,10 @@ namespace Battle
             
             var combatants = battleController.AllCombatants.ToArray();
 
-            Assert.AreEqual("character 1", combatants[0].GetComponent<CharacterBattleData>().displayName);
-            Assert.AreEqual("character 111", combatants[1].GetComponent<CharacterBattleData>().displayName);
-            Assert.AreEqual("character 11", combatants[2].GetComponent<CharacterBattleData>().displayName);
-            Assert.AreEqual("character 0", combatants[3].GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual("character 1", combatants[0].GetComponent<CharacterBattleData>().DisplayName);
+            Assert.AreEqual("character 111", combatants[1].GetComponent<CharacterBattleData>().DisplayName);
+            Assert.AreEqual("character 11", combatants[2].GetComponent<CharacterBattleData>().DisplayName);
+            Assert.AreEqual("character 0", combatants[3].GetComponent<CharacterBattleData>().DisplayName);
         }
 
         [UnityTest]
@@ -159,8 +159,8 @@ namespace Battle
             battleController.CurrentState = battleController.PlayerTargetSelect;
             yield return new WaitForSeconds(0.1f);
 
-            Assert.AreEqual("character 1", battleController.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
-            Assert.AreEqual(CharacterType.DefenseCharacter, battleController.ActionData.Target.GetComponent<CharacterBattleData>().type);
+            Assert.AreEqual("character 1", battleController.ActionData.Target.GetComponent<CharacterBattleData>().DisplayName);
+            Assert.AreEqual(CharacterType.DefenseCharacter, battleController.ActionData.Target.GetComponent<CharacterBattleData>().Type);
         }
 
         [UnityTest]
@@ -184,8 +184,8 @@ namespace Battle
             battleController.CurrentState = battleController.PlayerTargetSelect;
             yield return new WaitForSeconds(0.1f);
 
-            Assert.AreEqual("character 10", battleController.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
-            Assert.AreEqual(CharacterType.PlayerCharacter, battleController.ActionData.Target.GetComponent<CharacterBattleData>().type);
+            Assert.AreEqual("character 10", battleController.ActionData.Target.GetComponent<CharacterBattleData>().DisplayName);
+            Assert.AreEqual(CharacterType.PlayerCharacter, battleController.ActionData.Target.GetComponent<CharacterBattleData>().Type);
         }
 
         [UnityTest]

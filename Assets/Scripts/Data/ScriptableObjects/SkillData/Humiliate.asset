@@ -18,7 +18,6 @@ MonoBehaviour:
   AiPriorityType: 0
   Type: 0
   Power: 7
-  StatusEffect: Embarrassed
   FocusPointCost: 8
   RefreshRate: 3
   EffectsToRemove: []
@@ -30,3 +29,4 @@ MonoBehaviour:
   TargetAnimation: {fileID: 0}
   ActionType: 2
   Price: 100
+  Likelihood: 15

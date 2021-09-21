@@ -132,7 +132,7 @@ namespace Assets.Scripts.Battle
 
             _hasBeenApplied = true;
 
-            Debug.Log($"{_statusEffect.Name} applied to {characterBattleData.displayName}.");
+            Debug.Log($"{_statusEffect.Name} applied to {characterBattleData.DisplayName}.");
         }
 
         private void RestoreAttributesAndFocusPointCapacity(CharacterBattleData characterBattleData)

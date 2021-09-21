@@ -57,7 +57,7 @@ namespace Battle
             state.Execute(controller);
 
             Assert.AreEqual(controller.DefenseAttorneys, controller.TargetList);
-            Assert.AreEqual("DA 0", controller.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual("DA 0", controller.ActionData.Target.GetComponent<CharacterBattleData>().DisplayName);
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace Battle
 
             state.Execute(controller);
 
-            Assert.AreEqual("DA 1", controller.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual("DA 1", controller.ActionData.Target.GetComponent<CharacterBattleData>().DisplayName);
         }
 
         [Test]
@@ -131,7 +131,7 @@ namespace Battle
 
             state.Execute(controller);
 
-            Assert.AreEqual("DA 1", controller.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual("DA 1", controller.ActionData.Target.GetComponent<CharacterBattleData>().DisplayName);
         }
 
         [Test]
@@ -156,7 +156,7 @@ namespace Battle
             state.Execute(controller);
 
             Assert.AreEqual(controller.Prosecutors, controller.TargetList);
-            Assert.AreEqual("Prosecutor 0", controller.ActionData.Target.GetComponent<CharacterBattleData>().displayName);
+            Assert.AreEqual("Prosecutor 0", controller.ActionData.Target.GetComponent<CharacterBattleData>().DisplayName);
         }
 
         [Test]
@@ -198,8 +198,8 @@ namespace Battle
             {
                 var defenseAttorney = new GameObject();
                 defenseAttorney.AddComponent<CharacterBattleData>();
-                defenseAttorney.GetComponent<CharacterBattleData>().type = CharacterType.DefenseCharacter;
-                defenseAttorney.GetComponent<CharacterBattleData>().displayName = "DA " + i;
+                defenseAttorney.GetComponent<CharacterBattleData>().Type = CharacterType.DefenseCharacter;
+                defenseAttorney.GetComponent<CharacterBattleData>().DisplayName = "DA " + i;
                 controller.DefenseAttorneys.Add(defenseAttorney);
             }
         }
@@ -211,8 +211,8 @@ namespace Battle
             {
                 var prosecutor = new GameObject();
                 prosecutor.AddComponent<CharacterBattleData>();
-                prosecutor.GetComponent<CharacterBattleData>().type = CharacterType.PlayerCharacter;
-                prosecutor.GetComponent<CharacterBattleData>().displayName = "Prosecutor " + i;
+                prosecutor.GetComponent<CharacterBattleData>().Type = CharacterType.PlayerCharacter;
+                prosecutor.GetComponent<CharacterBattleData>().DisplayName = "Prosecutor " + i;
                 controller.Prosecutors.Add(prosecutor);
             }
         }

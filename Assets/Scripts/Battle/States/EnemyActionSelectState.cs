@@ -21,26 +21,18 @@ namespace Assets.Scripts.Battle.States
                 }
             }
 
-            Skill selectedSkill = null;
-            foreach(var skill in currentCombatantBattleData.Skills)
-            {
-                if(currentCombatantBattleData.CurrentFocusPoints >= skill.FocusPointCost)
-                {
-                    selectedSkill = skill;
-                    break;
-                }
-            }
+            var filteredSkills = currentCombatantBattleData.Skills.Where(x => x.FocusPointCost <= currentCombatantBattleData.CurrentFocusPoints);
 
-            if(selectedSkill == null)
+            if(!filteredSkills.Any())
             {
                 controller.ActionData.Action = new RestAction();
+                controller.Action.NewState = true;
+                return controller.Action;
             }
-            else
-            {
-                controller.ActionData.Action = new StressAttackAction();
-                controller.ActionData.SelectedSkill = selectedSkill;
-                controller.ActionData.Target = controller.Prosecutors[0];
-            }
+
+            controller.ActionData.Action = new StressAttackAction();
+            controller.ActionData.SelectedSkill = filteredSkills.First();
+            controller.ActionData.Target = controller.Prosecutors[0];
 
             controller.Action.NewState = true;
             return controller.Action;

@@ -18,14 +18,14 @@ MonoBehaviour:
   AiPriorityType: 0
   Type: 1
   Power: 0
-  StatusEffect: 
   FocusPointCost: 8
   RefreshRate: 0
-  EffectsToRemove: 00000000
-  EffectsToAdd: 
+  EffectsToRemove: []
+  EffectsToAdd: []
   StatusEffectTurnCount: 0
   Description: Reduces stress of ally by 20%
   SkillAnimation: {fileID: 0}
   TargetAnimation: {fileID: 0}
   ActionType: 0
   Price: 100
+  Likelihood: 35

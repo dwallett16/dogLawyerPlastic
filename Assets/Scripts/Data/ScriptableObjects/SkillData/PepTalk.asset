@@ -18,13 +18,14 @@ MonoBehaviour:
   AiPriorityType: 0
   Type: 0
   Power: 0
-  StatusEffect: 
   FocusPointCost: 4
   RefreshRate: 0
-  EffectsToRemove: 00000000
-  EffectsToAdd: 01000000
+  EffectsToRemove: []
+  EffectsToAdd: []
+  StatusEffectTurnCount: 0
   Description: Pep Talk Description
   SkillAnimation: {fileID: 0}
   TargetAnimation: {fileID: 0}
   ActionType: 3
   Price: 100
+  Likelihood: 20

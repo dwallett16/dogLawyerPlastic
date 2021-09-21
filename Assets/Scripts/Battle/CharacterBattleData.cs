@@ -8,11 +8,11 @@ using Assets.Scripts.Data.ScriptableObjects.StatusEffectData;
 public class CharacterBattleData : MonoBehaviour
 {
     [NonSerialized]
-    public string displayName;
+    public string DisplayName;
     [NonSerialized]
-    public CharacterType type;
+    public CharacterType Type;
     [NonSerialized]
-    public Personality personality;
+    public Personality Personality;
     [NonSerialized]
     public int StressCapacity;
     public int CurrentStress { get { return _currentStress; } }
@@ -100,10 +100,10 @@ public class CharacterBattleData : MonoBehaviour
 
     private void MapFromScriptableObject(Character characterData) 
     {
-        displayName = characterData.Name;
-        type = characterData.Type;
+        DisplayName = characterData.Name;
+        Type = characterData.Type;
         
-        personality = characterData.Personality;
+        Personality = characterData.Personality;
         StressCapacity = characterData.StressCapacity;
         FocusPointCapacity = characterData.FocusPointCapacity;
         IncreaseFocusPoints(characterData.FocusPointCapacity);

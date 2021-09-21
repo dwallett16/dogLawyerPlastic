@@ -19,15 +19,15 @@ namespace Assets.Scripts.Battle.States
             //Prepare next combatant
             PrepareNextCombatant(controller);
 
-            Debug.Log("Next character type: " + controller.ActionData.CurrentCombatantBattleData.type.ToString());
+            Debug.Log("Next character type: " + controller.ActionData.CurrentCombatantBattleData.Type.ToString());
 
             if (controller.ActionData.CurrentCombatantBattleData.ActiveStatusEffects.Any(s => s.StatusEffect == controller.StunnedEffect))
             {
-                Debug.Log(controller.ActionData.CurrentCombatantBattleData.displayName + " is Stunned. Skipping turn.");
+                Debug.Log(controller.ActionData.CurrentCombatantBattleData.DisplayName + " is Stunned. Skipping turn.");
                 return controller.EndTurn;
             }
 
-            if (controller.ActionData.CurrentCombatantBattleData.type == CharacterType.PlayerCharacter)
+            if (controller.ActionData.CurrentCombatantBattleData.Type == CharacterType.PlayerCharacter)
             {
                 controller.PlayerActionSelect.NewState = true;
                 return controller.PlayerActionSelect;

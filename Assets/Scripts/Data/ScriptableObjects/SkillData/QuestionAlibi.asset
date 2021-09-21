@@ -15,13 +15,17 @@ MonoBehaviour:
   Id: 10
   Name: Question Alibi
   Target: 3
+  AiPriorityType: 0
   Type: 3
-  LatentPower: 7
-  StatusEffect: 
+  Power: 0
   FocusPointCost: 6
   RefreshRate: 0
   EffectsToRemove: []
+  EffectsToAdd: []
+  StatusEffectTurnCount: 0
   Description: Question alibi description. Low latent power.
   SkillAnimation: {fileID: 0}
   TargetAnimation: {fileID: 0}
+  ActionType: 0
   Price: 100
+  Likelihood: 40

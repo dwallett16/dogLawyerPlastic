@@ -15,13 +15,17 @@ MonoBehaviour:
   Id: 1
   Name: Smack Talk
   Target: 0
+  AiPriorityType: 0
   Type: 0
-  LatentPower: 80
-  StatusEffect: 
+  Power: 0
   FocusPointCost: 7
   RefreshRate: 2
   EffectsToRemove: []
+  EffectsToAdd: []
+  StatusEffectTurnCount: 0
   Description: Insults that hit below the belt. Medium latent power.
   SkillAnimation: {fileID: 0}
   TargetAnimation: {fileID: 0}
+  ActionType: 0
   Price: 100
+  Likelihood: 15

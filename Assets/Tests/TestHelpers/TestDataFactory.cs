@@ -47,7 +47,7 @@ public class TestDataFactory
         return character;
     }
 
-    public static Skill CreateSkill(int id, SkillTarget target = SkillTarget.DefenseAttorneys, AiPriorityTypes type = AiPriorityTypes.Offense, int fpCost = 2) {
+    public static Skill CreateSkill(int id, SkillTarget target = SkillTarget.DefenseAttorneys, AiPriorityTypes type = AiPriorityTypes.Offense, int fpCost = 2, ActionTypes actionType = ActionTypes.StressAttack, float likelihood = 10f) {
         var skill = new Skill {
             Id = id,
             Name = $"Skill {id}",
@@ -57,7 +57,9 @@ public class TestDataFactory
             FocusPointCost = fpCost,
             RefreshRate = 0,
             Price = 100,
-            Description = $"skill {id}"
+            Description = $"skill {id}",
+            ActionType = actionType,
+            Likelihood = likelihood
         };
         return skill;
     }

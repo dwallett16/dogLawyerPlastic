@@ -130,14 +130,14 @@ namespace Battle {
             {
                 var prosecutor = new GameObject();
                 prosecutor.AddComponent<CharacterBattleData>();
-                prosecutor.GetComponent<CharacterBattleData>().type = CharacterType.PlayerCharacter;
+                prosecutor.GetComponent<CharacterBattleData>().Type = CharacterType.PlayerCharacter;
                 battleController.Prosecutors.Add(prosecutor);
             }
             for (int i = 0; i < 2; i++)
             {
                 var defenseAttorney = new GameObject();
                 defenseAttorney.AddComponent<CharacterBattleData>();
-                defenseAttorney.GetComponent<CharacterBattleData>().type = CharacterType.DefenseCharacter;
+                defenseAttorney.GetComponent<CharacterBattleData>().Type = CharacterType.DefenseCharacter;
                 battleController.DefenseAttorneys.Add(defenseAttorney);
             }
         }

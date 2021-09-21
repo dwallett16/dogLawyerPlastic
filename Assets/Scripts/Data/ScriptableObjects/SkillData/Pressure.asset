@@ -15,13 +15,17 @@ MonoBehaviour:
   Id: 12
   Name: Pressure
   Target: 2
+  AiPriorityType: 0
   Type: 4
-  LatentPower: 7
-  StatusEffect: 
+  Power: 0
   FocusPointCost: 5
   RefreshRate: 0
   EffectsToRemove: []
+  EffectsToAdd: []
+  StatusEffectTurnCount: 0
   Description: Pressure description. Medium latent power.
   SkillAnimation: {fileID: 0}
   TargetAnimation: {fileID: 0}
+  ActionType: 0
   Price: 200
+  Likelihood: 10

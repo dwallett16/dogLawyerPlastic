@@ -18,13 +18,14 @@ MonoBehaviour:
   AiPriorityType: 0
   Type: 0
   Power: 0
-  StatusEffect: 
   FocusPointCost: 4
   RefreshRate: 0
-  EffectsToRemove: 
-  EffectsToAdd: 
+  EffectsToRemove: []
+  EffectsToAdd: []
+  StatusEffectTurnCount: 0
   Description: Presents a basic argument to the Jury. Low latent power.
   SkillAnimation: {fileID: 0}
   TargetAnimation: {fileID: 0}
   ActionType: 4
   Price: 100
+  Likelihood: 40

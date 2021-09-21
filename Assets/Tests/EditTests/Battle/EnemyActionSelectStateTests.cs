@@ -51,16 +51,26 @@ namespace Battle
             Assert.IsInstanceOf<ActionState>(result);
         }
 
+        [Test]
+        public void ExecuteSetsSkillBasedOnPriority()
+        {
+            SetupController();
+        }
+
         private BattleController SetupController()
         {
             var enemyCharacter = new CharacterBattleData
             {
                 Skills = new List<Skill>
                 {
-                    TestDataFactory.CreateSkill(0, fpCost: 5),
-                    TestDataFactory.CreateSkill(1, fpCost: 3)
+                    TestDataFactory.CreateSkill(0, fpCost: 5, actionType: ActionTypes.StressAttack),
+                    TestDataFactory.CreateSkill(1, fpCost: 3, actionType: ActionTypes.Buff),
+                    TestDataFactory.CreateSkill(2, fpCost: 3, actionType: ActionTypes.PersuadeJury),
+                    TestDataFactory.CreateSkill(3, fpCost: 3, actionType: ActionTypes.Debuff),
+                    TestDataFactory.CreateSkill(4, fpCost: 3, actionType: ActionTypes.StressRecovery)
                 },
-                FocusPointCapacity = 10
+                FocusPointCapacity = 10,
+                Personality = TestDataFactory.CreatePersonality(0, new ActionTypes[] { ActionTypes.StressAttack, ActionTypes.Buff, ActionTypes.PersuadeJury, ActionTypes.Debuff, ActionTypes.StressRecovery })
             };
 
             var prosecutors = new List<GameObject>() { new GameObject() };

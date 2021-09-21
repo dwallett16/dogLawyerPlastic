@@ -15,13 +15,17 @@ MonoBehaviour:
   Id: 8
   Name: Call Character Witness
   Target: 3
+  AiPriorityType: 0
   Type: 3
-  LatentPower: 8
-  StatusEffect: 
+  Power: 0
   FocusPointCost: 6
   RefreshRate: 2
   EffectsToRemove: []
+  EffectsToAdd: []
+  StatusEffectTurnCount: 0
   Description: Character witness description
   SkillAnimation: {fileID: 0}
   TargetAnimation: {fileID: 0}
+  ActionType: 0
   Price: 100
+  Likelihood: 5
