@@ -74,7 +74,7 @@ public class BattleController : MonoBehaviour
         ActionData = new ActionData();
         PlayerActionSelect = new PlayerActionSelectState();
         Initial = new InitialState();
-        EnemyActionSelect = new EnemyActionSelectState();
+        EnemyActionSelect = new EnemyActionSelectState(new ProbabilityHelper());
         Action = new ActionState();
         NextTurn = new NextTurnState();
         PlayerSkillSelect = new PlayerSkillSelectState();

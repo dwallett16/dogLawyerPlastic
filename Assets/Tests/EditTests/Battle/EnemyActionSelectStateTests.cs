@@ -17,7 +17,7 @@ namespace Battle
         [Test]
         public void ExecuteSetsRestActionWhenNotEnoughFpToSelectSkill()
         {
-            var enemyActionState = new EnemyActionSelectState();
+            var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper());
             var controller = SetupController();
             controller.ActionData.CurrentCombatantBattleData.DecreaseFocusPoints(10);
 
@@ -29,20 +29,20 @@ namespace Battle
         [Test]
         public void ExecuteSelectsSkillWhenEnoughFp()
         {
-            var enemyActionState = new EnemyActionSelectState();
+            var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper());
             var controller = SetupController();
             controller.ActionData.CurrentCombatantBattleData.IncreaseFocusPoints(10);
 
             enemyActionState.Execute(controller);
 
-            Assert.AreEqual(0, controller.ActionData.SelectedSkill.Id);
+            Assert.IsNotNull(controller.ActionData.SelectedSkill);
             Assert.IsInstanceOf<StressAttackAction>(controller.ActionData.Action);
         }
 
         [Test]
         public void ExecuteReturnsActionState()
         {
-            var enemyActionState = new EnemyActionSelectState();
+            var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper());
             var controller = SetupController();
             controller.ActionData.CurrentCombatantBattleData.IncreaseFocusPoints(10);
 
@@ -52,9 +52,45 @@ namespace Battle
         }
 
         [Test]
-        public void ExecuteSetsSkillBasedOnPriority()
+        public void ExecuteSetsBuffSkillBasedOnPriority()
         {
-            SetupController();
+            var probabilityMock = Substitute.For<IProbabilityHelper>();
+            probabilityMock.GenerateNumberInRange(1, 71).Returns(1);
+            var enemyActionState = new EnemyActionSelectState(probabilityMock);
+            var controller = SetupController();
+            controller.ActionData.CurrentCombatantBattleData.IncreaseFocusPoints(10);
+
+            enemyActionState.Execute(controller);
+
+            Assert.AreEqual(1, controller.ActionData.SelectedSkill.Id);
+        }
+
+        [Test]
+        public void ExecuteSetsPersuadeJurySkillBasedOnPriority()
+        {
+            var probabilityMock = Substitute.For<IProbabilityHelper>();
+            probabilityMock.GenerateNumberInRange(1, 71).Returns(17);
+            var enemyActionState = new EnemyActionSelectState(probabilityMock);
+            var controller = SetupController();
+            controller.ActionData.CurrentCombatantBattleData.IncreaseFocusPoints(10);
+
+            enemyActionState.Execute(controller);
+
+            Assert.AreEqual(2, controller.ActionData.SelectedSkill.Id);
+        }
+
+        [Test]
+        public void ExecuteSetsStressAttackSkillBasedOnPriority()
+        {
+            var probabilityMock = Substitute.For<IProbabilityHelper>();
+            probabilityMock.GenerateNumberInRange(1, 71).Returns(70);
+            var enemyActionState = new EnemyActionSelectState(probabilityMock);
+            var controller = SetupController();
+            controller.ActionData.CurrentCombatantBattleData.IncreaseFocusPoints(10);
+
+            enemyActionState.Execute(controller);
+
+            Assert.AreEqual(0, controller.ActionData.SelectedSkill.Id);
         }
 
         private BattleController SetupController()
@@ -63,11 +99,9 @@ namespace Battle
             {
                 Skills = new List<Skill>
                 {
-                    TestDataFactory.CreateSkill(0, fpCost: 5, actionType: ActionTypes.StressAttack),
-                    TestDataFactory.CreateSkill(1, fpCost: 3, actionType: ActionTypes.Buff),
-                    TestDataFactory.CreateSkill(2, fpCost: 3, actionType: ActionTypes.PersuadeJury),
-                    TestDataFactory.CreateSkill(3, fpCost: 3, actionType: ActionTypes.Debuff),
-                    TestDataFactory.CreateSkill(4, fpCost: 3, actionType: ActionTypes.StressRecovery)
+                    TestDataFactory.CreateSkill(1, fpCost: 3, likelihood: 10, actionType: ActionTypes.Buff),
+                    TestDataFactory.CreateSkill(2, fpCost: 3, likelihood: 50, actionType: ActionTypes.PersuadeJury),
+                    TestDataFactory.CreateSkill(0, fpCost: 5, likelihood: 50, actionType: ActionTypes.StressAttack)
                 },
                 FocusPointCapacity = 10,
                 Personality = TestDataFactory.CreatePersonality(0, new ActionTypes[] { ActionTypes.StressAttack, ActionTypes.Buff, ActionTypes.PersuadeJury, ActionTypes.Debuff, ActionTypes.StressRecovery })

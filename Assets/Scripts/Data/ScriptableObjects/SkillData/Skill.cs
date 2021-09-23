@@ -22,5 +22,5 @@ public class Skill : ScriptableObject
     public Animation TargetAnimation;
     public ActionTypes ActionType;
     public int Price;
-    public float Likelihood;
+    public int Likelihood;
 }

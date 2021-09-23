@@ -47,7 +47,7 @@ public class TestDataFactory
         return character;
     }
 
-    public static Skill CreateSkill(int id, SkillTarget target = SkillTarget.DefenseAttorneys, AiPriorityTypes type = AiPriorityTypes.Offense, int fpCost = 2, ActionTypes actionType = ActionTypes.StressAttack, float likelihood = 10f) {
+    public static Skill CreateSkill(int id, SkillTarget target = SkillTarget.DefenseAttorneys, AiPriorityTypes type = AiPriorityTypes.Offense, int fpCost = 2, ActionTypes actionType = ActionTypes.StressAttack, int likelihood = 10) {
         var skill = new Skill {
             Id = id,
             Name = $"Skill {id}",

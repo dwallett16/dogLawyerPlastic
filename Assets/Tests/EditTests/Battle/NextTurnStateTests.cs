@@ -178,7 +178,7 @@ namespace Battle
             battleController.DefenseAttorneys = new List<GameObject>();
             battleController.PlayerActionSelect = new PlayerActionSelectState();
             battleController.Initial = new InitialState();
-            battleController.EnemyActionSelect = new EnemyActionSelectState();
+            battleController.EnemyActionSelect = new EnemyActionSelectState(new ProbabilityHelper());
             battleController.EndTurn = new EndTurnState();
             battleController.battleData = new BattleData();
             battleController.StunnedEffect = new StatusEffect { Name = "Stunned" };

@@ -123,7 +123,7 @@ namespace Battle
             var party = new List<Character> { CreateCharacter(10, CharacterType.PlayerCharacter, skills: playerSkills, wit: 1000) };
             SetupBattleScene(true, testParty: party);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.3f);
             var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
             battleController.SetButtonAction(Constants.Skills);
             yield return new WaitForSeconds(0.3f);
