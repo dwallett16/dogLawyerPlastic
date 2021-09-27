@@ -1,0 +1,38 @@
+﻿using System;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "Condition", menuName = "Condition")]
+public class Condition: ScriptableObject
+{
+    public int Id;
+    public string Name;
+    [Header("Individual Stats")]
+    public CharacterConditionStats Self;
+    public CharacterConditionStats DefenseAttorney2;
+    public CharacterConditionStats Prosecutor1;
+    public CharacterConditionStats Prosecutor2;
+    public SubCondition DefenseTeamStressTotal;
+    public SubCondition ProsecutorTeamStressTotal;
+    public SubCondition DefenseTeamFocusPointsTotal;
+    public SubCondition ProsecutorTeamFocusPointsTotal;
+    public SubCondition JuryPoints;
+
+}
+
+[Serializable]
+public class CharacterConditionStats
+{
+    public SubCondition Stress;
+    public SubCondition FocusPoints;
+}
+
+[Serializable]
+public class SubCondition
+{
+    [Tooltip("The minimum value for this sub-condition to evaluate to true.")]
+    public int Value;
+    [Tooltip("By default, greater-than-or-equal results in true. This changes it to less-than-or-equal.")]
+    public bool LessThan;
+    [Tooltip("This sub-condition will only evaluate to true if every other sub-condition with this checked also evaluate to true.")]
+    public bool And;
+}

@@ -150,7 +150,7 @@ namespace Assets.Scripts.Battle
             if (!_statusEffect.DoNotRestoreOnExpiration)
             {
                 RestoreAttributesAndFocusPointCapacity(characterBattleData);
-                Debug.Log($"{characterBattleData.displayName}'s stat adjustments have been restored.");
+                Debug.Log($"{characterBattleData.DisplayName}'s stat adjustments have been restored.");
             }
             characterBattleData.RemoveStatusEffect(this);
             Debug.Log($"{StatusEffect.Name} has ended.");
