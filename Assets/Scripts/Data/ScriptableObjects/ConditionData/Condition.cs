@@ -6,6 +6,7 @@ public class Condition: ScriptableObject
 {
     public int Id;
     public string Name;
+    public ActionTypes AffectedPriority;
     [Header("Individual Stats")]
     public CharacterConditionStats Self;
     public CharacterConditionStats DefenseAttorney2;

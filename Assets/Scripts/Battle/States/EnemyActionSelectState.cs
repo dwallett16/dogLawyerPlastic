@@ -1,9 +1,8 @@
 ﻿using Assets.Scripts.Battle.Actions;
+using Assets.Scripts.Battle.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Scripts.Battle.States
@@ -11,9 +10,11 @@ namespace Assets.Scripts.Battle.States
     public class EnemyActionSelectState : BattleState
     {
         private readonly IProbabilityHelper ProbabilityHelper;
-        public EnemyActionSelectState(IProbabilityHelper probabilityHelper)
+        private readonly IAiUtilities AiUtilities;
+        public EnemyActionSelectState(IProbabilityHelper probabilityHelper, IAiUtilities aiUtilities)
         {
             ProbabilityHelper = probabilityHelper;
+            AiUtilities = aiUtilities;
         }
         public override BattleState Execute(BattleController controller)
         {
@@ -29,18 +30,37 @@ namespace Assets.Scripts.Battle.States
 
             var filteredSkills = currentCombatantBattleData.Skills.Where(x => x.FocusPointCost <= currentCombatantBattleData.CurrentFocusPoints);
 
+            //do we want to keep resting until FP is at a certain amount?
             if (!filteredSkills.Any())
             {
                 controller.ActionData.Action = new RestAction();
                 controller.Action.NewState = true;
                 return controller.Action;
             }
+            //when reordering, order of conditions matters in final result
+            foreach(var condition in controller.ActionData.CurrentCombatantBattleData.Personality.Conditions)
+            {
+                if(AiUtilities.ProcessCondition(condition, controller))
+                {
+                    var priorities = controller.ActionData.CurrentCombatantBattleData.Personality.Priorities;
+                    var replaceIndex = Array.IndexOf(priorities, condition.AffectedPriority);
+                    var reorderedPriorities = new ActionTypes[priorities.Length];
+                    Array.Copy(priorities, reorderedPriorities, priorities.Length);
+                    for(var i = 0; i < replaceIndex; i++)
+                    {
+                        reorderedPriorities[i + 1] = priorities[i];
+                    }
+                    reorderedPriorities[0] = condition.AffectedPriority;
+                    controller.ActionData.CurrentCombatantBattleData.Personality.Priorities = reorderedPriorities;
+                }
+            }
 
             var probabilityRanges = CreateSkillProbabilityList(currentCombatantBattleData, filteredSkills);
             controller.ActionData.SelectedSkill = SelectSkillBasedOnProbability(probabilityRanges);
 
-            controller.ActionData.Action = new StressAttackAction();
-            controller.ActionData.Target = controller.Prosecutors[0];
+            ActionUtilities.Instance.SetAction(controller.ActionData);
+            //todo revisit this
+            controller.ActionData.Target = controller.Prosecutors[ProbabilityHelper.GenerateNumberInRange(0, controller.Prosecutors.Count - 1)];
 
             controller.Action.NewState = true;
             return controller.Action;

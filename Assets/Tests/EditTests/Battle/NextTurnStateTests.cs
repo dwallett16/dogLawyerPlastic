@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Assets.Scripts.Battle.States;
+using Assets.Scripts.Battle.Utilities;
 using Assets.Scripts.Data.ScriptableObjects.StatusEffectData;
 using NUnit.Framework;
 using UnityEngine;
@@ -178,7 +179,7 @@ namespace Battle
             battleController.DefenseAttorneys = new List<GameObject>();
             battleController.PlayerActionSelect = new PlayerActionSelectState();
             battleController.Initial = new InitialState();
-            battleController.EnemyActionSelect = new EnemyActionSelectState(new ProbabilityHelper());
+            battleController.EnemyActionSelect = new EnemyActionSelectState(new ProbabilityHelper(), new AiUtilities());
             battleController.EndTurn = new EndTurnState();
             battleController.battleData = new BattleData();
             battleController.StunnedEffect = new StatusEffect { Name = "Stunned" };

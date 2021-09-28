@@ -8,7 +8,7 @@ namespace Assets.Scripts.Battle.Actions
     {
         public void Act(ActionData actionData)
         {
-            Debug.Log("Buff Action");
+            Debug.Log("Buff Action. Using " + actionData.SelectedSkill.Name);
 
             actionData.CurrentCombatantBattleData.DecreaseFocusPoints(actionData.SelectedSkill.FocusPointCost);
 

@@ -8,7 +8,7 @@ namespace Assets.Scripts.Battle.Actions
     {
         public void Act(ActionData actionData)
         {
-            Debug.Log("Persuade Jury Action");
+            Debug.Log("Persuade Jury Action. Using " + actionData.SelectedSkill.Name);
             actionData.CurrentCombatantBattleData.DecreaseFocusPoints(actionData.SelectedSkill.FocusPointCost);
             var pointsToAdd = ActionUtilities.Instance.CalculateJuryPoints(actionData.CurrentCombatant, actionData.SelectedSkill);
             actionData.Target.GetComponent<JuryController>().ChangePoints(pointsToAdd);

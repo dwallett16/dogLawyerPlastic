@@ -98,11 +98,12 @@ public class TestDataFactory
         return newEffect;
     }
 
-    public static Personality CreatePersonality(int id, ActionTypes[] priorities = null)
+    public static Personality CreatePersonality(int id, ActionTypes[] priorities = null, List<Condition> conditions = null)
     {
         var personality = new Personality
         {
             Id = id,
+            Conditions = conditions == null ? new List<Condition>() : conditions,
             Priorities = priorities == null ? new ActionTypes[5] { ActionTypes.StressAttack, ActionTypes.Buff, ActionTypes.PersuadeJury, ActionTypes.Debuff, ActionTypes.StressRecovery } : priorities
         };
         return personality;

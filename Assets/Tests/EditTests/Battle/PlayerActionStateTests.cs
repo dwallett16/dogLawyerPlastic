@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NUnit.Framework;
 using Assets.Scripts.Battle.States;
+using Assets.Scripts.Battle.Utilities;
 
 namespace Battle {
     public class PlayerActionStateTests
@@ -67,7 +68,7 @@ namespace Battle {
             battleController.DefenseAttorneys = new List<GameObject>();
             battleController.PlayerActionSelect = new PlayerActionSelectState();
             battleController.Initial = new InitialState();
-            battleController.EnemyActionSelect = new EnemyActionSelectState(new ProbabilityHelper());
+            battleController.EnemyActionSelect = new EnemyActionSelectState(new ProbabilityHelper(), new AiUtilities());
             battleController.NextTurn = new NextTurnState();
         }
     }

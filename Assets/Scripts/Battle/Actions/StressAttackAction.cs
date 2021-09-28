@@ -8,7 +8,7 @@ namespace Assets.Scripts.Battle.Actions
     {
         public void Act(ActionData actionData)
         {
-            Debug.Log("Stress Attack Action");
+            Debug.Log("Stress Attack Action. Using " + actionData.SelectedSkill.Name);
 
             var attackSucceeds = ActionUtilities.Instance.CalculateAttackSuccess(actionData.Target);
             actionData.CurrentCombatantBattleData.DecreaseFocusPoints(actionData.SelectedSkill.FocusPointCost);

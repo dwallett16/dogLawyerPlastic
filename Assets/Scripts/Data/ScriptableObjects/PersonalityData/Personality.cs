@@ -7,4 +7,5 @@ public class Personality : ScriptableObject
 {
     public int Id;
     public ActionTypes[] Priorities = new ActionTypes[5];
+    public List<Condition> Conditions;
 }

@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Battle.States;
+using Assets.Scripts.Battle.Utilities;
 using Assets.Scripts.Data.ScriptableObjects.StatusEffectData;
 using NUnit.Framework;
 using System;
@@ -183,7 +184,7 @@ namespace Battle
             battleController.DefenseAttorneys = new List<GameObject>();
             battleController.PlayerActionSelect = new PlayerActionSelectState();
             battleController.Initial = new InitialState();
-            battleController.EnemyActionSelect = new EnemyActionSelectState(new ProbabilityHelper());
+            battleController.EnemyActionSelect = new EnemyActionSelectState(new ProbabilityHelper(), new AiUtilities());
             battleController.battleData = new BattleData();
         }
 

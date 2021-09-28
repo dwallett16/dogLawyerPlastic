@@ -9,7 +9,7 @@ namespace Assets.Scripts.Battle.Actions
     {
         public void Act(ActionData actionData)
         {
-            Debug.Log("Debuff Action");
+            Debug.Log("Debuff Action. Using " + actionData.SelectedSkill.Name);
 
             var debuffSucceeds = ActionUtilities.Instance.CalculateDebuffSuccess(actionData.Target);
             actionData.CurrentCombatantBattleData.DecreaseFocusPoints(actionData.SelectedSkill.FocusPointCost);

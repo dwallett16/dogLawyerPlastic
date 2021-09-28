@@ -4,6 +4,7 @@ using System.Linq;
 using Assets.Scripts.Battle.States;
 using System;
 using Assets.Scripts.Data.ScriptableObjects.StatusEffectData;
+using Assets.Scripts.Battle.Utilities;
 
 public class BattleController : MonoBehaviour
 {
@@ -74,7 +75,7 @@ public class BattleController : MonoBehaviour
         ActionData = new ActionData();
         PlayerActionSelect = new PlayerActionSelectState();
         Initial = new InitialState();
-        EnemyActionSelect = new EnemyActionSelectState(new ProbabilityHelper());
+        EnemyActionSelect = new EnemyActionSelectState(new ProbabilityHelper(), new AiUtilities());
         Action = new ActionState();
         NextTurn = new NextTurnState();
         PlayerSkillSelect = new PlayerSkillSelectState();

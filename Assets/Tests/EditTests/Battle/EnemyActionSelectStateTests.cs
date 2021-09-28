@@ -9,6 +9,7 @@ using NSubstitute;
 using Assets.Scripts.Battle.States;
 using UnityEngine;
 using Assets.Scripts.Battle.Actions;
+using Assets.Scripts.Battle.Utilities;
 
 namespace Battle
 {
@@ -17,7 +18,7 @@ namespace Battle
         [Test]
         public void ExecuteSetsRestActionWhenNotEnoughFpToSelectSkill()
         {
-            var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper());
+            var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper(), new AiUtilities());
             var controller = SetupController();
             controller.ActionData.CurrentCombatantBattleData.DecreaseFocusPoints(10);
 
@@ -29,20 +30,20 @@ namespace Battle
         [Test]
         public void ExecuteSelectsSkillWhenEnoughFp()
         {
-            var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper());
+            var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper(), new AiUtilities());
             var controller = SetupController();
             controller.ActionData.CurrentCombatantBattleData.IncreaseFocusPoints(10);
 
             enemyActionState.Execute(controller);
 
             Assert.IsNotNull(controller.ActionData.SelectedSkill);
-            Assert.IsInstanceOf<StressAttackAction>(controller.ActionData.Action);
+            Assert.IsInstanceOf<IAction>(controller.ActionData.Action);
         }
 
         [Test]
         public void ExecuteReturnsActionState()
         {
-            var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper());
+            var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper(), new AiUtilities());
             var controller = SetupController();
             controller.ActionData.CurrentCombatantBattleData.IncreaseFocusPoints(10);
 
@@ -56,13 +57,14 @@ namespace Battle
         {
             var probabilityMock = Substitute.For<IProbabilityHelper>();
             probabilityMock.GenerateNumberInRange(1, 71).Returns(1);
-            var enemyActionState = new EnemyActionSelectState(probabilityMock);
+            var enemyActionState = new EnemyActionSelectState(probabilityMock, new AiUtilities());
             var controller = SetupController();
             controller.ActionData.CurrentCombatantBattleData.IncreaseFocusPoints(10);
 
             enemyActionState.Execute(controller);
 
             Assert.AreEqual(1, controller.ActionData.SelectedSkill.Id);
+            Assert.IsInstanceOf<BuffAction>(controller.ActionData.Action);
         }
 
         [Test]
@@ -70,13 +72,14 @@ namespace Battle
         {
             var probabilityMock = Substitute.For<IProbabilityHelper>();
             probabilityMock.GenerateNumberInRange(1, 71).Returns(17);
-            var enemyActionState = new EnemyActionSelectState(probabilityMock);
+            var enemyActionState = new EnemyActionSelectState(probabilityMock, new AiUtilities());
             var controller = SetupController();
             controller.ActionData.CurrentCombatantBattleData.IncreaseFocusPoints(10);
 
             enemyActionState.Execute(controller);
 
             Assert.AreEqual(2, controller.ActionData.SelectedSkill.Id);
+            Assert.IsInstanceOf<PersuadeJuryAction>(controller.ActionData.Action);
         }
 
         [Test]
@@ -84,13 +87,71 @@ namespace Battle
         {
             var probabilityMock = Substitute.For<IProbabilityHelper>();
             probabilityMock.GenerateNumberInRange(1, 71).Returns(70);
-            var enemyActionState = new EnemyActionSelectState(probabilityMock);
+            var enemyActionState = new EnemyActionSelectState(probabilityMock, new AiUtilities());
             var controller = SetupController();
             controller.ActionData.CurrentCombatantBattleData.IncreaseFocusPoints(10);
 
             enemyActionState.Execute(controller);
 
             Assert.AreEqual(0, controller.ActionData.SelectedSkill.Id);
+            Assert.IsInstanceOf<StressAttackAction>(controller.ActionData.Action);
+        }
+
+        [Test]
+        public void ExecutePriorityGetsAdjustedWhenProcessConditionReturnsTrue()
+        {
+            var utilitiesMock = Substitute.For<IAiUtilities>();
+            utilitiesMock.ProcessCondition(Arg.Any<Condition>(), Arg.Any<BattleController>()).Returns(true);
+            var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper(), utilitiesMock);
+            var controller = SetupController();
+            controller.ActionData.CurrentCombatantBattleData.Personality.Conditions = new List<Condition> { new Condition { AffectedPriority = ActionTypes.StressRecovery } };
+            controller.ActionData.CurrentCombatantBattleData.IncreaseFocusPoints(10);
+
+            enemyActionState.Execute(controller);
+
+            Assert.AreEqual(ActionTypes.StressRecovery, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[0]);
+            Assert.AreEqual(ActionTypes.StressAttack, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[1]);
+            Assert.AreEqual(ActionTypes.Buff, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[2]);
+            Assert.AreEqual(ActionTypes.PersuadeJury, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[3]);
+            Assert.AreEqual(ActionTypes.Debuff, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[4]);
+        }
+
+        [Test]
+        public void ExecutePriorityGetsAdjustedWhenMultipleProcessConditionReturnTrue()
+        {
+            var utilitiesMock = Substitute.For<IAiUtilities>();
+            utilitiesMock.ProcessCondition(Arg.Any<Condition>(), Arg.Any<BattleController>()).Returns(true);
+            var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper(), utilitiesMock);
+            var controller = SetupController();
+            controller.ActionData.CurrentCombatantBattleData.Personality.Conditions = new List<Condition> { new Condition { AffectedPriority = ActionTypes.StressRecovery }, new Condition { AffectedPriority = ActionTypes.PersuadeJury} };
+            controller.ActionData.CurrentCombatantBattleData.IncreaseFocusPoints(10);
+
+            enemyActionState.Execute(controller);
+
+            Assert.AreEqual(ActionTypes.PersuadeJury, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[0]);
+            Assert.AreEqual(ActionTypes.StressRecovery, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[1]);
+            Assert.AreEqual(ActionTypes.StressAttack, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[2]);
+            Assert.AreEqual(ActionTypes.Buff, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[3]);
+            Assert.AreEqual(ActionTypes.Debuff, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[4]);
+        }
+
+        [Test]
+        public void ExecutePriorityGetsAdjustedWhenSomeProcessConditionReturnTrue()
+        {
+            var utilitiesMock = Substitute.For<IAiUtilities>();
+            utilitiesMock.ProcessCondition(Arg.Is<Condition>(cond => cond.AffectedPriority == ActionTypes.PersuadeJury), Arg.Any<BattleController>()).Returns(true);
+            var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper(), utilitiesMock);
+            var controller = SetupController();
+            controller.ActionData.CurrentCombatantBattleData.Personality.Conditions = new List<Condition> { new Condition { AffectedPriority = ActionTypes.StressRecovery }, new Condition { AffectedPriority = ActionTypes.PersuadeJury } };
+            controller.ActionData.CurrentCombatantBattleData.IncreaseFocusPoints(10);
+
+            enemyActionState.Execute(controller);
+
+            Assert.AreEqual(ActionTypes.PersuadeJury, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[0]);
+            Assert.AreEqual(ActionTypes.StressAttack, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[1]);
+            Assert.AreEqual(ActionTypes.Buff, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[2]);
+            Assert.AreEqual(ActionTypes.Debuff, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[3]);
+            Assert.AreEqual(ActionTypes.StressRecovery, controller.ActionData.CurrentCombatantBattleData.Personality.Priorities[4]);
         }
 
         private BattleController SetupController()

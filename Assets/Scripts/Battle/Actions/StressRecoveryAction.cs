@@ -12,7 +12,7 @@ namespace Assets.Scripts.Battle.Actions
     {
         public void Act(ActionData actionData)
         {
-            Debug.Log("Stress Recovery Action");
+            Debug.Log("Stress Recovery Action. Using " + actionData.SelectedSkill.Name);
 
             actionData.CurrentCombatantBattleData.DecreaseFocusPoints(actionData.SelectedSkill.FocusPointCost);
 

@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11ebd7c45a1d0c49942e940c418ba82, type: 3}
   m_Name: Hotheaded
   m_EditorClassIdentifier: 
+  Id: 2
   Priorities: 0300000001000000040000000000000002000000
+  Conditions: []
