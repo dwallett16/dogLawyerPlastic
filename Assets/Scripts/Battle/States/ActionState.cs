@@ -10,6 +10,7 @@ public class ActionState : BattleState
 
         controller.ActionData.Action.Act(controller.ActionData);
 
+        controller.EndTurn.NewState = true;
         return controller.EndTurn;
     }
 }

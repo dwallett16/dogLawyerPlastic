@@ -11,7 +11,8 @@ namespace Assets.Scripts.Battle.States
     {
         public override BattleState Execute(BattleController controller)
         {
-            InitializeState("EndTurnState");
+            if(NewState)
+                InitializeState("EndTurnState");
 
             var currentCombatantBattleData = controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>();
 

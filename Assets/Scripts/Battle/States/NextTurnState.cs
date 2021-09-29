@@ -24,6 +24,7 @@ namespace Assets.Scripts.Battle.States
             if (controller.ActionData.CurrentCombatantBattleData.ActiveStatusEffects.Any(s => s.StatusEffect == controller.StunnedEffect))
             {
                 Debug.Log(controller.ActionData.CurrentCombatantBattleData.DisplayName + " is Stunned. Skipping turn.");
+                controller.EndTurn.NewState = true;
                 return controller.EndTurn;
             }
 
