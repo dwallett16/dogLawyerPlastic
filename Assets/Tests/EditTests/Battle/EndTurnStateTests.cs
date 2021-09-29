@@ -14,12 +14,33 @@ namespace Battle
     public class EndTurnStateTests
     {
         [Test]
-        public void ExecuteReturnsNextTurnState()
+        public void ExecuteReturnsEndTurnState()
         {
             var state = new EndTurnState();
             var controller = new BattleController();
             controller.NextTurn = new NextTurnState();
             NewUp(controller);
+            CreateCombatantsList(controller);
+            controller.ActionData = new ActionData()
+            {
+                CurrentCombatant = controller.Prosecutors[0]
+            };
+
+            controller.ActionData.CurrentCombatant.GetComponent<CharacterBattleData>().InitializeCharacter(new Character());
+
+            var result = state.Execute(controller);
+
+            Assert.IsInstanceOf<EndTurnState>(result);
+        }
+
+        [Test]
+        public void ExecuteSubmitPressedReturnsNextTurnState()
+        {
+            var state = new EndTurnState();
+            var controller = new BattleController();
+            controller.NextTurn = new NextTurnState();
+            NewUp(controller);
+            controller.IsSubmitButtonPressed = true;
             CreateCombatantsList(controller);
             controller.ActionData = new ActionData()
             {

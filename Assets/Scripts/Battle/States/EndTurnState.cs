@@ -17,9 +17,11 @@ namespace Assets.Scripts.Battle.States
 
             if (currentCombatantBattleData.ActiveStatusEffects.Count > 0) ProcessStatusEffects(currentCombatantBattleData);
 
-
-
-            return controller.NextTurn;
+            if(controller.IsSubmitButtonPressed)
+            {
+                return controller.NextTurn;
+            }
+            return this;
         }
 
         private void ProcessStatusEffects(CharacterBattleData currentCombatantBattleData)

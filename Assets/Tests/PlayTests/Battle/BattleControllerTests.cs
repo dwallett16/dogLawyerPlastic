@@ -241,6 +241,30 @@ namespace Battle
             Assert.True(jury.GetComponent<JuryController>().GetJuryPoints() > 0);
         }
 
+        [UnityTest]
+        public IEnumerator UpdateEnemyActionUsesSkill()
+        {
+            var defenseAttorney = CreateCharacter(111, CharacterType.DefenseCharacter, wit: 10, skills: new List<Skill> { CreateSkill(9)});
+            var testDefendant = CreateCharacter(1100, CharacterType.DefendantCharacter);
+            var testCase = CreateCase(1, defenseAttorneys: new List<Character> { defenseAttorney }, defendant: testDefendant);
+            var party = new List<Character> { CreateCharacter(1, CharacterType.PlayerCharacter, wit: 1) };
+            SetupBattleScene(true, testCase, party);
+
+            yield return new WaitForSeconds(0.3f);
+            var battleController = GameObject.Find("BattleController").GetComponent<BattleController>();
+
+            Assert.IsInstanceOf<EndTurnState>(battleController.CurrentState);
+            Assert.AreEqual(9, battleController.ActionData.SelectedSkill.Id);
+
+            var inputMock = Substitute.For<IInputManager>();
+            inputMock.GetButtonDown(Constants.Submit).Returns(true);
+            battleController.InputManager = inputMock;
+
+            yield return new WaitForSeconds(0.3f);
+
+            Assert.IsInstanceOf<PlayerActionSelectState>(battleController.CurrentState);
+        }
+
         private void SetupBattleScene(bool useTestData, Case c = null, List<Character> testParty = null, string buttonAction = "") 
         {
             //Debug Menu
