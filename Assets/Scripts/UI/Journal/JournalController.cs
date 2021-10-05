@@ -50,40 +50,6 @@ public class JournalController : MonoBehaviour
         if(Input.GetButtonDown(Constants.Journal)) {
             ToggleJournal();
         }
-        else if(Input.GetButtonDown(Constants.Submit) && IsActive()) {
-            switch(currentState) {
-                case JournalState.Home:
-                    previousState = JournalState.Home;
-                    currentState = GetStateFromHomeSelection(homeSelection);
-                break;
-                case JournalState.CaseEvidence:
-                    currentState = JournalState.Evidence;
-                    previousState = JournalState.CaseEvidence;
-                    activeCase = allCases.Where(x => x.Id == currentItem.GetComponent<ButtonData>().Id).First();
-                break;
-                case JournalState.ExamineCaseEvidence:
-                    currentState = JournalState.ExamineEvidence;
-                    previousState = JournalState.ExamineCaseEvidence;
-                    activeCase = allCases.Where(x => x.Id == currentItem.GetComponent<ButtonData>().Id).First();
-                break;
-                case JournalState.ExamineEvidence:
-                    var conversation = currentItem.GetComponent<ButtonData>().ExamineConversation;
-                    ToggleExamineEvidenceJournal();
-                    playerJournalListener.StartExamineConversation(conversation);
-
-                break;
-                case JournalState.CaseDefenseAttorneys:
-                    currentState = JournalState.DefenseAttorneys;
-                    previousState = JournalState.CaseDefenseAttorneys;
-                break;
-                case JournalState.Skills:
-                case JournalState.DefenseAttorneys:
-                case JournalState.Party:
-                case JournalState.Evidence:
-                    return;
-            }
-            UpdateJournalPage(currentState);
-        }
         else if(Input.GetButtonDown(Constants.Cancel) && IsActive()) {
             if(currentState == JournalState.Home) {
                 ToggleJournal();
@@ -198,6 +164,7 @@ public class JournalController : MonoBehaviour
                     var caseInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, CaseEvidenceCanvas.transform);
                     caseInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     caseInst.GetComponentInChildren<Text>().text = c.Name;
+                    caseInst.GetComponent<Button>().onClick.AddListener(HandleButtonClick);
                     var caseData = caseInst.GetComponent<ButtonData>();
                     caseData.Id = c.Id;
 
@@ -222,6 +189,7 @@ public class JournalController : MonoBehaviour
                     var evInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, EvidenceCanvas.transform);
                     evInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     evInst.GetComponentInChildren<Text>().text = e.Name;
+                    evInst.GetComponent<Button>().onClick.AddListener(HandleButtonClick);
                     evInst.tag = Constants.MenuTag;
 
                     var evData = evInst.GetComponent<ButtonData>();
@@ -244,6 +212,7 @@ public class JournalController : MonoBehaviour
                     var pInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, PartyCanvas.transform);
                     pInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     pInst.GetComponentInChildren<Text>().text = p.Name;
+                    pInst.GetComponent<Button>().onClick.AddListener(HandleButtonClick);
                     pInst.tag = Constants.MenuTag;
 
                     var pData = pInst.GetComponent<ButtonData>();
@@ -269,6 +238,7 @@ public class JournalController : MonoBehaviour
                     var caseInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, CaseDaCanvas.transform);
                     caseInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     caseInst.GetComponentInChildren<Text>().text = c.Name;
+                    caseInst.GetComponent<Button>().onClick.AddListener(HandleButtonClick);
                     var caseData = caseInst.GetComponent<ButtonData>();
                     caseData.Id = c.Id;
 
@@ -291,6 +261,7 @@ public class JournalController : MonoBehaviour
                     var dInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, DaCanvas.transform);
                     dInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     dInst.GetComponentInChildren<Text>().text = d.Name;
+                    dInst.GetComponent<Button>().onClick.AddListener(HandleButtonClick);
                     dInst.tag = Constants.MenuTag;
 
                     var dData = dInst.GetComponent<ButtonData>();
@@ -311,6 +282,7 @@ public class JournalController : MonoBehaviour
                     var sInst = Instantiate(MenuItem, Vector3.zero, Quaternion.identity, SkillsCanvas.transform);
                     sInst.GetComponent<RectTransform>().anchoredPosition = new Vector2(JournalUiConstants.ButtonXLeftPage, yPos);
                     sInst.GetComponentInChildren<Text>().text = s.Name;
+                    sInst.GetComponent<Button>().onClick.AddListener(HandleButtonClick);
                     sInst.tag = Constants.MenuTag;
 
                     var sData = sInst.GetComponent<ButtonData>();
@@ -334,6 +306,43 @@ public class JournalController : MonoBehaviour
     public void SetHomeSelection(string selection) 
     {
         homeSelection = selection;
+    }
+
+    public void HandleButtonClick()
+    {
+        switch (currentState)
+        {
+            case JournalState.Home:
+                previousState = JournalState.Home;
+                currentState = GetStateFromHomeSelection(homeSelection);
+                break;
+            case JournalState.CaseEvidence:
+                currentState = JournalState.Evidence;
+                previousState = JournalState.CaseEvidence;
+                activeCase = allCases.Where(x => x.Id == currentItem.GetComponent<ButtonData>().Id).First();
+                break;
+            case JournalState.ExamineCaseEvidence:
+                currentState = JournalState.ExamineEvidence;
+                previousState = JournalState.ExamineCaseEvidence;
+                activeCase = allCases.Where(x => x.Id == currentItem.GetComponent<ButtonData>().Id).First();
+                break;
+            case JournalState.ExamineEvidence:
+                var conversation = currentItem.GetComponent<ButtonData>().ExamineConversation;
+                ToggleExamineEvidenceJournal();
+                playerJournalListener.StartExamineConversation(conversation);
+
+                break;
+            case JournalState.CaseDefenseAttorneys:
+                currentState = JournalState.DefenseAttorneys;
+                previousState = JournalState.CaseDefenseAttorneys;
+                break;
+            case JournalState.Skills:
+            case JournalState.DefenseAttorneys:
+            case JournalState.Party:
+            case JournalState.Evidence:
+                return;
+        }
+        UpdateJournalPage(currentState);
     }
 
     private JournalState GetStateFromHomeSelection(string selection)
