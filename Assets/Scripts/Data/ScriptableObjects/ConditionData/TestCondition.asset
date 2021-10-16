@@ -14,3 +14,73 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 0
   Name: 
+  AffectedPriority: 0
+  Self:
+    Stress:
+      Evaluate: 0
+      Value: 0
+      LessThan: 0
+      And: 0
+    FocusPoints:
+      Evaluate: 0
+      Value: 0
+      LessThan: 0
+      And: 0
+  DefenseAttorney2:
+    Stress:
+      Evaluate: 0
+      Value: 0
+      LessThan: 0
+      And: 0
+    FocusPoints:
+      Evaluate: 0
+      Value: 0
+      LessThan: 0
+      And: 0
+  Prosecutor1:
+    Stress:
+      Evaluate: 0
+      Value: 0
+      LessThan: 0
+      And: 0
+    FocusPoints:
+      Evaluate: 0
+      Value: 0
+      LessThan: 0
+      And: 0
+  Prosecutor2:
+    Stress:
+      Evaluate: 0
+      Value: 0
+      LessThan: 0
+      And: 0
+    FocusPoints:
+      Evaluate: 0
+      Value: 0
+      LessThan: 0
+      And: 0
+  DefenseTeamStressTotal:
+    Evaluate: 0
+    Value: 0
+    LessThan: 0
+    And: 0
+  ProsecutorTeamStressTotal:
+    Evaluate: 0
+    Value: 0
+    LessThan: 0
+    And: 0
+  DefenseTeamFocusPointsTotal:
+    Evaluate: 0
+    Value: 0
+    LessThan: 0
+    And: 0
+  ProsecutorTeamFocusPointsTotal:
+    Evaluate: 0
+    Value: 0
+    LessThan: 0
+    And: 0
+  JuryPoints:
+    Evaluate: 0
+    Value: 0
+    LessThan: 0
+    And: 0

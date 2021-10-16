@@ -40,7 +40,7 @@ namespace Assets.Scripts.Battle.States
             //when reordering, order of conditions matters in final result
             foreach(var condition in controller.ActionData.CurrentCombatantBattleData.Personality.Conditions)
             {
-                if(AiUtilities.ProcessCondition(condition, controller))
+                if(AiUtilities.ProcessCondition(condition, controller, currentCombatantBattleData))
                 {
                     var priorities = controller.ActionData.CurrentCombatantBattleData.Personality.Priorities;
                     var replaceIndex = Array.IndexOf(priorities, condition.AffectedPriority);

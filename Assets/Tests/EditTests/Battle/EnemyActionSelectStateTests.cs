@@ -101,7 +101,7 @@ namespace Battle
         public void ExecutePriorityGetsAdjustedWhenProcessConditionReturnsTrue()
         {
             var utilitiesMock = Substitute.For<IAiUtilities>();
-            utilitiesMock.ProcessCondition(Arg.Any<Condition>(), Arg.Any<BattleController>()).Returns(true);
+            utilitiesMock.ProcessCondition(Arg.Any<Condition>(), Arg.Any<BattleController>(), Arg.Any<CharacterBattleData>()).Returns(true);
             var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper(), utilitiesMock);
             var controller = SetupController();
             controller.ActionData.CurrentCombatantBattleData.Personality.Conditions = new List<Condition> { new Condition { AffectedPriority = ActionTypes.StressRecovery } };
@@ -120,7 +120,7 @@ namespace Battle
         public void ExecutePriorityGetsAdjustedWhenMultipleProcessConditionReturnTrue()
         {
             var utilitiesMock = Substitute.For<IAiUtilities>();
-            utilitiesMock.ProcessCondition(Arg.Any<Condition>(), Arg.Any<BattleController>()).Returns(true);
+            utilitiesMock.ProcessCondition(Arg.Any<Condition>(), Arg.Any<BattleController>(), Arg.Any<CharacterBattleData>()).Returns(true);
             var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper(), utilitiesMock);
             var controller = SetupController();
             controller.ActionData.CurrentCombatantBattleData.Personality.Conditions = new List<Condition> { new Condition { AffectedPriority = ActionTypes.StressRecovery }, new Condition { AffectedPriority = ActionTypes.PersuadeJury} };
@@ -139,7 +139,7 @@ namespace Battle
         public void ExecutePriorityGetsAdjustedWhenSomeProcessConditionReturnTrue()
         {
             var utilitiesMock = Substitute.For<IAiUtilities>();
-            utilitiesMock.ProcessCondition(Arg.Is<Condition>(cond => cond.AffectedPriority == ActionTypes.PersuadeJury), Arg.Any<BattleController>()).Returns(true);
+            utilitiesMock.ProcessCondition(Arg.Is<Condition>(cond => cond.AffectedPriority == ActionTypes.PersuadeJury), Arg.Any<BattleController>(), Arg.Any<CharacterBattleData>()).Returns(true);
             var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper(), utilitiesMock);
             var controller = SetupController();
             controller.ActionData.CurrentCombatantBattleData.Personality.Conditions = new List<Condition> { new Condition { AffectedPriority = ActionTypes.StressRecovery }, new Condition { AffectedPriority = ActionTypes.PersuadeJury } };
