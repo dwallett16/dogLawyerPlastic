@@ -30,15 +30,15 @@ namespace Assets.Scripts.Battle.States
 
             var filteredSkills = currentCombatantBattleData.Skills.Where(x => x.FocusPointCost <= currentCombatantBattleData.CurrentFocusPoints);
 
-            //do we want to keep resting until FP is at a certain amount?
             if (!filteredSkills.Any())
             {
                 controller.ActionData.Action = new RestAction();
                 controller.Action.NewState = true;
                 return controller.Action;
             }
-            //when reordering, order of conditions matters in final result
-            foreach(var condition in controller.ActionData.CurrentCombatantBattleData.Personality.Conditions)
+
+            controller.ActionData.CurrentCombatantBattleData.Personality.Conditions.Reverse();
+            foreach (var condition in controller.ActionData.CurrentCombatantBattleData.Personality.Conditions)
             {
                 if(AiUtilities.ProcessCondition(condition, controller, currentCombatantBattleData))
                 {
@@ -59,7 +59,7 @@ namespace Assets.Scripts.Battle.States
             controller.ActionData.SelectedSkill = SelectSkillBasedOnProbability(probabilityRanges);
 
             ActionUtilities.Instance.SetAction(controller.ActionData);
-            //todo revisit this
+            
             controller.ActionData.Target = controller.Prosecutors[ProbabilityHelper.GenerateNumberInRange(0, controller.Prosecutors.Count - 1)];
 
             controller.Action.NewState = true;

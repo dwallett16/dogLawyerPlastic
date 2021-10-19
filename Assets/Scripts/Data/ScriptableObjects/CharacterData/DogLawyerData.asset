@@ -16,9 +16,8 @@ MonoBehaviour:
   Name: Dog Lawyer
   Image: {fileID: 0}
   Material: {fileID: 2100000, guid: 6145096f659ad4e4baaa728f6ece6447, type: 2}
-  SkeletonData: {fileID: 11400000, guid: fbef94fb5dec34248b89904576f76ecb, type: 2}
   Type: 0
-  Personality: 1
+  Personality: {fileID: 0}
   Skills:
   - {fileID: 11400000, guid: e35c0b5f17f4e18439c7273b9e23ec49, type: 2}
   - {fileID: 11400000, guid: 395a779ae3f4e9248b60a22917adcc42, type: 2}
@@ -36,5 +35,5 @@ MonoBehaviour:
   Headshot: {fileID: 21300000, guid: 57b5879353e87894ca95edd0807609f1, type: 3}
   SmallHeadshot: {fileID: 21300000, guid: 2b7e8b8676355694da6273a06e9053e2, type: 3}
   JournalDescription: bio here
-  BattlePrefab: {fileID: 1499682536230412511, guid: 00c58e98cf28d8745b07bb6eeeec43d1,
+  BattlePrefab: {fileID: 6339554685193931742, guid: fdad91e7a67445049a51b96a4afd9039,
     type: 3}

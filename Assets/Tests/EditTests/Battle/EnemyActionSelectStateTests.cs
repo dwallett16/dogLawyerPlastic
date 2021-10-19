@@ -123,7 +123,7 @@ namespace Battle
             utilitiesMock.ProcessCondition(Arg.Any<Condition>(), Arg.Any<BattleController>(), Arg.Any<CharacterBattleData>()).Returns(true);
             var enemyActionState = new EnemyActionSelectState(new ProbabilityHelper(), utilitiesMock);
             var controller = SetupController();
-            controller.ActionData.CurrentCombatantBattleData.Personality.Conditions = new List<Condition> { new Condition { AffectedPriority = ActionTypes.StressRecovery }, new Condition { AffectedPriority = ActionTypes.PersuadeJury} };
+            controller.ActionData.CurrentCombatantBattleData.Personality.Conditions = new List<Condition> { new Condition { AffectedPriority = ActionTypes.PersuadeJury }, new Condition { AffectedPriority = ActionTypes.StressRecovery } };
             controller.ActionData.CurrentCombatantBattleData.IncreaseFocusPoints(10);
 
             enemyActionState.Execute(controller);
