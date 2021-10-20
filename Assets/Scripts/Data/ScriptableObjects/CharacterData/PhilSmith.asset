@@ -16,9 +16,8 @@ MonoBehaviour:
   Name: Phil Smith
   Image: {fileID: 0}
   Material: {fileID: 2100000, guid: d567731f8701340d19da64a0e31f68be, type: 2}
-  SkeletonData: {fileID: 11400000, guid: 3a98d2736a7f742a490a559f570e13a1, type: 2}
   Type: 2
-  Personality: 0
+  Personality: {fileID: 0}
   Skills: []
   StressCapacity: 20
   FocusPointCapacity: 0
@@ -32,5 +31,5 @@ MonoBehaviour:
   Headshot: {fileID: 0}
   SmallHeadshot: {fileID: 21300000, guid: 2b7e8b8676355694da6273a06e9053e2, type: 3}
   JournalDescription: Bio
-  BattlePrefab: {fileID: 1499682536230412511, guid: e10eda437dadda046bdd5e4856cb1897,
+  BattlePrefab: {fileID: 5286863625177099553, guid: e353f54381399a143829c4694fbc21ff,
     type: 3}
